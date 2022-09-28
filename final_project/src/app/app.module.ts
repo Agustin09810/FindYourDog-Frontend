@@ -11,12 +11,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { GridComponent } from './components/grid/grid.component';
+import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
+import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
+import { NavbarSupComponent } from './components/navbar-sup/navbar-sup.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ZoneComponent,
-    GridComponent
+    GridComponent,
+    NavbarInfComponent,
+    UploadbuttonComponent,
+    NavbarSupComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+#uploadbutton {
+    display: inline-block;
+    margin:auto;
+    text-align: center;
+    align-content: center;
+    width: 66px;
+    height: 40px;
+    color:white;
+    background-color: black;
+  }
