@@ -1,5 +1,5 @@
 export interface Zone {
-    imgId?: string,
-    name?: string,
-    zoneId?: string
+    imgId: string,
+    name: string,
+    zoneId: string
 }

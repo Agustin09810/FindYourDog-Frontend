@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, NgModule, OnInit } from '@angular/core';
 import { ZonesService } from 'src/app/services/zones.service';
-import { ZoneComponent } from '../zone/zone.component';
+import { Zone } from 'src/app/interfaces/Zone';
 
 
 @Component({
@@ -11,13 +11,12 @@ import { ZoneComponent } from '../zone/zone.component';
 })
 export class GridComponent implements OnInit {
 
-  zones:Zone[] = [];
+  zones:Zone[] = [ {imgId:'1', name:'abc', zoneId:'1'} ];
   constructor(private getZones:ZonesService) { }
 
   ngOnInit(): void {
-    this.getZones.getZones().subscribe(zonesRecived => {
-      this.zones = zonesRecived;
-    })
+    this.getZones.getZones().subscribe(zoneRecived => this.zones = zoneRecived);
+    console.log(this.zones + 'xddd');
   }
 
 }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, Input, NgModule } from '@angular/core';
 import { Image } from 'src/app/interfaces/Image';
 import { Zone } from 'src/app/interfaces/Zone';
@@ -18,7 +18,7 @@ export class ZoneComponent implements OnInit {
   constructor(private imgService:ImageByIdService) { }
 
   ngOnInit(): void {
-    this.imgService.getImagesById(this.zone.imgId!).subscribe(x => this.img = x);
+    this.imgService.getImagesById(this.zone.imgId).subscribe(x => this.img = x);
   }
 
   nombre: string = 'Centro';

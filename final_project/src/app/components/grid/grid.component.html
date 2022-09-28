@@ -1,7 +1,10 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 grid" *ngFor="let zoneX of zones">
-            <app-zone [zone]="zoneX"></app-zone>
-        </div>
+<div class="w-100 pt-4">
+    <div class="row gx-2 gy-2 w-100">
+        <app-zone
+        *ngFor="let zoneX of zones" 
+        class="col-6 img-max-size" 
+        [zone]="zoneX">
+        </app-zone>
     </div>
 </div>
+
