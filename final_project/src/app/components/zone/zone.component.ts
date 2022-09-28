@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Image } from 'src/app/interfaces/Image';
 import { Zone } from 'src/app/interfaces/Zone';
+import { ImageByIdService } from 'src/app/services/image-by-id.service';
 
 @Component({
   selector: 'app-zone',
@@ -9,15 +11,20 @@ import { Zone } from 'src/app/interfaces/Zone';
 export class ZoneComponent implements OnInit {
 
   @Input() zone?: Zone;
+  img?: Image;
 
-  constructor() { }
+  constructor(private imgService:ImageByIdService) { }
 
   ngOnInit(): void {
+    this.imgService.getImagesById(this.id).subscribe(x => this.img = x);
+    console.log(this.img?.imageId + 'asdasd');
   }
 
   nombre: string = 'Centro';
-  img: string = '../../../assets/images/img3.jpg';
-  //llamar al servicio getImageById devuleve ruta img
+  id:string = '1';
+
+
+
 
 
 
