@@ -1,0 +1,31 @@
+.navbar-brand{
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 130%;
+    line-height: 48px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-right: 38.4% ;
+}
+
+.nav-item{
+    font-family: 'Century Gothic';
+    font-style: normal;
+    font-size: 85%;
+}
+
+.nav-link{
+    margin-bottom: 10px;
+}
+
+.icon{
+    display: inline-block;
+    text-align: center;
+}
+
+.text{
+    display: inline-block;
+    text-align:center;
+}

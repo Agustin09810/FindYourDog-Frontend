@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
 import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
+import { NavbarSupComponent } from './components/navbar-sup/navbar-sup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarInfComponent,
-    UploadbuttonComponent
+    UploadbuttonComponent,
+    NavbarSupComponent
   ],
   imports: [
     BrowserModule,
