@@ -11,7 +11,7 @@ import { Zone } from 'src/app/interfaces/Zone';
 })
 export class GridComponent implements OnInit {
 
-  zones:Zone[] = [ {imgId:'1', name:'abc', zoneId:'1'} ];
+  zones:Zone[] = [];
   constructor(private getZones:ZonesService) { }
 
   ngOnInit(): void {
