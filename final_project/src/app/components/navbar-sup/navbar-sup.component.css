@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin-right: 38.4% ;
+    margin-right: 40% ;
 }
 
 .nav-item{
@@ -18,14 +18,15 @@
 
 .nav-link{
     margin-bottom: 10px;
+    vertical-align: center;
+    align-items: center;
 }
 
-.icon{
-    display: inline-block;
-    text-align: center;
+.bi{
+    font-size: 1.2rem;
+    vertical-align: center;
 }
 
-.text{
-    display: inline-block;
-    text-align:center;
+a{
+    vertical-align: center;
 }
