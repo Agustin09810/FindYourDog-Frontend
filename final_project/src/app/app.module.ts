@@ -15,6 +15,7 @@ import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component
 import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
 import { NavbarSupComponent } from './components/navbar-sup/navbar-sup.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './components/home/home.component';
     NavbarInfComponent,
     UploadbuttonComponent,
     NavbarSupComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
