@@ -16,6 +16,8 @@ import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uplo
 import { NavbarSupComponent } from './components/navbar-sup/navbar-sup.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginInputComponent } from './components/login/login-input/login-input.component';
+import { LoginButtonComponent } from './components/login/login-button/login-button.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { LoginComponent } from './components/login/login.component';
     UploadbuttonComponent,
     NavbarSupComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    LoginInputComponent,
+    LoginButtonComponent
   ],
   imports: [
     BrowserModule,

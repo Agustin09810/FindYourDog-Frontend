@@ -13,11 +13,12 @@ export class UserService {
   usersUrl = 'api/users';
   constructor(private http:HttpClient) { }
 
-  getUsers() {
-    this.http.get<User[]>(this.usersUrl);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.usersUrl);
   }
 
-  login(username:string, password:string) {
-    return this.getUsers().pipe(map(users => users.find(user => (user.username === username) & (user.password === password))));
+  login(username:string, password:string): Observable<User|undefined> {
+    return this.getUsers().pipe(map(users => users.find(user => ((user.username === username) && (user.password === password)))));
   }
+  
 }
