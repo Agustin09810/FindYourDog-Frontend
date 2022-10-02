@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Image } from './interfaces/Image';
+import { User } from './interfaces/User';
 import { Zone } from './interfaces/Zone';
 
 
@@ -34,6 +35,12 @@ export class InMemoryDataService {
       {imgId:'7', name:'name7', zoneId:'7'},
       {imgId:'8', name:'name8', zoneId:'8'},
       {imgId:'9', name:'name9', zoneId:'9'}
+    ]
+
+    const users: User[] = [
+      {username:'admin', password:'admin'},
+      {username:'wea123', password:'wea123'}
+      
     ]
     return {images, zones};
   }
