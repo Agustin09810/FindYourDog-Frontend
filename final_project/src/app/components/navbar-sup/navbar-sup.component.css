@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin-right: 40% ;
+    margin-right: 42.3% ;
 }
 
 .nav-item{
@@ -22,11 +22,29 @@
     align-items: center;
 }
 
-.bi{
+.bi .bi-plus-circle-fill{
     font-size: 1.2rem;
-    vertical-align: center;
+    vertical-align: -0.4rem;
 }
+
+.bi .bi-stickies{
+    font-size: 1.2rem;
+    vertical-align: -0.43rem;
+}
+
+.bi .bi-chat{
+    font-size: 1.2rem;
+    vertical-align: -1.25px;
+}
+
+.bi .bi-gear{
+    font-size: 1.2rem;
+    vertical-align: -1.75px;
+}
+
 
 a{
     vertical-align: center;
 }
+
+
