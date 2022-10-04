@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginButtonComponent implements OnInit {
 
   user?:User;
+  userChanged: boolean = false;
 
   constructor(private userService:UserService) { }
 
@@ -18,21 +19,15 @@ export class LoginButtonComponent implements OnInit {
 
   loginCheck(username:string, password:string) {
     this.userService.login(username, password).subscribe(x => {
-      this.user = x
-      console.log(this.user)
-      if(this.user){
-        return true;
-      }else{
-        return false;
-      }
+      this.user = x;
+      console.log(this.user);
+      this.changeUser();
+      console.log(this.userChanged);
   });
-    /* if(this.user == undefined){
-      console.log('f');
-      return false;
-    }else{
-      console.log('bien xd');
-      return true;
-    } */
+  }
+
+  changeUser(){
+    this.userChanged = true;
   }
 
 }
