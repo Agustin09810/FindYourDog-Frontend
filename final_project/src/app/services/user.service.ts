@@ -18,6 +18,7 @@ export class UserService {
   }
 
   login(username:string, password:string): Observable<User|undefined> {
+    console.log(username + ' ' + password + 'entre lgoin service');
     return this.getUsers().pipe(map(users => users.find(user => ((user.username === username) && (user.password === password)))));
   }
   

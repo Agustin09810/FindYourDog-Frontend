@@ -16,12 +16,23 @@ export class LoginButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(username:string, password:string): boolean {
-    this.userService.login(username, password).subscribe(x => this.user = x);
-    if(this.user == undefined){
+  loginCheck(username:string, password:string) {
+    this.userService.login(username, password).subscribe(x => {
+      this.user = x
+      console.log(this.user)
+      if(this.user){
+        return true;
+      }else{
+        return false;
+      }
+  });
+    /* if(this.user == undefined){
+      console.log('f');
       return false;
     }else{
+      console.log('bien xd');
       return true;
-    }
+    } */
   }
+
 }

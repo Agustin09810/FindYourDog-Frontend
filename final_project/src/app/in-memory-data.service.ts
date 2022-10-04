@@ -42,6 +42,6 @@ export class InMemoryDataService {
       {username:'wea123', password:'wea123'}
       
     ]
-    return {images, zones};
+    return {images, zones, users};
   }
 }

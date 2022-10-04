@@ -8,8 +8,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class LoginInputComponent implements OnInit {
 
-  password:string = '';
-  username:string = '';
   @ViewChild('usernameInput') user!: ElementRef;
   @ViewChild('passwordInput') pass!: ElementRef;
   constructor() { }
@@ -17,13 +15,13 @@ export class LoginInputComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUsername() {
-    this.username = this.user.nativeElement.value;
+  getUsername(): string {
+    return this.user.nativeElement.value;
 
   }
 
-  getPassword() {
-    this.password = this.pass.nativeElement.value;
+  getPassword(): string {
+    return this.pass.nativeElement.value;
 
   }
 
