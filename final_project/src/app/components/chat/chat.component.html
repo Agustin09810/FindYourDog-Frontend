@@ -1,1 +1,8 @@
-<p>chat works!</p>
+<div class="border">
+    <app-navbar-sup class="border"></app-navbar-sup>
+    <div class="border">
+        <div class="row border" *ngFor="let msg of messages">
+            <app-message [message]="msg"></app-message>
+        </div>
+    </div>
+</div>

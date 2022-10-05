@@ -38,8 +38,11 @@ export class InMemoryDataService {
     ]
 
     const users: User[] = [
-      {username:'admin', password:'admin'},
-      {username:'wea123', password:'wea123'}
+      {username:'admin', password:'admin', profileImg:'1', messages: new Map([
+        ['user2', [{originUsername:'admin', targetUsername:'user2', text:'hola weon'}, {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'}, {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
+        ], ['user3', []]
+      ])},
+      {username:'wea123', password:'wea123', profileImg:'1', messages: new Map([['user2', []], ['user1', []]])}
       
     ]
     return {images, zones, users};

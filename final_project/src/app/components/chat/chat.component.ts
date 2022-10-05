@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Message } from 'src/app/interfaces/Message';
+import { User } from 'src/app/interfaces/User';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  originUsername:string = 'admin';
+  targetUsername:string = 'user2';
+  user?:User;
+  messages?: Message[] = [];
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.getUser(this.originUsername);
+    console.log(this.user + 'xd');
   }
+
+  //dado un usuario, llamar al servicio que traiga los chats de ese usuario
+  getUser(username:string) {
+    this.userService.getUserByUsername(username).subscribe(x => {
+      this.user = x;
+      console.log(x?.messages instanceof Map<string, Message[]>);
+      this.messages = this.user?.messages.get(this.targetUsername);
+    });
+  }
+
 
 }

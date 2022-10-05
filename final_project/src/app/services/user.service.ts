@@ -30,4 +30,20 @@ export class UserService {
                                             }
                                           }));
   }
+
+  getUserByUsername(username:string) {
+    return this.getUsers().pipe(map(users => users.find(user => user.username === username)), map(user => {
+                                                                                      if(user === undefined) {
+                                                                                        console.log('user undefined');
+                                                                                        return undefined;
+                                                                                      } else{
+                                                                                        console.log("user found");
+                                                                                        return user;
+                                                                                      }
+                                                                                      }));
+ }
+
+getMessages(username1:string, username2:string){
+  return this.getUserByUsername(username1).pipe(map(user => user?.messages.get(username2)));
+}
 }
