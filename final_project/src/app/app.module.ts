@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginInputComponent } from './components/login/login-input/login-input.component';
 import { LoginButtonComponent } from './components/login/login-button/login-button.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginButtonComponent } from './components/login/login-button/login-butt
     HomeComponent,
     LoginComponent,
     LoginInputComponent,
-    LoginButtonComponent
+    LoginButtonComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

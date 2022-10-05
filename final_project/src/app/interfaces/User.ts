@@ -1,4 +1,8 @@
+import { Message } from "./Message";
 export interface User{
     username:string,
-    password:string
+    password:string,
+    profileImg: string,
+    messages: Map<string, Message[]>
+    
 }
