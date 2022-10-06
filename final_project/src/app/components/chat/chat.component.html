@@ -1,7 +1,11 @@
-<div class="border">
-    <app-navbar-sup class="border"></app-navbar-sup>
-    <div class="containerDiv border">
-            <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="border rowStyles"></app-message>
+
+<div class="containerDiv">
+    <div class="navBar">
+        <app-navbar-sup [text]="this.targetUsername" class=""></app-navbar-sup>
+    </div>
+
+    <div class="">
+            <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="row prueba"></app-message>
 
     </div>
 </div>
