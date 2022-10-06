@@ -44,6 +44,6 @@ export class UserService {
  }
 
 getMessages(username1:string, username2:string){
-  return this.getUserByUsername(username1).pipe(map(user => user?.messages.get(username2)));
+  return this.getUserByUsername(username1).pipe(map(user => user?.messages));
 }
 }

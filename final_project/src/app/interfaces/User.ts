@@ -3,6 +3,6 @@ export interface User{
     username:string,
     password:string,
     profileImg: string,
-    messages: Map<string, Message[]>
+    messages: Message[]
     
 }

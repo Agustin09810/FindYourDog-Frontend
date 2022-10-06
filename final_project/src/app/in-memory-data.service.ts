@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Image } from './interfaces/Image';
+import { Message } from './interfaces/Message';
 import { User } from './interfaces/User';
 import { Zone } from './interfaces/Zone';
 
@@ -38,11 +39,16 @@ export class InMemoryDataService {
     ]
 
     const users: User[] = [
-      {username:'admin', password:'admin', profileImg:'1', messages: new Map([
-        ['user2', [{originUsername:'admin', targetUsername:'user2', text:'hola weon'}, {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'}, {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
-        ], ['user3', []]
-      ])},
-      {username:'wea123', password:'wea123', profileImg:'1', messages: new Map([['user2', []], ['user1', []]])}
+      {username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
+                   {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
+                   {originUsername:'user2', targetUsername:'admin', text:'mira vos'},
+                   {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
+                   {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
+      },
+      {username:'user2', password:'user2', profileImg:'1', messages:[
+        {originUsername:'user2', targetUsername:'user3', text:'la wea xd'},
+        {originUsername:'admin', targetUsername:'user2', text:'hola weon'}
+      ]}
       
     ]
     return {images, zones, users};

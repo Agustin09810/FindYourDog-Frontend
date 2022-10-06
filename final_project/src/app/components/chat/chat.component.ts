@@ -26,8 +26,8 @@ export class ChatComponent implements OnInit {
   getUser(username:string) {
     this.userService.getUserByUsername(username).subscribe(x => {
       this.user = x;
-      console.log(x?.messages instanceof Map<string, Message[]>);
-      this.messages = this.user?.messages.get(this.targetUsername);
+      console.log(x);
+      this.user!.messages.forEach((msg:Message) => ((msg.targetUsername === this.targetUsername)||(msg.targetUsername === this.originUsername)) ? this.messages?.push(msg) : console.log('este no lo meto'));
     });
   }
 

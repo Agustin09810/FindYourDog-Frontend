@@ -3,3 +3,13 @@
     border-width: 1px;
     border-color: black;
 }
+
+.rowStyles {
+    height: 100%;
+}
+
+.containerDiv {
+    position: relative;
+    margin-left: 25%;
+    margin-right: 25%;
+}
