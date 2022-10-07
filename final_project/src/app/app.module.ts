@@ -18,6 +18,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginInputComponent } from './components/login/login-input/login-input.component';
 import { LoginButtonComponent } from './components/login/login-button/login-button.component';
+import { DogbyzoneComponent } from './components/dogbyzone/dogbyzone.component';
+import { DogsGridComponent } from './components/dogbyzone/dogs-grid/dogs-grid.component';
+import { PostComponent } from './components/dogbyzone/post/post.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { LoginButtonComponent } from './components/login/login-button/login-butt
     HomeComponent,
     LoginComponent,
     LoginInputComponent,
-    LoginButtonComponent
+    LoginButtonComponent,
+    DogbyzoneComponent,
+    DogsGridComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

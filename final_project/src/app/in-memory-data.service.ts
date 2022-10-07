@@ -3,6 +3,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Image } from './interfaces/Image';
 import { User } from './interfaces/User';
 import { Zone } from './interfaces/Zone';
+import { Post } from './interfaces/Post';
 
 
 
@@ -23,7 +24,11 @@ export class InMemoryDataService {
       { imageId: '6', imageUrl: '../assets/images/img3.jpg' },
       { imageId: '7', imageUrl: '../assets/images/img3.jpg' },
       { imageId: '8', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '9', imageUrl: '../assets/images/img3.jpg' }
+      { imageId: '9', imageUrl: '../assets/images/img3.jpg' },
+      { imageId: '10', imageUrl: '../assets/images/dogs/dog1.jpg' },
+      { imageId: '11', imageUrl: '../assets/images/dogs/dog2.jpg' },
+      { imageId: '12', imageUrl: '../assets/images/dogs/dog3.jpg' },
+      { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' }
     ];
     const zones: Zone[] = [
       {imgId:'1', name:'name1', zoneId:'1'},
@@ -40,8 +45,13 @@ export class InMemoryDataService {
     const users: User[] = [
       {username:'admin', password:'admin'},
       {username:'wea123', password:'wea123'}
-      
     ]
-    return {images, zones, users};
+
+    const posts: Post[] = [
+      {id:'1', user:'admin', dogName:'dog1', dogBreed:'breed1', lostOn:new Date(2022, 1, 2, 18, 23, 42), photos:['10']},
+      {id:'2', user:'admin', dogName:'dog2', dogBreed:'breed2', lostOn:new Date(2022, 6, 7, 19, 37, 12,), photos:['11']},
+      {id:'3', user:'wea123', dogName:'dog3', dogBreed:'breed3', lostOn:new Date(), photos:['12','13']},
+    ]
+    return {images, zones, users, posts};
   }
 }
