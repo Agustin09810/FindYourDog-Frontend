@@ -31,5 +31,13 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  sendMessage(message:string) {
+    let msg: Message = { originUsername: this.originUsername, targetUsername: this.targetUsername, text: message};
+    this.user?.messages.push(msg);
+    let user:User = this.user!;
+    this.userService.sendMessage(user).subscribe();
+    
+  }
+
 
 }

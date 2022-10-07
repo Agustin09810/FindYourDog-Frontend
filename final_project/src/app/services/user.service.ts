@@ -4,6 +4,7 @@ import { User } from '../interfaces/User';
 
 import { map, filter, ignoreElements } from 'rxjs/operators';
 import { Observable, pipe } from 'rxjs';
+import { Message } from '../interfaces/Message';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ import { Observable, pipe } from 'rxjs';
 export class UserService {
 
   usersUrl = 'api/users';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http:HttpClient) { }
 
   getUsers(): Observable<User[]> {
@@ -43,7 +48,11 @@ export class UserService {
                                                                                       }));
  }
 
-getMessages(username1:string, username2:string){
-  return this.getUserByUsername(username1).pipe(map(user => user?.messages));
-}
+  getMessages(username1:string, username2:string){
+    return this.getUserByUsername(username1).pipe(map(user => user?.messages));
+  }
+
+  sendMessage(user:User) {
+    return this.http.put<User>(this.usersUrl, user, this.httpOptions)
+  }
 }

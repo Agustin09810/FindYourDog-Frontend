@@ -8,4 +8,10 @@
             <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="row prueba"></app-message>
 
     </div>
+    <div class="inputMsgDiv">
+        
+        <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded">
+        <button class="btn btn-primary mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
+
+    </div>
 </div>

@@ -39,13 +39,13 @@ export class InMemoryDataService {
     ]
 
     const users: User[] = [
-      {username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
+      {id:'1', username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
                    {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
                    {originUsername:'user2', targetUsername:'admin', text:'mira vos'},
                    {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
                    {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
       },
-      {username:'user2', password:'user2', profileImg:'1', messages:[
+      {id:'2', username:'user2', password:'user2', profileImg:'1', messages:[
         {originUsername:'user2', targetUsername:'user3', text:'la wea xd'},
         {originUsername:'admin', targetUsername:'user2', text:'hola weon'}
       ]}
