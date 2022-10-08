@@ -38,7 +38,7 @@ export class InMemoryDataService {
       {imgId:'9', name:'name9', zoneId:'9'}
     ]
 
-    const users: User[] = [
+    const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages
       {id:'1', username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
                    {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
                    {originUsername:'user2', targetUsername:'admin', text:'mira vos'},

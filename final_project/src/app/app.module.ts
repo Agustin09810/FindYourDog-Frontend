@@ -20,6 +20,8 @@ import { LoginInputComponent } from './components/login/login-input/login-input.
 import { LoginButtonComponent } from './components/login/login-button/login-button.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/chat/message/message.component';
+import { ChatPreviewComponent } from './components/chat/chat-preview/chat-preview.component';
+import { UserPreviewComponent } from './components/user-preview/user-preview.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { MessageComponent } from './components/chat/message/message.component';
     LoginInputComponent,
     LoginButtonComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    ChatPreviewComponent,
+    UserPreviewComponent
   ],
   imports: [
     BrowserModule,
