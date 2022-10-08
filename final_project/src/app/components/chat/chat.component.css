@@ -20,7 +20,7 @@
 
 .inputMsgDiv{
     display: flex;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: darkgray;
@@ -29,4 +29,8 @@
 
 .inputMsg{
     width: 100%;
+}
+
+.divMsg{
+    padding-bottom: 120px;
 }
