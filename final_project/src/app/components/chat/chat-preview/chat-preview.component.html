@@ -1,1 +1,12 @@
-<p>chat-preview works!</p>
+<div>
+    <div>
+        <app-navbar-sup [text]="'Chats'" class=""></app-navbar-sup>
+    </div>
+
+    <div>
+        <app-user-preview [user]="user" *ngFor="let userFriend of user.friends"></app-user-preview>
+    </div>
+    <div>
+
+    </div>
+</div>

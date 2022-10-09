@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
 
-import { map, filter, ignoreElements } from 'rxjs/operators';
-import { Observable, pipe } from 'rxjs';
+import { map, filter, ignoreElements, switchMap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
 import { Message } from '../interfaces/Message';
 
 @Injectable({
@@ -48,6 +48,10 @@ export class UserService {
                                                                                       }));
  }
 
+ getUserById(id:string){
+  return this.getUsers().pipe(map(users => users.find(user => user.id === id)));
+ }
+
   getMessages(username1:string, username2:string){
     return this.getUserByUsername(username1).pipe(map(user => user?.messages));
   }
@@ -55,4 +59,16 @@ export class UserService {
   sendMessage(user:User) {
     return this.http.put<User>(this.usersUrl, user, this.httpOptions)
   }
+
+  getContactsIds(username:string){
+    return this.getUserByUsername(username).pipe(map(user => user?.contactsIds));
+  }
+
+  getContacts(username:string){
+
+
+    return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
+
+  }
+
 }
