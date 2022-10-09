@@ -1,10 +1,12 @@
-<div>
+<div #chatPreview>
     <div>
         <app-navbar-sup [text]="'Chats'" class=""></app-navbar-sup>
     </div>
 
-    <div>
-        <app-user-preview [user]="userFriend" *ngFor="let userFriend of contacts"></app-user-preview>
+    <div *ngIf="user">
+        <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">
+            
+        </app-user-preview>
     </div>
     <div>
 

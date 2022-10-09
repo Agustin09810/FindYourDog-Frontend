@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
 import { UserService } from 'src/app/services/user.service';
+import { UserPreviewComponent } from '../../user-preview/user-preview.component';
 
 @Component({
   selector: 'app-chat-preview',
@@ -35,6 +36,9 @@ export class ChatPreviewComponent implements OnInit {
     });
   }
 
-  //obtener array de users "agregados" y mostrarlo en diferentes rows segun user preview a través de input
+
+  
+  
+
 
 }

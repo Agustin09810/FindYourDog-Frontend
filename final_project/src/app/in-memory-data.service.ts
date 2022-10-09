@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Chat } from './interfaces/Chat';
 import { Image } from './interfaces/Image';
 import { Message } from './interfaces/Message';
 import { User } from './interfaces/User';
@@ -39,23 +40,35 @@ export class InMemoryDataService {
     ]
 
     const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages
-      {id:'1', contactsIds:['2', '3'], username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
+      {id:'1', contactsIds:['2', '3'], chatsIds:['1', '2'], username:'admin', password:'admin', profileImg:'1', messages: [{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
                    {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
                    {originUsername:'user2', targetUsername:'admin', text:'mira vos'},
                    {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
                    {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
       },
-      {id:'2', contactsIds:['1', '3'], username:'user2', password:'user2', profileImg:'1', messages:[
+      {id:'2', contactsIds:['1', '3'], chatsIds:['1', '3'], username:'user2', password:'user2', profileImg:'1', messages:[
         {originUsername:'user2', targetUsername:'user3', text:'la wea xd'},
         {originUsername:'admin', targetUsername:'user2', text:'hola weon'}
       ]},
-      {id:'3', contactsIds:['2', '1'], username:'user3', password:'user3', profileImg:'1', messages:[
+      {id:'3', contactsIds:['2', '1'], chatsIds:['2', '3'], username:'user3', password:'user3', profileImg:'1', messages:[
         {originUsername:'user3', targetUsername:'user2', text:'la wea xd'},
         {originUsername:'user3', targetUsername:'user2', text:'hola weon'}
       ]}
 
       
     ]
-    return {images, zones, users};
+
+    const chats: Chat[] = [
+      {id:'1', messages:[{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
+      {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
+      {originUsername:'user2', targetUsername:'admin', text:'mira vos'},
+      {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
+      {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]},
+      {id:'2', messages:[
+        {originUsername:'admin', targetUsername:'user3', text:'la wea xd'},
+        {originUsername:'user3', targetUsername:'admin', text:'hola weon'}
+      ]}
+    ]
+    return {images, zones, users, chats};
   }
 }

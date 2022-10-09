@@ -5,6 +5,7 @@ import { User } from '../interfaces/User';
 import { map, filter, ignoreElements, switchMap } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
 import { Message } from '../interfaces/Message';
+import { Chat } from '../interfaces/Chat';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Message } from '../interfaces/Message';
 export class UserService {
 
   usersUrl = 'api/users';
+  chatsUrl = 'api/chats';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -56,8 +58,8 @@ export class UserService {
     return this.getUserByUsername(username1).pipe(map(user => user?.messages));
   }
 
-  sendMessage(user:User) {
-    return this.http.put<User>(this.usersUrl, user, this.httpOptions)
+  sendMessage(chat:Chat) {
+    return this.http.put<Chat>(this.chatsUrl, chat, this.httpOptions)
   }
 
   getContactsIds(username:string){
@@ -69,6 +71,13 @@ export class UserService {
 
     return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
 
+  }
+
+  getChats(){
+    return this.http.get<Chat[]>(this.chatsUrl);
+  }
+  getMessagesByChatId(chatId:string){
+    return this.getChats().pipe(map(chats => chats.find(chat => chat.id == chatId)));
   }
 
 }
