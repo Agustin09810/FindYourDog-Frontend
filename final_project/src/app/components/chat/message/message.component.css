@@ -1,6 +1,7 @@
 .messageTextFormat{
     margin-left: 10px;
     margin-bottom: 0;
+    overflow-wrap: break-word;
 }
 
 
