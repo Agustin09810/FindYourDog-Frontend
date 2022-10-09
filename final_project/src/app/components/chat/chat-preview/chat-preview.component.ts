@@ -11,7 +11,7 @@ export class ChatPreviewComponent implements OnInit {
 
   username:string = 'admin';
   user?:User;
-  contacts?:User[];
+  contacts:User[] = [];
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
@@ -22,9 +22,16 @@ export class ChatPreviewComponent implements OnInit {
   getUser(username:string) {
     this.userService.getUserByUsername(username).subscribe(x => {
       this.user = x;
-      console.log(x);
-      this.userService.getContacts(this.user!.username).subscribe(x => x?.map(j => this.contacts?.push(j.));
-      console.log(this.contacts);
+      console.log(x + 'xd user');
+      this.userService.getContactsIds(this.user!.username).subscribe(x => {
+        x!.forEach(element => {
+          this.userService.getUserById(element).subscribe(y => {
+            console.log(y?.id + 'y');
+            this.contacts?.push(y!);
+            console.log(this.contacts + 'contactos')
+          })
+        });
+      });
     });
   }
 
