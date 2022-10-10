@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ChatComponent implements OnInit {
 
   originUsername:string = 'admin';
-  targetUsername:string = 'user2';
+  @Input() targetUsername!:string;
   @Input() chatId!:string;
   @Input() user!:User;
   messages?: Message[] = [];
