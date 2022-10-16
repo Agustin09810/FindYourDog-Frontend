@@ -1,5 +1,6 @@
 export interface Zone {
     imgId: string,
     name: string,
-    zoneId: string
+    id: string,
+    posts: string[]
 }

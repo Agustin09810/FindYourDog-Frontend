@@ -31,15 +31,15 @@ export class InMemoryDataService {
       { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' }
     ];
     const zones: Zone[] = [
-      {imgId:'1', name:'name1', zoneId:'1'},
-      {imgId:'2', name:'name2', zoneId:'2'},
-      {imgId:'3', name:'name3', zoneId:'3'},
-      {imgId:'4', name:'name4', zoneId:'4'},
-      {imgId:'5', name:'name5', zoneId:'5'},
-      {imgId:'6', name:'name6', zoneId:'6'},
-      {imgId:'7', name:'name7', zoneId:'7'},
-      {imgId:'8', name:'name8', zoneId:'8'},
-      {imgId:'9', name:'name9', zoneId:'9'}
+      {imgId:'1', name:'name1', id:'1', posts: ['1']},
+      {imgId:'2', name:'name2', id:'2', posts: ['2']},
+      {imgId:'3', name:'name3', id:'3', posts: ['3']},
+      {imgId:'4', name:'name4', id:'4', posts: []},
+      {imgId:'5', name:'name5', id:'5', posts: []},
+      {imgId:'6', name:'name6', id:'6', posts: []},
+      {imgId:'7', name:'name7', id:'7', posts: []},
+      {imgId:'8', name:'name8', id:'8', posts: []},
+      {imgId:'9', name:'name9', id:'9', posts: []}
     ]
 
     const users: User[] = [
@@ -48,9 +48,9 @@ export class InMemoryDataService {
     ]
 
     const posts: Post[] = [
-      {id:'1', user:'admin', dogName:'dog1', dogBreed:'breed1', lostOn:new Date(2022, 1, 2, 18, 23, 42), photos:['10']},
-      {id:'2', user:'admin', dogName:'dog2', dogBreed:'breed2', lostOn:new Date(2022, 6, 7, 19, 37, 12,), photos:['11']},
-      {id:'3', user:'wea123', dogName:'dog3', dogBreed:'breed3', lostOn:new Date(), photos:['12','13']},
+      {id:'1', user:'admin', dogName:'dog1', dogBreed:'breed1', lostOn:new Date(2022, 6, 30), photos:['10']},
+      {id:'2', user:'admin', dogName:'dog2', dogBreed:'breed2', lostOn:new Date(2022, 8, 9), photos:['11']},
+      {id:'3', user:'wea123', dogName:'dog3', dogBreed:'breed3', lostOn:new Date(2022, 10, 10), photos:['12','13']}
     ]
     return {images, zones, users, posts};
   }

@@ -13,10 +13,11 @@ export class GridComponent implements OnInit {
 
   zones:Zone[] = [];
   constructor(private getZones:ZonesService) { }
-
   ngOnInit(): void {
     this.getZones.getZones().subscribe(zoneRecived => this.zones = zoneRecived);
     console.log(this.zones + 'xddd');
   }
+
+
 
 }

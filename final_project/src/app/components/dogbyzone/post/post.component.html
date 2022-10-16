@@ -1,12 +1,11 @@
 <div class="outsideDiv">
-    
     <div class="imgDog">
         <div class="textDog">
             <p>{{post.dogName}}</p>
         </div>
         <img src="{{firstPhoto?.imageUrl}}" alt="">
         <div class="textlostOn">
-            <p>Perdido hace {{getDayDiff(post.lostOn)}} días</p>
+            <p>Perdido el: {{getDayDiff(post.lostOn)}}</p>
         </div>
     </div>
 </div>

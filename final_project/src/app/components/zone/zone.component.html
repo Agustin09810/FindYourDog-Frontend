@@ -1,11 +1,12 @@
 <div class="outsideDiv">
-    
-    <div class="imgZone">
-        <div class="gradient"></div>
-        <div class="textZone">
-            <p>{{zone.name}}</p>
+    <a routerLink="/zone/{{zone.id}}" routerLinkActive="active">
+        <div class="imgZone">
+            <div class="gradient"></div>
+            <div class="textZone">
+                <p>{{zone.name}}</p>
+            </div>
+            <img src="{{img?.imageUrl}}" alt="">
         </div>
-        <img src="{{img?.imageUrl}}" alt="">
-    </div>
+    </a>
 </div>
 

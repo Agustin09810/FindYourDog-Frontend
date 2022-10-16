@@ -13,6 +13,8 @@ export class PostComponent implements OnInit {
 
   @Input() post!: Post;
   firstPhoto?: Image;
+
+
   constructor(
     private imgService:ImageByIdService
   ) { }
@@ -23,10 +25,14 @@ export class PostComponent implements OnInit {
 
   getDayDiff(startDate: Date): number {
     const msInDay = 24 * 60 * 60 * 1000;
-    const actualDate = new Date();
-  
-    let days = Math.round(Math.abs(Number(actualDate) - Number(startDate)) / msInDay);
+    console.log(startDate);
+    const dateLost = new Date(startDate);
+
+    var time = new Date().getTime() - dateLost.getTime();
+    
+    const days = Math.floor(time / msInDay);
 
     return days;
   }
+
 }

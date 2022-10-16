@@ -3,7 +3,7 @@
     padding-top: 0%;
     padding-left: 2%;
     margin-bottom: 0;
-    color: white;
+    color: black;
 
 }
 
@@ -33,7 +33,7 @@ img {
 /*mobile*/
 .outsideDiv {
     position: relative;
-    width: 100%; /* borrarlos y ponerlos 100% cuando tengagmos grilla*/
+    width: 100%;
     height: 150px;
 
 }
