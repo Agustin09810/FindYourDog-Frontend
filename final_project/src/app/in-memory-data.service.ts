@@ -30,7 +30,10 @@ export class InMemoryDataService {
       { imageId: '10', imageUrl: '../assets/images/dogs/dog1.jpg' },
       { imageId: '11', imageUrl: '../assets/images/dogs/dog2.jpg' },
       { imageId: '12', imageUrl: '../assets/images/dogs/dog3.jpg' },
-      { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' }
+      { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' },
+      { imageId: '14', imageUrl: '../assets/images/users/arjona.jpg' },
+      { imageId: '15', imageUrl: '../assets/images/users/ibai.jpeg' }
+
     ];
     const zones: Zone[] = [
       {imgId:'1', name:'name1', id:'1', posts: ['1']},
@@ -57,11 +60,11 @@ export class InMemoryDataService {
                    {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
                    {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]
       },
-      {id:'2', contactsIds:['1', '3'], chatsIds:['1', '3'], username:'user2', password:'user2', profileImg:'1', messages:[
+      {id:'2', contactsIds:['1', '3'], chatsIds:['1', '3'], username:'user2', password:'user2', profileImg:'14', messages:[
         {originUsername:'user2', targetUsername:'user3', text:'la wea xd'},
         {originUsername:'admin', targetUsername:'user2', text:'hola weon'}
       ]},
-      {id:'3', contactsIds:['2', '1'], chatsIds:['2', '3'], username:'user3', password:'user3', profileImg:'1', messages:[
+      {id:'3', contactsIds:['2', '1'], chatsIds:['2', '3'], username:'user3', password:'user3', profileImg:'15', messages:[
         {originUsername:'user3', targetUsername:'user2', text:'la wea xd'},
         {originUsername:'user3', targetUsername:'user2', text:'hola weon'}
       ]}
