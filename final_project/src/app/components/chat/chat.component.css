@@ -1,0 +1,40 @@
+
+
+.containerDiv {
+    position: absolute;
+    background-color: whitesmoke;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    z-index: 99999999;
+}
+
+.prueba {
+    margin-bottom: 10px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.navBar {
+    background-color: darkgray;
+    margin-bottom: 10px;
+}
+
+.inputMsgDiv{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: darkgray;
+    padding: 20px;
+}
+
+.inputMsg{
+    width: 100%;
+}
+
+.divMsg{
+    padding-bottom: 120px;
+    background-color: whitesmoke;
+}

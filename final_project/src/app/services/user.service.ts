@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
 
-import { map, filter, ignoreElements } from 'rxjs/operators';
-import { Observable, pipe } from 'rxjs';
+import { map, filter, ignoreElements, switchMap } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
+import { Message } from '../interfaces/Message';
+import { Chat } from '../interfaces/Chat';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,11 @@ import { Observable, pipe } from 'rxjs';
 export class UserService {
 
   usersUrl = 'api/users';
+  chatsUrl = 'api/chats';
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   constructor(private http:HttpClient) { }
 
   getUsers(): Observable<User[]> {
@@ -30,4 +37,47 @@ export class UserService {
                                             }
                                           }));
   }
+
+  getUserByUsername(username:string) {
+    return this.getUsers().pipe(map(users => users.find(user => user.username === username)), map(user => {
+                                                                                      if(user === undefined) {
+                                                                                        console.log('user undefined');
+                                                                                        return undefined;
+                                                                                      } else{
+                                                                                        console.log("user found");
+                                                                                        return user;
+                                                                                      }
+                                                                                      }));
+ }
+
+ getUserById(id:string){
+  return this.getUsers().pipe(map(users => users.find(user => user.id === id)));
+ }
+
+  getMessages(username1:string, username2:string){
+    return this.getUserByUsername(username1).pipe(map(user => user?.messages));
+  }
+
+  sendMessage(chat:Chat) {
+    return this.http.put<Chat>(this.chatsUrl, chat, this.httpOptions)
+  }
+
+  getContactsIds(username:string){
+    return this.getUserByUsername(username).pipe(map(user => user?.contactsIds));
+  }
+
+  getContacts(username:string){
+
+
+    return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
+
+  }
+
+  getChats(){
+    return this.http.get<Chat[]>(this.chatsUrl);
+  }
+  getMessagesByChatId(chatId:string){
+    return this.getChats().pipe(map(chats => chats.find(chat => chat.id == chatId)));
+  }
+
 }

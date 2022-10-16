@@ -1,0 +1,9 @@
+<app-chat #hiddenElement [chatId]="chatId" [user]="originUser" [targetUsername]="user.username"></app-chat>
+
+<div class="userPreview" (click)="showChat()">
+    <div class="imgUser"></div>
+    <div class="userTextContainer">
+        <p class="username">{{user.username}}</p>
+        <p class="lastMsg">{{lastMessage}}</p>
+    </div>
+</div>
