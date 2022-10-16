@@ -1,13 +1,8 @@
 .formContainer {
-    margin-right: 20vw;
-    margin-left: 20vw;
-    margin-top: 40vh;
+    margin-right: 10%;
+    margin-left: 10%;
 
 
 }
 
-.inputStyle {
-    background-color: cyan;
-    border-color: black;
-    border-radius: 18px;
-}
+

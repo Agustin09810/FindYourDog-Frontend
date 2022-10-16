@@ -1,0 +1,21 @@
+.containerDiv{
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 35vh;
+}
+
+.shadeDiv{
+        border-radius: 4px;
+        box-shadow:
+          rgba(0, 0, 0, 0.024) 0px 0px 0px 1px,
+          rgba(0, 0, 0, 0.05) 0px 1px 0px 0px,
+          rgba(0, 0, 0, 0.1) 0px 0px 8px 0px,
+          rgba(0, 0, 0, 0.4) 0px 20px 30px 0px;
+            
+}
+
+.loginButton{
+    display: flex;
+    justify-content: center;
+}
+
