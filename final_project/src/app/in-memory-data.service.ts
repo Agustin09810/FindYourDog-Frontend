@@ -33,7 +33,7 @@ export class InMemoryDataService {
       { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' }
     ];
     const zones: Zone[] = [
-      {imgId:'1', name:'name1', id:'1', posts: ['1']},
+      {imgId:'1', name:'name1', id:'1', posts: ['1', '4', '5']},
       {imgId:'2', name:'name2', id:'2', posts: ['2']},
       {imgId:'3', name:'name3', id:'3', posts: ['3']},
       {imgId:'4', name:'name4', id:'4', posts: []},
@@ -45,9 +45,11 @@ export class InMemoryDataService {
     ]
 
     const posts: Post[] = [
-      {id:'1', user:'admin', dogName:'dog1', dogBreed:'breed1', lostOn:new Date(2022, 6, 30), photos:['10']},
+      {id:'1', user:'admin', dogName:'Pepe', dogBreed:'breed1', lostOn:new Date(2022, 6, 30), photos:['10']},
       {id:'2', user:'admin', dogName:'dog2', dogBreed:'breed2', lostOn:new Date(2022, 8, 9), photos:['11']},
-      {id:'3', user:'wea123', dogName:'dog3', dogBreed:'breed3', lostOn:new Date(2022, 10, 10), photos:['12','13']}
+      {id:'3', user:'wea123', dogName:'dog3', dogBreed:'breed3', lostOn:new Date(2022, 11, 10), photos:['12','13']},
+      {id:'4', user:'wea123', dogName:'Capitán', dogBreed:'breed4', lostOn:new Date(2022, 9, 10), photos:['12','13']},
+      {id:'5', user:'wea123', dogName:'Thor', dogBreed:'breed5', lostOn:new Date(2022, 9, 15), photos:['11','13']}
     ]
     
     const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages

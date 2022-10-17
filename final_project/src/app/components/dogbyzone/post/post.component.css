@@ -1,4 +1,21 @@
-.textDog {
+.card{
+    object-fit: cover;
+}
+
+.card-img-top{
+    height: 15rem;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .card{
+        width:100%
+    }
+}
+
+
+
+/* .textDog {
     position: absolute;
     padding-top: 0%;
     padding-left: 2%;
@@ -30,10 +47,10 @@ img {
 }
 
 
-/*mobile*/
+
 .outsideDiv {
     position: relative;
     width: 100%;
     height: 150px;
 
-}
+} */
