@@ -1,0 +1,16 @@
+.containerDiv{
+    height: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.post-carousel{
+    position: relative;
+    height: 10vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
+
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}

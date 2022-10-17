@@ -1,4 +1,5 @@
 <div class="outsideDiv">
+    <a routerLink="./{{post.id}}">
     <div class="imgDog">
         <div class="textDog">
             <p>{{post.dogName}}</p>
@@ -8,5 +9,6 @@
             <p>Perdido el: {{getDayDiff(post.lostOn)}}</p>
         </div>
     </div>
+    </a>
 </div>
 

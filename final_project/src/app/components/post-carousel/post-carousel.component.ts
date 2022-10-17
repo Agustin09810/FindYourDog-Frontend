@@ -9,12 +9,13 @@ import { Image } from 'src/app/interfaces/Image';
 })
 export class PostCarouselComponent implements OnInit {
 
-  @Input() firstImage!:Image;
-  @Input() otherImages!:Image[];
+  @Input() postImages?:Image[];
+
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log('url');
   }
 
 }

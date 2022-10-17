@@ -1,0 +1,12 @@
+<div class="containerDiv" *ngIf="post">
+    <div *ngIf="postImages.length === post.photos.length">
+        <app-post-carousel class="post-carousel" [postImages]="postImages"></app-post-carousel>
+        <div class="post-info">
+            <h2>{{post.dogName}}</h2>
+            <p>Raza: {{post.dogBreed}}</p>
+            <p>Descripción</p>
+        </div>
+        <button class="btn"></button>
+    </div>
+    
+</div>
