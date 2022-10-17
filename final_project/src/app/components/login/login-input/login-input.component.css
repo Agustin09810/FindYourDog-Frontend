@@ -5,4 +5,18 @@
 
 }
 
+.inputStyle{
+    border: none;
+}
+
+.inputContainer{
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+}
+
+.passForm{
+    margin-top: 20px;
+}
+
 
