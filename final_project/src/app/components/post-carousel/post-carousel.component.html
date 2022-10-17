@@ -1,0 +1,18 @@
+<div id="carouselExampleControls" class="carousel slide carouselContainer" data-bs-ride="carousel">
+    <div class="carousel-inner w-100 h-100">
+      <div class="carousel-item active imgxd">
+        <img src="{{firstImage.imageUrl}}" class="d-block w-100 imgxd" alt="...">
+      </div>
+      <div class="carousel-item imgxd" *ngFor="let image of otherImages">
+        <img src="image.imageUrl" class="d-block w-100 imgxd" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>

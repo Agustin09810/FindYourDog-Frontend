@@ -25,6 +25,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/chat/message/message.component';
 import { ChatPreviewComponent } from './components/chat/chat-preview/chat-preview.component';
 import { UserPreviewComponent } from './components/user-preview/user-preview.component';
+import { PostCarouselComponent } from './components/post-carousel/post-carousel.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserPreviewComponent } from './components/user-preview/user-preview.com
     ChatComponent,
     MessageComponent,
     ChatPreviewComponent,
-    UserPreviewComponent
+    UserPreviewComponent,
+    PostCarouselComponent
   ],
   imports: [
     BrowserModule,
