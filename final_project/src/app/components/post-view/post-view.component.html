@@ -3,11 +3,15 @@
         <app-post-carousel [postImages]="postImages"></app-post-carousel>
     </div>
     <div class="post-info">
-        <h2>{{post.dogName}}</h2>
-        <p>Raza: {{post.dogBreed}}</p>
-        <p>Descripción</p>
-        <button class="btn btn-outline-dark contact-button">Contactar</button>
-
-    </div>
-    
+        <div class="dog-name">
+            <h2>{{post.dogName}}</h2>
+        </div>
+        <div class="other-info">
+            <p><b>Raza: </b>{{post.dogBreed}}</p>
+            <p><b>Descripción: </b>algo hardcodeado</p>
+        </div>
+        <div class="contact-button">
+            <button class="btn btn-outline-dark">Contactar</button>
+        </div>
+    </div>   
 </div>
