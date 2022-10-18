@@ -1,16 +1,24 @@
 .containerDiv{
-    height: 100%;
-    width: 100%;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: whitesmoke;
+    
+}
+
+.post-info{
+    border-top-color: rgb(228, 228, 228);
+    border-top-width: 2px;
+    border-top-style: solid;
+
+    position: relative;
+    height: 70vh;
     background-color: whitesmoke;
 }
 
-.post-carousel{
-    position: relative;
-    height: 10vh;
-    margin-left: 25vw;
-    margin-right: 25vw;
+.contact-button{
 
-    border-color: black;
-    border-width: 1px;
-    border-style: solid;
 }
+
+
+

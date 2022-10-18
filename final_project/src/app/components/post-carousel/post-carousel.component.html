@@ -1,11 +1,7 @@
-
-
-<div class="divContainer">
-  <ngb-carousel *ngIf="postImages" class="carouselContainer">
+<div>
+  <ngb-carousel *ngIf="postImages">
     <ng-template ngbSlide *ngFor="let image of postImages">
-      <div class="div-img">
-        <img [src]="image.imageUrl" alt="image.id" class="img-dog">
-      </div>
+          <img [src]="image.imageUrl" alt="image.id" class="img-dog">
     </ng-template>
   </ngb-carousel>
 </div>
