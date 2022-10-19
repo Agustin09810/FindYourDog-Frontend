@@ -3,13 +3,6 @@
     margin-right: 0px;
 }
 
-@media(min-width: 768px) {
-    .col-12{
-        width:33.3%!important;
-    }
-}
-
-
 .container {
     margin-bottom: 80px;
 }
