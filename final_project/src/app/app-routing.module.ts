@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full'}
  
 
 ];
