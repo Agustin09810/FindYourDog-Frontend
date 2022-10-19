@@ -17,7 +17,9 @@
 }
 
 .navBar {
-    background-color: darkgray;
+    border-bottom-color: rgb(228, 228, 228);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     margin-bottom: 10px;
 }
 
@@ -26,8 +28,12 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: darkgray;
-    padding: 20px;
+    padding: 5px 20px 5px 20px;
+    background-color: whitesmoke;
+    border-top-color: rgb(228, 228, 228);
+    border-top-width: 1px;
+    border-top-style: solid;
+    
 }
 
 .inputMsg{
@@ -37,4 +43,8 @@
 .divMsg{
     padding-bottom: 120px;
     background-color: whitesmoke;
+}
+
+.btn-styles{
+    background-color: #32CD32;
 }

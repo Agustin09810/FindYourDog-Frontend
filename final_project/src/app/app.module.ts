@@ -25,6 +25,9 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MessageComponent } from './components/chat/message/message.component';
 import { ChatPreviewComponent } from './components/chat/chat-preview/chat-preview.component';
 import { UserPreviewComponent } from './components/user-preview/user-preview.component';
+import { PostCarouselComponent } from './components/post-carousel/post-carousel.component';
+import { PostViewComponent } from './components/post-view/post-view.component';
+
 
 @NgModule({
   declarations: [
@@ -40,11 +43,13 @@ import { UserPreviewComponent } from './components/user-preview/user-preview.com
     LoginButtonComponent,
     DogbyzoneComponent,
     DogsGridComponent,
-    PostComponent,
     ChatComponent,
     MessageComponent,
     ChatPreviewComponent,
-    UserPreviewComponent
+    UserPreviewComponent,
+    PostCarouselComponent,
+    PostComponent,
+    PostViewComponent
   ],
   imports: [
     BrowserModule,
