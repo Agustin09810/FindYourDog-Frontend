@@ -1,0 +1,48 @@
+<app-navbar-sup [text]="textNavbar"></app-navbar-sup>
+<div *ngIf="isMobile && step=='name'" class="outerMobile">
+    <div class="container name">
+        <div class="mb-3">
+            <label for="dogName" class="form-label">Nombre: </label>
+            <input type="email" class="form-control" id="dogName" placeholder="Capitán">
+        </div>
+        <div class="anotherName">
+            <label for="btn-check" class="form-label">¿Responde a algún apodo?</label>
+            <div class="buttonDiv">
+                <input type="checkbox" #checkYes class="yes btn-check" id="yes-btn-check" (change)="true" autocomplete="off">
+                <label class="boton btn btn-primary" id="yes-button" for="yes-btn-check">Si</label>
+                <input type="checkbox" class="btn-check" id="no-btn-check" autocomplete="off">
+                <label class="boton btn btn-primary" id="no-button" for="no-btn-check">No</label>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="checkYes.checked" class="container otherNames">
+        <div class="container dates">
+            <div class="mb-3">
+                <label for="otherNames" class="form-label">Apodos: </label>
+                <input type="email" class="form-control" id="otherNames" placeholder="Capi">
+            </div>
+        </div>
+    </div>
+
+    <div class="container continue d-grid">
+        <button type="button" class="btn btn-primary" (click)="continue1()">Continuar</button>
+    </div>
+</div>
+
+<div *ngIf="isMobile && step=='date'" class="outerMobile">
+    <div class="mb-3">
+        <label for="datePicker" class="me-3">Visto por última vez:</label>
+        <input id="datePicker" type="date" value="{{today}}">
+    </div>
+    <div class="mb-3">
+        <label for="timePicker" class="me-3">Hora aproximada:</label>
+        <input type="time" id="timePicker" name="timePicker" value="{{now}}" required>
+    </div>
+</div>
+
+<div *ngIf="isDesktop" class="outerDesktop">
+    <p>Hola</p>
+</div>
+
+<app-navbar-inf></app-navbar-inf>
