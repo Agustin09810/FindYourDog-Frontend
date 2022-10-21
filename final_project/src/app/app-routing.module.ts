@@ -6,6 +6,7 @@ import { DogbyzoneComponent } from './components/dogbyzone/dogbyzone.component';
 import { ChatPreviewComponent } from './components/chat/chat-preview/chat-preview.component';
 import { LoginComponent } from './components/login/login.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
+import { MyPostsComponent } from './components/my-posts/my-posts.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
+  { path: 'random/:userId', component: MyPostsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
  
 

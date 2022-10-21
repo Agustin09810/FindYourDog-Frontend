@@ -1,5 +1,5 @@
 <div class="containerDiv" *ngIf="post">
-    <div *ngIf="postImages.length === post.photos.length">
+    <div *ngIf="postImages.length">
         <app-post-carousel [postImages]="postImages"></app-post-carousel>
     </div>
     <div class="post-info">
@@ -10,7 +10,7 @@
             <p><b>Raza: </b>{{post.dogBreed}}</p>
             <p><b>Descripción: </b>algo hardcodeado</p>
         </div>
-        <div class="contact-button">
+        <div *ngIf="displayButton === true" class="contact-button">
             <button class="btn btn-outline-dark">Contactar</button>
         </div>
     </div>   

@@ -27,6 +27,7 @@ import { ChatPreviewComponent } from './components/chat/chat-preview/chat-previe
 import { UserPreviewComponent } from './components/user-preview/user-preview.component';
 import { PostCarouselComponent } from './components/post-carousel/post-carousel.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
+import { MyPostsComponent } from './components/my-posts/my-posts.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PostViewComponent } from './components/post-view/post-view.component';
     UserPreviewComponent,
     PostCarouselComponent,
     PostComponent,
-    PostViewComponent
+    PostViewComponent,
+    MyPostsComponent
   ],
   imports: [
     BrowserModule,

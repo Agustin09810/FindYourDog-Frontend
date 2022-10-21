@@ -30,8 +30,10 @@ export class DogsGridComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('zoneId');
     if(id)
       {
-        this.zoneService.getZone(id).subscribe(zone => this.zone = zone);
-        setTimeout(() => this.getZonePostsAux(), 500);
+        this.zoneService.getZone(id).subscribe(zone =>{
+          this.zone = zone;
+          this.getZonePostsAux();
+        } );
           
       }
     }

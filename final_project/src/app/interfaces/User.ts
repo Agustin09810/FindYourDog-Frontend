@@ -1,4 +1,5 @@
 import { Message } from "./Message";
+
 export interface User{
     id:string,
     contactsIds:string[],
@@ -6,6 +7,7 @@ export interface User{
     username:string,
     password:string,
     profileImg: string,
+    postsIds:string[];
     messages: Message[]
     
 }
