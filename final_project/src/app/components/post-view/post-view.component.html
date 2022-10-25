@@ -1,6 +1,6 @@
 <div class="containerDiv" *ngIf="post">
-    <div *ngIf="postImages.length">
-        <app-post-carousel [postImages]="postImages"></app-post-carousel>
+    <div *ngIf="postImages.length" class="carousel-container">
+        <app-post-carousel [postImages]="postImages" class="post-carousel"></app-post-carousel>
     </div>
     <div class="post-info">
         <div class="dog-name">

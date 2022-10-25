@@ -11,13 +11,30 @@ import { Image } from 'src/app/interfaces/Image';
 export class PostCarouselComponent implements OnInit {
 
   @Input() postImages?:Image[];
+  currentImage?:Image;
+  count:number = 0;
 
-  showNavigationArrows = false;
-  showNavigationIndicators = false;
   constructor() { }
 
   ngOnInit(): void {
     console.log('url');
+    this.currentImage = this.postImages?.at(0);
+  }
+
+  next(){
+    if(this.count < this.postImages!.length-1){
+      this.count++;
+      this.currentImage = this.postImages!.at(this.count);
+    }
+  }
+
+  previous(){
+    {
+      if(this.count > 0){
+        this.count--;
+        this.currentImage = this.postImages!.at(this.count);
+      }
+    }
   }
 
 }

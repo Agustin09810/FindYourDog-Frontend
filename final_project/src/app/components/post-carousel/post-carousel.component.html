@@ -1,9 +1,11 @@
-<div>
-  <ngb-carousel *ngIf="postImages">
-    <ng-template ngbSlide *ngFor="let image of postImages">
-          <img [src]="image.imageUrl" alt="image.id" class="img-dog">
-    </ng-template>
-  </ngb-carousel>
+<div class="outerDiv">
+  <div class="carousel" *ngIf="postImages">
+    <div class="innerCarousel">
+      <i class="bi bi-caret-left previousButton" (click)="previous()"></i>
+      <i class="bi bi-caret-right nextButton" (click)="next()"></i>
+          <img [src]="currentImage?.imageUrl" alt="image.id" class="img-dog">
+    </div>
+  </div>
 </div>
 
 
