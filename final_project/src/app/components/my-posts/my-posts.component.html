@@ -1,6 +1,6 @@
 <div *ngIf="posts">
-    <button class="btn btn-primary nextButton" (click)="nextPost()">next</button>
-    <button class="btn btn-primary previousButton" (click)="previousPost()">previous</button>
+    <i class="bi bi-chevron-right nextButton" (click)="nextPost()"></i>
+    <i class="bi bi-chevron-left previousButton" (click)="previousPost()"></i>
     <app-post-view *ngIf="post" [inputPost]="post"></app-post-view>
     
 </div>

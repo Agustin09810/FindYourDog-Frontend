@@ -1,13 +1,15 @@
 .nextButton{
     position: fixed;
-    bottom: 40px;
+    bottom: 5vh;
     right: 10px;
     z-index: 1;
+    font-size: 3rem;
 }
 
 .previousButton{
     position: fixed;
-    bottom: 40px;
+    bottom: 5vh;
     left: 10px;
     z-index: 1;
+    font-size: 3rem;
 }
