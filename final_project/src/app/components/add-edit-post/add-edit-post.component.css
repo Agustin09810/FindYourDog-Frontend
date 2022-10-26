@@ -5,14 +5,14 @@
     width: 100%;
 }
 .boton{
-    width: 45%;
+    width: 100%;
 }
-#no-button{
-    margin-left: 5%;
+
+.botonMas{
+    width: 100%;
+    margin-top: 5%;
 }
-#yes-button{
-    margin-right: 5%;
-}
+
 .container.name{
     margin-top: 5%;
 }
@@ -22,5 +22,13 @@
 
 .container.continue{
     position: absolute;
-    bottom: 7%;
+    bottom: 8.5%;
+}
+
+.continue.btn.btn-primary{
+    width: 100%;
+}
+
+.back.btn.btn-primary{
+    width: 100%;
 }

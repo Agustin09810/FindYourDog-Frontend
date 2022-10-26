@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
-  { path: 'addpost/:step', component: AddEditPostComponent },
+  { path: 'addpost', component: AddEditPostComponent }
 
  
 
