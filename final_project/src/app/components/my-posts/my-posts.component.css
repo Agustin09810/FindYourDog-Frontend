@@ -30,48 +30,7 @@
     width: 100%;
 }
 
-@media (min-width:500px){
-    .outerDiv{
-        height: 80vh;
-    }
-    .containerDiv{
-        width: auto;
 
-        margin-left: 10vw;
-        margin-right: 10vw;
-        margin-top: 10vh;
-        margin-bottom: 10vh;
-    }
-}
-@media (min-width:700px){
-    
-    .containerDiv{
-        width: auto;
-
-        margin-left: 13vw;
-        margin-right: 13vw;
-    }
-}
-
-@media (min-width:900px){
-    
-    .containerDiv{
-        width: auto;
-
-        margin-left: 16vw;
-        margin-right: 16vw;
-    }
-}
-
-@media (min-width:1100px){
-    
-    .containerDiv{
-        width: auto;
-
-        margin-left: 19vw;
-        margin-right: 19vw;
-    }
-}
 
 
 
