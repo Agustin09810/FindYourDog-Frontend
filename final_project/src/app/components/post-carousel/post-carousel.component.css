@@ -42,5 +42,14 @@
     color: white;
 }
 
+@media (min-width: 578px){
+    .nextButton{
+        bottom: 45%;
+    }
+    .previousButton{
+        bottom: 45%;
+    }
+}
+
 
 

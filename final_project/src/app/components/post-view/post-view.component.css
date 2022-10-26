@@ -50,5 +50,36 @@
     margin-right: 5vw;
 }
 
+.outerDiv{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: whitesmoke;
+}
+
+@media (min-width:578px){
+    .containerDiv{
+        display: inline-flex;
+        height: 80vh;
+        width: 80vw;
+        margin: 10vh 10vw 10vh 10vw;
 
 
+        box-shadow: 10px 5px 5px rgb(97, 97, 97);
+    }
+
+    .post-info{
+        width: 50%;
+        font-size: x-large;
+
+        border-top-color: rgb(228, 228, 228);
+        border-top-width: 2px;
+        border-top-style: solid;
+    }
+    
+    .carousel-container{
+        width: 50%;
+        height: 100%;
+    }
+
+}
