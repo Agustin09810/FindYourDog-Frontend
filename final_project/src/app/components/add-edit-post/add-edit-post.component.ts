@@ -11,16 +11,17 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class AddEditPostComponent implements OnInit {
 
-  step: string = "date";
+  step: string = "name";
   todayDate: Date = new Date();
   today: string = this.todayDate.toISOString().substring(0,10);
   now: string = this.todayDate.getHours() + ':' + "00";
   textNavbar: string = "Publicar";
 
-  @ViewChild('dogName') dogNameInput!: ElementRef;
+  @ViewChild('dogNameInput') dogNameInput!: ElementRef;
 
   
   dogName: string = "";
+  dogGender: string = "";
   otherNames: string[] = [];
   lastSeenDate: string = "";
   lastSeenHour: string = "";
@@ -41,25 +42,36 @@ export class AddEditPostComponent implements OnInit {
   
   ngOnInit(): void {
   }
-
-  continue1(): void {
-    this.step = "date";
-    this.textNavbar = "Fecha";
-    this.dogName = this.dogNameInput.nativeElement.value;
-  }
-
+    
   continue2(): void {
     this.step = "breed";
     this.textNavbar = "Raza";
   }
 
-  goBack1(): void {
-    this.step = "name";
-    this.textNavbar = "Publicar";
-  }
-
-  goBack(): void {
-    this.location.back();
+  navigate(step: number): void{
+    switch(step){
+      case 1:
+        this.step = "name";
+        this.textNavbar = "Nombre";
+        this.dogNameInput.nativeElement.value="";
+        break;
+      case 2:
+        this.step = "gender";
+        this.textNavbar = "Género";
+        this.dogName = this.dogNameInput.nativeElement.value;
+        this.disableButton = "disabled";
+        break;
+      case 3:
+        this.step = "breed";
+        this.textNavbar = "Raza";
+        //RECUPERAR genero de los botones dependiendo cual fue clickeado
+        break;
+      case 4:
+        this.step = "date";
+        this.textNavbar = "Fecha";
+        this.dogName = this.dogNameInput.nativeElement.value;
+        break;
+    }
   }
 
   changeButtonState(): void {

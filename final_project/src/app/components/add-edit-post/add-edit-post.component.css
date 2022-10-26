@@ -22,7 +22,7 @@
 
 .container.continue{
     position: absolute;
-    bottom: 8.5%;
+    bottom: 9.3%;
 }
 
 .continue.btn.btn-primary{
@@ -31,4 +31,9 @@
 
 .back.btn.btn-primary{
     width: 100%;
+}
+
+.btn-group-vertical{
+    width: 100%;
+    height: 7em
 }

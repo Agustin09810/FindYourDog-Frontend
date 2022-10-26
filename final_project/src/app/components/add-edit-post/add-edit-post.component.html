@@ -1,16 +1,17 @@
 <app-navbar-sup [text]="textNavbar"></app-navbar-sup>
+<!-- STEP 1 => NOMBRE Y APODOS -->
 <div *ngIf="isMobile && step=='name'" class="outerMobile">
     <div class="container name">
         <div class="mb-3">
             <label for="dogName" class="form-label">Nombre: </label>
-            <input type="email" #dogName (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán">
+            <input type="email" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
             <small class="form-text text-muted">Este campo es obligatorio</small>
         </div>
-        <div class="anotherName">
+        <div class="anotherName container text-center">
             <label for="btn-check" class="form-label">¿Responde a algún apodo?</label>
             <div class="buttonDiv">
                 <input type="checkbox" #checkYes class="yes btn-check" id="yes-btn-check" (change)="true" autocomplete="off">
-                <label class="boton btn btn-primary" id="yes-button" for="yes-btn-check">Si</label>
+                <label class="boton btn btn-outline-dark" id="yes-button" for="yes-btn-check">Si</label>
             </div>
         </div>
     </div>
@@ -26,14 +27,25 @@
             </div>
         </div>
     </div>
-
-    <div class="container continue d-grid ">
-        <button type="button" class="btn btn-primary {{disableButton}}" (click)="continue1()">Continuar</button>
+    <div class="container continue d-grid">
+        <button type="button" class="btn btn-primary {{disableButton}}" (click)="navigate(2)">Continuar</button>
     </div>
-
-    
 </div>
 
+<!-- STEP 2 => GENERO -->
+<div *ngIf="isMobile && step=='gender'" class="outerMobile">
+    <div class="container genders">
+        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+            <button type="button" class="btn btn-outline-dark" (click)="navigate(3)">Macho</button>
+            <button type="button" class="btn btn-outline-dark" (click)="navigate(3)">Hembra</button>
+        </div>
+    </div>
+    <div class="container continue d-grid">
+        <button type="button" class="continue btn btn-primary" (click)="navigate(1)">Volver</button>
+    </div>
+</div>
+
+<!-- STEP 4 => FECHA -->
 <div *ngIf="isMobile && step=='date'" class="outerMobile">
     <div class="container dates">
         <div class="mb-3">
@@ -49,7 +61,7 @@
     <div class="container continue">
         <div class="row">
             <div class="col">
-                <button type="button" class="back btn btn-primary" (click)="goBack1()">Volver</button>
+                <button type="button" class="back btn btn-primary" (click)="navigate(3)">Volver</button>
             </div>
             <div class="col">
                 <button type="button" class="continue btn btn-primary" (click)="continue2()">Continuar</button>
@@ -57,6 +69,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <div *ngIf="isDesktop" class="outerDesktop">
     <p>Hola</p>
