@@ -1,7 +1,7 @@
 .containerDiv{
     position: relative;
-    height: 100%;
     width: 100%;
+    margin-top: 76px;
     background-color: whitesmoke;
     
 }
@@ -24,8 +24,10 @@
     border-top-style: solid;
 
     position: relative;
-    height: 70%;
+    height: 60%;
     background-color: whitesmoke;
+
+    overflow-y: scroll;
 }
 
 .contact-button{
@@ -60,20 +62,36 @@
     justify-content: space-around;
 }
 
+.navbarStyles {
+    border-bottom-color: rgb(228, 228, 228);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    z-index: 9999;
+
+    position: fixed;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.navbarStylesInf {
+   position: fixed;
+}
+
 @media (min-width:578px){
     .containerDiv{
         display: inline-flex;
-        height: 80vh;
-        width: 80vw;
         margin: 10vh 10vw 10vh 10vw;
+        margin-top: max(10vh,86px);/*86px max height of navbar*/
+        margin-bottom: 86px;
         max-width: 1200px;
-
 
         box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
 
     .post-info{
         width: 50%;
+        height: 100%;
         font-size: x-large;
 
         border-top-color: rgb(228, 228, 228);

@@ -1,5 +1,9 @@
-<div class="outerDiv">
-    <div class="containerDiv" *ngIf="post">
+
+<div class="outerDiv" *ngIf="post">
+    <div class="navbarStyles">
+        <app-navbar-sup [text]="'Perro'"></app-navbar-sup>
+    </div>
+    <div class="containerDiv">
         <div *ngIf="postImages.length" class="carousel-container">
             <app-post-carousel [postImages]="postImages" class="post-carousel"></app-post-carousel>
         </div>
@@ -9,12 +13,15 @@
             </div>
             <div class="other-info">
                 <p><b>Raza: </b>{{post.dogBreed}}</p>
-                <p><b>Descripción: </b>algo hardcodeado</p>
+                <p><b>Descripción: </b>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat voluptate molestias ex, eligendi nemo perferendis voluptatibus deleniti nobis. Atque fugiat labore cupiditate consequatur voluptas earum repellendus sequi inventore nulla ullam?</p>
             </div>
             <div *ngIf="displayButton === true" class="contact-button">
                 <button class="btn btn-outline-dark">Contactar</button>
             </div>
         </div>   
+    </div>
+    <div class="navbarStyles">
+        <app-navbar-inf></app-navbar-inf>
     </div>
 </div>
 
