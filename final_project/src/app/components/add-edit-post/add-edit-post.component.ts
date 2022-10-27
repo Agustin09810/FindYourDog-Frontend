@@ -4,6 +4,9 @@ import {Location} from '@angular/common';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
+import {BreedService} from '../../services/breed.service';
+import {Breed} from '../../interfaces/Breed';
+
 @Component({
   selector: 'app-add-edit-post',
   templateUrl: './add-edit-post.component.html',
@@ -11,7 +14,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class AddEditPostComponent implements OnInit {
 
-  step: string = "name";
+  step: string = "breed";
   todayDate: Date = new Date();
   today: string = this.todayDate.toISOString().substring(0,10);
   now: string = this.todayDate.getHours() + ':' + "00";
@@ -19,13 +22,14 @@ export class AddEditPostComponent implements OnInit {
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef;
 
-  
   dogName: string = "";
-  dogGender: string = "";
   otherNames: string[] = [];
+  dogGender: string = "";
+  dogBreed: string = "";
+  breeds: Breed[] = [];
   lastSeenDate: string = "";
   lastSeenHour: string = "";
-  dogBreed: string = "";
+  
   additionalInfo: string = "";
 
   disableButton: string = "disabled";
@@ -34,6 +38,7 @@ export class AddEditPostComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private route: ActivatedRoute,
     private location: Location,
+    private breedService: BreedService
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -41,12 +46,9 @@ export class AddEditPostComponent implements OnInit {
   isDesktop = this.deviceService.isDesktop();
   
   ngOnInit(): void {
+    this.getBreeds();
   }
     
-  continue2(): void {
-    this.step = "breed";
-    this.textNavbar = "Raza";
-  }
 
   navigate(step: number): void{
     switch(step){
@@ -81,5 +83,21 @@ export class AddEditPostComponent implements OnInit {
     else{
       this.disableButton = "disabled";
     }
+  }
+
+  getBreeds() : void{
+    this.breedService.getBreeds().subscribe(breeds => this.breeds = breeds);
+  }
+
+  getBreedById(id: string): void{
+    this.breedService.getBreedById(id).subscribe(breed => {
+      if(breed){
+        this.dogBreed = breed.name;
+      }
+    });
+  }
+
+  searchBreed(event: any){
+    this.breedService.getBreedByName(event.target.value).subscribe(breeds => this.breeds = breeds);
   }
 }

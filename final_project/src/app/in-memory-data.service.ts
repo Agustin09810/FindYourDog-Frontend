@@ -6,7 +6,7 @@ import { Message } from './interfaces/Message';
 import { User } from './interfaces/User';
 import { Zone } from './interfaces/Zone';
 import { Post } from './interfaces/Post';
-
+import { Breed } from './interfaces/Breed';
 
 
 @Injectable({
@@ -85,6 +85,60 @@ export class InMemoryDataService {
         {originUsername:'user3', targetUsername:'admin', text:'hola weon'}
       ]}
     ]
-    return {images, zones, users, chats, posts};
+
+    const breeds: Breed[] = [
+      {id:'1', name:'Australian Cattle Dog'},
+      {id:'2', name:'Australian Shepherd'},
+      {id:'3', name:'Australian Terrier'},
+      {id:'4', name:'Basenji'},
+      {id:'5', name:'Basset Hound'},
+      {id:'6', name:'Beagle'},
+      {id:'7', name:'Bearded Collie'},
+      {id:'8', name:'Bedlington Terrier'},
+      {id:'9', name:'Bloodhound'},
+      {id:'10', name:'Border Collie'},
+      {id:'11', name:'Border Terrier'},
+      {id:'12', name:'Bull Terrier'},
+      {id:'13', name:'Bulldog'},
+      {id:'14', name:'Chesapeake Bay Retriever'},
+      {id:'15', name:'Chihuahua'},
+      {id:'16', name:'Chinese Crested'},
+      {id:'17', name:'Chow Chow'},
+      {id:'18', name:'Collie'},
+      {id:'19', name:'Dalmatian'},
+      {id:'20', name:'Doberman'},
+      {id:'21', name:'English Cocker Spaniel'},
+      {id:'22', name:'English Setter'},
+      {id:'23', name:'Eskimo Dog'},
+      {id:'24', name:'Fox Terrier'},
+      {id:'25', name:'Foxhound'},
+      {id:'26', name:'French Bulldog'},
+      {id:'27', name:'German Shepherd'},
+      {id:'28', name:'Golden Retriever'},
+      {id:'29', name:'Irish Setter'},
+      {id:'30', name:'Irish Wolfhound'},
+      {id:'31', name:'Japanese Spaniel'},
+      {id:'32', name:'Labrador Retriever'},
+      {id:'33', name:'Maltese'},
+      {id:'34', name:'Norwegian Elkhound'},
+      {id:'35', name:'Otterhound'},
+      {id:'36', name:'Pekingese'},
+      {id:'37', name:'Poodle'},
+      {id:'38', name:'Pug'},
+      {id:'39', name:'Rhodesian Ridgeback'},
+      {id:'40', name:'Rottweiler'},
+      {id:'41', name:'Saint Bernard'},
+      {id:'42', name:'Scottish Deerhound'},
+      {id:'43', name:'Sussex Spaniel'},
+      {id:'44', name:'Tibetan Terrier'},
+      {id:'45', name:'Weimaraner'},
+      {id:'46', name:'Welsh Terrier'},
+      {id:'47', name:'West Highland White Terrier '},
+      {id:'48', name:'Whippet'},
+      {id:'49', name:'Yorkshire Terrier'},
+      {id:'50', name:'Zerdava'},
+    ]
+
+    return {images, zones, users, chats, posts, breeds};
   }
 }

@@ -1,5 +1,6 @@
 .navbar-brand{
-    font-family: sans-serif;
+    font-family: 'SF Pro';
+    letter-spacing:.01em;
     font-style: normal;
     font-weight: 400;
     font-size: 130%;
@@ -11,7 +12,7 @@
 }
 
 .nav-item{
-    font-family: 'Century Gothic';
+    font-family: 'SF Pro';
     font-style: normal;
     font-size: 85%;
 }

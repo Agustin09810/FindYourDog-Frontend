@@ -1,10 +1,12 @@
+<div class="navbarStyles">
 <app-navbar-sup [text]="textNavbar"></app-navbar-sup>
+</div>
 <!-- STEP 1 => NOMBRE Y APODOS -->
 <div *ngIf="isMobile && step=='name'" class="outerMobile">
     <div class="container name">
         <div class="mb-3">
             <label for="dogName" class="form-label">Nombre: </label>
-            <input type="email" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
+            <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control inputStyle" id="dogName" placeholder="Capitán" value="{{dogName}}" >
             <small class="form-text text-muted">Este campo es obligatorio</small>
         </div>
         <div class="anotherName container text-center">
@@ -19,9 +21,9 @@
     <div *ngIf="checkYes.checked" class="container otherNames">
         <div class="container dates">
             <label for="otherNames" class="form-label">Apodos: </label>
-            <div class="col mb-3" id="otherNamesFirst">
+            <div class="col mb-3" id="otherNamesFirst"> 
                 <div class="row">
-                    <input type="email" class="form-control" id="otherNamesFirst" placeholder="Capi">
+                    <input type="text" class="form-control inputStyle" id="otherNamesFirst" placeholder="Capi">
                     <button type="button" class="botonMas btn btn-outline-dark" ><i class="bi bi-plus-circle"></i></button>
                 </div>
             </div>
@@ -45,7 +47,26 @@
     </div>
 </div>
 
-<!-- STEP 4 => FECHA -->
+<!-- STEP 3 => RAZA -->
+<div *ngIf="isMobile && step=='breed'" class="outerMobile">
+    <div class="container searcher">
+        <label for="breedSearcher" class="form-label">HOLA</label>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
+        </form>    
+    </div>
+    <div class="container breeds" id="breedContainer">
+        <div class="list-group" >
+            <a class="list-group-item list-group-item-action text-center" id="breedList"*ngFor="let breedX of breeds" aria-current="true">
+              {{breedX.name}}
+            </a>
+          </div> 
+    </div>
+    <div class="container continue d-grid" id="volverBreed">
+        <button type="button" class="continue btn btn-primary" (click)="navigate(2)">Volver</button>
+    </div>
+</div>
+<!-- STEP 4 => FECHA Y UBICACION-->
 <div *ngIf="isMobile && step=='date'" class="outerMobile">
     <div class="container dates">
         <div class="mb-3">
@@ -64,12 +85,13 @@
                 <button type="button" class="back btn btn-primary" (click)="navigate(3)">Volver</button>
             </div>
             <div class="col">
-                <button type="button" class="continue btn btn-primary" (click)="continue2()">Continuar</button>
+                <button type="button" class="continue btn btn-primary" (click)="navigate(4)">Continuar</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- STEP 5 => FOTOS -->
 
 
 
