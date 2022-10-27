@@ -36,3 +36,9 @@ img {
     border-radius: 10px;
     background: linear-gradient(179.47deg, #000000 0.45%, rgba(196, 196, 196, 0) 99.55%);
 }
+
+@media (min-width: 992px){
+    .outsideDiv{
+        height: 200px;
+    }
+}
