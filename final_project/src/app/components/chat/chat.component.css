@@ -18,9 +18,12 @@
 
 .navBar {
     border-bottom-color: rgb(228, 228, 228);
+    background-color: whitesmoke;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     margin-bottom: 10px;
+    position: fixed;
+    width: 100%;
 }
 
 .inputMsgDiv{
@@ -41,10 +44,12 @@
 }
 
 .divMsg{
-    padding-bottom: 120px;
+    padding-bottom: 60px;
+    padding-top: 86px;
     background-color: whitesmoke;
 }
 
 .btn-styles{
-    background-color: #32CD32;
+    background-color: #000000;
+    color: whitesmoke;
 }

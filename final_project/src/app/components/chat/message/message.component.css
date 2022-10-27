@@ -16,9 +16,10 @@
 
 .messageSent {
     margin-left: auto;
-    background-color: #c9c8c8;
+    background-color: #000000;
+    color: whitesmoke;
 }
 
 .messageRecived {
-    background-color: rgb(53, 186, 226);
+    background-color: rgb(222, 222, 222);
 }
