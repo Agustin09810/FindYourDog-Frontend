@@ -7,6 +7,7 @@ import { ChatPreviewComponent } from './components/chat/chat-preview/chat-previe
 import { LoginComponent } from './components/login/login.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { MyPostsComponent } from './components/my-posts/my-posts.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
   { path: 'random/:userId', component: MyPostsComponent },
+  { path: 'chats/:userId/:targetUserId/:chatId', component: ChatComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
  
 

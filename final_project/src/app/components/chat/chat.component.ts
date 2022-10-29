@@ -4,6 +4,8 @@ import { Message } from 'src/app/interfaces/Message';
 import { User } from 'src/app/interfaces/User';
 import { UserService } from 'src/app/services/user.service';
 
+import { ActivatedRoute, TitleStrategy } from '@angular/router';
+
 
 @Component({
   selector: 'app-chat',
@@ -12,29 +14,40 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChatComponent implements OnInit {
 
-  originUsername:string = 'admin';
-  @Input() targetUsername!:string;
-  @Input() chatId!:string;
-  @Input() user!:User;
+  originUsername?:string;
+  targetUsername?:string;
+  chatId?:string;
+  user?:User;
   messages?: Message[] = [];
+  messagesBool?:boolean;
 
-  isDisplaying:boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    //this.getUser(this.originUsername);
-    console.log(this.chatId);
-    this.getMessages(this.chatId);
-    console.log(this.user + 'xd');
+    this.loadChat();
   }
 
-  show(): void {
-    this.isDisplaying = true;
-  }
 
-  hide(): void {
-    this.isDisplaying = false;
+  loadChat(){
+    const userId = this.route.snapshot.paramMap.get('userId');
+    const targetUserId = this.route.snapshot.paramMap.get('targetUserId');
+    const chatId = this.route.snapshot.paramMap.get('chatId');
+  
+    console.log(userId + ' ' + targetUserId + ' ' + chatId);
+    if(userId && targetUserId && chatId){
+      this.chatId = chatId;
+      this.userService.getUserById(userId).subscribe(originUser => {
+        this.user = originUser;
+        this.originUsername = originUser?.username;
+        console.log('originUser = ' + this.originUsername);
+        this.userService.getUserById(targetUserId).subscribe(targetUser => {
+          this.targetUsername = targetUser?.username;
+          console.log('targetUsername = ' + this.targetUsername);
+          this.userService.getMessagesByChatId(chatId).subscribe(chat => {this.messages = chat?.messages; this.messagesBool = true});
+        })
+      })
+    }
   }
 
 
@@ -56,15 +69,17 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message:string) {
-    let msg: Message = { originUsername: this.originUsername, targetUsername: this.targetUsername, text: message};
-    //this.messages?.push(msg);
-    let user:User = this.user!;
-    let messagesCopy:Message[] = [...this.messages!];
-    messagesCopy.push(msg);
 
-    let chat:Chat = {id:this.chatId, messages:messagesCopy}
-    this.userService.sendMessage(chat).subscribe(() => console.log(this.user?.messages));
-    this.getMessages(this.chatId);
+    if(this.originUsername && this.targetUsername && this.chatId && this.messagesBool == true){
+      let msg: Message = { originUsername: this.originUsername, targetUsername: this.targetUsername, text: message};
+      let user:User = this.user!;
+      let messagesCopy:Message[] = [...this.messages!];
+      messagesCopy.push(msg);
+  
+      let chat:Chat = {id:this.chatId, messages:messagesCopy}
+      this.userService.sendMessage(chat).subscribe(() => console.log(this.user?.messages));
+      this.getMessages(this.chatId);  
+    }
     
   }
 

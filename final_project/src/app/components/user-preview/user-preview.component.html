@@ -1,6 +1,6 @@
-<app-chat #hiddenElement [chatId]="chatId" [user]="originUser" [targetUsername]="user.username"></app-chat>
-
-<div class="userPreview" (click)="showChat()">
+<a routerLink="/chats/{{originUser.id}}/{{user.id}}/{{chatId}}" routerLinkActive="active">
+    <div class="userPreview">
+    
     <div class="imgUser">
         <img class="profile-img" src="{{profileImgUrl?.imageUrl}}" alt="">
     </div>
@@ -8,4 +8,6 @@
         <p class="username">{{user.username}}</p>
         <p class="lastMsg">{{lastMessage}}</p>
     </div>
-</div>
+    
+    </div>
+</a>
