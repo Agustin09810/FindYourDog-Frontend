@@ -8,5 +8,16 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    position: fixed;
+    width: 100%;
+    max-width: 1200px;
+    background-color: whitesmoke;
+    z-index: 9999;
+}
+
+.containerUserPreview{
+    padding-top: 87px;
+    padding-bottom: 56.5px;
+    background-color: whitesmoke;
 }
 

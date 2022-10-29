@@ -56,14 +56,33 @@ export class InMemoryDataService {
     ]
     
     const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages
-      {id:'1', contactsIds:['2', '3'], chatsIds:['1', '2'], username:'admin', password:'admin', profileImg:'1', postsIds:['1', '2'], messages: []
+      {id:'1', contactsIds:['2', '3', '5', '6', '7', '8', '9', '10'], chatsIds:['1', '2', '5', '6', '7', '8', '9', '220'], username:'admin', password:'admin', profileImg:'1', postsIds:['1', '2'], messages: []
       },
       {id:'2', contactsIds:['1', '3'], chatsIds:['1', '3'], username:'user2', password:'user2', profileImg:'14', postsIds:['3', '4'], messages:[
         
       ]},
       {id:'3', contactsIds:['2', '1'], chatsIds:['2', '3'], username:'user3', password:'user3', profileImg:'15', postsIds:['5'], messages:[
         
+      ]},
+      {id:'5', contactsIds:['1'], chatsIds:['5'], username:'user5', password:'user5', profileImg:'15', postsIds:['5'], messages:[
+        
+      ]},
+      {id:'6', contactsIds:['1'], chatsIds:['6'], username:'user6', password:'user6', profileImg:'15', postsIds:['5'], messages:[
+        
+      ]},
+      {id:'7', contactsIds:['1'], chatsIds:['7'], username:'user7', password:'user7', profileImg:'15', postsIds:['5'], messages:[
+        
+      ]},
+      {id:'8', contactsIds:['1'], chatsIds:['8'], username:'user8', password:'user8', profileImg:'15', postsIds:['5'], messages:[
+        
+      ]},
+      {id:'9', contactsIds:['1'], chatsIds:['9'], username:'user9', password:'user9', profileImg:'15', postsIds:['5'], messages:[
+        
+      ]},
+      {id:'10', contactsIds:['1'], chatsIds:['220'], username:'user10', password:'user10', profileImg:'15', postsIds:['5'], messages:[
+        
       ]}
+
 
       
     ]
@@ -77,6 +96,30 @@ export class InMemoryDataService {
       {id:'2', messages:[
         {originUsername:'admin', targetUsername:'user3', text:'la wea xd'},
         {originUsername:'user3', targetUsername:'admin', text:'hola weon'}
+      ]},
+      {id:'5', messages:[
+        {originUsername:'admin', targetUsername:'user5', text:'la wea xd'},
+        {originUsername:'user5', targetUsername:'admin', text:'hola weon5'}
+      ]},
+      {id:'6', messages:[
+        {originUsername:'admin', targetUsername:'user6', text:'la wea xd'},
+        {originUsername:'user6', targetUsername:'admin', text:'hola weon6'}
+      ]},
+      {id:'7', messages:[
+        {originUsername:'admin', targetUsername:'user7', text:'la wea xd'},
+        {originUsername:'user7', targetUsername:'admin', text:'hola weon7'}
+      ]},
+      {id:'8', messages:[
+        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
+        {originUsername:'user8', targetUsername:'admin', text:'hola weon8'}
+      ]},
+      {id:'9', messages:[
+        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
+        {originUsername:'user8', targetUsername:'admin', text:'hola weon9'}
+      ]},
+      {id:'220', messages:[
+        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
+        {originUsername:'user8', targetUsername:'admin', text:'hola weon220'}
       ]}
     ]
     return {images, zones, users, chats, posts};
