@@ -1,14 +1,17 @@
 <div #chatPreview class="bg-chat">
-    <div class="navbarStyles">
-        <app-navbar-sup [text]="'Chats'"></app-navbar-sup>
-    </div>
+    <div class="containerDiv">
+        <div class="navbarStyles">
+            <app-navbar-sup [text]="'Chats'"></app-navbar-sup>
+        </div>
 
-    <div *ngIf="user" class="containerUserPreview">
-        <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">       
-        </app-user-preview>
-    </div>
-    <div>
+        <div *ngIf="user" class="containerUserPreview">
+            <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">       
+            </app-user-preview>
+        </div>
+        <div>
 
+        </div>
     </div>
+    
 </div>
 <app-navbar-inf></app-navbar-inf>

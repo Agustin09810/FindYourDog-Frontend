@@ -2,6 +2,10 @@
     position: relative;
     background-color: whitesmoke;
     height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: space-around;
 }
 
 .navbarStyles {
@@ -13,11 +17,24 @@
     max-width: 1200px;
     background-color: whitesmoke;
     z-index: 9999;
+
 }
 
 .containerUserPreview{
+    position: relative;
     padding-top: 87px;
     padding-bottom: 56.5px;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.containerDiv{
+    position: relative;
+    width: 100%;
+
+    max-width: 1200px;
     background-color: whitesmoke;
 }
 
