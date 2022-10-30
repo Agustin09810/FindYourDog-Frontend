@@ -8,10 +8,11 @@
 
 
 .message{
+    position: relative;
     border-radius: 10px;
 
     width: fit-content; /*fit-content anda pero hay que mejorar cosas*/
-    max-width: 60vw;
+    max-width: 60%;
 }
 
 .messageSent {

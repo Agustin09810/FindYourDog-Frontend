@@ -1,17 +1,19 @@
-
-<div class="containerDiv" *ngIf="this.messagesBool">
-    <div class="navBar">
-        <app-navbar-sup [text]="this.targetUsername" class=""></app-navbar-sup>
-    </div>
-
-    <div class="divMsg">
-            <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="row prueba"></app-message>
-
-    </div>
-    <div class="inputMsgDiv">
-        
-        <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded">
-        <button class="btn btn-styles mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
-
+<div class="outerDiv">
+    <div class="containerDiv" *ngIf="this.messagesBool">
+        <div class="navBar">
+            <app-navbar-sup [text]="this.targetUsername" class=""></app-navbar-sup>
+        </div>
+    
+        <div class="divMsg">
+                <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="row messageRow"></app-message>
+    
+        </div>
+        <div class="inputMsgDiv">
+            
+            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded">
+            <button class="btn btn-styles mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
+    
+        </div>
     </div>
 </div>
+
