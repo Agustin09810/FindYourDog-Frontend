@@ -27,13 +27,14 @@
 }
 
 .container.continue{
-    position: absolute;
+    position: fixed;
     bottom: 9.3%;
 }
 #breedContainer{
     margin-top: 2%;
+    position: absolute;
     margin-bottom: 8%;
-    height: 71vh;
+    height: 57%;
     overflow: scroll;
 }
 #breedList{
