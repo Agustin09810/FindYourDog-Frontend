@@ -31,11 +31,9 @@
 }
 
 .contact-button{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
     display: flex;
     justify-content: space-around;
+    z-index: 9999999;
 }
 
 .dog-name{
@@ -66,6 +64,8 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+
+    background-color: whitesmoke;
 
     z-index: 9999;
 
