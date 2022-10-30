@@ -38,8 +38,8 @@
 <div *ngIf="isMobile && step=='gender'" class="outerMobile">
     <div class="container genders">
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-            <button type="button" class="btn btn-outline-dark" (click)="navigate(3)">Macho</button>
-            <button type="button" class="btn btn-outline-dark" (click)="navigate(3)">Hembra</button>
+            <button type="button" #buttonBoy class="btn btn-outline-dark" (click)="navigate(3,buttonBoy.value)">Macho</button>
+            <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="navigate(3, buttonGirl.value)">Hembra</button>
         </div>
     </div>
     <div class="container continue d-grid">
@@ -58,7 +58,7 @@
     </div>
     <div class="container breeds" id="breedContainer">
         <div class="list-group">
-            <a class="list-group-item list-group-item-action text-center" id="breedList"*ngFor="let breedX of breeds" aria-current="true">
+            <a class="list-group-item list-group-item-action text-center" id="breedList"*ngFor="let breedX of breeds" aria-current="true" (click)="navigate(4, breedX.name)">
               {{breedX.name}}
             </a>
           </div> 
@@ -69,14 +69,32 @@
 </div>
 <!-- STEP 4 => FECHA Y UBICACION-->
 <div *ngIf="isMobile && step=='date'" class="outerMobile">
+    <div class="container text">
+        <p>Por favor, bríndenos datos sobre la fecha y ubicación de la última vez que vió a {{dogName}}</p>
+    </div>
     <div class="container dates">
         <div class="mb-3">
             <label for="datePicker" class="me-3">Visto por última vez:</label>
-            <input id="datePicker" type="date" value="{{today}}">
+            <form>
+                <div class="input-group">
+                    <input
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        #datePicker
+                        ngbDatepicker
+                        #calendarButton="ngbDatepicker"
+                        [placement]="'bottom'"
+                        (change)="verifyDate(datePicker.value, timePicker.value)"
+                        (dateSelect)="verifyDate(datePicker.value, timePicker.value)"
+                        value="{{today}}"
+                    />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
+                </div>
+            </form>
         </div>
         <div class="mb-3">
             <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker" name="timePicker" value="{{now}}" required>
+            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value)" name="timePicker" value="{{now}}" required>
         </div>
     </div>
 
@@ -86,7 +104,7 @@
                 <button type="button" class="back btn btn-primary" (click)="navigate(3)">Volver</button>
             </div>
             <div class="col">
-                <button type="button" class="continue btn btn-primary" (click)="navigate(4)">Continuar</button>
+                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5)">Continuar</button>
             </div>
         </div>
     </div>

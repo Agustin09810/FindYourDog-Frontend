@@ -14,7 +14,7 @@ import {Breed} from '../../interfaces/Breed';
 })
 export class AddEditPostComponent implements OnInit {
 
-  step: string = "breed";
+  step: string = "date";
   todayDate: Date = new Date();
   today: string = this.todayDate.toISOString().substring(0,10);
   now: string = this.todayDate.getHours() + ':' + "00";
@@ -33,7 +33,7 @@ export class AddEditPostComponent implements OnInit {
   additionalInfo: string = "";
 
   disableButton: string = "disabled";
-  
+
   constructor(
     private deviceService: DeviceDetectorService,
     private route: ActivatedRoute,
@@ -50,7 +50,7 @@ export class AddEditPostComponent implements OnInit {
   }
     
 
-  navigate(step: number): void{
+  navigate(step: number, auxText?: string): void{
     switch(step){
       case 1:
         this.step = "name";
@@ -61,18 +61,26 @@ export class AddEditPostComponent implements OnInit {
         this.step = "gender";
         this.textNavbar = "Género";
         this.dogName = this.dogNameInput.nativeElement.value;
-        this.disableButton = "disabled";
         break;
       case 3:
         this.step = "breed";
         this.textNavbar = "Raza";
-        //RECUPERAR genero de los botones dependiendo cual fue clickeado
+        this.dogGender = auxText!;
         break;
       case 4:
         this.step = "date";
         this.textNavbar = "Fecha";
-        this.dogName = this.dogNameInput.nativeElement.value;
+        if(auxText){
+          this.dogBreed = auxText;
+        }
+        else{
+          this.dogBreed = "Desconocida";
+        }
         break;
+        case 5:
+          this.step = "photos";
+          this.textNavbar = "Fotos";
+          //RECUPERAR FECHA Y HORA DE DESAPARICION;
     }
   }
 
@@ -96,6 +104,46 @@ export class AddEditPostComponent implements OnInit {
       }
     });
   }
+
+  verifyDate(date: string, hour:string): boolean{
+    let dateAux = new Date(date);
+    let today = new Date();
+    let a = dateAux.getDate();
+    let b = today.getDate();
+    if(dateAux.getFullYear() > today.getFullYear()){
+      this.disableButton = "disabled";
+      return false;
+    }
+    else{
+      if(dateAux.getMonth() > today.getMonth()){
+        this.disableButton = "disabled";
+        return false;
+      }
+      else{
+        if(dateAux.getDate() > today.getDate()){
+          this.disableButton = "disabled";
+          return false;
+        }
+        else{
+          if(dateAux.getDate()+1 == today.getDate()){
+            if(parseInt(hour.substring(0,2)) > today.getHours()){
+              this.disableButton = "disabled";
+              return false;
+            }
+            else{
+              if(parseInt(hour.substring(3,5)) > today.getMinutes()){
+                this.disableButton = "disabled";
+                return false;
+              }
+            }
+          }
+        }
+      }
+    }
+    this.disableButton = "active";
+    return true;
+  }
+
 
   searchBreed(event: any){
     this.breedService.getBreedByName(event.target.value).subscribe(breeds => this.breeds = breeds);
