@@ -28,6 +28,8 @@ import { UserPreviewComponent } from './components/user-preview/user-preview.com
 import { PostCarouselComponent } from './components/post-carousel/post-carousel.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
+import { ImageUploadComponent } from './components/add-edit-post/image-upload/image-upload.component';
+import { UploadButtonComponent } from './components/add-edit-post/image-upload/upload-button/upload-button.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.c
     PostCarouselComponent,
     PostComponent,
     PostViewComponent,
-    AddEditPostComponent
+    AddEditPostComponent,
+    ImageUploadComponent,
+    UploadButtonComponent
   ],
   imports: [
     BrowserModule,

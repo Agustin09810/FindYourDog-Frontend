@@ -7,6 +7,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import {BreedService} from '../../services/breed.service';
 import {Breed} from '../../interfaces/Breed';
 
+import {Zone} from '../../interfaces/Zone';
+import {ZonesService} from '../../services/zones.service';
+
 @Component({
   selector: 'app-add-edit-post',
   templateUrl: './add-edit-post.component.html',
@@ -21,6 +24,7 @@ export class AddEditPostComponent implements OnInit {
   textNavbar: string = "Publicar";
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef;
+  @ViewChild('')
 
   dogName: string = "";
   otherNames: string[] = [];
@@ -30,7 +34,11 @@ export class AddEditPostComponent implements OnInit {
   lastSeenDate: string = "";
   lastSeenHour: string = "";
   
+  zones: Zone[] = [];
+
   additionalInfo: string = "";
+
+  @Input() counterOfChars: number = 0;
 
   disableButton: string = "disabled";
 
@@ -38,7 +46,8 @@ export class AddEditPostComponent implements OnInit {
     private deviceService: DeviceDetectorService,
     private route: ActivatedRoute,
     private location: Location,
-    private breedService: BreedService
+    private breedService: BreedService,
+    private zonesService: ZonesService
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -47,6 +56,7 @@ export class AddEditPostComponent implements OnInit {
   
   ngOnInit(): void {
     this.getBreeds();
+    this.getZones();
   }
     
 
@@ -105,11 +115,13 @@ export class AddEditPostComponent implements OnInit {
     });
   }
 
+  getZones(): void{
+    this.zonesService.getZones().subscribe(zones => this.zones = zones);
+  }
+
   verifyDate(date: string, hour:string): boolean{
     let dateAux = new Date(date);
     let today = new Date();
-    let a = dateAux.getDate();
-    let b = today.getDate();
     if(dateAux.getFullYear() > today.getFullYear()){
       this.disableButton = "disabled";
       return false;
@@ -142,6 +154,10 @@ export class AddEditPostComponent implements OnInit {
     }
     this.disableButton = "active";
     return true;
+  }
+
+  countCharacters(event: any){
+    this.counterOfChars = event.length;
   }
 
 

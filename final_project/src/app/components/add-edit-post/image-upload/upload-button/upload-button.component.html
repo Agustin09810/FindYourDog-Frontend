@@ -1,0 +1,33 @@
+<label class="upload button" *ngIf="!selectedFile">
+    <span><i class="bi bi-plus-square-dotted"></i></span>
+    <input #imageInput
+    type="file"
+    accept="image/*"
+    (change)="processFile(imageInput)"
+    >
+</label>
+
+<div class="photo" *ngIf="selectedFile">
+    <div class="img-preview" [ngStyle]="{'background-image':'url('+ selectedFile.src +')'}">
+    </div>
+    <span id="xButton" data-bs-toggle="modal" [attr.data-bs-target]="'#' + idNumber"><i class="bi bi-x-circle"></i></span>
+</div>
+
+<div class="modal fade" tabindex="-1" id="{{idNumber}}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">¿Eliminar Foto?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Desea eliminar la imagen?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="deleteFile()">Si</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+</div>
+  
