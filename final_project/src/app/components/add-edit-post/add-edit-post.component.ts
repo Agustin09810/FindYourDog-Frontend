@@ -24,16 +24,22 @@ export class AddEditPostComponent implements OnInit {
   textNavbar: string = "Publicar";
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef;
-  @ViewChild('')
+  @ViewChild('another1') another1Input?: ElementRef;
+  @ViewChild('another2') another2Input?: ElementRef;
+  @ViewChild('datePicker') datePicker!: ElementRef;
+  @ViewChild('timePicker') timePicker!: ElementRef;
+  @ViewChild('locationPicker') locationPicker!: ElementRef;
 
-  dogName: string = "";
-  otherNames: string[] = [];
-  dogGender: string = "";
-  dogBreed: string = "";
+  dogName?: string;
+  otherNames?: string[];
+  dogGender?: string;
+  dogBreed?: string;
   breeds: Breed[] = [];
-  lastSeenDate: string = "";
-  lastSeenHour: string = "";
-  
+  lastSeenDate?: string;
+  lastSeenHour?: string;
+  ubiDetails?: string;
+
+
   zones: Zone[] = [];
 
   additionalInfo: string = "";
@@ -60,17 +66,28 @@ export class AddEditPostComponent implements OnInit {
   }
     
 
-  navigate(step: number, auxText?: string): void{
+  navigate(step: number, auxText?: string, auxText2?: string, auxText3?: string): void{
     switch(step){
       case 1:
         this.step = "name";
         this.textNavbar = "Nombre";
-        this.dogNameInput.nativeElement.value="";
+        this.dogNameInput.nativeElement.value = this.dogName;
+        if(this.otherNames != undefined)
+        if(this.otherNames.length > 0)(
+          this.otherNames = []
+        )
         break;
       case 2:
         this.step = "gender";
         this.textNavbar = "Género";
-        this.dogName = this.dogNameInput.nativeElement.value;
+        this.dogName = this.dogNameInput.nativeElement.value!;
+        if(this.otherNames != undefined)
+        if(this.another1Input && this.another1Input.nativeElement.value != ''){
+          this.otherNames.push(this.another1Input.nativeElement.value);
+          if(this.another2Input && this.another2Input.nativeElement.value != ''){
+            this.otherNames.push(this.another2Input.nativeElement.value);
+          }
+        }
         break;
       case 3:
         this.step = "breed";
@@ -86,12 +103,24 @@ export class AddEditPostComponent implements OnInit {
         else{
           this.dogBreed = "Desconocida";
         }
+        debugger;
+        if(this.lastSeenDate != undefined){
+          this.datePicker.nativeElement.value = this.lastSeenDate;
+          this.timePicker.nativeElement.value = this.lastSeenHour;
+          this.locationPicker.nativeElement.value = this.ubiDetails;
+        }
         break;
         case 5:
+          this.lastSeenDate = auxText!;
+          this.lastSeenHour = auxText2!;
+          this.ubiDetails = auxText3!;
           this.step = "photos";
           this.textNavbar = "Fotos";
-          //RECUPERAR FECHA Y HORA DE DESAPARICION;
     }
+  }
+
+  publish(): void{
+    
   }
 
   changeButtonState(): void {
@@ -119,28 +148,47 @@ export class AddEditPostComponent implements OnInit {
     this.zonesService.getZones().subscribe(zones => this.zones = zones);
   }
 
-  verifyDate(date: string, hour:string): boolean{
+  verifyDate(date: string, hour:string, selectedIndex:number): boolean{
     let dateAux = new Date(date);
     let today = new Date();
+    if(selectedIndex == 0){
+      this.disableButton = "disabled";
+      return false;
+    }
     if(dateAux.getFullYear() > today.getFullYear()){
       this.disableButton = "disabled";
       return false;
+    }
+    else if(dateAux.getFullYear() < today.getFullYear()){
+      this.disableButton = "active";
+      return true;
     }
     else{
       if(dateAux.getMonth() > today.getMonth()){
         this.disableButton = "disabled";
         return false;
       }
+      else if(dateAux.getMonth() < today.getMonth()){
+        this.disableButton = "active";
+        return true;
+      }
       else{
-        if(dateAux.getDate() > today.getDate()){
+        if(dateAux.getDate()+1 > today.getDate()){
           this.disableButton = "disabled";
           return false;
         }
+        else if(dateAux.getDate()+1 < today.getDate()){
+          this.disableButton = "active";
+          return true;
+        }
         else{
-          if(dateAux.getDate()+1 == today.getDate()){
             if(parseInt(hour.substring(0,2)) > today.getHours()){
               this.disableButton = "disabled";
               return false;
+            }
+            else if(parseInt(hour.substring(0,2)) < today.getHours()){
+              this.disableButton = "active";
+              return true;
             }
             else{
               if(parseInt(hour.substring(3,5)) > today.getMinutes()){
@@ -148,12 +196,15 @@ export class AddEditPostComponent implements OnInit {
                 return false;
               }
             }
-          }
         }
       }
     }
     this.disableButton = "active";
     return true;
+  }
+
+  verifyPhoto(): void{
+
   }
 
   countCharacters(event: any){

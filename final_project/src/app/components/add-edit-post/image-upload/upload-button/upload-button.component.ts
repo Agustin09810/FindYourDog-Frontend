@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { ImageByIdService } from '../../../../services/image-by-id.service';
+
+
 class imageSnippet{
   constructor(public src: string, public file: File){}
 }
@@ -12,8 +15,9 @@ class imageSnippet{
 export class UploadButtonComponent implements OnInit {
 
   @Input() selectedFile?: imageSnippet;
-  idNumber: string = 'hola';
-  constructor() { }
+  idNumber: string = 'random';
+  
+  constructor(private imageService:ImageByIdService) { }
 
   ngOnInit(): void {
     this.idNumber = this.randomID(15);
@@ -24,7 +28,8 @@ export class UploadButtonComponent implements OnInit {
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new imageSnippet(event.target.result, file)
+      this.selectedFile = new imageSnippet(event.target.result, file);
+      this.imageService.uploadImage(this.selectedFile.file);
       });
 
     reader.readAsDataURL(file);

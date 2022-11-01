@@ -48,14 +48,14 @@
         </div>
     </div>
     <div class="container continue d-grid">
-        <button type="button" class="continue btn btn-primary" (click)="navigate(1)">Volver</button>
+        <button type="button" class="continue btn btn-outline-primary" (click)="navigate(1)">Volver</button>
     </div>
 </div>
 
 <!-- STEP 3 => RAZA -->
 <div *ngIf="isMobile && step=='breed'" class="outerMobile">
     <div class="container searcher">
-        <label for="breedSearcher" class="form-label">Seleccione la raza de su perro</label>
+        <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de su perro</label>
         <form class="d-flex" role="search">
             <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
         </form>    
@@ -69,13 +69,13 @@
           </div> 
     </div>
     <div class="container continue d-grid" id="volverBreed">
-        <button type="button" class="continue btn btn-primary" (click)="navigate(2)">Volver</button>
+        <button type="button" class="continue btn btn-outline-primary" (click)="navigate(2)">Volver</button>
     </div>
 </div>
 <!-- STEP 4 => FECHA Y UBICACION-->
 <div *ngIf="isMobile && step=='date'" class="outerMobile">
     <div class="container text">
-        <p>Por favor, bríndenos datos sobre la fecha y ubicación de la última vez que vio a {{dogName}}</p>
+        <p>Por favor, bríndenos datos sobre la <strong>fecha y ubicación</strong> de la última vez que vio a {{dogName}}</p>
     </div>
     <div class="container dates">
         <div class="mb-3">
@@ -89,8 +89,8 @@
                         ngbDatepicker
                         #calendarButton="ngbDatepicker"
                         [placement]="'bottom'"
-                        (change)="verifyDate(datePicker.value, timePicker.value)"
-                        (dateSelect)="verifyDate(datePicker.value, timePicker.value)"
+                        (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
+                        (dateSelect)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
                         value="{{today}}"
                     />
                     <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
@@ -100,14 +100,14 @@
         </div>
         <div class="mb-3">
             <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value)" name="timePicker" value="{{now}}" required>
+            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{now}}" required>
             <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
             
         </div>
     </div>
     <div class="container comboBox mb-3">
         <label for="location" class="form-label">Ubicación:</label>
-        <select class="form-select" id="location" required>
+        <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)">
             <option value="0">Seleccione una opción</option>
             <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}">{{zoneX.name}}</option>
         </select>
@@ -115,18 +115,17 @@
     </div>
     <div class="container form">
         <label for="details">Detalles adicionales sobre la ubicación:</label>
-        <textarea #ubiDetails class="form-control" maxlength="100" placeholder="" (keydown)="countCharacters(ubiDetails.value)" id="details"></textarea>
+        <textarea #ubiDetails class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetails.value)" id="details"></textarea>
         <small class="form-text text-muted">{{counterOfChars}}/100</small>
     </div>
-
 
     <div class="container continue">
         <div class="row">
             <div class="col">
-                <button type="button" class="back btn btn-primary" (click)="navigate(3)">Volver</button>
+                <button type="button" class="back btn btn-outline-primary" (click)="navigate(3)">Volver</button>
             </div>
             <div class="col">
-                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5)">Continuar</button>
+                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5, datePicker.value, timePicker.value, ubiDetails.value)">Continuar</button>
             </div>
         </div>
     </div>
@@ -134,7 +133,22 @@
 
 <!-- STEP 5 => FOTOS -->
 <div *ngIf="isMobile && step=='photos'" class="outerMobile" >
-    <app-image-upload></app-image-upload>
+    <app-image-upload [dogName]="dogName"></app-image-upload>
+    <div class="container form mt-3">
+        <label for="dogDetails">Detalles adicionales:</label>
+        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails"></textarea>
+        <small class="form-text text-muted">{{counterOfChars}}/120</small>
+    </div>
+    <div class="container continue">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="back btn btn-outline-primary" (click)="navigate(4)">Volver</button>
+            </div>
+            <div class="col">
+                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5)">Publicar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

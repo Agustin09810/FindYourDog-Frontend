@@ -1,5 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
 @font-face {
-    font-family: "SF Pro";
-    src: local("SF Pro"), url(./assets/fonts/SFPRODISPLAYREGULAR.otf) format("truetype");
-}
+    font-family: "SF Pro Regular";
+    src: local("SF Pro Regular"), url(./assets/fonts/SFPRODISPLAYREGULAR.otf) format("truetype");
+    };
+
+@font-face {
+    font-family: "SF Pro Medium";
+    src: local("SF Pro Medium"), url(./assets/fonts/SFPRODISPLAYMEDIUM.OTF) format("truetype");
+    }
+    
+@font-face {
+    font-family: "SF Pro Bold";
+    src: local("SF Pro Bold"), url(./assets/fonts/SFPRODISPLAYBOLD.OTF) format("truetype");
+    }
+
+@font-face {
+    font-family: "SF Pro LightItalic";
+    src: local("SF Pro LightItalic"), url(./assets/fonts/SFPRODISPLAYLIGHTITALIC.OTF) format("truetype");
+    }

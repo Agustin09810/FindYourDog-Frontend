@@ -1,7 +1,14 @@
+body{
+    overflow:scroll;
+}
+
 .navbarStyles {
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+}
+.container{
+    font-family: 'SF Pro Regular';
 }
 
 .anotherName{
@@ -28,25 +35,41 @@
 
 .container.continue{
     position: fixed;
+    
     bottom: 60px;
 }
+
 #breedContainer{
     margin-top: 2%;
     position: absolute;
     margin-bottom: 8%;
-    height: 57%;
+    cursor:pointer;
+    height: 65%;
     overflow: scroll;
 }
+@media(max-height:792px){
+    #breedContainer{
+        margin-top: 2%;
+        position: absolute;
+        margin-bottom: 8%;
+        cursor:pointer;
+        height: 57%;
+        overflow: scroll;
+    }
+}
+
 #breedList{
     height:100%;
     overflow: scroll;
+    font-family: 'SF Pro Regular';
+    font-style: normal;
 }
 
 .continue.btn.btn-primary{
     width: 100%;
 }
 
-.back.btn.btn-primary{
+.back.btn.btn-outline-primary{
     width: 100%;
 }
 
@@ -55,6 +78,7 @@
     height: 7em
 }
 
-#details{
-    height: 6.5em
+textarea{
+    resize: none;
 }
+

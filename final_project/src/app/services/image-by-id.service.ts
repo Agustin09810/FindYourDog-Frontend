@@ -22,4 +22,13 @@ export class ImageByIdService {
     return this.getImages().pipe(map(imgs => imgs.find(img => img.imageId === id)));
   }
 
+  
+  public uploadImage(image: File) {
+    const formData = new FormData();
+
+    formData.append('image', image);
+
+    return this.http.post(this.imagesUrl, formData);
+  }
+
 }

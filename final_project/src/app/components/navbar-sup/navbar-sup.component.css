@@ -1,5 +1,5 @@
 .navbar-brand{
-    font-family: 'SF Pro';
+    font-family: 'SF Pro Regular';
     letter-spacing:.01em;
     font-style: normal;
     font-weight: 400;
@@ -12,7 +12,7 @@
 }
 
 .nav-item{
-    font-family: 'SF Pro';
+    font-family: 'SF Pro Regular';
     font-style: normal;
     font-size: 85%;
 }
