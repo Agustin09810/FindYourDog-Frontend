@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Image } from 'src/app/interfaces/Image';
 import { User } from 'src/app/interfaces/User';
 import { ImageByIdService } from 'src/app/services/image-by-id.service';
+import { MessageService } from 'src/app/services/message.service';
 import { UserService } from 'src/app/services/user.service';
 import { ChatComponent } from '../chat/chat.component';
 
@@ -14,7 +15,7 @@ import { ChatComponent } from '../chat/chat.component';
 export class UserPreviewComponent implements OnInit {
 
 
-  constructor(private userService:UserService, private imageService:ImageByIdService) { }
+  constructor(private userService:UserService, private imageService:ImageByIdService, private messageService:MessageService) { }
 
   @Input() user!:User;
   @Input() originUser!:User;
@@ -24,7 +25,7 @@ export class UserPreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getChatId(this.originUser!, this.user!);
-    this.getLastMessage();
+    this.getChat(this.chatId);
     this.imageService.getImagesById(this.user.profileImg).subscribe(x => this.profileImgUrl = x);
 
 
@@ -40,11 +41,14 @@ export class UserPreviewComponent implements OnInit {
 
   }
 
-  getLastMessage() {
-    this.userService.getMessagesByChatId(this.chatId!).subscribe(x => {
-      this.lastMessage = x?.messages.at(-1)?.text.substring(0, 20) + '...';
-    })
+  //Se obtiene el chat y posteriormente su último mensaje.
+  getChat(chatId:string){
+    this.userService.getChatById(chatId).subscribe(chat => this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
+      message => this.lastMessage = message.text.substring(0, 20) + '...'
+    ));
   }
+
+  
 
 
   

@@ -88,40 +88,64 @@ export class InMemoryDataService {
     ]
 
     const chats: Chat[] = [
-      {id:'1', messages:[{originUsername:'admin', targetUsername:'user2', text:'hola weon'},
-      {originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
-      {originUsername:'user2', targetUsername:'admin', text:'mira vos'},
-      {originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
-      {originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'}]},
-      {id:'2', messages:[
-        {originUsername:'admin', targetUsername:'user3', text:'la wea xd'},
-        {originUsername:'user3', targetUsername:'admin', text:'hola weon'}
+      {id:'1', messagesIds:
+      ['1', '2', '3', '4', '5']},
+
+      {id:'2', messagesIds:['11','12']},
+
+      {id:'5', messagesIds:[
+        '21' , '22'
       ]},
-      {id:'5', messages:[
-        {originUsername:'admin', targetUsername:'user5', text:'la wea xd'},
-        {originUsername:'user5', targetUsername:'admin', text:'hola weon5'}
+
+      {id:'6', messagesIds:[
+        '31', '32'
       ]},
-      {id:'6', messages:[
-        {originUsername:'admin', targetUsername:'user6', text:'la wea xd'},
-        {originUsername:'user6', targetUsername:'admin', text:'hola weon6'}
+
+      {id:'7', messagesIds:[
+        '41', '42'
       ]},
-      {id:'7', messages:[
-        {originUsername:'admin', targetUsername:'user7', text:'la wea xd'},
-        {originUsername:'user7', targetUsername:'admin', text:'hola weon7'}
+
+      {id:'8', messagesIds:[
+        '51', '52'
       ]},
-      {id:'8', messages:[
-        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
-        {originUsername:'user8', targetUsername:'admin', text:'hola weon8'}
+
+      {id:'9', messagesIds:[
+        '61', '62'
       ]},
-      {id:'9', messages:[
-        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
-        {originUsername:'user8', targetUsername:'admin', text:'hola weon9'}
-      ]},
-      {id:'220', messages:[
-        {originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
-        {originUsername:'user8', targetUsername:'admin', text:'hola weon220'}
+
+      {id:'220', messagesIds:[
+        '71', '72'
       ]}
     ]
-    return {images, zones, users, chats, posts};
+
+    const messages: Message[] = [
+      {id:'1', originUsername:'admin', targetUsername:'user2', text:'te bloquie de ista pero por otra cuenta veo tus historias'},
+      {id:'2', originUsername:'admin', targetUsername:'user2', text:'hola weon'},
+      {id:'3', originUsername:'user2', targetUsername:'admin', text:'mira vos'},
+      {id:'4', originUsername:'admin', targetUsername:'user2', text:'ye ye ye brr'},
+      {id:'5', originUsername:'admin', targetUsername:'user2', text:'ando manejando x las callses q me besaste'},
+
+      {id:'11', originUsername:'admin', targetUsername:'user3', text:'la wea xd'},
+      {id:'12', originUsername:'user3', targetUsername:'admin', text:'hola weon'},
+
+      {id:'21', originUsername:'admin', targetUsername:'user5', text:'la wea xd'},
+      {id:'22', originUsername:'user5', targetUsername:'admin', text:'hola weon5'},
+
+      {id:'31', originUsername:'admin', targetUsername:'user6', text:'la wea xd'},
+      {id:'32', originUsername:'user6', targetUsername:'admin', text:'hola weon6'},
+
+      {id:'41', originUsername:'admin', targetUsername:'user7', text:'la wea xd'},
+      {id:'42', originUsername:'user7', targetUsername:'admin', text:'hola weon7'},
+
+      {id:'51', originUsername:'admin', targetUsername:'user8', text:'la wea xd'},
+      {id:'52', originUsername:'user8', targetUsername:'admin', text:'hola weon8'},
+
+      {id:'61', originUsername:'admin', targetUsername:'user9', text:'la wea xd'},
+      {id:'62', originUsername:'user9', targetUsername:'admin', text:'hola weon9'},
+
+      {id:'71', originUsername:'admin', targetUsername:'user10', text:'la wea xd'},
+      {id:'72', originUsername:'user10', targetUsername:'admin', text:'hola weon10220'}
+    ]
+    return {images, zones, users, chats, posts, messages};
   }
 }
