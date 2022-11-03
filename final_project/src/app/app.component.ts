@@ -8,5 +8,5 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'final_project';
+  title = 'FYD';
 }

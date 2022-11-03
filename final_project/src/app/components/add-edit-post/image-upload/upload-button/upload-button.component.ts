@@ -29,9 +29,9 @@ export class UploadButtonComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new imageSnippet(event.target.result, file);
+      debugger;
       this.imageService.uploadImage(this.selectedFile.file);
       });
-
     reader.readAsDataURL(file);
   }
 

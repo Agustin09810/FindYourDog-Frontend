@@ -42,6 +42,7 @@
 <!-- STEP 2 => GENERO -->
 <div *ngIf="isMobile && step=='gender'" class="outerMobile">
     <div class="container genders">
+        <p>Por favor, indique el <strong>género</strong> de {{dogName}}</p>
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
             <button type="button" #buttonBoy class="btn btn-outline-dark" (click)="navigate(3,buttonBoy.value)">Macho</button>
             <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="navigate(3, buttonGirl.value)">Hembra</button>
@@ -91,7 +92,7 @@
                         [placement]="'bottom'"
                         (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
                         (dateSelect)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
-                        value="{{today}}"
+                        value="{{lastSeenDate}}"
                     />
                     <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
                 </div>
@@ -100,22 +101,22 @@
         </div>
         <div class="mb-3">
             <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{now}}" required>
+            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
             <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
             
         </div>
     </div>
     <div class="container comboBox mb-3">
         <label for="location" class="form-label">Ubicación:</label>
-        <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)">
+        <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
             <option value="0">Seleccione una opción</option>
-            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}">{{zoneX.name}}</option>
+            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
         </select>
         <small class="form-text text-muted">Este campo es obligatorio</small>
     </div>
     <div class="container form">
         <label for="details">Detalles adicionales sobre la ubicación:</label>
-        <textarea #ubiDetails class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetails.value)" id="details"></textarea>
+        <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details"></textarea>
         <small class="form-text text-muted">{{counterOfChars}}/100</small>
     </div>
 
@@ -125,7 +126,7 @@
                 <button type="button" class="back btn btn-outline-primary" (click)="navigate(3)">Volver</button>
             </div>
             <div class="col">
-                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5, datePicker.value, timePicker.value, ubiDetails.value)">Continuar</button>
+                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5, datePicker.value, timePicker.value, ubiDetailsText.value, locationComboBox.value)">Continuar</button>
             </div>
         </div>
     </div>
@@ -145,7 +146,7 @@
                 <button type="button" class="back btn btn-outline-primary" (click)="navigate(4)">Volver</button>
             </div>
             <div class="col">
-                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5)">Publicar</button>
+                <button type="button" class="continue btn btn-primary {{disableButton}}">Publicar</button>
             </div>
         </div>
     </div>

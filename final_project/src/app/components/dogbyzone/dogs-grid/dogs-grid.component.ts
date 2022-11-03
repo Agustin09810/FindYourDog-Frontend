@@ -41,7 +41,7 @@ export class DogsGridComponent implements OnInit {
       {
         if(this.zone.posts.length > 0){
           this.zone.posts.forEach(postId => {
-            this.postsService.getPostsById(postId).subscribe(post => this.posts.push(post));
+            this.postsService.getPostsById(parseInt(postId)).subscribe(post => this.posts.push(post));
           }); 
         }       
       }

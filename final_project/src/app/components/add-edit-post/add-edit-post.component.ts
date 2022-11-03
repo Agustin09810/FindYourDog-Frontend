@@ -10,6 +10,9 @@ import {Breed} from '../../interfaces/Breed';
 import {Zone} from '../../interfaces/Zone';
 import {ZonesService} from '../../services/zones.service';
 
+import {Post} from '../../interfaces/Post';
+import {PostsService} from '../../services/posts.service';
+
 @Component({
   selector: 'app-add-edit-post',
   templateUrl: './add-edit-post.component.html',
@@ -17,7 +20,7 @@ import {ZonesService} from '../../services/zones.service';
 })
 export class AddEditPostComponent implements OnInit {
 
-  step: string = "date";
+  step: string = "photos";
   todayDate: Date = new Date();
   today: string = this.todayDate.toISOString().substring(0,10);
   now: string = this.todayDate.getHours() + ':' + "00";
@@ -26,9 +29,13 @@ export class AddEditPostComponent implements OnInit {
   @ViewChild('dogNameInput') dogNameInput!: ElementRef;
   @ViewChild('another1') another1Input?: ElementRef;
   @ViewChild('another2') another2Input?: ElementRef;
+
+  //Elements from STEP 4
   @ViewChild('datePicker') datePicker!: ElementRef;
   @ViewChild('timePicker') timePicker!: ElementRef;
-  @ViewChild('locationPicker') locationPicker!: ElementRef;
+  @ViewChild('locationComboBox') locationPicker!: ElementRef;
+  @ViewChild('ubiDetailsText') ubiDetailsInput!: ElementRef;
+  
 
   dogName?: string;
   otherNames?: string[];
@@ -37,8 +44,10 @@ export class AddEditPostComponent implements OnInit {
   breeds: Breed[] = [];
   lastSeenDate?: string;
   lastSeenHour?: string;
-  ubiDetails?: string;
-
+  lostZone?: string;
+  ubiDetails: string = "";
+  photos: string[] = [];
+  
 
   zones: Zone[] = [];
 
@@ -53,7 +62,8 @@ export class AddEditPostComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private breedService: BreedService,
-    private zonesService: ZonesService
+    private zonesService: ZonesService,
+    private postService: PostsService
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -66,7 +76,7 @@ export class AddEditPostComponent implements OnInit {
   }
     
 
-  navigate(step: number, auxText?: string, auxText2?: string, auxText3?: string): void{
+  navigate(step: number, auxText?: string, auxText2?: string, auxText3?: string, auxText4?: string): void{
     switch(step){
       case 1:
         this.step = "name";
@@ -103,24 +113,15 @@ export class AddEditPostComponent implements OnInit {
         else{
           this.dogBreed = "Desconocida";
         }
-        debugger;
-        if(this.lastSeenDate != undefined){
-          this.datePicker.nativeElement.value = this.lastSeenDate;
-          this.timePicker.nativeElement.value = this.lastSeenHour;
-          this.locationPicker.nativeElement.value = this.ubiDetails;
-        }
         break;
         case 5:
           this.lastSeenDate = auxText!;
           this.lastSeenHour = auxText2!;
           this.ubiDetails = auxText3!;
+          this.lostZone = auxText4!;
           this.step = "photos";
           this.textNavbar = "Fotos";
     }
-  }
-
-  publish(): void{
-    
   }
 
   changeButtonState(): void {
@@ -131,7 +132,6 @@ export class AddEditPostComponent implements OnInit {
       this.disableButton = "disabled";
     }
   }
-
   getBreeds() : void{
     this.breedService.getBreeds().subscribe(breeds => this.breeds = breeds);
   }
@@ -203,16 +203,13 @@ export class AddEditPostComponent implements OnInit {
     return true;
   }
 
-  verifyPhoto(): void{
-
-  }
-
   countCharacters(event: any){
     this.counterOfChars = event.length;
   }
 
-
   searchBreed(event: any){
     this.breedService.getBreedByName(event.target.value).subscribe(breeds => this.breeds = breeds);
   }
+
+
 }

@@ -22,9 +22,10 @@ export class PostViewComponent implements OnInit {
   }
 
   getPostById(): void {
-    const id = this.route.snapshot.paramMap.get('post-view-Id');
+    let id: any = this.route.snapshot.paramMap.get('post-view-Id');
     if(id)
       {
+        id = parseInt(id);
         this.postService.getPostsById(id).subscribe(post => {
           this.post = post;
           this.post?.photos.forEach(imgId => {

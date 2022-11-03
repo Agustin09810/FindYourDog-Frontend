@@ -1,5 +1,5 @@
 export interface Post{
-    id: string,
+    id: number,
     user: string,
     dogName: string,
     dogNickNames: string[],

@@ -47,11 +47,11 @@ export class InMemoryDataService {
     ]
 
     const posts: Post[] = [
-      {id:'1', user:'admin', dogName:'Pepe', dogNickNames: ['Pepito'], dogGender: 'Macho',dogBreed:'breed1', lostOn:new Date(2022, 6, 30), lostAt:'10:45', lostZone:'name1', lostDescription:'Estaba en el Parque Villa Biarritz', dogDescription: 'Llevaba una correa amarilla', photos:['10', '11', '12']},
-      {id:'2', user:'admin', dogName:'dog2', dogNickNames: ['doggy2'], dogGender: 'Hembra', dogBreed:'breed2', lostOn:new Date(2022, 8, 9), lostAt:'18:35', lostZone:'name2', lostDescription:'Estaba en la estación de tren', dogDescription: 'Llevaba una correa roja', photos:['11']},
-      {id:'3', user:'wea123', dogName:'dog3', dogNickNames: [], dogGender: 'Hembra', dogBreed:'breed3', lostOn:new Date(2022, 11, 10), lostAt:'19:56', lostZone:'name1', lostDescription:'Estaba al lado de un banco' , dogDescription: 'Llevaba una correa negra', photos:['12','13']},
-      {id:'4', user:'wea123', dogName:'Capitán', dogNickNames: ['Capi', 'Capitansito'], dogGender: 'Macho', dogBreed:'breed4', lostOn:new Date(2022, 9, 10), lostAt:'12:37', lostZone:'name1', lostDescription:'Estaba cerca de una pared tageada', dogDescription: 'Llevaba una correa azul', photos:['12','13']},
-      {id:'5', user:'wea123', dogName:'Thor', dogNickNames: [], dogGender: 'Macho', dogBreed:'breed5', lostOn:new Date(2022, 9, 15), lostAt:'07:12', lostZone:'name3', lostDescription:'Estaba en el Parque Rodó', dogDescription: 'Llevaba una correa verde', photos:['11','13']}
+      {id:1, user:'admin', dogName:'Pepe', dogNickNames: ['Pepito'], dogGender: 'Macho',dogBreed:'breed1', lostOn:new Date(2022, 6, 30), lostAt:'10:45', lostZone:'name1', lostDescription:'Estaba en el Parque Villa Biarritz', dogDescription: 'Llevaba una correa amarilla', photos:['10', '11', '12']},
+      {id:2, user:'admin', dogName:'dog2', dogNickNames: ['doggy2'], dogGender: 'Hembra', dogBreed:'breed2', lostOn:new Date(2022, 8, 9), lostAt:'18:35', lostZone:'name2', lostDescription:'Estaba en la estación de tren', dogDescription: 'Llevaba una correa roja', photos:['11']},
+      {id:3, user:'wea123', dogName:'dog3', dogNickNames: [], dogGender: 'Hembra', dogBreed:'breed3', lostOn:new Date(2022, 11, 10), lostAt:'19:56', lostZone:'name1', lostDescription:'Estaba al lado de un banco' , dogDescription: 'Llevaba una correa negra', photos:['12','13']},
+      {id:4, user:'wea123', dogName:'Capitán', dogNickNames: ['Capi', 'Capitansito'], dogGender: 'Macho', dogBreed:'breed4', lostOn:new Date(2022, 9, 10), lostAt:'12:37', lostZone:'name1', lostDescription:'Estaba cerca de una pared tageada', dogDescription: 'Llevaba una correa azul', photos:['12','13']},
+      {id:5, user:'wea123', dogName:'Thor', dogNickNames: [], dogGender: 'Macho', dogBreed:'breed5', lostOn:new Date(2022, 9, 15), lostAt:'07:12', lostZone:'name3', lostDescription:'Estaba en el Parque Rodó', dogDescription: 'Llevaba una correa verde', photos:['11','13']}
     ]
     
     const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages
