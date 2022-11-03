@@ -1,5 +1,5 @@
 <div class="navbarStyles">
     <app-navbar-sup [text]="'Home'"></app-navbar-sup>
 </div>
-<app-grid></app-grid>
+<app-grid [departmentId]="departmentId" *ngIf="departmentId"></app-grid>
 <app-navbar-inf></app-navbar-inf>

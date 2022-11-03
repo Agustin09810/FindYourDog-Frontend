@@ -1,7 +1,11 @@
 
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { ZonesService } from 'src/app/services/zones.service';
 import { Zone } from 'src/app/interfaces/Zone';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/interfaces/User';
+import { DepartmentService } from 'src/app/services/department.service';
 
 
 @Component({
@@ -11,12 +15,26 @@ import { Zone } from 'src/app/interfaces/Zone';
 })
 export class GridComponent implements OnInit {
 
+  @Input() departmentId?:string;
   zones:Zone[] = [];
-  constructor(private getZones:ZonesService) { }
+  constructor(private zoneService:ZonesService, private departmentService:DepartmentService) { }
   ngOnInit(): void {
-    this.getZones.getZones().subscribe(zoneRecived => this.zones = zoneRecived);
-    console.log(this.zones + 'xddd');
+    this.loadZones();
+    console.log(this.departmentId);
   }
+
+  loadZones(){
+    if(this.departmentId){
+      console.log('xd');
+      this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
+        department.zonesId.forEach(zoneId => {
+          this.zoneService.getZone(zoneId).subscribe(zone => this.zones.push(zone));
+        });
+      })
+    }
+  }
+
+  
 
 
 

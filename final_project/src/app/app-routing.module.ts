@@ -11,7 +11,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: ':userId/home', component: HomeComponent },
   { path: 'zone/:zoneId', component: DogbyzoneComponent },
   { path: 'chat', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },

@@ -81,4 +81,8 @@ export class UserService {
     return this.getChats().pipe(map(chats => chats.find(chat => chat.id == chatId)));
   }
 
+  updateDepartment(user:User){
+    return this.http.put<User>(this.usersUrl, user, this.httpOptions);
+  }
+
 }

@@ -6,6 +6,7 @@ import { Message } from './interfaces/Message';
 import { User } from './interfaces/User';
 import { Zone } from './interfaces/Zone';
 import { Post } from './interfaces/Post';
+import { Department } from './interfaces/Department';
 
 
 
@@ -44,7 +45,13 @@ export class InMemoryDataService {
       {imgId:'6', name:'name6', id:'6', posts: []},
       {imgId:'7', name:'name7', id:'7', posts: []},
       {imgId:'8', name:'name8', id:'8', posts: []},
-      {imgId:'9', name:'name9', id:'9', posts: []}
+      {imgId:'9', name:'name9', id:'9', posts: []},
+      {imgId:'10', name:'name11', id:'11', posts: ['1']},
+      {imgId:'11', name:'name12', id:'12', posts: ['1', '4']},
+      {imgId:'12', name:'name21', id:'21', posts: ['5']},
+      {imgId:'13', name:'name22', id:'22', posts: ['4', '5']},
+      {imgId:'14', name:'name31', id:'31', posts: ['1', '4', '5']},
+      {imgId:'15', name:'name32', id:'32', posts: ['1', '4', '5']},
     ]
 
     const posts: Post[] = [
@@ -57,31 +64,31 @@ export class InMemoryDataService {
     
     const users: User[] = [//poner un id en messages y haecr una coleccion  array  messages con su id, asi 2 usuarios comparten el mismo id de array messages
       {id:'1', contactsIds:['2', '3', '5', '6', '7', '8', '9', '10'], chatsIds:['1', '2', '5', '6', '7', '8', '9', '220'], username:'admin', password:'admin', profileImg:'1', postsIds:['1', '2'], messages: []
-      },
+      , departmentId:'1'},
       {id:'2', contactsIds:['1', '3'], chatsIds:['1', '3'], username:'user2', password:'user2', profileImg:'14', postsIds:['3', '4'], messages:[
         
-      ]},
+      ], departmentId:'2'},
       {id:'3', contactsIds:['2', '1'], chatsIds:['2', '3'], username:'user3', password:'user3', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'3'},
       {id:'5', contactsIds:['1'], chatsIds:['5'], username:'user5', password:'user5', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'4'},
       {id:'6', contactsIds:['1'], chatsIds:['6'], username:'user6', password:'user6', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'5'},
       {id:'7', contactsIds:['1'], chatsIds:['7'], username:'user7', password:'user7', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'6'},
       {id:'8', contactsIds:['1'], chatsIds:['8'], username:'user8', password:'user8', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'7'},
       {id:'9', contactsIds:['1'], chatsIds:['9'], username:'user9', password:'user9', profileImg:'15', postsIds:['5'], messages:[
         
-      ]},
+      ], departmentId:'8'},
       {id:'10', contactsIds:['1'], chatsIds:['220'], username:'user10', password:'user10', profileImg:'15', postsIds:['5'], messages:[
         
-      ]}
+      ], departmentId:'9'}
 
 
       
@@ -146,6 +153,29 @@ export class InMemoryDataService {
       {id:'71', originUsername:'admin', targetUsername:'user10', text:'la wea xd'},
       {id:'72', originUsername:'user10', targetUsername:'admin', text:'hola weon10220'}
     ]
-    return {images, zones, users, chats, posts, messages};
+
+    const departments:Department[] = [
+      {id:'1', name:'Montevideo', zonesId:['1', '2', '3', '4', '5', '6', '7', '8', '9']},
+      {id:'2', name:'Canelones', zonesId:['11', '12']},
+      {id:'3', name:'Maldonado', zonesId:['21', '22']},
+      {id:'4', name:'San José', zonesId:['31', '32']},
+      {id:'5', name:'Colonia', zonesId:['12', '11']},
+      {id:'6', name:'Soriano', zonesId:['12', '11']},
+      {id:'7', name:'Flores', zonesId:['12', '11']},
+      {id:'8', name:'Florida', zonesId:['12', '11']},
+      {id:'9', name:'Lavalleja', zonesId:['12', '11']},
+      {id:'10', name:'Rocha', zonesId:['12', '11']},
+      {id:'11', name:'Treinta y tres', zonesId:['12', '11']},
+      {id:'12', name:'Durazno', zonesId:['12', '11']},
+      {id:'13', name:'Río Negro', zonesId:['12', '11']},
+      {id:'14', name:'Paysandú', zonesId:['12', '11']},
+      {id:'15', name:'Tacuarembó', zonesId:['12', '11']},
+      {id:'16', name:'Cerro Largo', zonesId:['12', '11']},
+      {id:'17', name:'Rivera', zonesId:['12', '11']},
+      {id:'18', name:'Salto', zonesId:['12', '11']},
+      {id:'19', name:'Artigas', zonesId:['12', '11']},
+
+    ]
+    return {images, zones, users, chats, posts, messages, departments};
   }
 }

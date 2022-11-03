@@ -1,3 +1,4 @@
+import { Department } from "./Department";
 import { Message } from "./Message";
 
 export interface User{
@@ -8,6 +9,7 @@ export interface User{
     password:string,
     profileImg: string,
     postsIds:string[];
-    messages: Message[]
+    messages: Message[],
+    departmentId: string
     
 }
