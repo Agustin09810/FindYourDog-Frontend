@@ -28,6 +28,7 @@ import { UserPreviewComponent } from './components/user-preview/user-preview.com
 import { PostCarouselComponent } from './components/post-carousel/post-carousel.component';
 import { PostViewComponent } from './components/post-view/post-view.component';
 import { MyPostsComponent } from './components/my-posts/my-posts.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MyPostsComponent } from './components/my-posts/my-posts.component';
     PostCarouselComponent,
     PostComponent,
     PostViewComponent,
-    MyPostsComponent
+    MyPostsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

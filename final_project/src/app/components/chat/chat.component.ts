@@ -88,7 +88,6 @@ export class ChatComponent implements OnInit {
         this.messages?.push(msg);
         this.userService.sendMessage(chat).subscribe(() => {
           this.chat?.messagesIds.push(msg.id);
-          this.userService.getChatById(this.chatId!).subscribe(x => console.log());
         });
       });
       
