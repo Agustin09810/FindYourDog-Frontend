@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ImageByIdService } from '../../../../services/image-by-id.service';
+import { Image } from '../../../../interfaces/Image';
 
 
 class imageSnippet{
@@ -15,6 +16,8 @@ class imageSnippet{
 export class UploadButtonComponent implements OnInit {
 
   @Input() selectedFile?: imageSnippet;
+  @Output() sendPhoto = new EventEmitter<Image>();
+  @Input() imageToUpload: Image|undefined = undefined;
   idNumber: string = 'random';
   
   constructor(private imageService:ImageByIdService) { }
@@ -29,13 +32,14 @@ export class UploadButtonComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new imageSnippet(event.target.result, file);
-      debugger;
-      this.imageService.uploadImage(this.selectedFile.file);
+      this.imageToUpload = {imageId: this.idNumber, imageUrl: this.selectedFile.src};
+      this.imageService.uploadImage(this.imageToUpload).subscribe();
       });
     reader.readAsDataURL(file);
   }
 
   deleteFile(): void{
+    this.imageService.deleteImage(this.imageToUpload!.imageId).subscribe();
     this.selectedFile = undefined;
   }
 

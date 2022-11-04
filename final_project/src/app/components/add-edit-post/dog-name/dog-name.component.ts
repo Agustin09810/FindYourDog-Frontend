@@ -42,6 +42,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
       
     }
   }
+  
   changeButtonState(): void {
     if(this.dogNameInput.nativeElement.value != '') {
       this.disableButton = "active";

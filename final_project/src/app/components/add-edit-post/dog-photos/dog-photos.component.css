@@ -1,3 +1,7 @@
+.container{
+    font-family: 'SF Pro Regular';
+}
+
 .container.continue{
     position: fixed;
     

@@ -23,22 +23,7 @@
 
 <!-- STEP 5 => FOTOS -->
 <div *ngIf="isMobile && step=='photos'" class="outerMobile" >
-    <app-image-upload [dogName]="dogName"></app-image-upload>
-    <div class="container form mt-3">
-        <label for="dogDetails">Detalles adicionales:</label>
-        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails"></textarea>
-        <small class="form-text text-muted">{{counterOfChars}}/120</small>
-    </div>
-    <div class="container continue">
-        <div class="row">
-            <div class="col">
-                <button type="button" class="back btn btn-outline-primary" (click)="navigate(4)">Volver</button>
-            </div>
-            <div class="col">
-                <button type="button" class="continue btn btn-primary {{disableButton}}">Publicar</button>
-            </div>
-        </div>
-    </div>
+    <app-dog-photos [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
 </div>
 
 

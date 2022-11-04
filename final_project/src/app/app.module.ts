@@ -30,6 +30,11 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
 import { ImageUploadComponent } from './components/add-edit-post/image-upload/image-upload.component';
 import { UploadButtonComponent } from './components/add-edit-post/image-upload/upload-button/upload-button.component';
+import { DogNameComponent} from './components/add-edit-post/dog-name/dog-name.component';
+import { DogGenderComponent } from './components/add-edit-post/dog-gender/dog-gender.component';
+import { DogBreedComponent } from './components/add-edit-post/dog-breed/dog-breed.component';
+import { DogDateZoneComponent } from './components/add-edit-post/dog-date-zone/dog-date-zone.component';
+import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-photos.component';
 
 
 @NgModule({
@@ -55,7 +60,12 @@ import { UploadButtonComponent } from './components/add-edit-post/image-upload/u
     PostViewComponent,
     AddEditPostComponent,
     ImageUploadComponent,
-    UploadButtonComponent
+    UploadButtonComponent,
+    DogNameComponent,
+    DogGenderComponent,
+    DogBreedComponent,
+    DogDateZoneComponent,
+    DogPhotosComponent
   ],
   imports: [
     BrowserModule,

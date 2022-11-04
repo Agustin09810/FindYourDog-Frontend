@@ -23,7 +23,7 @@ export class PostsService {
     return this.http.get<Post[]>(this.postsUrl);
   }
 
-  getPostsById(id: number){
+  getPostsById(id: string){
     return this.getPosts().pipe(map(posts => posts.find(post => post.id === id)));
   }
 

@@ -46,24 +46,12 @@ export class AddEditPostComponent implements OnInit {
   lastSeenHour?: string;
   lostZone?: string;
   ubiDetails: string = "";
+  dogDescription: string = "";
   photos: string[] = [];
-  
-
-  zones: Zone[] = [];
-
-  additionalInfo: string = "";
-
-  @Input() counterOfChars: number = 0;
-
-  disableButton: string = "disabled";
 
   constructor(
     private deviceService: DeviceDetectorService,
-    private route: ActivatedRoute,
-    private location: Location,
-    private breedService: BreedService,
-    private zonesService: ZonesService,
-    private postService: PostsService
+    private route: ActivatedRoute
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -71,9 +59,8 @@ export class AddEditPostComponent implements OnInit {
   isDesktop = this.deviceService.isDesktop();
   
   ngOnInit(): void {
-    this.getBreeds();
-    this.getZones();
   }
+
   navigateAux(data: string[]){
     this.step=data[0];
     switch(this.step){
@@ -113,129 +100,25 @@ export class AddEditPostComponent implements OnInit {
             this.ubiDetails = data[4];
           }
         }
+        console.log(new Date(this.lastSeenDate + ' ' + this.lastSeenHour));
         break;
     }
   }
-
-  navigate(step: number, auxText?: string, auxText2?: string, auxText3?: string, auxText4?: string): void{
-    switch(step){
-      case 1:
-        this.step = "name";
-        this.textNavbar = "Nombre";
-        break;
-      case 2:
-        this.step = "gender";
-        this.textNavbar = "Género";
-        break;
-      case 3:
-        this.step = "breed";
-        this.textNavbar = "Raza";
-        this.dogGender = auxText!;
-        break;
-      case 4:
-        this.step = "date";
-        this.textNavbar = "Fecha";
-        if(auxText){
-          this.dogBreed = auxText;
-        }
-        else{
-          this.dogBreed = "Desconocida";
-        }
-        break;
-        case 5:
-          this.lastSeenDate = auxText!;
-          this.lastSeenHour = auxText2!;
-          this.ubiDetails = auxText3!;
-          this.lostZone = auxText4!;
-          this.step = "photos";
-          this.textNavbar = "Fotos";
-    }
-  }
-
-  changeButtonState(): void {
-    if(this.dogNameInput.nativeElement.value != '') {
-      this.disableButton = "active";
-    }
-    else{
-      this.disableButton = "disabled";
-    }
-  }
-  getBreeds() : void{
-    this.breedService.getBreeds().subscribe(breeds => this.breeds = breeds);
-  }
-
-  getBreedById(id: string): void{
-    this.breedService.getBreedById(id).subscribe(breed => {
-      if(breed){
-        this.dogBreed = breed.name;
+      
+  randomID(length: number): string {
+      var result           = '';
+      var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
       }
-    });
-  }
+      return result;
+    }
 
-  getZones(): void{
-    this.zonesService.getZones().subscribe(zones => this.zones = zones);
-  }
-
-  verifyDate(date: string, hour:string, selectedIndex:number): boolean{
-    let dateAux = new Date(date);
-    let today = new Date();
-    if(selectedIndex == 0){
-      this.disableButton = "disabled";
-      return false;
-    }
-    if(dateAux.getFullYear() > today.getFullYear()){
-      this.disableButton = "disabled";
-      return false;
-    }
-    else if(dateAux.getFullYear() < today.getFullYear()){
-      this.disableButton = "active";
-      return true;
-    }
-    else{
-      if(dateAux.getMonth() > today.getMonth()){
-        this.disableButton = "disabled";
-        return false;
+    publish(){
+      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogBreed!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
+       dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
+       dogDescription: this.dogDescription, photos: this.photos};
       }
-      else if(dateAux.getMonth() < today.getMonth()){
-        this.disableButton = "active";
-        return true;
-      }
-      else{
-        if(dateAux.getDate()+1 > today.getDate()){
-          this.disableButton = "disabled";
-          return false;
-        }
-        else if(dateAux.getDate()+1 < today.getDate()){
-          this.disableButton = "active";
-          return true;
-        }
-        else{
-            if(parseInt(hour.substring(0,2)) > today.getHours()){
-              this.disableButton = "disabled";
-              return false;
-            }
-            else if(parseInt(hour.substring(0,2)) < today.getHours()){
-              this.disableButton = "active";
-              return true;
-            }
-            else{
-              if(parseInt(hour.substring(3,5)) > today.getMinutes()){
-                this.disableButton = "disabled";
-                return false;
-              }
-            }
-        }
-      }
-    }
-    this.disableButton = "active";
-    return true;
-  }
-
-  countCharacters(event: any){
-    this.counterOfChars = event.length;
-  }
-
-  
-
-
+      
 }
