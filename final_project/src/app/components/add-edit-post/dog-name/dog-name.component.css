@@ -1,0 +1,44 @@
+.container{
+    font-family: 'SF Pro Regular';
+}
+
+.anotherName{
+    margin-top: 7%;
+}
+.buttonDiv{
+    width: 100%;
+}
+.button{
+    width: 100%;
+}
+
+.buttonMore{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.container.name{
+    margin-top: 5%;
+}
+.container.otherNames{
+    margin-top: 7%;
+}
+
+.container.continue{
+    position: fixed;
+    
+    bottom: 60px;
+}
+
+.continue.btn.btn-primary{
+    width: 100%;
+}
+
+.boton{
+    width: 100%;
+}
+
+.botonMas{
+    width: 100%;
+    margin-top: 5%;
+}

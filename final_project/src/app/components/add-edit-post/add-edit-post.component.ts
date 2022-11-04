@@ -20,7 +20,7 @@ import {PostsService} from '../../services/posts.service';
 })
 export class AddEditPostComponent implements OnInit {
 
-  step: string = "photos";
+  step: string = "name";
   todayDate: Date = new Date();
   today: string = this.todayDate.toISOString().substring(0,10);
   now: string = this.todayDate.getHours() + ':' + "00";
@@ -38,7 +38,7 @@ export class AddEditPostComponent implements OnInit {
   
 
   dogName?: string;
-  otherNames?: string[];
+  otherNames: string[] = [];
   dogGender?: string;
   dogBreed?: string;
   breeds: Breed[] = [];
@@ -74,30 +74,58 @@ export class AddEditPostComponent implements OnInit {
     this.getBreeds();
     this.getZones();
   }
-    
+  navigateAux(data: string[]){
+    this.step=data[0];
+    switch(this.step){
+      case "name":
+        this.textNavbar = "Nombre";
+        break;
+      case "gender":
+        this.textNavbar = "Género";
+        if(data[1]){
+        this.dogName = data[1];
+        }
+        if(data[2]){
+          let aux: string[] = [data[2]];
+          if(data[3]){
+            aux.push(data[3]);
+          }
+          this.otherNames = aux;
+        }
+        break;
+      case "breed":
+        this.textNavbar = "Raza";
+        if(data[1]){
+        this.dogGender = data[1];
+        }
+        break;
+      case "date":
+        this.textNavbar = "Fecha";
+        this.dogBreed = data[1];
+        break;
+      case "photos":
+        this.textNavbar = "Fotos";
+        if(data[1]){
+          this.lastSeenDate = data[1];
+          this.lastSeenHour = data[2];
+          this.lostZone = data[3];
+          if(data[4]){
+            this.ubiDetails = data[4];
+          }
+        }
+        break;
+    }
+  }
 
   navigate(step: number, auxText?: string, auxText2?: string, auxText3?: string, auxText4?: string): void{
     switch(step){
       case 1:
         this.step = "name";
         this.textNavbar = "Nombre";
-        this.dogNameInput.nativeElement.value = this.dogName;
-        if(this.otherNames != undefined)
-        if(this.otherNames.length > 0)(
-          this.otherNames = []
-        )
         break;
       case 2:
         this.step = "gender";
         this.textNavbar = "Género";
-        this.dogName = this.dogNameInput.nativeElement.value!;
-        if(this.otherNames != undefined)
-        if(this.another1Input && this.another1Input.nativeElement.value != ''){
-          this.otherNames.push(this.another1Input.nativeElement.value);
-          if(this.another2Input && this.another2Input.nativeElement.value != ''){
-            this.otherNames.push(this.another2Input.nativeElement.value);
-          }
-        }
         break;
       case 3:
         this.step = "breed";
@@ -207,9 +235,7 @@ export class AddEditPostComponent implements OnInit {
     this.counterOfChars = event.length;
   }
 
-  searchBreed(event: any){
-    this.breedService.getBreedByName(event.target.value).subscribe(breeds => this.breeds = breeds);
-  }
+  
 
 
 }

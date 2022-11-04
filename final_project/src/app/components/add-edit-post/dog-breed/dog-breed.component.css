@@ -1,21 +1,5 @@
-body{
-    overflow:scroll;
-}
-
-.navbarStyles {
-    border-bottom-color: rgb(228, 228, 228);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-}
 .container{
     font-family: 'SF Pro Regular';
-}
-
-.anotherName{
-    margin-top: 7%;
-}
-.buttonDiv{
-    width: 100%;
 }
 
 .container.continue{
@@ -57,8 +41,3 @@ body{
 .back.btn.btn-outline-primary{
     width: 100%;
 }
-
-textarea{
-    resize: none;
-}
-

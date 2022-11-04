@@ -1,0 +1,54 @@
+<div class="container text">
+    <p>Por favor, bríndenos datos sobre la <strong>fecha y ubicación</strong> de la última vez que vio a {{dogName}}</p>
+</div>
+<div class="container dates">
+    <div class="mb-3">
+        <label for="datePicker" class="me-3">Visto por última vez:</label>
+        <form>
+            <div class="input-group">
+                <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    #datePicker
+                    ngbDatepicker
+                    #calendarButton="ngbDatepicker"
+                    [placement]="'bottom'"
+                    (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
+                    (dateSelect)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
+                    value="{{lastSeenDate}}"
+                />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
+            </div>
+            <small class="form-text text-muted">Este campo es obligatorio</small>
+        </form>
+    </div>
+    <div class="mb-3">
+        <label for="timePicker" class="me-3">Hora aproximada:</label>
+        <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
+        <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
+    </div>
+</div>
+<div class="container comboBox mb-3">
+    <label for="location" class="form-label">Ubicación:</label>
+    <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
+        <option value="0">Seleccione una opción</option>
+        <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
+    </select>
+    <small class="form-text text-muted">Este campo es obligatorio</small>
+</div>
+<div class="container form">
+    <label for="details">Detalles adicionales sobre la ubicación:</label>
+    <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details"></textarea>
+    <small class="form-text text-muted">{{counterOfChars}}/100</small>
+</div>
+
+<div class="container continue">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
+        </div>
+        <div class="col">
+            <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="nextStepFunction(datePicker.value, timePicker.value, locationComboBox.value, ubiDetailsText.value)">Continuar</button>
+        </div>
+    </div>
+</div>

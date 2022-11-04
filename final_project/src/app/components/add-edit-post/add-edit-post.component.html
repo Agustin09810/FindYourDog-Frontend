@@ -3,133 +3,22 @@
 </div>
 <!-- STEP 1 => NOMBRE Y APODOS -->
 <div *ngIf="isMobile && step=='name'" class="outerMobile">
-    <div class="container name">
-        <div class="form-floating mb-3">
-            <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
-            <label for="dogName">Nombre</label>
-            <small class="form-text text-muted">Este campo es obligatorio</small>
-        </div>
-        <div class="anotherName container text-center">
-            <label for="btn-check" class="form-label">¿Responde a algún apodo?</label>
-            <div class="buttonDiv">
-                <input type="checkbox" #checkYes class="yes btn-check" id="yes-btn-check" (change)="true" autocomplete="off">
-                <label class="boton btn btn-outline-dark" id="yes-button" for="yes-btn-check">Si</label>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="checkYes.checked" class="container otherNames">
-        <div class="container dates">
-            <label for="otherNames" class="form-label ">Apodos: </label>
-            <div class="row form-floating mb-3">
-                <input type="text" class="form-control" id="otherNamesFirst" placeholder="">
-                <label for="otherNamesFirst">Apodo 1</label>
-                <button type="button" #another1 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='block'"
-                (click)="another1.style.display='none'"><i class="bi bi-plus-circle"></i></button>
-            </div>
-            <div class="row form-floating" #secondNickName style="display: none">
-                <input type="text" class="form-control" #nickName2 id="otherNamesSecond" placeholder="">
-                <label for="otherNamesSecond">Apodo 2</label>
-                <button type="button" #another2 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='none'" (click)="another1.style.display='block'" (click)="nickName2.value=''"><i class="bi bi-trash"></i></button>
-            </div>
-        </div>
-    </div>
-    <div class="container continue d-grid">
-        <button type="button" class="btn btn-primary {{disableButton}}" (click)="navigate(2)">Continuar</button>
-    </div>
+    <app-dog-name [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
 </div>
 
 <!-- STEP 2 => GENERO -->
 <div *ngIf="isMobile && step=='gender'" class="outerMobile">
-    <div class="container genders">
-        <p>Por favor, indique el <strong>género</strong> de {{dogName}}</p>
-        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-            <button type="button" #buttonBoy class="btn btn-outline-dark" (click)="navigate(3,buttonBoy.value)">Macho</button>
-            <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="navigate(3, buttonGirl.value)">Hembra</button>
-        </div>
-    </div>
-    <div class="container continue d-grid">
-        <button type="button" class="continue btn btn-outline-primary" (click)="navigate(1)">Volver</button>
-    </div>
+    <app-dog-gender [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
 </div>
 
 <!-- STEP 3 => RAZA -->
 <div *ngIf="isMobile && step=='breed'" class="outerMobile">
-    <div class="container searcher">
-        <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de su perro</label>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
-        </form>    
-        <small class="form-text text-muted">En caso de desconocerla, presione Continuar.</small>
-    </div>
-    <div class="container breeds" id="breedContainer">
-        <div class="list-group">
-            <a class="list-group-item list-group-item-action text-center" id="breedList"*ngFor="let breedX of breeds" aria-current="true" (click)="navigate(4, breedX.name)">
-              {{breedX.name}}
-            </a>
-          </div> 
-    </div>
-    <div class="container continue d-grid" id="volverBreed">
-        <button type="button" class="continue btn btn-outline-primary" (click)="navigate(2)">Volver</button>
-    </div>
+    <app-dog-breed [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
 </div>
 <!-- STEP 4 => FECHA Y UBICACION-->
 <div *ngIf="isMobile && step=='date'" class="outerMobile">
-    <div class="container text">
-        <p>Por favor, bríndenos datos sobre la <strong>fecha y ubicación</strong> de la última vez que vio a {{dogName}}</p>
-    </div>
-    <div class="container dates">
-        <div class="mb-3">
-            <label for="datePicker" class="me-3">Visto por última vez:</label>
-            <form>
-                <div class="input-group">
-                    <input
-                        class="form-control"
-                        placeholder="yyyy-mm-dd"
-                        #datePicker
-                        ngbDatepicker
-                        #calendarButton="ngbDatepicker"
-                        [placement]="'bottom'"
-                        (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
-                        (dateSelect)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
-                        value="{{lastSeenDate}}"
-                    />
-                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
-                </div>
-                <small class="form-text text-muted">Este campo es obligatorio</small>
-            </form>
-        </div>
-        <div class="mb-3">
-            <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
-            <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
-            
-        </div>
-    </div>
-    <div class="container comboBox mb-3">
-        <label for="location" class="form-label">Ubicación:</label>
-        <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
-            <option value="0">Seleccione una opción</option>
-            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
-        </select>
-        <small class="form-text text-muted">Este campo es obligatorio</small>
-    </div>
-    <div class="container form">
-        <label for="details">Detalles adicionales sobre la ubicación:</label>
-        <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details"></textarea>
-        <small class="form-text text-muted">{{counterOfChars}}/100</small>
-    </div>
-
-    <div class="container continue">
-        <div class="row">
-            <div class="col">
-                <button type="button" class="back btn btn-outline-primary" (click)="navigate(3)">Volver</button>
-            </div>
-            <div class="col">
-                <button type="button" class="continue btn btn-primary {{disableButton}}" (click)="navigate(5, datePicker.value, timePicker.value, ubiDetailsText.value, locationComboBox.value)">Continuar</button>
-            </div>
-        </div>
-    </div>
+    <app-dog-date-zone [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
+        [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
 </div>
 
 <!-- STEP 5 => FOTOS -->

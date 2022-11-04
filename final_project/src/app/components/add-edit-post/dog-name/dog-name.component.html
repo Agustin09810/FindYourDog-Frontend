@@ -1,0 +1,34 @@
+<div *ngIf="isMobile" class="outerMobile">
+    <div class="container name">
+        <div class="form-floating mb-3">
+            <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
+            <label for="dogName">Nombre</label>
+            <small class="form-text text-muted">Este campo es obligatorio</small>
+        </div>
+        <div class="anotherName container text-center">
+            <label for="btn-check" class="form-label">¿Responde a algún apodo?</label>
+            <div class="buttonDiv">
+                <input type="checkbox" #checkYes class="yes btn-check" id="yes-btn-check" (change)="checked= !checked" autocomplete="off">
+                <label class="boton btn btn-outline-dark" id="yes-button" for="yes-btn-check">Si</label>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="checked" class="container otherNames">
+        <div class="container dates">
+            <label for="otherNames" class="form-label ">Apodos: </label>
+            <div class="row form-floating mb-3">
+                <input type="text" #nickName1 class="form-control" id="otherNamesFirst" value={{otherNames![0]}} placeholder="">
+                <label for="otherNamesFirst">Apodo 1</label>
+                <button type="button" #another1 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='block'"
+                (click)="another1.style.display='none'"><i class="bi bi-plus-circle"></i></button>
+            </div>
+            <div class="row form-floating" #secondNickName style="display: none">
+                <input type="text" class="form-control" #nickName2 id="otherNamesSecond"  value={{otherNames![1]}} placeholder="">
+                <label for="otherNamesSecond">Apodo 2</label>
+                <button type="button" #another2 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='none'" (click)="another1.style.display='block'" (click)="nickName2.value=''"><i class="bi bi-trash"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="container continue d-grid">
+        <button type="button" class="btn btn-primary {{disableButton}}" (click)="nextStepFunction()">Continuar</button>
+    </div>
