@@ -1,4 +1,5 @@
 <div class="settings-container" *ngIf="currentUser">
+    <app-navbar-sup [text]="'Opciones'" class="navbarStyles"></app-navbar-sup>
     <div class="mid-div">
         <div class="info-user-container">
                 <img src="{{profileImgUrl}}" alt="profile image" class="profile-image">
@@ -17,5 +18,7 @@
             </ul>
         </div>
     </div>
-    
+  
 </div>
+<app-navbar-inf class="navbarStyles"></app-navbar-inf>
+
