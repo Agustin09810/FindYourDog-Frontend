@@ -17,21 +17,21 @@ export class InMemoryDataService {
 
   createDb() {
     const images: Image[] = [
-      { imageId: '1', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '2', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '3', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '4', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '5', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '6', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '7', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '8', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '9', imageUrl: '../assets/images/img3.jpg' },
-      { imageId: '10', imageUrl: '../assets/images/dogs/dog1.jpg' },
-      { imageId: '11', imageUrl: '../assets/images/dogs/dog2.jpg' },
-      { imageId: '12', imageUrl: '../assets/images/dogs/dog3.jpg' },
-      { imageId: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' },
-      { imageId: '14', imageUrl: '../assets/images/users/arjona.jpg' },
-      { imageId: '15', imageUrl: '../assets/images/users/ibai.jpeg' }
+      { id: '1', imageUrl: '../assets/images/img3.jpg' },
+      { id: '2', imageUrl: '../assets/images/img3.jpg' },
+      { id: '3', imageUrl: '../assets/images/img3.jpg' },
+      { id: '4', imageUrl: '../assets/images/img3.jpg' },
+      { id: '5', imageUrl: '../assets/images/img3.jpg' },
+      { id: '6', imageUrl: '../assets/images/img3.jpg' },
+      { id: '7', imageUrl: '../assets/images/img3.jpg' },
+      { id: '8', imageUrl: '../assets/images/img3.jpg' },
+      { id: '9', imageUrl: '../assets/images/img3.jpg' },
+      { id: '10', imageUrl: '../assets/images/dogs/dog1.jpg' },
+      { id: '11', imageUrl: '../assets/images/dogs/dog2.jpg' },
+      { id: '12', imageUrl: '../assets/images/dogs/dog3.jpg' },
+      { id: '13', imageUrl: '../assets/images/dogs/dog3_1.jpg' },
+      { id: '14', imageUrl: '../assets/images/users/arjona.jpg' },
+      { id: '15', imageUrl: '../assets/images/users/ibai.jpeg' }
 
     ];
     const zones: Zone[] = [

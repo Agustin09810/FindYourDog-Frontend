@@ -29,33 +29,39 @@ export class ImageUploadComponent implements OnInit {
   checkAndSendImages(): string[]{
     let imagesIds: string[] = []
     if(this.imageSelector1.imageToUpload){
+      console.log(this.imageSelector1.imageToUpload);
       this.imageService.uploadImage(this.imageSelector1.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector1.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector1.imageToUpload!.id) }
       )
     }
     if(this.imageSelector2.imageToUpload){
+      console.log(this.imageSelector2.imageToUpload);
       this.imageService.uploadImage(this.imageSelector2.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector2.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector2.imageToUpload!.id) }
       )
     }
     if(this.imageSelector3.imageToUpload){
+      console.log(this.imageSelector3.imageToUpload);
       this.imageService.uploadImage(this.imageSelector3.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector3.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector3.imageToUpload!.id) }
       )
     }
     if(this.imageSelector4.imageToUpload){
+    console.log(this.imageSelector4.imageToUpload);
       this.imageService.uploadImage(this.imageSelector4.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector4.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector4.imageToUpload!.id) }
       )
     }
     if(this.imageSelector5.imageToUpload){
+      console.log(this.imageSelector5.imageToUpload);
       this.imageService.uploadImage(this.imageSelector5.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector6.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector6.imageToUpload!.id) }
       )
     }
     if(this.imageSelector6.imageToUpload){
+      console.log(this.imageSelector6.imageToUpload);
       this.imageService.uploadImage(this.imageSelector6.imageToUpload).subscribe(
-        x => { imagesIds.push(this.imageSelector6.imageToUpload!.imageId) }
+        x => { imagesIds.push(this.imageSelector6.imageToUpload!.id) }
       )
     }
     return imagesIds;

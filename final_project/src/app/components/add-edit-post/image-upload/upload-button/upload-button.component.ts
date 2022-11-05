@@ -32,17 +32,13 @@ export class UploadButtonComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new imageSnippet(event.target.result, file);
-      this.imageToUpload = {imageId: this.idNumber, imageUrl: this.selectedFile.src};
+      this.imageToUpload = {id: this.idNumber, imageUrl: this.selectedFile.src};
       });
     reader.readAsDataURL(file);
   }
 
-  uploadImage(image: Image){
-    this.imageService.uploadImage(image);
-  }
-
   deleteFile(): void{
-    this.imageService.deleteImage(this.imageToUpload!.imageId).subscribe();
+    this.imageService.deleteImage(this.imageToUpload!.id).subscribe();
     this.selectedFile = undefined;
   }
 

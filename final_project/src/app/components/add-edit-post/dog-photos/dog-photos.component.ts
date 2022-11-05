@@ -40,9 +40,8 @@ export class DogPhotosComponent implements OnInit {
     this.nextStep.emit(["date"]);
   }
 
-  //FALTA HACER ESTO Y ESTARIA
- /*  nextStepFunction(): void {
-    let photos: () => string[] = this.imageUploadComponent.checkAndSendImages;
+  nextStepFunction(): void {
+    let photos: string[] = this.imageUploadComponent.checkAndSendImages();
     this.nextStep.emit(photos);
-  } */
+  }
 }

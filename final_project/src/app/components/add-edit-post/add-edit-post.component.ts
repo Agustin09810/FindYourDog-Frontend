@@ -12,6 +12,7 @@ import {Zone} from '../../interfaces/Zone';
 import {ZonesService} from '../../services/zones.service';
 
 import {Post} from '../../interfaces/Post';
+import {PostsService} from '../../services/posts.service';
 
 @Component({
   selector: 'app-add-edit-post',
@@ -37,9 +38,13 @@ export class AddEditPostComponent implements OnInit {
   dogDescription: string = "";
   photos: string[] = [];
 
+  zone?: Zone;
+
   constructor(
     private deviceService: DeviceDetectorService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private postService: PostsService,
+    private zoneService: ZonesService
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -104,10 +109,18 @@ export class AddEditPostComponent implements OnInit {
     }
 
     publish(photos: string[]){
-      
       let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogBreed!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
        dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
-       dogDescription: this.dogDescription, photos: this.photos};
+       dogDescription: this.dogDescription, photos: photos};
+       this.postService.addPost(post).subscribe(post=>console.log(post.photos));
+       this.zoneService.getZone(this.lostZone!).subscribe(zone =>{
+        zone.posts.push(post.id);
+        console.log(zone);
+        this.zone = zone;
+        console.log(this.zone);
+        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe();})
+       
       }
+      
       
 }

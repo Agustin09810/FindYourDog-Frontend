@@ -24,7 +24,7 @@ export class PostsService {
   }
 
   getPostsById(id: string){
-    return this.getPosts().pipe(map(posts => posts.find(post => post.id === id)));
+    return this.http.get<Post>(`${this.postsUrl}/${id}`);
   }
 
   addPost(post: Post): Observable<Post>{
