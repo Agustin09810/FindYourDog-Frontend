@@ -63,6 +63,7 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
 
+    z-index: 999;
     background-color: white;
 
     position: fixed;
