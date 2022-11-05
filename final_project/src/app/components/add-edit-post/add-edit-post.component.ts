@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
+
+import { ImageUploadComponent } from './image-upload/image-upload.component'
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -11,7 +12,6 @@ import {Zone} from '../../interfaces/Zone';
 import {ZonesService} from '../../services/zones.service';
 
 import {Post} from '../../interfaces/Post';
-import {PostsService} from '../../services/posts.service';
 
 @Component({
   selector: 'app-add-edit-post',
@@ -21,22 +21,10 @@ import {PostsService} from '../../services/posts.service';
 export class AddEditPostComponent implements OnInit {
 
   step: string = "name";
-  todayDate: Date = new Date();
-  today: string = this.todayDate.toISOString().substring(0,10);
-  now: string = this.todayDate.getHours() + ':' + "00";
-  textNavbar: string = "Publicar";
+  textNavbar: string = "Nombre";
 
-  @ViewChild('dogNameInput') dogNameInput!: ElementRef;
-  @ViewChild('another1') another1Input?: ElementRef;
-  @ViewChild('another2') another2Input?: ElementRef;
-
-  //Elements from STEP 4
-  @ViewChild('datePicker') datePicker!: ElementRef;
-  @ViewChild('timePicker') timePicker!: ElementRef;
-  @ViewChild('locationComboBox') locationPicker!: ElementRef;
-  @ViewChild('ubiDetailsText') ubiDetailsInput!: ElementRef;
+  @ViewChild('dogPhotosComponent') dogPhotosComponent!: ImageUploadComponent;
   
-
   dogName?: string;
   otherNames: string[] = [];
   dogGender?: string;
@@ -115,7 +103,8 @@ export class AddEditPostComponent implements OnInit {
       return result;
     }
 
-    publish(){
+    publish(photos: string[]){
+      
       let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogBreed!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
        dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
        dogDescription: this.dogDescription, photos: this.photos};

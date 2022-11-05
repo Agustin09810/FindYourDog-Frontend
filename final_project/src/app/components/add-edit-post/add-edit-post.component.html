@@ -23,7 +23,7 @@
 
 <!-- STEP 5 => FOTOS -->
 <div *ngIf="isMobile && step=='photos'" class="outerMobile" >
-    <app-dog-photos [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
+    <app-dog-photos #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
 </div>
 
 

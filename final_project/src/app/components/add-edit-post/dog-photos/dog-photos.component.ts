@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter,  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import { ImageUploadComponent } from  '../image-upload/image-upload.component'
 
 @Component({
   selector: 'app-dog-photos',
@@ -13,6 +14,8 @@ export class DogPhotosComponent implements OnInit {
   dogPhotos?: string[];
   
   @Output() nextStep = new EventEmitter<string[]>();
+
+  @ViewChild('imageUploadComponent') imageUploadComponent!: ImageUploadComponent;
 
   @Input() counterOfChars: number = 0;
   disableButton: string = 'disabled';
@@ -37,9 +40,9 @@ export class DogPhotosComponent implements OnInit {
     this.nextStep.emit(["date"]);
   }
 
-  nextStepFunction(): void {
-    let toEmit: string[] = [];
-    
-    this.nextStep.emit(toEmit);
-  }
+  //FALTA HACER ESTO Y ESTARIA
+ /*  nextStepFunction(): void {
+    let photos: () => string[] = this.imageUploadComponent.checkAndSendImages;
+    this.nextStep.emit(photos);
+  } */
 }
