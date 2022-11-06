@@ -5,6 +5,6 @@
         <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="nextStepFunction(buttonGirl.value)" value="Hembra" >Hembra</button>
     </div>
 </div>
-<div class="container continue d-grid">
+<div *ngIf="mobile" class="container continue d-grid">
     <button type="button" class="continue btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
 </div>

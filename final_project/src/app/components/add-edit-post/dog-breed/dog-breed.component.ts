@@ -14,6 +14,7 @@ export class DogBreedComponent implements OnInit {
   @Input() dogName?: string;
   @Input() dogBreed?: string;
   breeds: Breed[] = [];
+  @Input() mobile?:boolean
 
   constructor(
     private breedService: BreedService

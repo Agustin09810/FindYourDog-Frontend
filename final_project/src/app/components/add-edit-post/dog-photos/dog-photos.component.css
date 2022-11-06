@@ -1,6 +1,11 @@
 .container{
     font-family: 'SF Pro Regular';
 }
+@media(max-height:792px){
+    .outer{
+        margin-bottom:110px;
+    }
+}
 
 .container.continue{
     position: fixed;

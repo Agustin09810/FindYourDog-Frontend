@@ -4,6 +4,7 @@ import { ImageByIdService } from '../../../../services/image-by-id.service';
 import { Image } from '../../../../interfaces/Image';
 
 
+
 class imageSnippet{
   constructor(public src: string, public file: File){}
 }
@@ -16,7 +17,7 @@ class imageSnippet{
 export class UploadButtonComponent implements OnInit {
 
   @Input() selectedFile?: imageSnippet;
-  @Output() sendPhoto = new EventEmitter<Image>();
+  @Output() sendPhotoToCheck = new EventEmitter<string>();
   @Input() imageToUpload: Image|undefined = undefined;
   idNumber: string = 'random';
   
@@ -26,20 +27,22 @@ export class UploadButtonComponent implements OnInit {
     this.idNumber = this.randomID(15);
   }
 
-  processFile(imageInput: any){
+  async processFile(imageInput: any){
     const file: File = imageInput.files[0];
     const reader = new FileReader();
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new imageSnippet(event.target.result, file);
       this.imageToUpload = {id: this.idNumber, imageUrl: this.selectedFile.src};
+      this.sendPhotoToCheck.emit('active')
       });
     reader.readAsDataURL(file);
   }
 
   deleteFile(): void{
-    this.imageService.deleteImage(this.imageToUpload!.id).subscribe();
     this.selectedFile = undefined;
+    this.imageToUpload = undefined;
+    this.sendPhotoToCheck.emit('disabled');
   }
 
   randomID(length: number): string {

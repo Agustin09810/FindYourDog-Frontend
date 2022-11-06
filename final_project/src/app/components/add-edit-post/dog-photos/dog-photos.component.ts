@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { ImageUploadComponent } from  '../image-upload/image-upload.component'
+import { Image} from '../../../interfaces/Image';
+import { ImageByIdService } from '../../../services/image-by-id.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-dog-photos',
@@ -8,7 +11,10 @@ import { ImageUploadComponent } from  '../image-upload/image-upload.component'
 })
 export class DogPhotosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private imageService: ImageByIdService,
+    private cd: ChangeDetectorRef
+  ) { }
 
   @Input() dogName?: string;
   dogPhotos?: string[];
@@ -18,7 +24,7 @@ export class DogPhotosComponent implements OnInit {
   @ViewChild('imageUploadComponent') imageUploadComponent!: ImageUploadComponent;
 
   @Input() counterOfChars: number = 0;
-  disableButton: string = 'disabled';
+  @Input() disableButton: string = 'disabled';
 
   ngOnInit(): void {
   }
@@ -27,21 +33,28 @@ export class DogPhotosComponent implements OnInit {
     this.counterOfChars = event.length;
   }
 
-  changeButtonState(): void {
-  //Si hay al menos una foto, habilitar el botón
-   /*  if() {
-      this.disableButton = "active";
-    }
-    else{
-      this.disableButton = "disabled";
-    } */
-  }
   lastStepFunction(): void {
     this.nextStep.emit(["date"]);
   }
 
-  nextStepFunction(): void {
-    let photos: string[] = this.imageUploadComponent.checkAndSendImages();
-    this.nextStep.emit(photos);
+  checkIfButtonShouldBeDisabled(): void {
+    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+    this.cd.detectChanges();
+    console.log(photos)
+    if(photos.length > 0){
+      this.disableButton = 'active';
+    }
+    else{
+      this.disableButton = 'disabled';
+    }
+    this.cd.detectChanges();
+  }
+
+  nextStepFunction() {
+    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+    let photosIDs: string[] = [];
+    photos.forEach(photo => photosIDs.push(photo.id))
+    photos.forEach(async photo => await lastValueFrom(this.imageService.uploadImage(photo)));
+    this.nextStep.emit(photosIDs)
   }
 }

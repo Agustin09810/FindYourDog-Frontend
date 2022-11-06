@@ -22,6 +22,7 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   
   zones: Zone[] = [];
   disableButton: string = "disabled";
+  @Input() mobile?:boolean
 
   constructor(
     private zonesService: ZonesService,
@@ -33,6 +34,11 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if(this.lastSeenDate != undefined && this.lastSeenHour != undefined && this.lostZone != undefined){
+      if(this.verifyDate(this.lastSeenDate, this.lastSeenHour, 1)){
+        this.disableButton = "active";
+      }
+    }
     this.cd.detectChanges();
   }
 
@@ -43,6 +49,14 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   verifyDate(date: string, hour:string, selectedIndex:number): boolean{
     let dateAux = new Date(date);
     let today = new Date();
+    if(date==""){
+      this.disableButton = "disabled";
+      return false;
+    }
+    if(hour == ""){
+      this.disableButton = "disabled";
+      return false;
+    }
     if(selectedIndex == 0){
       this.disableButton = "disabled";
       return false;

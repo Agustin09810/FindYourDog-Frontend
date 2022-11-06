@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { ImageUploadComponent } from './image-upload/image-upload.component'
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-import {BreedService} from '../../services/breed.service';
 import {Breed} from '../../interfaces/Breed';
 
 import {Zone} from '../../interfaces/Zone';
@@ -13,6 +12,7 @@ import {ZonesService} from '../../services/zones.service';
 
 import {Post} from '../../interfaces/Post';
 import {PostsService} from '../../services/posts.service';
+
 
 @Component({
   selector: 'app-add-edit-post',
@@ -36,15 +36,17 @@ export class AddEditPostComponent implements OnInit {
   lostZone?: string;
   ubiDetails: string = "";
   dogDescription: string = "";
-  photos: string[] = [];
+  photos:string[] = [];
+
+  post?: Post;
 
   zone?: Zone;
 
   constructor(
     private deviceService: DeviceDetectorService,
-    private route: ActivatedRoute,
+    private router: Router,
     private postService: PostsService,
-    private zoneService: ZonesService
+    private zoneService: ZonesService,
   ) { }
 
   isMobile = this.deviceService.isMobile();
@@ -93,7 +95,9 @@ export class AddEditPostComponent implements OnInit {
             this.ubiDetails = data[4];
           }
         }
-        console.log(new Date(this.lastSeenDate + ' ' + this.lastSeenHour));
+        break;
+      default:
+        this.publish(data);
         break;
     }
   }
@@ -108,19 +112,25 @@ export class AddEditPostComponent implements OnInit {
       return result;
     }
 
-    publish(photos: string[]){
-      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogBreed!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
-       dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
-       dogDescription: this.dogDescription, photos: photos};
-       this.postService.addPost(post).subscribe(post=>console.log(post.photos));
-       this.zoneService.getZone(this.lostZone!).subscribe(zone =>{
+    publish(photosA: string[]){
+      this.photos = photosA;
+      let post = this.createPost();
+
+      this.postService.addPost(post).subscribe(postX=>console.log(postX));
+      this.zoneService.getZone(this.lostZone!).subscribe(zone => {
         zone.posts.push(post.id);
-        console.log(zone);
         this.zone = zone;
-        console.log(this.zone);
-        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe();})
-       
-      }
+        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe();
+        this.router.navigate(['/zone/' + zone.id])
+      });
+    }
+
+    createPost(): Post{
+      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogName!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
+                        dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
+                        dogDescription: this.dogDescription, photos: this.photos};
+      return post;
+    }
       
       
 }

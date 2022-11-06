@@ -26,7 +26,7 @@ export class ImageByIdService {
     return this.getImages().pipe(map(imgs => imgs.find(img => img.id === id)));
   }
 
-  uploadImage(image: Image) {
+  uploadImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.imagesUrl, image, this.httpOptions).pipe(
       tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
     catchError(this.handleError<Image>('uploadImage'))

@@ -7,6 +7,9 @@
     /* border */
     border: 1px solid #ccc;
 }
+.row{
+    max-height: 8em;
+}
 
 .g-custom{
     --bs-gutter-x: 3%;

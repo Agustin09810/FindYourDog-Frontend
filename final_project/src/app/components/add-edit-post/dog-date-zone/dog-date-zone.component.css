@@ -1,3 +1,9 @@
+
+@media(max-height:792px){
+    .container.outer{
+        margin-bottom:98px;
+    }
+}
 .container.continue{
     position: fixed;
     

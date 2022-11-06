@@ -1,17 +1,26 @@
-<div class="container searcher">
-    <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de {{dogName}}</label>
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
-    </form>    
-    <small class="form-text text-muted">En caso de desconocerla, presione Continuar.</small>
+<div class="outer">
+    <div class="container searcher">
+        <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de {{dogName}}</label>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
+        </form>    
+        <small class="form-text text-muted">En caso de desconocerla, presione Continuar.</small>
+    </div>
+    <div class="container breeds" id="breedContainer">
+        <div class="list-group">
+            <li class="list-group-item list-group-item-action text-center" #breedListItem active id="breedList"*ngFor="let breedX of breeds" aria-current="true" (click)="nextStepFunction(breedX.name)">
+            {{breedX.name}}
+            </li>
+        </div> 
+    </div>
 </div>
-<div class="container breeds" id="breedContainer">
-    <div class="list-group">
-        <li class="list-group-item list-group-item-action text-center" #breedListItem active id="breedList"*ngFor="let breedX of breeds" aria-current="true" (click)="nextStepFunction(breedX.name)">
-          {{breedX.name}}
-        </li>
-      </div> 
-</div>
-<div class="container continue d-grid" id="volverBreed">
-    <button type="button" class="continue btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
+<div *ngIf="mobile" class="container continue">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
+        </div>
+        <div class="col">
+            <button type="button" class="continue btn btn-primary" (click)="nextStepFunction('Desconocida')">Continuar</button>
+        </div>
+    </div>
 </div>

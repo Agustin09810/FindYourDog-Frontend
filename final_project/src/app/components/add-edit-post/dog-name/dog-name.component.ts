@@ -28,6 +28,8 @@ export class DogNameComponent implements OnInit, AfterViewInit {
 
   disableButton: string = "disabled";
 
+  @Input() mobile?:boolean
+
   constructor(private deviceService: DeviceDetectorService,
     private cd: ChangeDetectorRef) { }
 
@@ -35,12 +37,14 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if(this.dogName){
+      this.disableButton = 'active';
+    }
     if(this.otherNames[0] != undefined){
       this.checked = true;
       this.checkYes.nativeElement.checked = true;
-      this.cd.detectChanges();
-      
     }
+    this.cd.detectChanges();
   }
   
   changeButtonState(): void {

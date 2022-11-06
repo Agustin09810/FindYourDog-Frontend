@@ -2,6 +2,12 @@
     font-family: 'SF Pro Regular';
 }
 
+@media(max-height:792px){
+    .outerMobile{
+        margin-bottom:110px;
+    }
+}
+
 .anotherName{
     margin-top: 7%;
 }

@@ -22,8 +22,12 @@
         position: absolute;
         margin-bottom: 8%;
         cursor:pointer;
-        height: 57%;
+        height: 47%;
         overflow: scroll;
+    }
+    .outer{
+        height: 100%;
+        margin-bottom:110px;
     }
 }
 
@@ -32,6 +36,11 @@
     overflow: scroll;
     font-family: 'SF Pro Regular';
     font-style: normal;
+}
+
+.container.continue{
+    position: fixed;
+    bottom: 60px;
 }
 
 .continue.btn.btn-primary{

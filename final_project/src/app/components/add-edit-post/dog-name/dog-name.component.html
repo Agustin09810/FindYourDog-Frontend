@@ -1,4 +1,4 @@
-<div *ngIf="isMobile" class="outerMobile">
+<div class="outerMobile">
     <div class="container name">
         <div class="form-floating mb-3">
             <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
@@ -29,6 +29,6 @@
             </div>
         </div>
     </div>
-    <div class="container continue d-grid">
+    <div *ngIf="mobile" class="container continue d-grid">
         <button type="button" class="btn btn-primary {{disableButton}}" (click)="nextStepFunction()">Continuar</button>
     </div>
