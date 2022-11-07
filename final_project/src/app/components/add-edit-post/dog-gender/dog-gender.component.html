@@ -8,14 +8,3 @@
 <div *ngIf="mobile" class="container continue d-grid">
     <button type="button" class="continue btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
 </div>
-
-<div *ngIf="!mobile" class="container genders desktop">
-    <p>Por favor, indique el <strong>género</strong> de su perro: </p>
-    <div class="btn-group-vertical desktop" role="group" aria-label="Vertical button group">
-        <input #radioBoy type="radio" class="btn-check" name="btnradio" id="btnradio1" (click)="changeGender(radioBoy.value)" autocomplete="off" >
-        <label class="labelButton btn btn-outline-dark" for="btnradio1">Macho</label>
-
-        <input #radioGirl type="radio" class="btn-check" name="btnradio" id="btnradio2" value="Hembra" (click)="changeGender(radioBoy.value)" autocomplete="off">
-        <label class="labelButton btn btn-outline-dark" for="btnradio2">Hembra</label>
-    </div>
-</div>

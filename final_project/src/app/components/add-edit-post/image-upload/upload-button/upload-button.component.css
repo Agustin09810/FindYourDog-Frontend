@@ -31,5 +31,24 @@ input{
     top: -0.75em;
     right: -1.80em;
     cursor: pointer;
+}
+
+/* DESKTOP */
+@media (min-width:578px){
+    .upload.button{
+        height: 10em;
+    }
+    .img-preview{
+        height: 10em;
+    }
+
     
+#xButton{
+    color:rgb(218, 30, 30);
+    font-size: 1.5rem;
+    position: relative;
+    top: -0.75em;
+    right: -11.8vw;
+    cursor: pointer;
+}
 }

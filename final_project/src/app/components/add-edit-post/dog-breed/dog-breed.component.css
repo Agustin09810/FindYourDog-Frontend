@@ -50,3 +50,19 @@
 .back.btn.btn-outline-primary{
     width: 100%;
 }
+
+@media(min-width:578px){
+    #breedContainer{
+        position:relative;
+        height: 55%;
+        margin-bottom: 0;
+    }
+
+    .container.continue{
+        position:relative;
+        bottom:10%
+    }
+    .outer{
+        margin-bottom: 0;
+    }
+}

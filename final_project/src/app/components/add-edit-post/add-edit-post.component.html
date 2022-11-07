@@ -30,10 +30,20 @@
 <div *ngIf="isDesktop" class="outerDiv">
     <div class="navbarStyles desktop"><app-navbar-sup [text]="textNavbar"></app-navbar-sup></div>
     <div *ngIf="step=='name'" class="containerDiv">
-        <app-dog-name [mobile]="true" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
-        <!-- <div class="container continue d-grid">
-            <button type="button" class="btn btn-primary">Continuar</button>
-        </div> -->
+        <app-dog-name id="dogNameComponent" [mobile]="true" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
+    </div>
+    <div *ngIf="step=='gender'" class="containerDiv">
+        <app-dog-gender id="dogNameComponent" [mobile]="true" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
+    </div>
+    <div *ngIf="step=='breed'" class="containerDiv breed">
+        <app-dog-breed id="dogNameComponent"[mobile]="true" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
+    </div>
+    <div *ngIf="step=='date'" class="containerDiv">
+        <app-dog-date-zone id="dogNameComponent" [mobile]="true" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
+            [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
+    </div>
+    <div *ngIf="step=='photos'" class="containerDiv">
+        <app-dog-photos id="dogNameComponent" #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
     </div>
 </div>
 <app-navbar-inf style="position:fixed"></app-navbar-inf>

@@ -21,3 +21,14 @@
 textarea{
     resize: none;
 }
+
+@media(min-width:578px){
+    .container.outer{
+        margin-bottom:60px;
+    }
+    .container.continue{
+        position:relative;
+        bottom:5%
+    }
+
+}

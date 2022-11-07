@@ -21,15 +21,17 @@
     }
 
     .containerDiv{
-        display: block;
+        display: inline-flex;
         margin: 10vh 10vw 10vh 10vw;
-        margin-top: max(20vh,86px);/*86px max height of navbar*/
+        margin-top: max(10vh,86px);/*86px max height of navbar*/
         margin-bottom: 86px;
         max-width: 1200px;
         width:80%;
         box-shadow: 10px 5px 5px 5px rgb(97, 97, 97);
         background-color: whitesmoke;
+        overflow: scroll;
     }
+
 
     .outerDiv{
         position: relative;
@@ -44,6 +46,15 @@
 
     .container.continue{
         margin-bottom:5px
+    }
+
+    #dogNameComponent{
+        width: 100%;
+        height: 100%;
+    }
+
+    .containerDiv.breed{
+        overflow: hidden;
     }
 
 

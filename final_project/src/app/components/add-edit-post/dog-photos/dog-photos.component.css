@@ -24,3 +24,11 @@
 textarea{
     resize: none;
 }
+
+/* DESKTOP */
+@media (min-width:578px){
+    .container.continue{
+        position:relative;
+        bottom:5%
+    }
+}

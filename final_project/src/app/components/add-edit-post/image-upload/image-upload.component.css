@@ -22,3 +22,24 @@
     margin-bottom: 3%;
 }
 
+/* DESKTOP */
+@media (min-width:578px){
+    .container.external{
+        margin-top: 0%;
+    }
+    .container.text-center{
+        height:58vh;
+    }
+    .row{
+        max-height: 10em;
+    }
+    .col-4.upper{
+        margin-top: 1%;
+        margin-bottom: 2vh;
+    }
+    .col-4.bottom{
+        margin-top: 2%;
+        margin-bottom: 5%;
+    }
+}
+

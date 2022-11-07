@@ -4,7 +4,6 @@ import { ImageByIdService } from '../../../../services/image-by-id.service';
 import { Image } from '../../../../interfaces/Image';
 
 
-
 class imageSnippet{
   constructor(public src: string, public file: File){}
 }
@@ -21,7 +20,7 @@ export class UploadButtonComponent implements OnInit {
   @Input() imageToUpload: Image|undefined = undefined;
   idNumber: string = 'random';
   
-  constructor(private imageService:ImageByIdService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.idNumber = this.randomID(15);
@@ -35,6 +34,7 @@ export class UploadButtonComponent implements OnInit {
       this.selectedFile = new imageSnippet(event.target.result, file);
       this.imageToUpload = {id: this.idNumber, imageUrl: this.selectedFile.src};
       this.sendPhotoToCheck.emit('active')
+      console.log(this.selectedFile.src);
       });
     reader.readAsDataURL(file);
   }
