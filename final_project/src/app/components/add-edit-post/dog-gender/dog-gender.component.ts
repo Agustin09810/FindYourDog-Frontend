@@ -9,6 +9,8 @@ export class DogGenderComponent implements OnInit, AfterViewInit {
 
   @Input() dogName?: string;
   @Input() dogGender?: string;
+  @Input() dataToSend?: string;
+
   @Output() nextStep = new EventEmitter<string[]>();
   @ViewChild('buttonBoy') buttonBoy!: ElementRef<HTMLButtonElement>;
   @ViewChild('buttonGirl') buttonGirl!: ElementRef<HTMLButtonElement>;
@@ -46,5 +48,9 @@ export class DogGenderComponent implements OnInit, AfterViewInit {
     toEmit.push("name");
     this.nextStep.emit(toEmit);
   }
-
+  
+   changeGender(gender: string){
+    this.dataToSend = gender;
+   }
+  
 }

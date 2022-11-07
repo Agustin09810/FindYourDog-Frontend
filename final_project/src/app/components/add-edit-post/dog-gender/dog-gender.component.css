@@ -20,3 +20,22 @@
 .back.btn.btn-outline-primary{
     width: 100%;
 }
+
+/* DESKTOP */
+.container.genders.desktop{
+    justify-content: center;
+    align-items: center;
+    margin-top: 5% ;
+}
+.btn-group-vertical.desktop{
+    display:flex;
+    width: 100%;
+    margin-top:10%;
+}
+
+.labelButton{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+

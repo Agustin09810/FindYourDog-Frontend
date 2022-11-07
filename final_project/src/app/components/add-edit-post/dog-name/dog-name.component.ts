@@ -18,7 +18,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   @Output() nextStep = new EventEmitter<string[]>();
 
 
-  @ViewChild('dogNameInput') dogNameInput!: ElementRef;
+  @ViewChild('dogNameInput') dogNameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('nickName1') another1Input?: ElementRef;
   @ViewChild('nickName2') another2Input?: ElementRef;
   @ViewChild('checkYes') checkYes!: ElementRef<HTMLInputElement>;

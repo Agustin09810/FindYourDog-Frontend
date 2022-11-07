@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router} from '@angular/router';
 
 import { ImageUploadComponent } from './image-upload/image-upload.component'
+import { DogNameComponent } from './dog-name/dog-name.component'
+import { DogGenderComponent } from './dog-gender/dog-gender.component'
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -25,6 +27,8 @@ export class AddEditPostComponent implements OnInit {
   textNavbar: string = "Nombre";
 
   @ViewChild('dogPhotosComponent') dogPhotosComponent!: ImageUploadComponent;
+  @ViewChild('dogNameComponent') dogNameComponent!: DogNameComponent;
+  @ViewChild('dogGenderComponent') dogGenderComponent!: DogGenderComponent;
   
   dogName?: string;
   otherNames: string[] = [];
@@ -54,7 +58,26 @@ export class AddEditPostComponent implements OnInit {
   isDesktop = this.deviceService.isDesktop();
   
   ngOnInit(): void {
+
   }
+
+  /* navigateDesktop(step: string){
+    if(step == 'name'){
+      this.dogName = this.dogNameComponent.dogNameInput.nativeElement.value;
+      if(this.dogNameComponent.another1Input != undefined){
+        this.otherNames.push(this.dogNameComponent.another1Input.nativeElement.value);
+      }
+      if(this.dogNameComponent.another2Input != undefined){
+        this.otherNames.push(this.dogNameComponent.another2Input.nativeElement.value);
+      }
+      this.step='breed';
+    }
+    if(step == 'breed'){
+      this.dogGender = this.dogGenderComponent.dataToSend;
+      this.step='date';
+    }
+
+  } */
 
   navigateAux(data: string[]){
     this.step=data[0];

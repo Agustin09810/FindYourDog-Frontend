@@ -1,5 +1,6 @@
 <div class="outerMobile">
     <div class="container name">
+        <p *ngIf="!mobile">Por favor, indique el <strong>nombre</strong> de su perro</p>
         <div class="form-floating mb-3">
             <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
             <label for="dogName">Nombre</label>
@@ -32,3 +33,4 @@
     <div *ngIf="mobile" class="container continue d-grid">
         <button type="button" class="btn btn-primary {{disableButton}}" (click)="nextStepFunction()">Continuar</button>
     </div>
+</div>

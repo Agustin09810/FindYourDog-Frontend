@@ -1,50 +1,51 @@
-body{
-    overflow:scroll;
-}
 
 .navbarStyles {
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
-
-    background-color: whitesmoke;
-
-    z-index: 9999;
-
-    position: fixed;
-    width: 100%;
 }
 .container{
     font-family: 'SF Pro Regular';
 }
 
+/* DESKTOP */
 
 @media (min-width:578px){
-    .outerDesktop{
-        display:inline-flex;
-        height:100vh;
-        width:100vw;
 
-        background-color: whitesmoke;
-        margin: 10vh 10vw 10vh 10vw;
-        margin-top: max(10vh,86px);
-        margin-bottom: 86px;
+    .navbarStyles.desktop{
+        z-index: 999999;
+        background-color: white;
+        position: fixed;
+        width: 100%;
         max-width: 1200px;
-        box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
-    /* .outerDesktop{
-        position: relative;
-        height: 100vh;
-        width: 100v;
-        background-color: whitesmoke;
-    
-        justify-content: space-around;
-        display: inline-flex;
+
+    .containerDiv{
+        display: block;
         margin: 10vh 10vw 10vh 10vw;
-        margin-top: max(10vh,86px);
+        margin-top: max(20vh,86px);/*86px max height of navbar*/
         margin-bottom: 86px;
         max-width: 1200px;
+        width:80%;
+        box-shadow: 10px 5px 5px 5px rgb(97, 97, 97);
+        background-color: whitesmoke;
+    }
 
-        box-shadow: 10px 5px 5px rgb(97, 97, 97);
-    } */
+    .outerDiv{
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+    }
+    .row{
+        width:100%;
+    }
+
+    .container.continue{
+        margin-bottom:5px
+    }
+
+
+
 }
