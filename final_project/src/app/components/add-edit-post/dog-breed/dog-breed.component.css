@@ -1,0 +1,68 @@
+.container{
+    font-family: 'SF Pro Regular';
+}
+
+.container.continue{
+    position: fixed;
+    
+    bottom: 60px;
+}
+
+#breedContainer{
+    margin-top: 2%;
+    position: absolute;
+    margin-bottom: 8%;
+    cursor:pointer;
+    height: 65%;
+    overflow: scroll;
+}
+@media(max-height:792px){
+    #breedContainer{
+        margin-top: 2%;
+        position: absolute;
+        margin-bottom: 8%;
+        cursor:pointer;
+        height: 47%;
+        overflow: scroll;
+    }
+    .outer{
+        height: 100%;
+        margin-bottom:110px;
+    }
+}
+
+#breedList{
+    height:100%;
+    overflow: scroll;
+    font-family: 'SF Pro Regular';
+    font-style: normal;
+}
+
+.container.continue{
+    position: fixed;
+    bottom: 60px;
+}
+
+.continue.btn.btn-primary{
+    width: 100%;
+}
+
+.back.btn.btn-outline-primary{
+    width: 100%;
+}
+
+@media(min-width:578px){
+    #breedContainer{
+        position:relative;
+        height: 55%;
+        margin-bottom: 0;
+    }
+
+    .container.continue{
+        position:relative;
+        bottom:10%
+    }
+    .outer{
+        margin-bottom: 0;
+    }
+}

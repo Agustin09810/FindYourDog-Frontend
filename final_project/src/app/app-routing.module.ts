@@ -9,6 +9,7 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { MyPostsComponent } from './components/my-posts/my-posts.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
 
 const routes: Routes = [
   { path: ':userId/home', component: HomeComponent },
@@ -19,7 +20,9 @@ const routes: Routes = [
   { path: 'random/:userId', component: MyPostsComponent },
   { path: 'chats/:userId/:targetUserId/:chatId', component: ChatComponent },
   { path: 'settings/:userId', component: SettingsComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'addpost', component: AddEditPostComponent }
+
  
 
 ];

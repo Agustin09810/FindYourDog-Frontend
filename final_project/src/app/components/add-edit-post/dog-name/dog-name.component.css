@@ -1,0 +1,64 @@
+.container{
+    font-family: 'SF Pro Regular';
+}
+
+@media(max-height:792px){
+    .outerMobile{
+        margin-bottom:110px;
+    }
+}
+
+.anotherName{
+    margin-top: 7%;
+}
+.buttonDiv{
+    width: 100%;
+}
+.button{
+    width: 100%;
+}
+
+.buttonMore{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.container.name{
+    margin-top: 5%;
+}
+.container.otherNames{
+    margin-top: 7%;
+}
+
+.container.continue{
+    position: fixed;
+    
+    bottom: 60px;
+}
+
+.continue.btn.btn-primary{
+    width: 100%;
+}
+
+.boton{
+    width: 100%;
+}
+
+.botonMas{
+    width: 100%;
+    margin-top: 5%;
+}
+
+@media(min-width:578px){
+    .anotherName{
+        margin-top: 0%;
+    }
+    .container.otherNames{
+        margin-top: 2%;
+    }
+    .container.continue{
+        position:relative;
+        bottom:-4rem;
+    }
+    
+}

@@ -1,0 +1,49 @@
+.container{
+    font-family: 'SF Pro Regular';
+}
+
+.btn-group-vertical{
+    width: 100%;
+    height: 7em
+}
+
+.container.continue{
+    position: fixed;
+    
+    bottom: 60px;
+}
+
+.continue.btn.btn-primary{
+    width: 100%;
+}
+
+.back.btn.btn-outline-primary{
+    width: 100%;
+}
+
+/* DESKTOP */
+
+@media(min-width:578px){
+    .container.genders{
+        display:flex;
+        align-items: center;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin-top: 5%;
+    }
+    p{
+        width:100%
+    }
+    .btn-group-vertical{
+        width: 100%;
+        height: 7em
+    }
+    .btn{
+        width: 100%;
+    }
+
+    .container.continue{
+        position:relative;
+        bottom:-7.5rem;
+    }
+}

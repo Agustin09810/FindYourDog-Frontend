@@ -11,6 +11,10 @@ export class ZonesService {
   private zonesUrl = 'api/zones'
   constructor(private http:HttpClient) { }
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   getZones() {
     return this.http.get<Zone[]>(this.zonesUrl);
   }
@@ -18,6 +22,11 @@ export class ZonesService {
   getZone(id: string): Observable<Zone>{
     const url = `${this.zonesUrl}/${id}`;
     return this.http.get<Zone>(url);
+  }
+
+  addPostToZone(id: string, zone: Zone): Observable<Zone>{
+    const url = `${this.zonesUrl}/${id}`;
+    return this.http.put<Zone>(url, zone, this.httpOptions);
   }
 
 

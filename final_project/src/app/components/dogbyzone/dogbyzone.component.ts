@@ -26,7 +26,11 @@ export class DogbyzoneComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('zoneId');
     if(id)
       {
-        this.zoneService.getZone(id).subscribe(zone => this.zone = zone);
+        this.zoneService.getZone(id).subscribe(zone => {
+          this.zone = zone
+          console.log(this.zone);
+        });
+        
       }
   }
 
