@@ -22,4 +22,6 @@ export class LoginComponent implements OnInit {
     console.log('1');
     console.log(this.childButton.loginCheck(user, pass) + ' chequeoLogin');
   }
+
+  
 }

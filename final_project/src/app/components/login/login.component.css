@@ -1,7 +1,14 @@
 .containerDiv{
-    margin-left: 20vw;
+    /*margin-left: 20vw;
     margin-right: 20vw;
-    margin-top: 35vh;
+    margin-top: 35vh;*/
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .shadeDiv{
@@ -17,5 +24,13 @@
 .loginButton{
     display: flex;
     justify-content: center;
+}
+
+.outerDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
