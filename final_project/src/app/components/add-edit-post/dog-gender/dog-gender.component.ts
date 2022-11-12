@@ -15,8 +15,6 @@ export class DogGenderComponent implements OnInit, AfterViewInit {
   @ViewChild('buttonBoy') buttonBoy!: ElementRef<HTMLButtonElement>;
   @ViewChild('buttonGirl') buttonGirl!: ElementRef<HTMLButtonElement>;
 
-  @Input() mobile?:boolean
-
   constructor(
     private cd: ChangeDetectorRef
   ) { }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, ChangeDetectorRef, AfterViewInit} from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import {  } from 'src/app/interfaces/Post';
 
 @Component({
@@ -8,10 +7,6 @@ import {  } from 'src/app/interfaces/Post';
   styleUrls: ['./dog-name.component.css']
 })
 export class DogNameComponent implements OnInit, AfterViewInit {
-
-  isMobile = this.deviceService.isMobile();
-  isTablet = this.deviceService.isTablet();
-  isDesktop = this.deviceService.isDesktop();
 
   @Input() dogName?: string;
   @Input() otherNames: string[] = [];
@@ -28,9 +23,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
 
   disableButton: string = "disabled";
 
-  @Input() mobile?:boolean
-
-  constructor(private deviceService: DeviceDetectorService,
+  constructor(
     private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {

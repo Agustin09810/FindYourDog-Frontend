@@ -1,4 +1,4 @@
-<div class="outerMobile">
+<div class="outer">
     <div class="container name">
         <p>Por favor, indique el <strong>nombre</strong> de su perro</p>
         <div class="form-floating mb-3">
@@ -10,7 +10,7 @@
             <label for="btn-check" class="form-label">¿Responde a algún apodo?</label>
             <div class="buttonDiv">
                 <input type="checkbox" #checkYes class="yes btn-check" id="yes-btn-check" (change)="checked= !checked" autocomplete="off">
-                <label class="boton btn btn-outline-dark" id="yes-button" for="yes-btn-check">Si</label>
+                <label class="yesButton btn btn-outline-dark" id="yes-button" for="yes-btn-check">Si</label>
             </div>
         </div>
     </div>
@@ -20,17 +20,18 @@
             <div class="row form-floating mb-3">
                 <input type="text" #nickName1 class="form-control" id="otherNamesFirst" value={{otherNames![0]}} placeholder="">
                 <label for="otherNamesFirst">Apodo 1</label>
-                <button type="button" #another1 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='block'"
+                <button type="button" #another1 class="buttonMore btn btn-outline-dark mb-3" (click)="secondNickName.style.display='block'"
                 (click)="another1.style.display='none'"><i class="bi bi-plus-circle"></i></button>
             </div>
             <div class="row form-floating" #secondNickName style="display: none">
                 <input type="text" class="form-control" #nickName2 id="otherNamesSecond"  value={{otherNames![1]}} placeholder="">
                 <label for="otherNamesSecond">Apodo 2</label>
-                <button type="button" #another2 class="botonMas btn btn-outline-dark mb-3" (click)="secondNickName.style.display='none'" (click)="another1.style.display='block'" (click)="nickName2.value=''"><i class="bi bi-trash"></i></button>
+                <button type="button" #another2 class="buttonMore btn btn-outline-dark mb-3" (click)="secondNickName.style.display='none'" (click)="another1.style.display='block'"
+                    (click)="nickName2.value=''"><i class="bi bi-trash"></i></button>
             </div>
         </div>
     </div>
-    <div *ngIf="mobile" class="container continue d-grid">
-        <button type="button" class="btn btn-primary {{disableButton}}" (click)="nextStepFunction()">Continuar</button>
-    </div>
+</div>
+<div class="container continue d-grid" #buttonContinue>
+    <button type="button" class="btn btn-primary {{disableButton}}" (click)="nextStepFunction()">Continuar</button>
 </div>

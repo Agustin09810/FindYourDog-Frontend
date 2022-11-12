@@ -1,49 +1,16 @@
-<div *ngIf="isMobile" class="outerMobile">
-    <div class="navbarStyles mobile">
+<div class="outerNav">
+    <div class="navbarStyles">
         <app-navbar-sup [text]="textNavbar"></app-navbar-sup>
     </div>
-    <!-- STEP 1 => NOMBRE Y APODOS -->
-    <div *ngIf="step=='name'" class="outerMobile">
-        <app-dog-name [mobile]="true" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
-    </div>
-
-    <!-- STEP 2 => GENERO -->
-    <div *ngIf="step=='gender'" class="outerMobile">
-        <app-dog-gender [mobile]="true" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
-    </div>
-
-    <!-- STEP 3 => RAZA -->
-    <div *ngIf="step=='breed'" class="outerMobile">
-        <app-dog-breed [mobile]="true" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
-    </div>
-    <!-- STEP 4 => FECHA Y UBICACION-->
-    <div *ngIf="step=='date'" class="outerMobile">
-        <app-dog-date-zone [mobile]="true" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
-            [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
-    </div>
-
-    <!-- STEP 5 => FOTOS -->
-    <div *ngIf="step=='photos'" class="outerMobile" >
-        <app-dog-photos #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
-    </div>
 </div>
-<div *ngIf="isDesktop" class="outerDiv">
-    <div class="navbarStyles desktop"><app-navbar-sup [text]="textNavbar"></app-navbar-sup></div>
-    <div *ngIf="step=='name'" class="containerDiv">
-        <app-dog-name id="dogNameComponent" [mobile]="true" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
-    </div>
-    <div *ngIf="step=='gender'" class="containerDiv">
-        <app-dog-gender id="dogNameComponent" [mobile]="true" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
-    </div>
-    <div *ngIf="step=='breed'" class="containerDiv breed">
-        <app-dog-breed id="dogNameComponent"[mobile]="true" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
-    </div>
-    <div *ngIf="step=='date'" class="containerDiv">
-        <app-dog-date-zone id="dogNameComponent" [mobile]="true" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
-            [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
-    </div>
-    <div *ngIf="step=='photos'" class="containerDiv">
-        <app-dog-photos id="dogNameComponent" #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
+<div class="outerDiv">
+    <div class="containerDiv">
+        <app-dog-name class="component" *ngIf="step == 'name'" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
+        <app-dog-gender class="component" *ngIf="step == 'gender'" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
+        <app-dog-breed class="component" *ngIf="step == 'breed'" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
+        <app-dog-date-zone class="component" *ngIf="step == 'date'" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
+                [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
+        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
     </div>
 </div>
 <app-navbar-inf style="position:fixed"></app-navbar-inf>

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input, Output, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, ChangeDetectorRef, EventEmitter } from '@angular/core';
 
 import {Zone} from '../../../interfaces/Zone';
 import {ZonesService} from '../../../services/zones.service';
@@ -22,7 +22,6 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   
   zones: Zone[] = [];
   disableButton: string = "disabled";
-  @Input() mobile?:boolean
 
   constructor(
     private zonesService: ZonesService,

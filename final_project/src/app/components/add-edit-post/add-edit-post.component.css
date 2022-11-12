@@ -4,20 +4,35 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
+
 .container{
     font-family: 'SF Pro Regular';
 }
 
-/* DESKTOP */
+/* DESKTOP  */
 
 @media (min-width:578px){
+    .outerNav{
+        position: relative;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+    }
 
-    .navbarStyles.desktop{
+    .navbarStyles{
         z-index: 999999;
-        background-color: white;
         position: fixed;
         width: 100%;
         max-width: 1200px;
+    }
+
+    .outerDiv{
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
     .containerDiv{
@@ -26,37 +41,17 @@
         margin-top: max(10vh,86px);/*86px max height of navbar*/
         margin-bottom: 86px;
         max-width: 1200px;
-        width:80%;
-        box-shadow: 10px 5px 5px 5px rgb(97, 97, 97);
-        background-color: whitesmoke;
-        overflow: scroll;
-    }
-
-
-    .outerDiv{
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: space-around;
-    }
-    .row{
+        max-height: 700px;
+        height: calc(100% - (87px + 86px));
         width:100%;
+        box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
 
-    .container.continue{
-        margin-bottom:5px
+    .component{
+        position: relative;
+        width:100%;
+        overflow-y:scroll;
     }
-
-    #dogNameComponent{
-        width: 100%;
-        height: 100%;
-    }
-
-    .containerDiv.breed{
-        overflow: hidden;
-    }
-
 
 
 }

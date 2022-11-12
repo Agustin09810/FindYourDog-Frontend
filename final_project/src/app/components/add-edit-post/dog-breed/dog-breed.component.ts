@@ -14,7 +14,6 @@ export class DogBreedComponent implements OnInit {
   @Input() dogName?: string;
   @Input() dogBreed?: string;
   breeds: Breed[] = [];
-  @Input() mobile?:boolean
 
   constructor(
     private breedService: BreedService
@@ -23,7 +22,6 @@ export class DogBreedComponent implements OnInit {
   ngOnInit(): void {
     this.getBreeds()
   }
-
 
   getBreeds() : void{
     this.breedService.getBreeds().subscribe(breeds => this.breeds = breeds);

@@ -1,4 +1,4 @@
-<div class="container outer">
+<div class="outer">
     <div class="container text">
         <p>Por favor, bríndenos datos sobre la <strong>fecha y ubicación</strong> de la última vez que vio a {{dogName}}</p>
     </div>
@@ -43,7 +43,8 @@
         <small class="form-text text-muted">{{counterOfChars}}/100</small>
     </div>
 </div>
-<div *ngIf="mobile" class="container continue">
+
+<div class="container continue">
     <div class="row">
         <div class="col">
             <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>

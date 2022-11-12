@@ -1,17 +1,22 @@
-
-@media(max-height:792px){
-    .container.outer{
-        margin-bottom:98px;
-    }
+.container{
+    font-family: 'SF Pro Regular';
 }
+
 .container.continue{
     position: fixed;
-    
     bottom: 60px;
 }
 
 .continue.btn.btn-primary{
     width: 100%;
+}
+
+option{
+    font-family: 'SF Pro Regular';
+}
+
+.container.form{
+    margin-bottom:100px;
 }
 
 .back.btn.btn-outline-primary{
@@ -23,12 +28,18 @@ textarea{
 }
 
 @media(min-width:578px){
-    .container.outer{
-        margin-bottom:60px;
-    }
-    .container.continue{
+    .outer{
         position:relative;
-        bottom:5%
+        overflow-y:scroll;
+        height: 90%;
+    }
+    .container.form{
+        margin-bottom:0;
     }
 
+    .container.continue{
+        position:absolute;
+        bottom:1%;
+    }
 }
+

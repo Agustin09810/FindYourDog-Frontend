@@ -2,63 +2,38 @@
     font-family: 'SF Pro Regular';
 }
 
-@media(max-height:792px){
-    .outerMobile{
-        margin-bottom:110px;
-    }
+.container.name{
+    position: relative;
+    width: 100%;
 }
 
-.anotherName{
-    margin-top: 7%;
+.yesButton{
+    width:100%;
 }
-.buttonDiv{
-    width: 100%;
-}
-.button{
-    width: 100%;
+
+.container.otherNames{
+    margin-top:5%;
+    margin-bottom:100px;
 }
 
 .buttonMore{
-    width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
-.container.name{
-    margin-top: 5%;
-}
-.container.otherNames{
-    margin-top: 7%;
-}
-
-.container.continue{
-    position: fixed;
-    
-    bottom: 60px;
-}
-
-.continue.btn.btn-primary{
-    width: 100%;
-}
-
-.boton{
-    width: 100%;
-}
-
-.botonMas{
-    width: 100%;
-    margin-top: 5%;
+.container.continue.d-grid{
+    position:fixed;
+    bottom:60px;
 }
 
 @media(min-width:578px){
-    .anotherName{
-        margin-top: 0%;
+    .container.continue.d-grid{
+        position:absolute;
+        bottom:1%;
     }
-    .container.otherNames{
-        margin-top: 2%;
-    }
-    .container.continue{
+    .outer{
         position:relative;
-        bottom:-4rem;
+        overflow-y:scroll;
+        height: 90%;
     }
     
 }

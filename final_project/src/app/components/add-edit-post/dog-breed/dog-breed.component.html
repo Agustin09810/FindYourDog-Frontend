@@ -1,4 +1,4 @@
-<div class="outer">
+
     <div class="container searcher">
         <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de {{dogName}}</label>
         <form class="d-flex" role="search">
@@ -13,14 +13,13 @@
             </li>
         </div> 
     </div>
-</div>
-<div *ngIf="mobile" class="container continue">
-    <div class="row">
-        <div class="col">
-            <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
-        </div>
-        <div class="col">
-            <button type="button" class="continue btn btn-primary" (click)="nextStepFunction('Desconocida')">Continuar</button>
+    <div class="container continue">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="button btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
+            </div>
+            <div class="col">
+                <button type="button" class="button btn btn-primary" (click)="nextStepFunction('Desconocida')">Continuar</button>
+            </div>
         </div>
     </div>
-</div>

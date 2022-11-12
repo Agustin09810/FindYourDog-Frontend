@@ -1,10 +1,12 @@
-<div *ngIf="mobile" class="container genders">
-    <p >Por favor, indique el <strong>género</strong> de {{dogName}}</p>
-    <div class="btn-group-vertical mobile" role="group" aria-label="Vertical button group">
-        <button type="button" #buttonBoy class="btn btn-outline-dark" (click)="nextStepFunction(buttonBoy.value)" value="Macho" >Macho</button>
-        <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="nextStepFunction(buttonGirl.value)" value="Hembra" >Hembra</button>
+<div class="outer">
+    <div class="container genders">
+        <p >Por favor, indique el <strong>género</strong> de {{dogName}}</p>
+        <div class="btn-group-vertical mobile" role="group" aria-label="Vertical button group">
+            <button type="button" #buttonBoy class="btn btn-outline-dark" (click)="nextStepFunction(buttonBoy.value)" value="Macho" >Macho</button>
+            <button type="button" #buttonGirl class="btn btn-outline-dark" (click)="nextStepFunction(buttonGirl.value)" value="Hembra" >Hembra</button>
+        </div>
     </div>
 </div>
-<div *ngIf="mobile" class="container continue d-grid">
+<div  class="container continue d-grid">
     <button type="button" class="continue btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
 </div>
