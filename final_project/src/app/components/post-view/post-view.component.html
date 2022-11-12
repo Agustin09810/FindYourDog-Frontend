@@ -12,12 +12,11 @@
                 <h2>{{post.dogName}}</h2>
             </div>
             <div class="other-info">
+                <p><b>Apodos: </b>{{post.dogNickNames.join()}}</p>
                 <p><b>Raza: </b>{{post.dogBreed}}</p>
-                <p><b>Descripción: </b>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat voluptate molestias ex, eligendi nemo perferendis voluptatibus deleniti nobis. Atque fugiat labore cupiditate consequatur voluptas earum repellendus sequi inventore nulla ullam?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus iure aperiam, quaerat nemo rerum autem adipisci, eveniet repellat culpa, vel repellendus fuga voluptatem ipsam consectetur porro? Itaque sequi quas eos.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores odio ullam praesentium similique, error ex molestiae dolore, in, placeat saepe labore eius repellendus voluptates? Rem veniam tempore maxime veritatis qui!
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium nam magnam corrupti consectetur, perferendis illo blanditiis quis odit fugit illum minima tenetur porro temporibus fugiat rem quo reprehenderit at earum.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. At veniam tenetur unde, in sed ut odio exercitationem suscipit ducimus corporis, nisi quasi, vitae esse error dolores laboriosam omnis amet quibusdam.</p>
+                <p><b>Género: </b>{{post.dogGender}}</p>
+                <p><b>Perdido el: </b>{{post.lostOn.toString()}}</p>
+                <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
             </div>
             <div *ngIf="displayButton === true" class="contact-button">
                 <button class="btn btn-outline-dark">Contactar</button>
