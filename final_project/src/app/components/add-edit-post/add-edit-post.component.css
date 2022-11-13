@@ -52,6 +52,32 @@
         width:100%;
         overflow-y:scroll;
     }
+}
 
+@media (min-width:2300px){
+    .container{
+        max-width:1500px;
+    }
+    .containerDiv{
+        max-width: 1500px;
+        max-height: 900px;
+    }
 
+    .navbarStyles {
+        max-width: 1500px;
+    }
+}
+
+@media (min-width:2900px){
+    .container{
+        max-width:1800px;
+    }
+    .containerDiv{
+        max-width: 1800px;
+        max-height: 1200px;
+    }
+
+    .navbarStyles {
+        max-width: 1800px;
+    }
 }

@@ -79,13 +79,30 @@
 }
 
 @media (min-width:578px){
+    .outerNav{
+        position: relative;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .outerDiv{
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     .containerDiv{
         display: inline-flex;
         margin: 10vh 10vw 10vh 10vw;
         margin-top: max(10vh,86px);/*86px max height of navbar*/
         margin-bottom: 86px;
         max-width: 1200px;
-
+        max-height: 700px;
+        height: calc(100% - (87px + 86px));
         box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
 
@@ -104,4 +121,25 @@
         height: 100%;
     }
 
+}
+@media (min-width:2300px){
+    .containerDiv{
+        max-width: 1500px;
+        max-height: 900px;
+    }
+
+    .navbarStyles {
+        max-width: 1500px;
+    }
+}
+
+@media (min-width:2900px){
+    .containerDiv{
+        max-width: 1800px;
+        max-height: 1200px;
+    }
+
+    .navbarStyles {
+        max-width: 1800px;
+    }
 }

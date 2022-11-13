@@ -1,5 +1,6 @@
 .container{
     font-family: 'SF Pro Regular';
+    max-width: inherit;
 }
 
 .btn-group-vertical{

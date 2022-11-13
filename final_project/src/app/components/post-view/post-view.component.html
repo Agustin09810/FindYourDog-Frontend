@@ -1,8 +1,9 @@
-
-<div class="outerDiv" *ngIf="post">
+<div class="outerNav">
     <div class="navbarStyles">
         <app-navbar-sup [text]="'Perro'"></app-navbar-sup>
     </div>
+</div>
+<div class="outerDiv" *ngIf="post">
     <div class="containerDiv">
         <div *ngIf="postImages.length" class="carousel-container">
             <app-post-carousel [postImages]="postImages" class="post-carousel"></app-post-carousel>

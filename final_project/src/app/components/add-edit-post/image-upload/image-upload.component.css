@@ -1,3 +1,6 @@
+.container{
+    max-width: inherit;
+}
 .container.external{
     margin-top: 5%;
 }
