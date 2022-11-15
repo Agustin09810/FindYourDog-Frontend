@@ -19,7 +19,7 @@ export class LoginButtonComponent implements OnInit {
 
   loginCheck(username:string, password:string) {
     let user = {
-      id: '', contactsIds: [], chatsIds: [], username: username, password: password, profileImg: '', postsIds: [], messages: [], departmentId: ''
+      id: '', contactsUsernames: [], chatsIds: [], username: username, password: password, profileImg: '', postsIds: [], messages: [], departmentId: ''
     }
     this.userService.login(user).subscribe(x => {
       this.user = x;

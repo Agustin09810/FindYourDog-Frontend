@@ -36,6 +36,7 @@ export class UserPreviewComponent implements OnInit {
     user1.chatsIds.forEach(element => {
       if(user2.chatsIds.includes(element)){
         this.chatId = element;
+        return;
       }
     });
 

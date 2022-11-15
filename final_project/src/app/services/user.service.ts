@@ -33,21 +33,17 @@ export class UserService {
     return this.http.get<User>(`${this.usersUrl}/${username}`);
  }
 
- getUserById(id:string){
-  return this.http.get<User>(`${this.usersUrl}/${id}`);
- }
 
   sendMessage(chat:Chat) {
-    return this.http.put<Chat>(this.chatsUrl, chat, this.httpOptions);
+    return this.http.put<Chat>(this.chatsUrl+`/${chat.id}`, chat, this.httpOptions);
   }
 
-  getContactsIds(username:string){
-    return this.getUserByUsername(username).pipe(map(user => user?.contactsIds));
+
+  getContactsUsernames(username:string){
+    return this.getUserByUsername(username).pipe(map(user => user?.contactsUsernames));
   }
 
-  getContacts(username:string){
-    return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
-  }
+  
 
   getChatById(chatId:string){
     return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`);
