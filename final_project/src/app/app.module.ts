@@ -8,8 +8,6 @@ import { ZoneComponent } from './components/zone/zone.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { GridComponent } from './components/grid/grid.component';
 import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
 import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
@@ -75,10 +73,7 @@ import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-ph
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

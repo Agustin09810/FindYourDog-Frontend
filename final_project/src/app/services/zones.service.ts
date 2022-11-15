@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ZonesService {
 
-  private zonesUrl = 'api/zones'
+  private zonesUrl = 'http://localhost:3000/api/v1/zones'
   constructor(private http:HttpClient) { }
 
   httpOptions = {

@@ -2,7 +2,6 @@
 
 .containerDiv {
     position: relative;
-    background-color: whitesmoke;
     top: 0;
     left: 0;
     height: 100%;
@@ -20,7 +19,6 @@
 
 .navBar {
     border-bottom-color: rgb(228, 228, 228);
-    background-color: whitesmoke;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     margin-bottom: 10px;
@@ -37,7 +35,6 @@
     width: 100%;
     max-width: 1200px;
     padding: 5px 20px 5px 20px;
-    background-color: whitesmoke;
     border-top-color: rgb(228, 228, 228);
     border-top-width: 1px;
     border-top-style: solid;
@@ -51,7 +48,6 @@
 .divMsg{
     padding-bottom: 60px;
     padding-top: 86px;
-    background-color: whitesmoke;
     overflow-y: auto;
     height: 100%;
     width: 100%;
@@ -67,5 +63,4 @@
     height: 100vh;
     display: flex;
     justify-content: space-around;
-    background-color: whitesmoke;
 }

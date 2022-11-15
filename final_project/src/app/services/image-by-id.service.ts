@@ -9,7 +9,7 @@ import { Observable, pipe, tap, catchError, of } from 'rxjs';
 })
 export class ImageByIdService {
 
-  private imagesUrl = 'api/images'
+  private imagesUrl = 'http://localhost:3000/api/v1/images'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,13 +17,10 @@ export class ImageByIdService {
 
   constructor(private http: HttpClient) { }
 
-  getImages() {
-    return this.http.get<Image[]>(this.imagesUrl)
-  }
+
 
   getImagesById(id:string) {
-    console.log(id);
-    return this.getImages().pipe(map(imgs => imgs.find(img => img.id === id)));
+    return this.http.get<Image>(`${this.imagesUrl}/${id}`);
   }
 
   uploadImage(image: Image): Observable<Image> {

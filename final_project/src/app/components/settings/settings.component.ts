@@ -29,7 +29,7 @@ export class SettingsComponent implements OnInit {
     if(id){
       this.userService.getUserById(id).subscribe(user => {
         this.currentUser = user;
-        this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(imageUrl => this.profileImgUrl = imageUrl?.imageUrl);
+        this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(url => this.profileImgUrl = url?.url);
       });
     }
   }

@@ -32,7 +32,7 @@ export class UploadButtonComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new imageSnippet(event.target.result, file);
-      this.imageToUpload = {id: this.idNumber, imageUrl: this.selectedFile.src};
+      this.imageToUpload = {id: this.idNumber, url: this.selectedFile.src};
       this.sendPhotoToCheck.emit('active')
       console.log(this.selectedFile.src);
       });

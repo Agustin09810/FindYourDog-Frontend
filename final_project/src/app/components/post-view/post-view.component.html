@@ -13,7 +13,7 @@
                 <h2>{{post.dogName}}</h2>
             </div>
             <div class="other-info">
-                <p><b>Apodos: </b>{{post.dogNickNames.join()}}</p>
+                <p *ngIf="post.dogNickNames"><b>Apodos: </b>{{post.dogNickNames.join()}}</p>
                 <p><b>Raza: </b>{{post.dogBreed}}</p>
                 <p><b>Género: </b>{{post.dogGender}}</p>
                 <p><b>Perdido el: </b>{{post.lostOn.toString()}}</p>

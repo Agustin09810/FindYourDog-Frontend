@@ -21,8 +21,7 @@ export class ZoneComponent implements OnInit {
     this.imgService.getImagesById(this.zone.imgId).subscribe(x => this.img = x);
   }
 
-  nombre: string = 'Centro';
-  id:string = '1';
+  
 
 
 

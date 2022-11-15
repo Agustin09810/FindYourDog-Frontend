@@ -122,7 +122,7 @@ export class AddEditPostComponent implements OnInit {
 
       this.postService.addPost(post).subscribe(postX=>console.log(postX));
       this.zoneService.getZone(this.lostZone!).subscribe(zone => {
-        zone.posts.push(post.id);
+        zone.postsIds.push(post.id);
         this.zone = zone;
         this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe();
         this.router.navigate(['/zone/' + zone.id])
