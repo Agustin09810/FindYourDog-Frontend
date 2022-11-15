@@ -22,20 +22,8 @@ export class BreedService {
     return this.http.get<Breed|undefined>(`${this.breedsUrl}/${id}`);
   }
 
-
-    //FALTA IMPLEMENTAR EN BACKEND
-
   getBreedByName(name: string): Observable<Breed[]> {
     return this.http.get<Breed[]>(`${this.breedsUrl}?name=${name}`);
-   /*  let filteredBreeds = new Array<Breed>();
-    this.http.get<Breed[]>(this.breedsUrl).subscribe(breeds => {
-      breeds.forEach(breed => {
-        if (breed.name.toLowerCase().includes(name.toLowerCase())) {
-          filteredBreeds.push(breed);
-        }
-      });
-    });
-    return of(filteredBreeds); */
   }
 
 }

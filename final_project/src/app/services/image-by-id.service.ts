@@ -34,13 +34,6 @@ export class ImageByIdService {
     );
   }
 
-  uploadImageFile(formData: FormData): Observable<Image> {
-    return this.http.post<Image>(this.imagesUrl, formData, this.httpOptionsFile).pipe(
-      tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
-    catchError(this.handleError<Image>('uploadImage'))
-    );
-  }
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); 
