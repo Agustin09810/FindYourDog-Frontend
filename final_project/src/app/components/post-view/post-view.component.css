@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     margin-top: 76px;
-    background-color: whitesmoke;
+
     
 }
 
@@ -25,9 +25,8 @@
 
     position: relative;
     height: 60%;
-    background-color: whitesmoke;
 
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .contact-button{
@@ -54,7 +53,7 @@
     position: relative;
     height: 100vh;
     width: 100vw;
-    background-color: whitesmoke;
+
 
     display: flex;
     justify-content: space-around;
@@ -65,7 +64,7 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
 
-    background-color: whitesmoke;
+
 
     z-index: 9999;
 
@@ -75,7 +74,12 @@
 }
 
 .navbarStylesInf {
-   position: fixed;
+
+
+    z-index: 9999;
+
+    position: fixed;
+    width: 100%;
 }
 
 @media (min-width:578px){
