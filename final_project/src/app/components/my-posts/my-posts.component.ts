@@ -19,7 +19,7 @@ export class MyPostsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userService:UserService, private postsService:PostsService) { }
 
   ngOnInit(): void {
-    this.getMyPosts('userId');
+    this.getMyPosts('username');
   }
 
   getRotueId(routeId: string): string | undefined{
@@ -35,9 +35,9 @@ export class MyPostsComponent implements OnInit {
   //cuando clickeo next agarro el n+1 elemento del array y lo seteo en una variable post, que se le pasa x input a post-view
 
   getMyPosts(routeId:string){
-    const id = this.getRotueId(routeId);
-    if(id){
-      this.userService.getUserById(id).subscribe(user => {
+    const username = this.getRotueId(routeId);
+    if(username){
+      this.userService.getUserByUsername(username).subscribe(user => {
         let count:number = 0;
         user?.postsIds.forEach(postId => {
           this.postsService.getPostsById(postId).subscribe(post => {

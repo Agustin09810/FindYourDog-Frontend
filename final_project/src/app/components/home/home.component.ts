@@ -16,9 +16,9 @@ export class HomeComponent implements OnInit {
   }
 
   getUser(){
-    const id = this.route.snapshot.paramMap.get('userId');
-    if(id){
-      this.userService.getUserById(id).subscribe(user => {
+    const username = this.route.snapshot.paramMap.get('username');
+    if(username){
+      this.userService.getUserByUsername(username).subscribe(user => {
         this.departmentId = user?.departmentId;
         console.log(this.departmentId);
       });

@@ -12,14 +12,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
 
 const routes: Routes = [
-  { path: ':userId/home', component: HomeComponent },
+  { path: ':username/home', component: HomeComponent },
   { path: 'zone/:zoneId', component: DogbyzoneComponent },
-  { path: 'chat', component: ChatPreviewComponent },
+  { path: 'chats/:username', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
-  { path: 'random/:userId', component: MyPostsComponent },
-  { path: 'chats/:userId/:targetUserId/:chatId', component: ChatComponent },
-  { path: 'settings/:userId', component: SettingsComponent },
+  { path: 'random/:username', component: MyPostsComponent },
+  { path: 'chats/:username/:targetUsername/:chatId', component: ChatComponent },
+  { path: 'settings/:username', component: SettingsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'addpost', component: AddEditPostComponent }
 

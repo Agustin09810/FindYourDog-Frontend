@@ -32,16 +32,17 @@ export class ChatComponent implements OnInit {
 
 
   loadChat(){
-    const userId = this.route.snapshot.paramMap.get('userId');
-    const targetUserId = this.route.snapshot.paramMap.get('targetUserId');
+    const username = this.route.snapshot.paramMap.get('username');
+    const targetUsername = this.route.snapshot.paramMap.get('targetUsername');
     const chatId = this.route.snapshot.paramMap.get('chatId');
   
-    if(userId && targetUserId && chatId){
+    if(username && targetUsername && chatId){
       this.chatId = chatId;
-      this.userService.getUserById(userId).subscribe(originUser => {
+
+      this.userService.getUserByUsername(username).subscribe(originUser => {
         this.user = originUser;
         this.originUsername = originUser?.username;
-        this.userService.getUserById(targetUserId).subscribe(targetUser => {
+        this.userService.getUserByUsername(targetUsername).subscribe(targetUser => {
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
             this.chat = chat;

@@ -25,9 +25,9 @@ export class SettingsComponent implements OnInit {
   }
 
   getCurrentUser(){
-    const id = this.route.snapshot.paramMap.get('userId');
-    if(id){
-      this.userService.getUserById(id).subscribe(user => {
+    const username = this.route.snapshot.paramMap.get('username');
+    if(username){
+      this.userService.getUserByUsername(username).subscribe(user => {
         this.currentUser = user;
         this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(url => this.profileImgUrl = url?.url);
       });
@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
     if(this.currentUser){
       this.currentUser.departmentId = department.id;
       this.userService.updateDepartment(this.currentUser).subscribe();
-      //this.userService.getUserById(this.currentUser.id).subscribe(user => console.log(user?.departmentId + ' obtenido'));
+      
     }
   }
 

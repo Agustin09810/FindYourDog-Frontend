@@ -3,7 +3,7 @@ import { Message } from "./Message";
 
 export interface User{
     id:string,
-    contactsIds:string[],
+    contactsUsernames:string[],
     chatsIds:string[],
     username:string,
     password:string,
