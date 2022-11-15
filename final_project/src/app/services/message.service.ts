@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from '../interfaces/Message';
 
-const messageUrl = 'api/messages';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class MessageService {
+  
+  private messagesUrl = 'http://localhost:3000/api/v1/messages';
 
   constructor(private http:HttpClient) { }
 
@@ -17,11 +18,11 @@ export class MessageService {
   };
 
   getMessageById(id:string){
-    const url = messageUrl + `/${id}`;
+    const url = this.messagesUrl + `/${id}`;
     return this.http.get<Message>(url);
   }
 
   sendMessage(msg:Message){
-    return this.http.post<Message>(messageUrl, msg, this.httpOptions);
+    return this.http.post<Message>(this.messagesUrl, msg, this.httpOptions);
   }
 }

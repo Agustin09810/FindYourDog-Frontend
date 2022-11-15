@@ -29,7 +29,7 @@ export class AddEditPostComponent implements OnInit {
   @ViewChild('dogPhotosComponent') dogPhotosComponent!: ImageUploadComponent;
   @ViewChild('dogNameComponent') dogNameComponent!: DogNameComponent;
   @ViewChild('dogGenderComponent') dogGenderComponent!: DogGenderComponent;
-  
+
   dogName?: string;
   otherNames: string[] = [];
   dogGender?: string;

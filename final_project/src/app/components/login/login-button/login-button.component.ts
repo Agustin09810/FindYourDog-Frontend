@@ -18,9 +18,10 @@ export class LoginButtonComponent implements OnInit {
   }
 
   loginCheck(username:string, password:string) {
-    this.userService.login(username, password).subscribe(x => {
-      //Aca hacer que se pase la data a mock sobre user logueado y dsp recueprarla en todos lados a traves del servicio
-      console.log('2');
+    let user = {
+      id: '', contactsIds: [], chatsIds: [], username: username, password: password, profileImg: '', postsIds: [], messages: [], departmentId: ''
+    }
+    this.userService.login(user).subscribe(x => {
       this.user = x;
       console.log(this.user + 'user');
       this.changeUser();

@@ -12,7 +12,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 })
 export class PostsService {
 
-  private postsUrl = 'api/posts';
+  private postsUrl = 'http://localhost:3000/api/v1/posts';
+
   constructor(private http:HttpClient) { }
 
   httpOptions = {

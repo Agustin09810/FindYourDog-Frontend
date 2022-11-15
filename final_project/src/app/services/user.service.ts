@@ -13,8 +13,8 @@ import { MessageService } from './message.service';
 })
 export class UserService {
 
-  usersUrl = 'api/users';
-  chatsUrl = 'api/chats';
+  private usersUrl = 'http://localhost:3000/api/v1/users';
+  private chatsUrl = 'http://localhost:3000/api/v1/chats';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,39 +25,17 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  login(username:string, password:string): Observable<User|undefined> {
-    console.log(username + ' ' + password + 'entre login service');
-    return this.getUsers().pipe(map(users => users.find(user => 
-                                          ((user.username === username) && (user.password === password)))), map(user => {
-                                            if(user === undefined) {
-                                              console.log('user undefined');
-                                              return undefined;
-                                            } else{
-                                              console.log("user found");
-                                              return user;
-                                            }
-                                          }));
+  login(user: User): Observable<User|undefined> {
+    return this.http.post<User>(this.usersUrl, user, this.httpOptions);
   }
 
   getUserByUsername(username:string) {
-    return this.getUsers().pipe(map(users => users.find(user => user.username === username)), map(user => {
-                                                                                      if(user === undefined) {
-                                                                                        console.log('user undefined');
-                                                                                        return undefined;
-                                                                                      } else{
-                                                                                        console.log("user found");
-                                                                                        return user;
-                                                                                      }
-                                                                                      }));
+    return this.http.get<User>(`${this.usersUrl}/${username}`);
  }
 
  getUserById(id:string){
-  return this.getUsers().pipe(map(users => users.find(user => user.id === id)));
+  return this.http.get<User>(`${this.usersUrl}/${id}`);
  }
-
-  getMessages(username1:string, username2:string){
-    return this.getUserByUsername(username1).pipe(map(user => user?.messages));
-  }
 
   sendMessage(chat:Chat) {
     return this.http.put<Chat>(this.chatsUrl, chat, this.httpOptions);
@@ -68,17 +46,11 @@ export class UserService {
   }
 
   getContacts(username:string){
-
-
     return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
-
   }
 
-  getChats(){
-    return this.http.get<Chat[]>(this.chatsUrl);
-  }
   getChatById(chatId:string){
-    return this.getChats().pipe(map(chats => chats.find(chat => chat.id == chatId)));
+    return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`);
   }
 
   updateDepartment(user:User){

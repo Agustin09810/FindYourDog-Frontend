@@ -2,21 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Department } from '../interfaces/Department';
 
-const departmentUrl = 'api/departments';
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
 
+  private departmentsUrl = 'http://localhost:3000/api/v1/departments';
+
   constructor(private http:HttpClient) { }
 
   
   getDepartments(){
-    return this.http.get<Department[]>(departmentUrl);
+    return this.http.get<Department[]>(this.departmentsUrl);
   }
 
   getDepartmentById(id:string){
-    let url:string = departmentUrl + `/${id}`;
+    let url:string = this.departmentsUrl + `/${id}`;
     return this.http.get<Department>(url);
   }
 }

@@ -25,7 +25,6 @@ export class GridComponent implements OnInit {
 
   loadZones(){
     if(this.departmentId){
-      console.log('xd');
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
         department.zonesId.forEach(zoneId => {
           this.zoneService.getZone(zoneId).subscribe(zone => this.zones.push(zone));

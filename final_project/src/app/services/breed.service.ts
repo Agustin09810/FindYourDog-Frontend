@@ -8,8 +8,10 @@ import { Observable, map, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class BreedService {
-  private breedsUrl = 'api/breeds';
+  private breedsUrl = 'http://localhost:3000/api/v1/breeds';
+
   constructor(private http: HttpClient) { }
 
   getBreeds(): Observable<Breed[]> {
@@ -17,11 +19,15 @@ export class BreedService {
   }
 
   getBreedById(id: string): Observable<Breed|undefined> {
-    return this.getBreeds().pipe(map(breeds => breeds.find(breed => breed.id === id)));
+    return this.http.get<Breed|undefined>(`${this.breedsUrl}/${id}`);
   }
 
+
+    //FALTA IMPLEMENTAR EN BACKEND
+
   getBreedByName(name: string): Observable<Breed[]> {
-    let filteredBreeds = new Array<Breed>();
+    return this.http.get<Breed[]>(`${this.breedsUrl}?name=${name}`);
+   /*  let filteredBreeds = new Array<Breed>();
     this.http.get<Breed[]>(this.breedsUrl).subscribe(breeds => {
       breeds.forEach(breed => {
         if (breed.name.toLowerCase().includes(name.toLowerCase())) {
@@ -29,7 +35,7 @@ export class BreedService {
         }
       });
     });
-    return of(filteredBreeds);
+    return of(filteredBreeds); */
   }
 
 }
