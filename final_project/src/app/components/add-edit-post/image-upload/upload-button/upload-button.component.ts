@@ -34,7 +34,6 @@ export class UploadButtonComponent implements OnInit {
       this.selectedFile = new imageSnippet(event.target.result, file);
       this.imageToUpload = {id: this.idNumber, url: this.selectedFile.src};
       this.sendPhotoToCheck.emit('active')
-      console.log(this.selectedFile.src);
       });
     reader.readAsDataURL(file);
   }
@@ -53,7 +52,6 @@ export class UploadButtonComponent implements OnInit {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
 
-
-}
 }

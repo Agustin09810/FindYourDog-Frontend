@@ -25,7 +25,6 @@ export class PostComponent implements OnInit {
 
   getDayDiff(startDate: Date): number {
     const msInDay = 24 * 60 * 60 * 1000;
-    console.log(startDate);
     const dateLost = new Date(startDate);
 
     var time = new Date().getTime() - dateLost.getTime();

@@ -38,10 +38,9 @@ export class DogPhotosComponent implements OnInit {
   }
 
   checkIfButtonShouldBeDisabled(): void {
-    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
     this.cd.detectChanges();
-    console.log(photos)
-    if(photos.length > 0){
+    if(images.length > 0){
       this.disableButton = 'active';
     }
     else{
@@ -50,11 +49,13 @@ export class DogPhotosComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  nextStepFunction() {
-    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+  async nextStepFunction() {
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
     let photosIDs: string[] = [];
-    photos.forEach(photo => photosIDs.push(photo.id))
-    photos.forEach(async photo => await lastValueFrom(this.imageService.uploadImage(photo)));
+    for(let image of images){
+      const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
+      photosIDs.push(result.id);
+    }
     this.nextStep.emit(photosIDs)
   }
 }

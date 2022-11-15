@@ -15,6 +15,10 @@ export class ImageByIdService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  httpOptionsFile = {
+    headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data'})
+  }
+
   constructor(private http: HttpClient) { }
 
 
@@ -25,6 +29,13 @@ export class ImageByIdService {
 
   uploadImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.imagesUrl, image, this.httpOptions).pipe(
+      tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
+    catchError(this.handleError<Image>('uploadImage'))
+    );
+  }
+
+  uploadImageFile(formData: FormData): Observable<Image> {
+    return this.http.post<Image>(this.imagesUrl, formData, this.httpOptionsFile).pipe(
       tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
     catchError(this.handleError<Image>('uploadImage'))
     );
