@@ -23,7 +23,7 @@ export class PostViewComponent implements OnInit {
     this.getPostImages();
   }
 
-  displayButton?:boolean;
+  displayButton?:boolean = false;
 
  
   

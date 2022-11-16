@@ -33,7 +33,7 @@
         <label for="location" class="form-label">Ubicación:</label>
         <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
             <option value="0">Seleccione una opción</option>
-            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
+            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.name == lostZone">{{zoneX.name}}</option>
         </select>
         <small class="form-text text-muted">Este campo es obligatorio</small>
     </div>

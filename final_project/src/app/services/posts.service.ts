@@ -42,4 +42,11 @@ export class PostsService {
       return of(result as T);
     };
   }
+
+  updatePost(post: Post): Observable<Post>{
+    return this.http.put<Post>(`${this.postsUrl}/${post.id}`, post, this.httpOptions).pipe(
+      tap((newPost: Post) => console.log(`updated post with id=${newPost.id}`)),
+    catchError(this.handleError<Post>('updatePost'))
+    );
+  }
 }

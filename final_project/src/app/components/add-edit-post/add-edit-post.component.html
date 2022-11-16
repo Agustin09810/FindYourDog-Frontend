@@ -10,7 +10,7 @@
         <app-dog-breed class="component" *ngIf="step == 'breed'" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
         <app-dog-date-zone class="component" *ngIf="step == 'date'" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
                 [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
-        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
+        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" [dogPhotos]="photos" [editBool]="editBool" [post]="post" (nextStep)="navigateAux($event)" ></app-dog-photos>
     </div>
 </div>
 <app-navbar-inf style="position:fixed"></app-navbar-inf>

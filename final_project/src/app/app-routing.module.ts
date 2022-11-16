@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'chats/:username/:targetUsername/:chatId', component: ChatComponent },
   { path: 'settings/:username', component: SettingsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'addpost', component: AddEditPostComponent }
+  { path: 'addpost', component: AddEditPostComponent },
+  { path: 'editpost/:postId', component: AddEditPostComponent }
 
  
 

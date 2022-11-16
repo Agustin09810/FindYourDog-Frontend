@@ -4,6 +4,8 @@ import { Image} from '../../../interfaces/Image';
 import { ImageByIdService } from '../../../services/image-by-id.service';
 import { lastValueFrom } from 'rxjs';
 
+import {Post} from '../../../interfaces/Post';
+
 @Component({
   selector: 'app-dog-photos',
   templateUrl: './dog-photos.component.html',
@@ -17,7 +19,7 @@ export class DogPhotosComponent implements OnInit {
   ) { }
 
   @Input() dogName?: string;
-  dogPhotos?: string[];
+  @Input() dogPhotos?: string[];
   
   @Output() nextStep = new EventEmitter<string[]>();
 
@@ -25,6 +27,9 @@ export class DogPhotosComponent implements OnInit {
 
   @Input() counterOfChars: number = 0;
   @Input() disableButton: string = 'disabled';
+
+  @Input() editBool: boolean = false;
+  @Input() post?: Post;
 
   ngOnInit(): void {
   }

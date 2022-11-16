@@ -1,11 +1,9 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import { Router} from '@angular/router';
+import { Component, OnInit, ViewChild, Input} from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
 
 import { ImageUploadComponent } from './image-upload/image-upload.component'
 import { DogNameComponent } from './dog-name/dog-name.component'
 import { DogGenderComponent } from './dog-gender/dog-gender.component'
-
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 import {Breed} from '../../interfaces/Breed';
 
@@ -46,18 +44,42 @@ export class AddEditPostComponent implements OnInit {
 
   zone?: Zone;
 
+  editBool: boolean = false;
+
   constructor(
-    private deviceService: DeviceDetectorService,
     private router: Router,
     private postService: PostsService,
     private zoneService: ZonesService,
+    private route: ActivatedRoute
   ) { }
-
-  isMobile = this.deviceService.isMobile();
-  isTablet = this.deviceService.isTablet();
-  isDesktop = this.deviceService.isDesktop();
   
   ngOnInit(): void {
+    const postId = this.route.snapshot.paramMap.get('postId')
+    if(postId != undefined){
+      this.postService.getPostsById(postId).subscribe(post => {
+        this.post = post;
+        this.dogName = this.post.dogName;
+        if(this.post.dogNickNames != undefined){
+          this.otherNames = this.post.dogNickNames;
+        }
+        this.dogGender = this.post.dogGender;
+        this.dogBreed = this.post.dogBreed;
+        this.lastSeenDate = this.post.lostOn.toString().split('T')[0];
+        this.lastSeenHour = this.post.lostOn.toString().split('T')[1].substring(0,5);
+        this.lostZone = this.post.lostZone;
+        console.log(this.post.lostZone);
+        if(this.post.lostDescription != undefined){
+          this.ubiDetails = this.post.lostDescription;
+        }
+        this.ubiDetails = this.post.lostDescription;
+        if(this.post.dogDescription != undefined){
+          this.dogDescription = this.post.dogDescription;
+        }
+        this.dogDescription = this.post.dogDescription;
+        this.photos = this.post.photos;
+        this.editBool = true;
+      }); 
+    }
   }
 
   navigateAux(data: string[]){
