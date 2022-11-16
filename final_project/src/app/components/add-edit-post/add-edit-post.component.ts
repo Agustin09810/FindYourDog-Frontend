@@ -124,8 +124,8 @@ export class AddEditPostComponent implements OnInit {
       this.zoneService.getZone(this.lostZone!).subscribe(zone => {
         zone.postsIds.push(post.id);
         this.zone = zone;
-        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe();
-        this.router.navigate(['/zone/' + zone.id])
+        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe( () => {
+          this.router.navigate(['/zone/' + zone.id])});
       });
     }
 

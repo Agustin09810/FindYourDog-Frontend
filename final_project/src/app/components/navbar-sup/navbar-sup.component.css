@@ -48,4 +48,24 @@ a{
     vertical-align: center;
 }
 
+.arrow{
+    left:5%;
+    position:absolute;
+    cursor:pointer;
+}
+
+@media(max-width: 992px){
+    .navbar-brand{
+        position: relative;
+        left: 45%;
+    }
+}
+@media(min-width: 992px){
+    .navbar-brand{
+        position: relative;
+        left: 10%
+    }
+}
+
+
 

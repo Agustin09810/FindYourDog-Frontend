@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navbar-sup',
@@ -8,10 +9,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarSupComponent implements OnInit {
 
   @Input() text?: string;
+  @Input() backArrow: boolean = false;
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }
