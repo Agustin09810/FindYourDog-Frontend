@@ -31,7 +31,7 @@ textarea{
 @media(min-width:578px){
     .outer{
         position:relative;
-        overflow-y:scroll;
+        overflow-y:auto;
         height: 90%;
     }
     .container.form{
