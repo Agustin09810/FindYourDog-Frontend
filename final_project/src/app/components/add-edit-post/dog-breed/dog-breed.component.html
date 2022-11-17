@@ -2,7 +2,8 @@
     <div class="container searcher">
         <label for="breedSearcher" class="form-label">Seleccione la <strong>raza</strong> de {{dogName}}</label>
         <form class="d-flex" role="search">
-            <input class="form-control me-2" id="breedSearcher"type="search" placeholder="Border Collie" (keyup)="searchBreed($event)" aria-label="Search">
+            <input *ngIf="!dogBreed" class="form-control me-2" id="breedSearcher"type="search" placeholder="Busca una raza" (keyup)="searchBreed($event)" aria-label="Search">
+            <input *ngIf="dogBreed" class="form-control me-2" id="breedSearcher"type="search" placeholder="Raza actual: {{dogBreed}}" (keyup)="searchBreed($event)" aria-label="Search">
         </form>    
         <small class="form-text text-muted">En caso de desconocerla, presione Continuar.</small>
     </div>

@@ -12,8 +12,8 @@
             <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
         </div>
         <div class="col">
-            <button type="button" *ngIf="!editBool" class="continue btn btn-primary {{disableButton}} " (click)="nextStepFunction()">Publicar</button>
-            <button type="button" *ngIf="editBool" class="continue btn btn-primary {{disableButton}} " (click)="nextStepFunction()">Editar</button>
+            <button type="button" *ngIf="!editBool" class="continue btn btn-primary {{disableButton}} " (click)="nextStepFunction(dogDetails.value)">Publicar</button>
+            <button type="button" *ngIf="editBool" class="continue btn btn-primary {{disableButton}} " (click)="editPostFunction(dogDetails.value)">Editar</button>
         </div>
     </div>
 </div>

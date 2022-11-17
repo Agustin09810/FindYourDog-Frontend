@@ -59,15 +59,14 @@ export class AddEditPostComponent implements OnInit {
       this.postService.getPostsById(postId).subscribe(post => {
         this.post = post;
         this.dogName = this.post.dogName;
-        if(this.post.dogNickNames != undefined){
-          this.otherNames = this.post.dogNickNames;
+        if(this.post.dogNicknames != undefined){
+          this.otherNames = this.post.dogNicknames;
         }
         this.dogGender = this.post.dogGender;
         this.dogBreed = this.post.dogBreed;
         this.lastSeenDate = this.post.lostOn.toString().split('T')[0];
         this.lastSeenHour = this.post.lostOn.toString().split('T')[1].substring(0,5);
         this.lostZone = this.post.lostZone;
-        console.log(this.post.lostZone);
         if(this.post.lostDescription != undefined){
           this.ubiDetails = this.post.lostDescription;
         }
@@ -138,21 +137,67 @@ export class AddEditPostComponent implements OnInit {
       return result;
     }
 
-    publish(photosA: string[]){
-      this.photos = photosA;
-      let post = this.createPost();
-
-      this.postService.addPost(post).subscribe(postX=>console.log(postX));
-      this.zoneService.getZone(this.lostZone!).subscribe(zone => {
-        zone.postsIds.push(post.id);
-        this.zone = zone;
-        this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe( () => {
-          this.router.navigate(['/zone/' + zone.id])});
-      });
+  edit(photosA: string[]){
+    if(this.dogName != this.post!.dogName){
+      this.post!.dogName = this.dogName!;
     }
+    if(this.dogGender != this.post!.dogGender){
+      this.post!.dogGender = this.dogGender!;
+    }
+    if(this.dogBreed != this.post!.dogBreed){
+      this.post!.dogBreed = this.dogBreed!;
+    }
+    if(this.lastSeenDate != this.post!.lostOn.toString().split('T')[0]){
+      this.post!.lostOn = new Date(this.lastSeenDate + "T" + this.lastSeenHour + ":00");
+    }
+    if(this.lastSeenHour != this.post!.lostOn.toString().split('T')[1].substring(0,5)){
+      this.post!.lostOn = new Date(this.lastSeenDate + "T" + this.lastSeenHour + ":00");
+    }
+    if(this.lostZone != this.post!.lostZone){
+      this.post!.lostZone = this.lostZone!;
+    }
+    if(this.ubiDetails != this.post!.lostDescription){
+      this.post!.lostDescription = this.ubiDetails;
+    }
+    this.dogDescription = photosA.shift()!;
+    if(this.dogDescription != this.post!.dogDescription){
+      this.post!.dogDescription = this.dogDescription;
+    }
+    let imagesAux: string[] = [];
+    for(let id of this.post!.photos){
+      if(id != undefined && id != "" && id != null){
+        imagesAux.push(id);
+      } 
+    }
+    for(let id of photosA){
+      if(id != undefined && id != "" && id != null){
+        if(!this.post!.photos.includes(id)){
+          imagesAux.push(id);
+        }
+      }
+    }
+    this.post!.photos = imagesAux;
+    this.postService.updatePost(this.post!).subscribe(post => {
+      this.router.navigate(['/admin/home']);
+    });
+  }
+
+  publish(photosA: string[]){
+    this.dogDescription = photosA.shift()!;
+    this.photos = photosA;
+    let post = this.createPost();
+
+    this.postService.addPost(post).subscribe();
+    this.zoneService.getZone(this.lostZone!).subscribe(zone => {
+      zone.postsIds.push(post.id);
+      this.zone = zone;
+      this.zoneService.addPostToZone(this.zone!.id, this.zone!).subscribe( () => {
+        this.router.navigate(['/zone/' + zone.id])});
+    });
+  }
 
     createPost(): Post{
-      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogName!, dogNickNames: this.otherNames, dogGender: this.dogGender!,
+      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogName!, dogNicknames: this.otherNames, dogGender: this.dogGender!,
                         dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
                         dogDescription: this.dogDescription, photos: this.photos};
       return post;

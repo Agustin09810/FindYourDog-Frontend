@@ -11,7 +11,13 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   @Input() dogName?: string;
   @Input() otherNames: string[] = [];
   @Output() nextStep = new EventEmitter<string[]>();
-
+  editBoolean: boolean = false;
+  @Input() 
+  get editBool(): boolean {return this.editBoolean}
+  set editBool(value: boolean) {
+    this.editBoolean = value;
+    this.disableButton = "active";
+  }
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('nickName1') another1Input?: ElementRef;

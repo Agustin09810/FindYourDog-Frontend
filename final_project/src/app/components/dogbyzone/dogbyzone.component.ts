@@ -27,8 +27,7 @@ export class DogbyzoneComponent implements OnInit {
     if(id)
       {
         this.zoneService.getZone(id).subscribe(zone => {
-          this.zone = zone
-          console.log(this.zone);
+          this.zone = zone;
         });
         
       }

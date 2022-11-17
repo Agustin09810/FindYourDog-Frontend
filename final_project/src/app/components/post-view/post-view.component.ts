@@ -57,6 +57,7 @@ export class PostViewComponent implements OnInit {
       {
         this.postService.getPostsById(id).subscribe(post => {
           this.post = post;
+          console.log(post);
           this.post?.photos.forEach(imgId => {
             this.imageService.getImagesById(imgId).subscribe(x =>  {
               this.postImages?.push(x!);

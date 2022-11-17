@@ -36,7 +36,6 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit():void {
     if(this.dogPhotos!=undefined){
-      console.log('grilla');
       this.loadImages();
     }
   }
@@ -62,13 +61,11 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
     return images;
   }
 
+  
+  
   loadImages(): void{
-    console.log(this.dogPhotos);
-    console.log('afuera del if')
     if(this.dogPhotos){
-      console.log('dentro del if')
       if(this.dogPhotos[0]){
-        console.log('recontra adentro del if')
         this.imageSelector1.inputId = this.dogPhotos[0];
       }
       if(this.dogPhotos[1]){
@@ -87,6 +84,45 @@ export class ImageUploadComponent implements OnInit, AfterViewInit {
         this.imageSelector6.inputId = this.dogPhotos[5];
       }
     }
-
   }
+    checkAndSendImagesToEdit(): Image[]{
+      let images: Image[] = [];
+      if(this.imageSelector1.imageToUpload){
+        images.push(this.imageSelector1.imageToUpload)
+      } else if(this.imageSelector1.inputId){
+        let aux1: Image = {id: this.imageSelector1.inputId, url: ''}
+        images.push(aux1)
+      }
+      if(this.imageSelector2.imageToUpload){
+        images.push(this.imageSelector2.imageToUpload)
+      } else if(this.imageSelector2.inputId){
+        let aux2: Image = {id: this.imageSelector2.inputId, url: ''}
+        images.push(aux2)
+      }
+      if(this.imageSelector3.imageToUpload){
+        images.push(this.imageSelector3.imageToUpload)
+      } else if(this.imageSelector3.inputId){
+        let aux3: Image = {id: this.imageSelector3.inputId, url: ''}
+        images.push(aux3)
+      }
+      if(this.imageSelector4.imageToUpload){
+        images.push(this.imageSelector4.imageToUpload)
+      } else if(this.imageSelector4.inputId){
+        let aux4: Image = {id: this.imageSelector4.inputId, url: ''}
+        images.push(aux4)
+      }
+      if(this.imageSelector5.imageToUpload){
+        images.push(this.imageSelector5.imageToUpload)
+      } else if(this.imageSelector5.inputId){
+        let aux5: Image = {id: this.imageSelector5.inputId, url: ''}
+        images.push(aux5)
+      }
+      if(this.imageSelector6.imageToUpload){
+        images.push(this.imageSelector6.imageToUpload)
+      } else if(this.imageSelector6.inputId){
+        let aux6: Image = {id: this.imageSelector6.inputId, url: ''}
+        images.push(aux6)
+      }
+      return images;
+    }
 }

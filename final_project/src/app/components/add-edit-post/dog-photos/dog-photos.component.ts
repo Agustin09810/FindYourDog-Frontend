@@ -22,16 +22,20 @@ export class DogPhotosComponent implements OnInit {
   @Input() dogPhotos?: string[];
   
   @Output() nextStep = new EventEmitter<string[]>();
+  @Output() editPost = new EventEmitter<string[]>();
 
   @ViewChild('imageUploadComponent') imageUploadComponent!: ImageUploadComponent;
 
   @Input() counterOfChars: number = 0;
-  @Input() disableButton: string = 'disabled';
+  disableButton: string = 'disabled';
 
   @Input() editBool: boolean = false;
   @Input() post?: Post;
 
   ngOnInit(): void {
+    if(this.editBool){
+      this.disableButton = 'active';
+    }
   }
 
   countCharacters(event: any){
@@ -54,9 +58,23 @@ export class DogPhotosComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  async nextStepFunction() {
+  async editPostFunction(textArea: string) {
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImagesToEdit();
+    let photosIDs: string[] = [];
+    photosIDs.push(textArea);
+    for(let image of images){
+      if(!this.dogPhotos!.includes(image.id)){
+      const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
+      photosIDs.push(result.id);
+      }
+    }
+    this.editPost.emit(photosIDs)
+  }
+
+  async nextStepFunction(textArea: string) {
     let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
     let photosIDs: string[] = [];
+    photosIDs.push(textArea);
     for(let image of images){
       const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
       photosIDs.push(result.id);

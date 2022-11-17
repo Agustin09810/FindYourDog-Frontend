@@ -2,7 +2,7 @@ export interface Post{
     id: string,
     user: string,
     dogName: string,
-    dogNickNames: string[],
+    dogNicknames: string[],
     dogGender: string,
     dogBreed: string,
     lostOn: Date;

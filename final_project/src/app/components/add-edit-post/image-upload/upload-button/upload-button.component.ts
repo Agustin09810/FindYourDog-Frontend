@@ -25,7 +25,6 @@ export class UploadButtonComponent implements OnInit {
   get inputId(): string {return this.id!;}
   set inputId(id: string){
     this.id = id;
-    console.log(this.id + 'Holanda');
     this.getImageToDisplay();
   }
   @Input() post?: Post;
@@ -56,25 +55,33 @@ export class UploadButtonComponent implements OnInit {
   }
 
   deleteFile(): void{
-    this.selectedFile = undefined;
-    this.imageToUpload = undefined;
     if(this.id!){
-      console.log(this.id);
-      this.imageService.deleteImage(this.id!).subscribe();
-      //find element in post photos array and replace with last element
-      const index = this.post!.photos.indexOf(this.id!);
-      const lastElement = this.post!.photos.length-1;
-      const auxElement = this.post!.photos[index];
-      this.post!.photos[index] = this.post!.photos[lastElement];
-      this.post!.photos[lastElement] = auxElement;
-      this.post!.photos.pop();
-      this.postService.updatePost(this.post!).subscribe();
+        if(this.post!.photos.length > 1){
+        this.imageService.deleteImage(this.id!).subscribe();
+        const index = this.post!.photos.indexOf(this.id!);
+        const lastElement = this.post!.photos.length-1;
+        const auxElement = this.post!.photos[index];
+        this.post!.photos[index] = this.post!.photos[lastElement];
+        this.post!.photos[lastElement] = auxElement;
+        this.post!.photos.pop();
+        this.postService.updatePost(this.post!).subscribe();
+        this.selectedFile = undefined;
+        this.imageToUpload = undefined;
+        this.sendPhotoToCheck.emit('disabled');
+      }
+      else{
+        alert('No se puede eliminar la última foto');
+        this.sendPhotoToCheck.emit('active');
+      }
     }
-    this.sendPhotoToCheck.emit('disabled');
+    else{
+      this.selectedFile = undefined;
+      this.imageToUpload = undefined;
+      this.sendPhotoToCheck.emit('disabled');
+    }
   }
 
   getImageToDisplay(){
-    console.log('hola');
     this.imageService.getImagesById(this.id!).subscribe(
       (image: Image) => {
         this.selectedFile = {src: image.url};
