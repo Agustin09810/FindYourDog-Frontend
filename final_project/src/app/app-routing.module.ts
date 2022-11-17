@@ -13,10 +13,10 @@ import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.c
 
 const routes: Routes = [
   { path: ':username/home', component: HomeComponent },
-  { path: 'zone/:zoneId', component: DogbyzoneComponent },
+  { path: ':username/zone/:zoneId', component: DogbyzoneComponent },
   { path: 'chats/:username', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
+  { path: ':username/zone/:zoneId/:post-view-Id', component: PostViewComponent },
   { path: 'random/:username', component: MyPostsComponent },
   { path: 'chats/:username/:targetUsername/:chatId', component: ChatComponent },
   { path: 'settings/:username', component: SettingsComponent },

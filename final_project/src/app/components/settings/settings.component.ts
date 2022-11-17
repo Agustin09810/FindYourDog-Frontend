@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
   updateDepartment(department:Department){
     if(this.currentUser){
       this.currentUser.departmentId = department.id;
-      this.userService.updateDepartment(this.currentUser).subscribe();
+      this.userService.updateUser(this.currentUser).subscribe();
       
     }
   }

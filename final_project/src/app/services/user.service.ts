@@ -34,8 +34,12 @@ export class UserService {
  }
 
 
-  sendMessage(chat:Chat) {
+  updateChat(chat:Chat) {
     return this.http.put<Chat>(this.chatsUrl+`/${chat.id}`, chat, this.httpOptions);
+  }
+
+  createChat(chat:Chat){
+    return this.http.post<Chat>(this.chatsUrl, chat, this.httpOptions);
   }
 
 
@@ -49,8 +53,8 @@ export class UserService {
     return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`);
   }
 
-  updateDepartment(user:User){
-    return this.http.put<User>(this.usersUrl, user, this.httpOptions);
+  updateUser(user:User){
+    return this.http.put<User>(this.usersUrl + '/' + user.username, user, this.httpOptions);
   }
 
 }
