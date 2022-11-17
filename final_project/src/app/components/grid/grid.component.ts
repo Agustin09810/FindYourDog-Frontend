@@ -16,6 +16,8 @@ import { DepartmentService } from 'src/app/services/department.service';
 export class GridComponent implements OnInit {
 
   @Input() departmentId?:string;
+  @Input() username?:string;
+  
   zones:Zone[] = [];
   constructor(private zoneService:ZonesService, private departmentService:DepartmentService) { }
   ngOnInit(): void {

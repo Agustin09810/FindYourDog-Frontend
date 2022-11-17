@@ -20,7 +20,7 @@
                 <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
             </div>
             <div *ngIf="displayButton === true" class="contact-button">
-                <button class="btn btn-outline-dark">Contactar</button>
+                <button class="btn btn-outline-dark" (click)="contactUser()">Contactar</button>
             </div>
             <div *ngIf="displayButton === false" class="contact-button">
                 <button class="btn btn-outline-dark" routerLink="/editpost/{{post.id}}" >Editar</button>

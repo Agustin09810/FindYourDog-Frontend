@@ -13,6 +13,7 @@ import { ImageByIdService } from 'src/app/services/image-by-id.service';
 export class ZoneComponent implements OnInit {
 
   @Input() zone!: Zone;
+  @Input() username?:string;
   img?: Image;
 
   constructor(private imgService:ImageByIdService) { }

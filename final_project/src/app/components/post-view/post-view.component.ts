@@ -5,6 +5,8 @@ import { PostsService } from 'src/app/services/posts.service';
 import { ActivatedRoute } from '@angular/router'; 
 import { Post } from 'src/app/interfaces/Post';
 import { Image } from 'src/app/interfaces/Image';
+import { UserService } from 'src/app/services/user.service';
+import { Chat } from 'src/app/interfaces/Chat';
 
 @Component({
   selector: 'app-post-view',
@@ -27,7 +29,7 @@ export class PostViewComponent implements OnInit {
 
  
   
-  constructor(private postService:PostsService, private imageService:ImageByIdService, private route: ActivatedRoute) { }
+  constructor(private postService:PostsService, private imageService:ImageByIdService, private route: ActivatedRoute, private userService:UserService) { }
 
 
 
@@ -77,5 +79,36 @@ export class PostViewComponent implements OnInit {
     })
   }
 
+  //crer chat con el usuario que creo el post
+  //agregar el chatId en ambos usuarios
+
+  //get from route username
+  contactUser(): void {
+    const username = this.getRotueId('username');
+    if(username){
+      this.userService.getUserByUsername(username).subscribe(user => {
+        let chat:Chat = {id:'xd',  messagesIds:[]};
+
+        this.userService.createChat(chat).subscribe(chatRecived => {
+
+          this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
+            console.log(chatRecived.id + ' elchat');
+            user2.chatsIds.push(chatRecived.id);
+            user2.contactsUsernames.push(user.username);
+
+            user.chatsIds.push(chatRecived.id);
+            user.contactsUsernames.push(user2.username);
+
+            console.log(user)
+            console.log(user2)
+
+            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user).subscribe());
+          })
+        });
+       
+        
+      });
+    }
+  }
 
 }

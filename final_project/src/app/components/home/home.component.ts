@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private userService:UserService) { }
   departmentId?:string ;
+  currentUsername?:string;
   ngOnInit(): void {
     this.getUser();
   }
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     const username = this.route.snapshot.paramMap.get('username');
     if(username){
       this.userService.getUserByUsername(username).subscribe(user => {
+        this.currentUsername = user.username;
         this.departmentId = user?.departmentId;
         console.log(this.departmentId);
       });

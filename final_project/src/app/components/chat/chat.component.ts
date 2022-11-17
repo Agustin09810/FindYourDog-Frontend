@@ -87,7 +87,7 @@ export class ChatComponent implements OnInit {
       let chat:Chat = {id:this.chatId, messagesIds:messagesIdsCopy}
       this.messageService.sendMessage(msg).subscribe(() => {
         this.messages?.push(msg);
-        this.userService.sendMessage(chat).subscribe(() => {
+        this.userService.updateChat(chat).subscribe(() => {
           this.chat?.messagesIds.push(msg.id);
         });
       });
