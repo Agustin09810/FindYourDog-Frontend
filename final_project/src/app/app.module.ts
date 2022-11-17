@@ -35,6 +35,8 @@ import { DogGenderComponent } from './components/add-edit-post/dog-gender/dog-ge
 import { DogBreedComponent } from './components/add-edit-post/dog-breed/dog-breed.component';
 import { DogDateZoneComponent } from './components/add-edit-post/dog-date-zone/dog-date-zone.component';
 import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-photos.component';
+import { Page404Component } from './components/page404/page404.component';
+import { Page500Component } from './components/page500/page500.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-ph
     DogGenderComponent,
     DogBreedComponent,
     DogDateZoneComponent,
-    DogPhotosComponent
+    DogPhotosComponent,
+    Page404Component,
+    Page500Component
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { MyPostsComponent } from './components/my-posts/my-posts.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
+import { Page404Component } from './components/page404/page404.component';
+import { Page500Component } from './components/page500/page500.component';
 
 const routes: Routes = [
   { path: ':username/home', component: HomeComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'settings/:username', component: SettingsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'addpost', component: AddEditPostComponent },
-  { path: 'editpost/:postId', component: AddEditPostComponent }
+  { path: 'editpost/:postId', component: AddEditPostComponent },
+  { path: 'error404', component: Page404Component },
+  { path: 'error500', component: Page500Component }
 
  
 
