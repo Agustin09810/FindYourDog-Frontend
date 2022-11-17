@@ -7,6 +7,8 @@ import { Post } from 'src/app/interfaces/Post';
 import { Image } from 'src/app/interfaces/Image';
 import { UserService } from 'src/app/services/user.service';
 import { Chat } from 'src/app/interfaces/Chat';
+import { ZonesService } from 'src/app/services/zones.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-view',
@@ -29,7 +31,11 @@ export class PostViewComponent implements OnInit {
 
  
   
-  constructor(private postService:PostsService, private imageService:ImageByIdService, private route: ActivatedRoute, private userService:UserService) { }
+  constructor(private postService:PostsService, 
+    private imageService:ImageByIdService, 
+    private route: ActivatedRoute, 
+    private userService:UserService, 
+    private zoneService:ZonesService) { }
 
 
 
@@ -108,6 +114,41 @@ export class PostViewComponent implements OnInit {
        
         
       });
+    }
+  }
+
+  deletePost(): void {
+    if(this.post){
+      let username = this.post.user;
+      let postId = this.post.id;
+      let zoneId = this.post.lostZone;
+      let photosIds = this.post.photos;
+
+      this.postService.deletePost(this.post!).subscribe( postDeleted => {
+
+
+        photosIds.forEach( async photoId => {
+          await lastValueFrom(this.imageService.deleteImage(photoId));
+        })
+
+
+
+        this.userService.getUserByUsername(username).subscribe(user => {
+        let currentUser = user;
+        let index = currentUser.postsIds.indexOf(postId);
+        currentUser.postsIds.splice(index, 1);
+
+        this.userService.updateUser(currentUser).subscribe( x => {
+
+          this.zoneService.getZone(zoneId).subscribe(zone => {
+            let currentZone = zone;
+            let index = currentZone.postsIds.indexOf(postId);
+            currentZone.postsIds.splice(index, 1);
+            this.zoneService.updateZone(currentZone.id, currentZone).subscribe();
+          });
+        });
+      });
+    });
     }
   }
 

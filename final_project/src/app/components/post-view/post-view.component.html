@@ -13,7 +13,7 @@
                 <h2>{{post.dogName}}</h2>
             </div>
             <div class="other-info">
-                <p *ngIf="post.dogNicknames"><b>Apodos: </b>{{post.dogNicknames.join()}}</p>
+                <p *ngIf="post.dogNicknames.length > 0"><b>Apodos: </b>{{post.dogNicknames.join()}}</p>
                 <p><b>Raza: </b>{{post.dogBreed}}</p>
                 <p><b>Género: </b>{{post.dogGender}}</p>
                 <p><b>Perdido el: </b>{{post.lostOn.toString()}}</p>
@@ -24,6 +24,9 @@
             </div>
             <div *ngIf="displayButton === false" class="contact-button">
                 <button class="btn btn-outline-dark" routerLink="/editpost/{{post.id}}" >Editar</button>
+            </div>
+            <div *ngIf="displayButton === false" class="contact-button mt-2">
+                <button class="btn btn-outline-danger" (click)="deletePost()" ><i class="bi bi-trash3"></i></button>
             </div>
         </div>   
     </div>

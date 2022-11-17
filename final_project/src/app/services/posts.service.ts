@@ -49,4 +49,11 @@ export class PostsService {
     catchError(this.handleError<Post>('updatePost'))
     );
   }
+
+  deletePost(post: Post): Observable<Post>{
+      return this.http.delete<Post>(`${this.postsUrl}/${post.id}`, this.httpOptions).pipe(
+      tap((newPost: Post) => console.log(`deleted post with id=${newPost.id}`)),
+      catchError(this.handleError<Post>('deletePost'))
+      );
+  } 
 }

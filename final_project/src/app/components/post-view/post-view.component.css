@@ -35,6 +35,10 @@
     z-index: 9999999;
 }
 
+.btn{
+    width: 35%;
+}
+
 .dog-name{
     display: flex;
     justify-content: space-around;
