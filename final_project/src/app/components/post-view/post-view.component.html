@@ -26,12 +26,30 @@
                 <button class="btn btn-outline-dark" routerLink="/editpost/{{post.id}}" >Editar</button>
             </div>
             <div *ngIf="displayButton === false" class="contact-button mt-2">
-                <button class="btn btn-outline-danger" (click)="deletePost()" ><i class="bi bi-trash3"></i></button>
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal" ><i class="bi bi-trash3"></i></button>
             </div>
         </div>   
     </div>
     <div class="navbarStylesInf">
         <app-navbar-inf></app-navbar-inf>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="deletePostModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">¿Eliminar Publicación?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Desea eliminar la publicación?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal" (click)="deletePost()">Si</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
     </div>
 </div>
 
