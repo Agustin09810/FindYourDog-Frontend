@@ -15,6 +15,7 @@ export class MyPostsComponent implements OnInit {
   posts:Post[] = [];
   post?:Post;
   postsViews:number = 0;
+  display?: boolean;
 
   constructor(private route: ActivatedRoute, private userService:UserService, private postsService:PostsService) { }
 
@@ -45,6 +46,7 @@ export class MyPostsComponent implements OnInit {
           count++;
         });
       });
+      if(user!.postsIds.length > 0){this.display = true;}else{this.display = false;}
     })
   }
 
