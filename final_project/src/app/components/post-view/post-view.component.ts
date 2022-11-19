@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Chat } from 'src/app/interfaces/Chat';
 import { ZonesService } from 'src/app/services/zones.service';
 import { lastValueFrom } from 'rxjs';
+import { User } from 'src/app/interfaces/User';
 
 @Component({
   selector: 'app-post-view',
@@ -19,6 +20,7 @@ export class PostViewComponent implements OnInit {
 
   post?:Post;
   postImages:Image[] = [];
+  currentUser?:User;
 
   @Input() 
   get inputPost():Post {return this.post!;}
@@ -45,9 +47,11 @@ export class PostViewComponent implements OnInit {
     if (this.inputPost) {
       this.post = this.inputPost;
       this.displayButton = false;
+      this.getCurrentUser();
     }else{//default
       this.getPostById('post-view-Id');
       this.displayButton = true;
+      this.getCurrentUser();
     }
   }
 
@@ -86,35 +90,38 @@ export class PostViewComponent implements OnInit {
     })
   }
 
+
+  getCurrentUser(){
+    return this.userService.getUser().subscribe(user => this.currentUser = user);
+  }
   //crer chat con el usuario que creo el post
   //agregar el chatId en ambos usuarios
 
   //get from route username
   contactUser(): void {
-      this.userService.getUser().subscribe(user => {
-        let chat:Chat = {id:'xd',  messagesIds:[]};
+
+
+    if(this.currentUser){
+      let chat:Chat = {id:'xd',  messagesIds:[]};
 
         this.userService.createChat(chat).subscribe(chatRecived => {
 
           this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
             console.log(chatRecived.id + ' elchat');
             user2.chatsIds.push(chatRecived.id);
-            user2.contactsUsernames.push(user!.username);
+            user2.contactsUsernames.push(this.currentUser!.username);
 
-            user!.chatsIds.push(chatRecived.id);
-            user!.contactsUsernames.push(user2.username);
+            this.currentUser!.chatsIds.push(chatRecived.id);
+            this.currentUser!.contactsUsernames.push(user2.username);
 
-            console.log(user)
-            console.log(user2)
 
-            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user!).subscribe( x => this.router.navigate(['/chats'])));
+            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(this.currentUser!).subscribe( y => this.router.navigate(['/chats/' + user2.username + '/' + chatRecived.id])));
           })
         });
-       
-        
-      });
+    }   
+  };
     
-  }
+  
 
   deletePost(): void {
     if(this.post){

@@ -31,8 +31,9 @@ export class AuthInterceptor{
           if (err.status === 401) {
             this.authService.logout();
             this.router.navigate(['/login']);
+          }else if(err.status === 500){
+            this.router.navigate(['/error500']);
           }
-          //ADD error handling for errors 404, 500
           throw err;
         }));
     }
@@ -41,8 +42,9 @@ export class AuthInterceptor{
         catchError((err) => {
           if (err.status === 401) {
             this.router.navigate(['/login']);
+          }else if(err.status === 500){
+            this.router.navigate(['/error500']);
           }
-          //ADD error handling for errors 404, 500
           throw err;
         }));;
     }

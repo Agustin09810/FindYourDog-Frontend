@@ -24,14 +24,12 @@ export class SettingsComponent implements OnInit {
     this.getDepartments();
   }
 
+  
   getCurrentUser(){
-    const username = this.route.snapshot.paramMap.get('username');
-    if(username){
-      this.userService.getUserByUsername(username).subscribe(user => {
-        this.currentUser = user;
-        this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(url => this.profileImgUrl = url?.url);
-      });
-    }
+    this.userService.getUser().subscribe(x => {
+      this.currentUser = x;
+      this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(img => this.profileImgUrl = img.url);
+    });
   }
 
   getDepartments(){

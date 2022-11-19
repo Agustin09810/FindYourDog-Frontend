@@ -19,7 +19,7 @@
                 <p><b>Perdido el: </b>{{post.lostOn.toString()}}</p>
                 <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
             </div>
-            <div *ngIf="displayButton === true" class="contact-button">
+            <div *ngIf="displayButton === true && currentUser?.username != post.user" class="contact-button">
                 <button class="btn btn-outline-dark" (click)="contactUser()">Contactar</button>
             </div>
             <div *ngIf="displayButton === false" class="contact-button">
