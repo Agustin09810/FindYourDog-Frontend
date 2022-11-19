@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
+import {lastValueFrom} from 'rxjs';
 
 import { ImageUploadComponent } from './image-upload/image-upload.component'
 import { DogNameComponent } from './dog-name/dog-name.component'
@@ -12,6 +13,10 @@ import {ZonesService} from '../../services/zones.service';
 
 import {Post} from '../../interfaces/Post';
 import {PostsService} from '../../services/posts.service';
+
+import {User} from '../../interfaces/User';
+import {UserService} from '../../services/user.service';
+
 
 
 @Component({
@@ -41,6 +46,7 @@ export class AddEditPostComponent implements OnInit {
   photos:string[] = [];
 
   post?: Post;
+  user? : User;
 
   zone?: Zone;
 
@@ -50,7 +56,8 @@ export class AddEditPostComponent implements OnInit {
     private router: Router,
     private postService: PostsService,
     private zoneService: ZonesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) { }
   
   ngOnInit(): void {
@@ -182,12 +189,16 @@ export class AddEditPostComponent implements OnInit {
     });
   }
 
-  publish(photosA: string[]){
+  async publish(photosA: string[]){
     this.dogDescription = photosA.shift()!;
     this.photos = photosA;
+    this.user = await lastValueFrom(this.userService.getUser());
     let post = this.createPost();
 
-    this.postService.addPost(post).subscribe();
+    this.postService.addPost(post).subscribe(post => {
+      this.user!.postsIds.push(post.id)
+      this.userService.updateUser(this.user!).subscribe()});
+   
     this.zoneService.getZone(this.lostZone!).subscribe(zone => {
       zone.postsIds.push(post.id);
       this.zone = zone;
@@ -197,7 +208,8 @@ export class AddEditPostComponent implements OnInit {
   }
 
     createPost(): Post{
-      let post: Post = { id: this.randomID(15), user:'admin', dogName: this.dogName!, dogNicknames: this.otherNames, dogGender: this.dogGender!,
+      
+      let post: Post = { id: this.randomID(15), user:this.user!.username, dogName: this.dogName!, dogNicknames: this.otherNames, dogGender: this.dogGender!,
                         dogBreed: this.dogBreed!, lostOn: new Date(this.lastSeenDate + ' ' + this.lastSeenHour), lostZone: this.lostZone!, lostDescription: this.ubiDetails, 
                         dogDescription: this.dogDescription, photos: this.photos};
       return post;
