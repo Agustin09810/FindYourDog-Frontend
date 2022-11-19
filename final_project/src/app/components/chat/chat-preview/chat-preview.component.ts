@@ -22,21 +22,17 @@ export class ChatPreviewComponent implements OnInit {
 
 
   getUser() {
-    const username = this.route.snapshot.paramMap.get('username');
-    if(username){
-      this.userService.getUserByUsername(username).subscribe(x => {
-        this.user = x;
-
-        this.userService.getContactsUsernames(this.user!.username).subscribe(x => {
-          x!.forEach(element => {
-            this.userService.getUserByUsername(element).subscribe(y => {
-              this.contacts?.push(y!);
-              console.log(this.contacts + 'contactos')
-            })
-          });
+    this.userService.getUser().subscribe(x => {
+      this.user = x;
+      this.userService.getContactsUsernames(this.user!.username).subscribe(x => {
+        x!.forEach(element => {
+          this.userService.getUserByUsername(element).subscribe(y => {
+            this.contacts?.push(y!);
+            console.log(this.contacts + 'contactos')
+          })
         });
       });
-    }
+    });
   }
 
     

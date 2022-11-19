@@ -17,14 +17,11 @@ export class HomeComponent implements OnInit {
   }
 
   getUser(){
-    const username = this.route.snapshot.paramMap.get('username');
-    if(username){
-      this.userService.getUserByUsername(username).subscribe(user => {
-        this.currentUsername = user.username;
+      this.userService.getUser().subscribe(user => {
+        this.currentUsername = user?.username;
         this.departmentId = user?.departmentId;
         console.log(this.departmentId);
       });
-    }
   }
 
 }

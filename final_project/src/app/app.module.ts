@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { ZoneComponent } from './components/zone/zone.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { GridComponent } from './components/grid/grid.component';
 import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
@@ -37,6 +39,9 @@ import { DogDateZoneComponent } from './components/add-edit-post/dog-date-zone/d
 import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-photos.component';
 import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
+
+import { AuthInterceptor } from './interceptors/auth-interceptor';
+
 
 
 @NgModule({
@@ -79,7 +84,9 @@ import { Page500Component } from './components/page500/page500.component';
     NgbModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

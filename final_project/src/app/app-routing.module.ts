@@ -14,15 +14,15 @@ import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
 
 const routes: Routes = [
-  { path: ':username/home', component: HomeComponent },
-  { path: ':username/zone/:zoneId', component: DogbyzoneComponent },
-  { path: 'chats/:username', component: ChatPreviewComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
+  { path: 'zone/:zoneId', component: DogbyzoneComponent },
+  { path: 'chats', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
-  { path: ':username/zone/:zoneId/:post-view-Id', component: PostViewComponent },
-  { path: 'random/:username', component: MyPostsComponent },
-  { path: 'chats/:username/:targetUsername/:chatId', component: ChatComponent },
-  { path: 'settings/:username', component: SettingsComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
+  { path: 'myposts', component: MyPostsComponent },
+  { path: 'chats/:targetUsername/:chatId', component: ChatComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'addpost', component: AddEditPostComponent },
   { path: 'editpost/:postId', component: AddEditPostComponent },
   { path: 'error404', component: Page404Component },

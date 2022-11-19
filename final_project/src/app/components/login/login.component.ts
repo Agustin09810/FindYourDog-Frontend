@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   getData() {
     let pass = this.childInput.getPassword();
     let user = this.childInput.getUsername();
-    console.log('1');
     console.log(this.childButton.loginCheck(user, pass) + ' chequeoLogin');
   }
 

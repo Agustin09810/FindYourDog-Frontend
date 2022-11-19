@@ -25,13 +25,17 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  login(user: User): Observable<User|undefined> {
-    return this.http.post<User>(this.usersUrl, user, this.httpOptions);
+  login(username: string, password: string): Observable<any|undefined> {
+    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions);
   }
 
   getUserByUsername(username:string) {
     return this.http.get<User>(`${this.usersUrl}/${username}`);
  }
+
+  getUser(): Observable<User|undefined> {
+    return this.http.get<User>(this.usersUrl);
+  }
 
 
   updateChat(chat:Chat) {

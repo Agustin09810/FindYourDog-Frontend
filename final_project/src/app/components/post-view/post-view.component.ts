@@ -90,9 +90,7 @@ export class PostViewComponent implements OnInit {
 
   //get from route username
   contactUser(): void {
-    const username = this.getRotueId('username');
-    if(username){
-      this.userService.getUserByUsername(username).subscribe(user => {
+      this.userService.getUser().subscribe(user => {
         let chat:Chat = {id:'xd',  messagesIds:[]};
 
         this.userService.createChat(chat).subscribe(chatRecived => {
@@ -100,21 +98,21 @@ export class PostViewComponent implements OnInit {
           this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
             console.log(chatRecived.id + ' elchat');
             user2.chatsIds.push(chatRecived.id);
-            user2.contactsUsernames.push(user.username);
+            user2.contactsUsernames.push(user!.username);
 
-            user.chatsIds.push(chatRecived.id);
-            user.contactsUsernames.push(user2.username);
+            user!.chatsIds.push(chatRecived.id);
+            user!.contactsUsernames.push(user2.username);
 
             console.log(user)
             console.log(user2)
 
-            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user).subscribe());
+            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user!).subscribe());
           })
         });
        
         
       });
-    }
+    
   }
 
   deletePost(): void {

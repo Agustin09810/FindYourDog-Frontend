@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
 import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-button',
@@ -10,27 +11,17 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginButtonComponent implements OnInit {
 
   user?:User;
-  userChanged: boolean = false;
 
-  constructor(private userService:UserService) { }
+
+  constructor(private userService:UserService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
   loginCheck(username:string, password:string) {
-    let user = {
-      id: '', contactsUsernames: [], chatsIds: [], username: username, password: password, profileImg: '', postsIds: [], messages: [], departmentId: ''
-    }
-    this.userService.login(user).subscribe(x => {
-      this.user = x;
-      console.log(this.user + 'user');
-      this.changeUser();
-      console.log(this.userChanged + 'changeuser');
-  });
+    this.authService.login(username, password).subscribe();
   }
 
-  changeUser(){
-    this.userChanged = true;
-  }
 
 }
