@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ImageByIdService } from 'src/app/services/image-by-id.service';
 import { PostsService } from 'src/app/services/posts.service';
 
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute, Route, Router } from '@angular/router'; 
 import { Post } from 'src/app/interfaces/Post';
 import { Image } from 'src/app/interfaces/Image';
 import { UserService } from 'src/app/services/user.service';
@@ -35,7 +35,8 @@ export class PostViewComponent implements OnInit {
     private imageService:ImageByIdService, 
     private route: ActivatedRoute, 
     private userService:UserService, 
-    private zoneService:ZonesService) { }
+    private zoneService:ZonesService,
+    private router:Router) { }
 
 
 
@@ -106,7 +107,7 @@ export class PostViewComponent implements OnInit {
             console.log(user)
             console.log(user2)
 
-            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user!).subscribe());
+            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(user!).subscribe( x => this.router.navigate(['/chats'])));
           })
         });
        
