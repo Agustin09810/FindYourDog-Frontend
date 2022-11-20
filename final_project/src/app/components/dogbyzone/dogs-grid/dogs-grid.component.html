@@ -1,4 +1,8 @@
-<div class="w-100 pt-4 px-2 container">
+<div class="loading" *ngIf="!posts">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="posts" class="w-100 pt-4 px-2 container">
     <div class="row gx-2 gy-2 w-100 gridContainer ">
         <app-post
         *ngFor="let postX of posts" 

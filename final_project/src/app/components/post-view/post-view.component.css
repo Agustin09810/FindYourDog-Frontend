@@ -25,10 +25,8 @@
     border-top-color: rgb(228, 228, 228);
     border-top-width: 2px;
     border-top-style: solid;
-
     position: relative;
     height: 60%;
-
     overflow-y: auto;
 }
 
@@ -60,8 +58,6 @@
     position: relative;
     height: 100vh;
     width: 100vw;
-
-
     display: flex;
     justify-content: space-around;
 }
@@ -71,21 +67,14 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
     background-color: white;
-
-
-
     z-index: 999;
-
     position: fixed;
     width: 100%;
     max-width: 1200px;
 }
 
 .navbarStylesInf {
-
-
     z-index: 999;
-
     position: fixed;
     width: 100%;
 }
@@ -122,7 +111,6 @@
         width: 50%;
         height: 100%;
         font-size: x-large;
-
         border-top-color: rgb(228, 228, 228);
         border-top-width: 2px;
         border-top-style: solid;

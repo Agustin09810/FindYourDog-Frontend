@@ -13,7 +13,7 @@ export class ChatPreviewComponent implements OnInit {
 
   
   user?:User;
-  contacts:User[] = [];
+  contacts?:User[]
   constructor(private userService:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -27,7 +27,10 @@ export class ChatPreviewComponent implements OnInit {
       this.userService.getContactsUsernames(this.user!.username).subscribe(x => {
         x!.forEach(element => {
           this.userService.getUserByUsername(element).subscribe(y => {
-            this.contacts?.push(y!);
+            if(!this.contacts){
+              this.contacts = [];
+            }
+            this.contacts.push(y!);
             console.log(this.contacts + 'contactos')
           })
         });

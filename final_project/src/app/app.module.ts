@@ -39,6 +39,7 @@ import { DogDateZoneComponent } from './components/add-edit-post/dog-date-zone/d
 import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-photos.component';
 import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 
@@ -76,7 +77,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     DogDateZoneComponent,
     DogPhotosComponent,
     Page404Component,
-    Page500Component
+    Page500Component,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

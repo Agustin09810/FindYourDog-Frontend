@@ -22,6 +22,7 @@
     border-bottom-width: 1px;
     border-bottom-style: solid;
     margin-bottom: 10px;
+    background-color: white;
     position: fixed;
     width: 100%;
     max-width: 1200px;

@@ -16,7 +16,12 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   get editBool(): boolean {return this.editBoolean}
   set editBool(value: boolean) {
     this.editBoolean = value;
-    this.disableButton = "active";
+    if(value){
+      this.disableButton = "active";
+    }
+    else{
+      this.disableButton = "disabled";
+    }
   }
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef<HTMLInputElement>;
@@ -37,6 +42,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if(this.dogName){
+      console.log(this.dogName);
       this.disableButton = 'active';
     }
     if(this.otherNames[0] != undefined){

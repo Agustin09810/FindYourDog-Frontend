@@ -18,7 +18,7 @@ export class GridComponent implements OnInit {
   @Input() departmentId?:string;
   @Input() username?:string;
   
-  zones:Zone[] = [];
+  zones?:Zone[];
   constructor(private zoneService:ZonesService, private departmentService:DepartmentService) { }
   ngOnInit(): void {
     this.loadZones();
@@ -29,7 +29,11 @@ export class GridComponent implements OnInit {
     if(this.departmentId){
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
         department.zonesIds.forEach(zoneId => {
-          this.zoneService.getZone(zoneId).subscribe(zone => this.zones.push(zone));
+          this.zoneService.getZone(zoneId).subscribe(zone => {
+            if(!this.zones){
+              this.zones = [];
+            }
+            this.zones.push(zone)});
         });
       })
     }

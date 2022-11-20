@@ -3,7 +3,10 @@
         <div class="navbarStyles">
             <app-navbar-sup [text]="'Chats'"></app-navbar-sup>
         </div>
-
+        <div class="loading" *ngIf="!contacts" >
+            <app-spinner></app-spinner>
+        </div>
+        
         <div *ngIf="user" class="containerUserPreview">
             <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">       
             </app-user-preview>

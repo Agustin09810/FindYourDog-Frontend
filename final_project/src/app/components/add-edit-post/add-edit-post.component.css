@@ -3,6 +3,8 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    background-color: white;
+    position: fixed;
 }
 
 .container{

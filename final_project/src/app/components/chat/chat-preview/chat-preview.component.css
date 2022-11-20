@@ -16,7 +16,10 @@
     width: 100%;
     max-width: 1200px;
     z-index: 9999;
+}
 
+.loading{
+    margin-top:15%;
 }
 
 .containerUserPreview{

@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DogsGridComponent implements OnInit {
 
-  posts: any[] = [];
+  posts?: Post[];
   zone: Zone | undefined;
   constructor(
     private postsService: PostsService,
@@ -43,7 +43,11 @@ export class DogsGridComponent implements OnInit {
       {
         if(this.zone.postsIds.length > 0){
           this.zone.postsIds.forEach(postId => {
-            this.postsService.getPostsById(postId).subscribe(post => this.posts.push(post));
+            this.postsService.getPostsById(postId).subscribe(post => {
+              if(!this.posts){
+                this.posts = [];
+              }
+             this.posts.push(post)});
           }); 
         }       
       }
