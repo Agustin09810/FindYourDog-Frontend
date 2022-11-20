@@ -11,11 +11,12 @@ export class MessageComponent implements OnInit, AfterViewInit {
   @Input() message?:Message;//si hay problemas con el undefined se puede crear un msg que diga cargando mensaje etc.
   @Input() localUsername?: string;
   @ViewChild('msg') msgDiv?: ElementRef;
+  messageDate?: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.messageDate = this.calculateTime(this.message!.date);
   }
 
   //Despues de que se inicia completamente la vista del componente.
@@ -28,5 +29,30 @@ export class MessageComponent implements OnInit, AfterViewInit {
       this.msgDiv?.nativeElement.classList.add('messageRecived');
     }
   }
+
+  calculateTime(date: Date): string{
+    if(date){
+      let diff = new Date().getTime() - new Date(date).getTime();
+      console.log(diff)
+
+      
+
+      
+      
+      if(diff > 1000*60*60*24){
+        return `Hace ${Math.trunc(diff/1000/60/60/24)} días`;
+      }else if(diff > 1000*60*60){
+        return `Hace ${Math.trunc(diff/1000/60/60)} horas`;
+      }else if(diff > 1000*60){
+        return `Hace ${Math.trunc(diff/1000/60)} minutos`;
+      }else{
+        return `Reciente`;
+      }
+      
+    }
+    return '';
+    
+  }
+  
 
 }

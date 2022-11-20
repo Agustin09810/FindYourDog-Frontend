@@ -39,16 +39,28 @@ export class ChatComponent implements OnInit {
       this.chatId = chatId;
 
       this.userService.getUser().subscribe(originUser => {
+        this.messages = [];
         this.originUsername = originUser?.username;
         this.userService.getUserByUsername(targetUsername).subscribe(targetUser => {
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
             this.chat = chat;
-            chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => this.messages?.push(msg))); 
-            this.messagesBool = true;
+            chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => {
+              this.messages?.push(msg); 
+              console.log(chat.messagesIds.length + ' ' + this.messages?.length);
+              
+            if(this.messages?.length == chat?.messagesIds.length){
+              this.messages?.sort( (objA, objB) => new Date(objA.date).getTime() - new Date(objB.date).getTime());
+              this.messagesBool = true;
+
+              }
+            })); 
+            
           });
         })
       })
+      
+      console.log(this.messages);
     }
   }
 
@@ -76,7 +88,7 @@ export class ChatComponent implements OnInit {
     let idMsg:number = generateRandomInt(100000000000);
 
     if(this.originUsername && this.targetUsername && this.chatId && this.messagesBool == true){
-      let msg: Message = { id: `${idMsg}`, originUsername: this.originUsername, targetUsername: this.targetUsername, text: message};
+      let msg: Message = { id: `${idMsg}`, originUsername: this.originUsername, targetUsername: this.targetUsername, text: message, date: new Date() };
       let user:User = this.user!;
 
       let messagesIdsCopy:string[] = [...this.chat?.messagesIds!];
