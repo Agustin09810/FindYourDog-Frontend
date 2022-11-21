@@ -9,7 +9,7 @@ import {  } from 'src/app/interfaces/Post';
 export class DogNameComponent implements OnInit, AfterViewInit {
 
   @Input() dogName?: string;
-  @Input() otherNames: string[] = [];
+  @Input() otherNames?: string[];
   @Output() nextStep = new EventEmitter<string[]>();
   editBoolean: boolean = false;
   @Input() 
@@ -45,9 +45,11 @@ export class DogNameComponent implements OnInit, AfterViewInit {
       console.log(this.dogName);
       this.disableButton = 'active';
     }
-    if(this.otherNames[0] != undefined){
-      this.checked = true;
-      this.checkYes.nativeElement.checked = true;
+    if(this.otherNames){
+      if(this.otherNames[0] != undefined){
+        this.checked = true;
+        this.checkYes.nativeElement.checked = true;
+      }
     }
     this.cd.detectChanges();
   }

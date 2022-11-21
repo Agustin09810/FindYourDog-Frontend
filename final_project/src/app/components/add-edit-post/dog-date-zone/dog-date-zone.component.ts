@@ -14,7 +14,7 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   @Input() lastSeenDate?: string;
   @Input() lastSeenHour?: string;
   @Input() lostZone?: string;
-  @Input() ubiDetails: string = "";
+  @Input() ubiDetails?: string
 
   @Input() counterOfChars: number = 0;
 

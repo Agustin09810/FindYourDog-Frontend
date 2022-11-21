@@ -2,7 +2,7 @@
     <app-image-upload class="imageContainer" #imageUploadComponent (sendImagesToCheck)="checkIfButtonShouldBeDisabled()" [dogName]="dogName" [dogPhotosIds]="dogPhotos!" [post]="post"></app-image-upload>
     <div class="container form mt-3">
         <label for="dogDetails">Detalles adicionales:</label>
-        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails"></textarea>
+        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails">{{dogDescription}}</textarea>
         <small class="form-text text-muted">{{counterOfChars}}/120</small>
     </div>
 </div>

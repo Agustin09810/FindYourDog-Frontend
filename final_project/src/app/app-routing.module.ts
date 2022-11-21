@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'addpost', component: AddEditPostComponent },
   { path: 'editpost/:postId', component: AddEditPostComponent },
   { path: 'error404', component: Page404Component },
-  { path: 'error500', component: Page500Component }
+  { path: 'error500', component: Page500Component },
+  { path: '**', component: Page404Component }
 
  
 

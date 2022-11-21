@@ -24,8 +24,8 @@ export class ZonesService {
     return this.http.get<Zone>(url);
   }
 
-  updateZone(id: string, zone: Zone): Observable<Zone>{
-    const url = `${this.zonesUrl}/${id}`;
+  updateZone(zone: Zone): Observable<Zone>{
+    const url = `${this.zonesUrl}/${zone.id}`;
     return this.http.put<Zone>(url, zone, this.httpOptions);
   }
 

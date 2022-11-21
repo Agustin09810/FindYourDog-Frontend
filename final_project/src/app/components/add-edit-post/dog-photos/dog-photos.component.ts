@@ -20,6 +20,7 @@ export class DogPhotosComponent implements OnInit {
 
   @Input() dogName?: string;
   @Input() dogPhotos?: string[];
+  @Input() dogDescription?: string;
   
   @Output() nextStep = new EventEmitter<string[]>();
   @Output() editPost = new EventEmitter<string[]>();

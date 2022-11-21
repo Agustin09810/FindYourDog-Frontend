@@ -49,6 +49,7 @@ export class AddEditPostComponent implements OnInit {
   user? : User;
 
   zone?: Zone;
+  zoneEditAux?: string;
 
   editBool: boolean = false;
 
@@ -148,6 +149,9 @@ export class AddEditPostComponent implements OnInit {
     if(this.dogName != this.post!.dogName){
       this.post!.dogName = this.dogName!;
     }
+    if(this.otherNames != this.post!.dogNicknames){
+      this.post!.dogNicknames = this.otherNames;
+    }
     if(this.dogGender != this.post!.dogGender){
       this.post!.dogGender = this.dogGender!;
     }
@@ -161,6 +165,7 @@ export class AddEditPostComponent implements OnInit {
       this.post!.lostOn = new Date(this.lastSeenDate + "T" + this.lastSeenHour + ":00");
     }
     if(this.lostZone != this.post!.lostZone){
+      this.zoneEditAux = this.post!.lostZone;
       this.post!.lostZone = this.lostZone!;
     }
     if(this.ubiDetails != this.post!.lostDescription){
@@ -184,9 +189,25 @@ export class AddEditPostComponent implements OnInit {
       }
     }
     this.post!.photos = imagesAux;
-    this.postService.updatePost(this.post!).subscribe(post => {
-      this.router.navigate(['/admin/home']);
+    this.postService.updatePost(this.post!).subscribe(() => {
+      if(this.zoneEditAux != undefined){
+        this.zoneService.getZone(this.zoneEditAux).subscribe(zone => {
+          zone.postsIds.splice(zone.postsIds.indexOf(this.post!.id), 1);
+
+          this.zoneService.updateZone(zone).subscribe(() => {
+            this.zoneService.getZone(this.lostZone!).subscribe(zone => {
+              zone.postsIds.push(this.post!.id);
+              this.zoneService.updateZone(zone).subscribe(() => {
+                this.router.navigate(['/zone/' + this.lostZone!]);
+              });
+            });
+          });
+        });
+      } else{
+        this.router.navigate(['/zone/' + this.lostZone!]);
+      }
     });
+    
   }
 
   async publish(photosA: string[]){
@@ -202,7 +223,7 @@ export class AddEditPostComponent implements OnInit {
     this.zoneService.getZone(this.lostZone!).subscribe(zone => {
       zone.postsIds.push(post.id);
       this.zone = zone;
-      this.zoneService.updateZone(this.zone!.id, this.zone!).subscribe( () => {
+      this.zoneService.updateZone(this.zone!).subscribe( () => {
         this.router.navigate(['/zone/' + zone.id])});
     });
   }
