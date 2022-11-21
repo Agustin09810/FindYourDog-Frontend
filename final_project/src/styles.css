@@ -17,3 +17,6 @@
     font-family: "SF Pro LightItalic";
     src: local("SF Pro LightItalic"), url(./assets/fonts/SFPRODISPLAYLIGHTITALIC.OTF) format("truetype");
     }
+html{
+    scroll-behavior: smooth;
+}

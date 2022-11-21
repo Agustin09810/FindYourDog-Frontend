@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Inject} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { ZonesService } from '../../services/zones.service';
 import { Zone } from '../../interfaces/Zone'; 
 
@@ -12,8 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 export class DogbyzoneComponent implements OnInit {
 
   @Input() zone!: Zone | undefined;
+  showButton: boolean = false;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private zoneService: ZonesService,
     private route: ActivatedRoute
   ) { }
@@ -29,8 +32,17 @@ export class DogbyzoneComponent implements OnInit {
         this.zoneService.getZone(id).subscribe(zone => {
           this.zone = zone;
         });
-        
       }
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    const yOffSet = window.pageYOffset;
+    const scrollTop = this.document.documentElement.scrollTop;
+    this.showButton = (yOffSet || scrollTop) > 100;
+  }
+  onScrollTop(): void{
+    this.document.documentElement.scrollTop = 0;
   }
 
 
