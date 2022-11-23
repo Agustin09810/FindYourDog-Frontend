@@ -43,6 +43,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.component';
 
 
 
@@ -80,7 +81,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     Page404Component,
     Page500Component,
     SpinnerComponent,
-    SignUpComponent
+    SignUpComponent,
+    ConfirmedComponent
   ],
   imports: [
     BrowserModule,

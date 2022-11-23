@@ -13,7 +13,6 @@ export class LoginButtonComponent implements OnInit {
 
   user?:User;
 
-
   constructor(
     private authService: AuthService,
     private router:Router) { }
@@ -22,7 +21,10 @@ export class LoginButtonComponent implements OnInit {
   }
 
   loginCheck(username:string, password:string) {
-    this.authService.login(username, password).subscribe( x => this.router.navigate(['/home']));
+    this.authService.login(username, password).subscribe( x => {
+      console.log(x);
+      this.router.navigate(['/home']);
+    });
   }
 
 

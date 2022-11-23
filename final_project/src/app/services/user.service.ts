@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
 
-import { map, filter, ignoreElements, switchMap } from 'rxjs/operators';
+import { map, filter, ignoreElements, switchMap, catchError } from 'rxjs/operators';
 import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
 import { Message } from '../interfaces/Message';
 import { Chat } from '../interfaces/Chat';
@@ -26,7 +26,11 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<any|undefined> {
-    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions);
+    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions).pipe(
+      catchError(err => {
+        return err.error.message;
+      })
+    );
   }
 
   getUserByUsername(username:string) {
@@ -60,7 +64,11 @@ export class UserService {
   }
 
   createUser(user:User){
-    return this.http.post<User>(this.usersUrl, user, this.httpOptions);
+    return this.http.post<User>(`http://localhost:3000/api/v1/signup/${user.username}` , user, this.httpOptions);
+  }
+
+  confirmUser(code: string){
+    return this.http.get<User>(`http://localhost:3000/api/v1/confirm/${code}`);
   }
 
 }

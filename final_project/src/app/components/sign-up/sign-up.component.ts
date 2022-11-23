@@ -17,10 +17,15 @@ import {ChangeDetectorRef} from '@angular/core';
 export class SignUpComponent implements OnInit {
 
   departments?: Department[];
+  validUsername: string = '';
+  validEmail: string = '';
+  validPass:string = '';
+  validDepartment: string = '';
   @Input() errorUsername?: string;
   errorEmail?: string;
   errorPass?: string;
   errorDepartment: boolean = false;
+  userCreated: boolean = false;
 
   constructor(
     private departmentService: DepartmentService,
@@ -41,36 +46,46 @@ export class SignUpComponent implements OnInit {
   register(user: string, mail: string, password: string, department: string): void{
     if(user == undefined || user == ""){
       this.errorUsername = 'empty';
+      this.validUsername = 'invalid';
     } else if(user.length < 4){
       this.errorUsername = 'short';
-      console.log(user);
+      this.validUsername = 'invalid';
     } else if(!/^[A-Za-z0-9]*$/.test(user)){
     this.errorUsername = 'invalid';
+    this.validUsername = 'invalid';
     }
     else{
       this.errorUsername = undefined;
+      this.validUsername = 'valid';
     }
 
     if(mail == undefined || mail == ""){
       this.errorEmail = 'empty';
+      this.validEmail = 'invalid';
     } else{
       this.errorEmail = undefined;
+      this.validEmail = 'valid';
     }
 
     if(password == undefined || password == ""){
       this.errorPass = 'empty';
+      this.validPass = 'invalid';
     } else if(password.length < 8){
       this.errorPass = 'short';
+      this.validPass = 'invalid';
     }
     else{
       this.errorPass = undefined;
+      this.validPass = 'valid';
     }
 
     if(department == undefined || department == "0" || department == ""){
       this.errorDepartment = true;
+      this.validDepartment = 'invalid';
     }
     else{
       this.errorDepartment = false;
+      this.validDepartment = 'valid';
     }
 
     if(this.errorUsername != undefined || this.errorEmail != undefined || this.errorPass != undefined || this.errorDepartment == true){
@@ -80,8 +95,11 @@ export class SignUpComponent implements OnInit {
     else{
       console.log('todo bien');
       const userToCreate: User = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
-                        postsIds: [], chatsIds: [], contactsUsernames: [], messages: []};
-      this.userService.createUser(userToCreate).subscribe(x => console.log(x));
+                        postsIds: [], chatsIds: [], contactsUsernames: [], messages: [], status: 'Pending'};
+      this.userService.createUser(userToCreate).subscribe(x => {
+        console.log(x)
+        this.userCreated = true;
+      });
     }
     //add username or email taken error
 

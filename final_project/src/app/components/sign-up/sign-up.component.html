@@ -4,7 +4,7 @@
             <div class="form-group">
                 <label for="usernameInput">Usuario</label>
                 <div class="inputContainer">
-                    <input type="text" class="form-control inputStyle" #usernameInput placeholder="Ingrese un nombre de usuario">
+                    <input type="text" class="form-control inputStyle is-{{validUsername}}" #usernameInput placeholder="Ingrese un nombre de usuario">
                 </div>
                 <small *ngIf="errorUsername==='empty'">Este campo es obligatorio</small>
                 <small *ngIf="errorUsername==='invalid'">Caracteres inválidos</small>
@@ -14,7 +14,7 @@
             <div class="form-group emailForm">
                 <label for="emailInput">Correo electrónico</label>
                 <div class="inputContainer">
-                    <input type="email" class="form-control inputStyle" #emailInput placeholder="Ingrese un correo electrónico">
+                    <input type="email" class="form-control inputStyle is-{{validEmail}}" #emailInput placeholder="Ingrese un correo electrónico">
                 </div>
                 <small *ngIf="errorEmail==='empty'">Este campo es obligatorio</small>
                 <small *ngIf="errorEmail==='taken'">¡Ese correo electrónico ya existe!</small>
@@ -22,7 +22,7 @@
             <div class="form-group passForm">
                 <label for="passwordInput">Contraseña</label>
                 <div class="inputContainer">
-                    <input type="text" class="form-control inputStyle" #passwordInput placeholder="Ingrese una contraseña">
+                    <input type="text" class="form-control inputStyle  is-{{validPass}}" #passwordInput placeholder="Ingrese una contraseña">
                 </div>
                 <small *ngIf="errorPass==='empty'">Este campo es obligatorio</small>
                 <small *ngIf="errorPass==='short'">Contraseña muy corta (mín. 8 car.)</small>
@@ -30,7 +30,7 @@
             <div class="form-group departmentForm">
                 <label for="departmentSelector">Seleccione su departmento</label>
                 <div class="selectorContainer">
-                    <select class="form-select" #departmentSelector id="departmentSelector">
+                    <select class="form-select is-{{validDepartment}}" #departmentSelector id="departmentSelector">
                         <option value="0">Seleccione una opción</option>
                         <option *ngFor="let department of departments; index as i" value="{{department.id}}">{{department.name}}</option>
                     </select>
@@ -38,8 +38,11 @@
                 <small *ngIf="errorDepartment===true">Este campo es obligatorio</small>
             </div>    
         </form>
+        <div class="alert alert-success" *ngIf="userCreated" role="alert">
+            Usuario creado exitosamente. Por favor, verifica tu correo electrónico para confirmar tu cuenta.
+          </div>
         <div class="signUpButton">
-            <button class="btn btn-outline-dark" routerLink="/signup" (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">Registrarse</button>
+            <button class="btn btn-outline-dark" (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">Registrarse</button>
         </div>
     </div>
 </div>

@@ -10,6 +10,7 @@ export interface User{
     profileImg: string,
     postsIds:string[];
     messages: Message[],
-    departmentId: string
+    departmentId: string,
+    status: string,
     
 }

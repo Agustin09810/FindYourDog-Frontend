@@ -8,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class LoginInputComponent implements OnInit {
 
+
   @ViewChild('usernameInput') user!: ElementRef;
   @ViewChild('passwordInput') pass!: ElementRef;
   constructor() { }
