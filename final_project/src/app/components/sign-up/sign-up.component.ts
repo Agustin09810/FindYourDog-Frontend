@@ -31,11 +31,15 @@ export class SignUpComponent implements OnInit {
     private departmentService: DepartmentService,
     private cd: ChangeDetectorRef,
     private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
   ngAfterViewInit(){
+    if(localStorage.getItem("id_token") != null){
+      this.router.navigate(['/home']);
+    }
     this.getDepartments();
   }
 
@@ -97,8 +101,10 @@ export class SignUpComponent implements OnInit {
       const userToCreate: User = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
                         postsIds: [], chatsIds: [], contactsUsernames: [], messages: [], status: 'Pending'};
       this.userService.createUser(userToCreate).subscribe(x => {
+
         console.log(x)
-        this.userCreated = true;
+
+        /* this.userCreated = true; */
       });
     }
     //add username or email taken error

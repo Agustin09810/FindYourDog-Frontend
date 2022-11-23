@@ -22,7 +22,7 @@
     }
 
     .navbarStyles{
-        z-index: 999999;
+        z-index: 999;
         position: fixed;
         width: 100%;
         max-width: 1200px;

@@ -67,11 +67,9 @@ export class UploadButtonComponent implements OnInit {
         this.postService.updatePost(this.post!).subscribe();
         this.selectedFile = undefined;
         this.imageToUpload = undefined;
-        this.sendPhotoToCheck.emit('disabled');
       }
       else{
         alert('No se puede eliminar la última foto');
-        this.sendPhotoToCheck.emit('active');
       }
     }
     else{
