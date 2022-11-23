@@ -2,10 +2,10 @@ import { Department } from "./Department";
 import { Message } from "./Message";
 
 export interface User{
-    id:string,
     contactsUsernames:string[],
     chatsIds:string[],
     username:string,
+    email:string,
     password:string,
     profileImg: string,
     postsIds:string[];

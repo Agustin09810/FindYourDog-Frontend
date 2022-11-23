@@ -9,18 +9,23 @@
                 <small *ngIf="errorUsername==='empty'">Este campo es obligatorio</small>
                 <small *ngIf="errorUsername==='invalid'">Caracteres inválidos</small>
                 <small *ngIf="errorUsername==='short'">Nombre de usuario muy corto (mín. 4 car.)</small>
+                <small *ngIf="errorUsername==='taken'">¡Ese nombre de usuario ya existe!</small>
             </div>
             <div class="form-group emailForm">
                 <label for="emailInput">Correo electrónico</label>
                 <div class="inputContainer">
                     <input type="email" class="form-control inputStyle" #emailInput placeholder="Ingrese un correo electrónico">
                 </div>
+                <small *ngIf="errorEmail==='empty'">Este campo es obligatorio</small>
+                <small *ngIf="errorEmail==='taken'">¡Ese correo electrónico ya existe!</small>
             </div>
             <div class="form-group passForm">
                 <label for="passwordInput">Contraseña</label>
                 <div class="inputContainer">
                     <input type="text" class="form-control inputStyle" #passwordInput placeholder="Ingrese una contraseña">
                 </div>
+                <small *ngIf="errorPass==='empty'">Este campo es obligatorio</small>
+                <small *ngIf="errorPass==='short'">Contraseña muy corta (mín. 8 car.)</small>
             </div>
             <div class="form-group departmentForm">
                 <label for="departmentSelector">Seleccione su departmento</label>
@@ -30,6 +35,7 @@
                         <option *ngFor="let department of departments; index as i" value="{{department.id}}">{{department.name}}</option>
                     </select>
                 </div>
+                <small *ngIf="errorDepartment===true">Este campo es obligatorio</small>
             </div>    
         </form>
         <div class="signUpButton">

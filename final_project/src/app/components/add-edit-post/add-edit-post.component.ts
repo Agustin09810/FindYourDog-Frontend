@@ -215,16 +215,20 @@ export class AddEditPostComponent implements OnInit {
     this.photos = photosA;
     this.user = await lastValueFrom(this.userService.getUser());
     let post = this.createPost();
+    let id: string = '0';
 
-    this.postService.addPost(post).subscribe(post => {
-      this.user!.postsIds.push(post.id)
-      this.userService.updateUser(this.user!).subscribe()});
-   
-    this.zoneService.getZone(this.lostZone!).subscribe(zone => {
-      zone.postsIds.push(post.id);
-      this.zone = zone;
-      this.zoneService.updateZone(this.zone!).subscribe( () => {
-        this.router.navigate(['/zone/' + zone.id])});
+    this.postService.addPost(post).subscribe(postX => {
+      this.user!.postsIds.push(postX.id)
+      id = postX.id;
+      this.userService.updateUser(this.user!).subscribe(
+        () => {
+          this.zoneService.getZone(this.lostZone!).subscribe(zone => {
+            zone.postsIds.push(id);
+            this.zone = zone;
+            this.zoneService.updateZone(this.zone!).subscribe( () => {
+              this.router.navigate(['/zone/' + zone.id])});
+          });
+        })
     });
   }
 

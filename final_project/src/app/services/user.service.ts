@@ -51,14 +51,16 @@ export class UserService {
     return this.getUserByUsername(username).pipe(map(user => user?.contactsUsernames));
   }
 
-  
-
   getChatById(chatId:string){
     return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`);
   }
 
   updateUser(user:User){
     return this.http.put<User>(this.usersUrl + '/' + user.username, user, this.httpOptions);
+  }
+
+  createUser(user:User){
+    return this.http.post<User>(this.usersUrl, user, this.httpOptions);
   }
 
 }

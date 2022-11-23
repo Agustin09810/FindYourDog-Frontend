@@ -87,7 +87,7 @@ export class ChatComponent implements OnInit {
 
     let idMsg:number = generateRandomInt(100000000000);
 
-    if(this.originUsername && this.targetUsername && this.chatId && this.messagesBool == true){
+    if(this.originUsername && this.targetUsername && this.chatId){
       let msg: Message = { id: `${idMsg}`, originUsername: this.originUsername, targetUsername: this.targetUsername, text: message, date: new Date() };
       let user:User = this.user!;
 

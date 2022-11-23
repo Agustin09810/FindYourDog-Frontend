@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
         this.currentUsername = user?.username;
         this.departmentId = user?.departmentId;
         console.log(this.departmentId);
+        console.log(user);
       });
   }
 
