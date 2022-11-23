@@ -1,0 +1,39 @@
+<div class="outerDiv">
+    <div class="containerDiv shadeDiv">
+        <form class="formContainer">
+            <div class="form-group">
+                <label for="usernameInput">Usuario</label>
+                <div class="inputContainer">
+                    <input type="text" class="form-control inputStyle" #usernameInput placeholder="Ingrese un nombre de usuario">
+                </div>
+                <small *ngIf="errorUsername==='empty'">Este campo es obligatorio</small>
+                <small *ngIf="errorUsername==='invalid'">Caracteres inválidos</small>
+                <small *ngIf="errorUsername==='short'">Nombre de usuario muy corto (mín. 4 car.)</small>
+            </div>
+            <div class="form-group emailForm">
+                <label for="emailInput">Correo electrónico</label>
+                <div class="inputContainer">
+                    <input type="email" class="form-control inputStyle" #emailInput placeholder="Ingrese un correo electrónico">
+                </div>
+            </div>
+            <div class="form-group passForm">
+                <label for="passwordInput">Contraseña</label>
+                <div class="inputContainer">
+                    <input type="text" class="form-control inputStyle" #passwordInput placeholder="Ingrese una contraseña">
+                </div>
+            </div>
+            <div class="form-group departmentForm">
+                <label for="departmentSelector">Seleccione su departmento</label>
+                <div class="selectorContainer">
+                    <select class="form-select" #departmentSelector id="departmentSelector">
+                        <option value="0">Seleccione una opción</option>
+                        <option *ngFor="let department of departments; index as i" value="{{department.id}}">{{department.name}}</option>
+                    </select>
+                </div>
+            </div>    
+        </form>
+        <div class="signUpButton">
+            <button class="btn btn-outline-dark" routerLink="/signup" (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">Registrarse</button>
+        </div>
+    </div>
+</div>

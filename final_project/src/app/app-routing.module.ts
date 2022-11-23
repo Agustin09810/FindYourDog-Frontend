@@ -12,9 +12,11 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
 import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'signup', component: SignUpComponent },
   { path: 'home', component: HomeComponent },
   { path: 'zone/:zoneId', component: DogbyzoneComponent },
   { path: 'chats', component: ChatPreviewComponent },

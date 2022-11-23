@@ -40,6 +40,7 @@ import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-ph
 import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 
@@ -78,7 +79,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     DogPhotosComponent,
     Page404Component,
     Page500Component,
-    SpinnerComponent
+    SpinnerComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
