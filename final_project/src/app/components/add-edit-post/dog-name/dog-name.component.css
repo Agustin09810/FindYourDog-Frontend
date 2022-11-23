@@ -9,7 +9,7 @@
 }
 
 .yesButton{
-    width:100%;
+    width:50%;
 }
 
 .container.otherNames{
@@ -28,8 +28,13 @@
 
 @media(min-width:578px){
     .container.continue.d-grid{
-        position:absolute;
+        position:absolute;;
         bottom:1%;
+        display:flex;
+        justify-content: center;
+    }
+    .btn.btn-primary{
+        width: 15vw;
     }
     .outer{
         position:relative;

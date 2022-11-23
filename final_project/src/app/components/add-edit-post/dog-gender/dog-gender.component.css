@@ -26,9 +26,23 @@
         overflow-y:auto;
         height: 90%;
     }
-
-     .container.continue.d-grid{
-        position:absolute;
+    .container.genders{
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn-group-vertical{
+        width: 60%;
+        height: 7em
+    }
+    .container.continue.d-grid{
+        position:absolute;;
         bottom:1%;
+        display:flex;
+        justify-content: center;
+    }
+    .continue.btn{
+        width: 15vw;
     }
 }

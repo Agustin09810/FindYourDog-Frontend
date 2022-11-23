@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
 
 import { map, filter, ignoreElements, switchMap, catchError } from 'rxjs/operators';
-import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
+import { combineLatest, forkJoin, Observable, pipe, of, tap } from 'rxjs';
 import { Message } from '../interfaces/Message';
 import { Chat } from '../interfaces/Chat';
 import { MessageService } from './message.service';
@@ -26,11 +26,11 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<any|undefined> {
-    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions).pipe(
-      catchError(err => {
-        return err.error.message;
-      })
-    );
+    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions).
+    pipe(catchError(err => {
+      console.log(err);
+      return of(err);
+    }));
   }
 
   getUserByUsername(username:string) {

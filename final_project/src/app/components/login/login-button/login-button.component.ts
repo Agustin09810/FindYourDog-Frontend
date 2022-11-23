@@ -22,6 +22,9 @@ export class LoginButtonComponent implements OnInit {
 
   loginCheck(username:string, password:string) {
     this.authService.login(username, password).subscribe( x => {
+      if(x == undefined){
+        alert("Invalid username or password");
+      }
       console.log(x);
       this.router.navigate(['/home']);
     });

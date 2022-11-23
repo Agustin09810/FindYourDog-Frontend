@@ -45,7 +45,7 @@
         max-width: 1200px;
         max-height: 700px;
         height: calc(100% - (87px + 86px));
-        width:100%;
+        width:50%;
         box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
 
