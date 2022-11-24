@@ -1,1 +1,20 @@
-<button class="btn btn-outline-dark formContainer mt-2">Iniciar sesión</button>
+<div class="divContainer">
+    <div class="alert alert-danger" *ngIf="errorDisplay=='nonAuthorized'" role="alert">
+        Error, esta cuenta no ha sido verificada. Por favor, chequea tu correo electrónico para verificar tu cuenta.
+    </div>
+    <div class="alert alert-danger" *ngIf="errorDisplay=='invalid'" role="alert">
+        Los datos ingresados no son correctos. Por favor, inténtelo de nuevo con otros datos.
+    </div>
+    <div class="alert alert-danger" *ngIf="errorDisplay=='emptyBoth'" role="alert">
+        Por favor, ingrese un nombre de usuario y una contraseña.
+    </div>
+    <div class="alert alert-danger" *ngIf="errorDisplay=='emptyUsername'" role="alert">
+        Por favor, ingrese un nombre de usuario.
+    </div>
+    <div class="alert alert-danger" *ngIf="errorDisplay=='emptyPassword'" role="alert">
+        Por favor, ingrese una contraseña.
+    </div>
+    <div>
+        <button class="btn btn-outline-dark formContainer mt-2">Iniciar sesión</button>
+    </div>
+</div>

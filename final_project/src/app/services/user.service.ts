@@ -26,11 +26,7 @@ export class UserService {
   }
 
   login(username: string, password: string): Observable<any|undefined> {
-    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions).
-    pipe(catchError(err => {
-      console.log(err);
-      return of(err);
-    }));
+    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions);
   }
 
   getUserByUsername(username:string) {

@@ -104,7 +104,7 @@ export class SignUpComponent implements OnInit {
 
         console.log(x)
 
-        /* this.userCreated = true; */
+        this.userCreated = true;
       });
     }
     //add username or email taken error

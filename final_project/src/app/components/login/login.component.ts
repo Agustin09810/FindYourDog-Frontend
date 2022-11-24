@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, OnInit, ViewChild, } from '@angular/core';
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { LoginInputComponent } from './login-input/login-input.component';
 import { UserService } from 'src/app/services/user.service';
@@ -14,9 +14,11 @@ export class LoginComponent implements OnInit {
   @ViewChild(LoginInputComponent, {static : true}) childInput! : LoginInputComponent;
   @ViewChild(LoginButtonComponent, {static : true}) childButton! : LoginButtonComponent;
   constructor(
-    private userService: UserService,
     private router: Router,
   ) { }
+
+  errorUsername?: boolean
+  errorPassword?: boolean
 
   ngOnInit(): void {
     if(localStorage.getItem("id_token") != null){
@@ -29,6 +31,5 @@ export class LoginComponent implements OnInit {
     let user = this.childInput.getUsername();
     this.childButton.loginCheck(user, pass);
   }
-
   
 }

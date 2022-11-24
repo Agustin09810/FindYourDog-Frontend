@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as moment from "moment";
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/User';
-import { shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,8 @@ export class AuthService {
 
   login(username:string, password: string): Observable<any> {
     return this.http.post<any>(this.URL, {username, password})
-    .pipe(tap(res => this.setSession(res)), shareReplay());
+    .pipe(tap(res => this.setSession(res)), shareReplay(), catchError(err => {
+      return of(err)}));
   }
         
   private setSession(authResult: any) {

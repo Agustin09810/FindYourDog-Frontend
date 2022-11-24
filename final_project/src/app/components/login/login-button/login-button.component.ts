@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
 import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class LoginButtonComponent implements OnInit {
 
   user?:User;
+  errorDisplay?: string
+  errorUsername: boolean = false;
+  errorPassword: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -21,14 +24,43 @@ export class LoginButtonComponent implements OnInit {
   }
 
   loginCheck(username:string, password:string) {
-    this.authService.login(username, password).subscribe( x => {
-      if(x == undefined){
-        alert("Invalid username or password");
-      }
-      console.log(x);
-      this.router.navigate(['/home']);
-    });
+    if(username == "" || username==undefined){
+      this.errorUsername = true;
+    }else{
+      this.errorUsername = false;
+    }
+
+    if(password == "" || password==undefined){
+      this.errorPassword = true; 
+    }
+    else{
+      this.errorPassword = false;
+    }
+
+    if(this.errorUsername && this.errorPassword){
+      this.errorDisplay = "emptyBoth";
+    }
+    else if(this.errorUsername && !this.errorPassword){
+      this.errorDisplay = "emptyUsername";
+    }
+    else if(this.errorPassword && !this.errorUsername){
+      this.errorDisplay = "emptyPassword";
+    }
+
+    if(!this.errorUsername && !this.errorPassword){
+      this.errorDisplay = undefined;
+      this.authService.login(username, password).subscribe( x => {
+        if(x.status == 404){
+          this.errorDisplay = "invalid";
+        }
+        if(x.status == 401){
+          this.errorDisplay = "nonAuthorized";
+        }
+        else {
+          console.log(x);
+        }
+        //this.router.navigate(['/home']);
+      });
+    } 
   }
-
-
 }
