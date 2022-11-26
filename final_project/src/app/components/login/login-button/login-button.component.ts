@@ -53,13 +53,13 @@ export class LoginButtonComponent implements OnInit {
         if(x.status == 404){
           this.errorDisplay = "invalid";
         }
-        if(x.status == 401){
+        else if(x.status == 401){
           this.errorDisplay = "nonAuthorized";
         }
         else {
           console.log(x);
+          this.router.navigate(['/home']);
         }
-        //this.router.navigate(['/home']);
       });
     } 
   }

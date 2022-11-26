@@ -19,6 +19,10 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   @Input() counterOfChars: number = 0;
 
   @Output() nextStep = new EventEmitter<string[]>();
+
+  @Input() validDate?: string;
+  validHour?: string;
+  validZone?: string;
   
   zones: Zone[] = [];
   disableButton: string = "disabled";
@@ -105,6 +109,7 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
       }
     }
     this.disableButton = "active";
+    this.cd.detectChanges();
     return true;
   }
 
@@ -118,8 +123,8 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
     toEmit.push(date)
     toEmit.push(hour)
     toEmit.push(zone)
-    if(ubiDetails != ''){
-      toEmit.push(ubiDetails)
+    if(ubiDetails.trim().length != 0){
+      toEmit.push(ubiDetails.trim())
     }
     this.nextStep.emit(toEmit);
   }
@@ -128,6 +133,24 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
     let toEmit: string[] = [];
     toEmit.push("breed");
     this.nextStep.emit(toEmit);
+  }
+
+  checkHour(hour: string){
+    if(hour != ""){
+      this.validHour = "valid";
+    }
+    else{
+      this.validHour = "invalid";
+    }
+  }
+
+  checkZone(zone: string){
+    if(zone != "0"){
+      this.validZone = "valid";
+    }
+    else{
+      this.validZone = "invalid";
+    }
   }
 
 }

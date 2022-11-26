@@ -16,7 +16,7 @@
                 <p *ngIf="post.dogNicknames.length > 0"><b>Apodos: </b>{{post.dogNicknames.join()}}</p>
                 <p><b>Raza: </b>{{post.dogBreed}}</p>
                 <p><b>Género: </b>{{post.dogGender}}</p>
-                <p><b>Perdido el: </b>{{post.lostOn.toString()}}</p>
+                <p><b>Perdido el: </b>{{cleanDate(post.lostOn)}}</p>
                 <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
             </div>
             <div *ngIf="displayButton === true && currentUser?.username != post.user" class="contact-button">

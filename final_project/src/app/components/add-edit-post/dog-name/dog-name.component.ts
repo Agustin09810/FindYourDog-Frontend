@@ -31,6 +31,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   @ViewChild('checkYes') another1Button!: ElementRef<HTMLButtonElement>;
   
   @Input() checked: boolean = false;
+  validName?: string;
 
   disableButton: string = "disabled";
 
@@ -53,9 +54,18 @@ export class DogNameComponent implements OnInit, AfterViewInit {
     }
     this.cd.detectChanges();
   }
+
+  checkValidName(): void {
+    if(this.dogNameInput.nativeElement.value.trim().length == 0){
+      this.validName = "invalid";
+    }
+    else{
+      this.validName = "valid";
+    }
+  }
   
   changeButtonState(): void {
-    if(this.dogNameInput.nativeElement.value != '') {
+    if(this.dogNameInput.nativeElement.value.trim().length != 0) {
       this.disableButton = "active";
     }
     else{
@@ -66,12 +76,12 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   nextStepFunction(): void {
     let toEmit: string[] = [];
     toEmit.push("gender");
-    toEmit.push(this.dogNameInput.nativeElement.value);
+    toEmit.push(this.dogNameInput.nativeElement.value.trim());
     if(this.another1Input && this.another1Input.nativeElement.value != ''){
-      toEmit.push(this.another1Input.nativeElement.value);
+      toEmit.push(this.another1Input.nativeElement.value.trim());
     }
     if(this.another2Input && this.another2Input.nativeElement.value != ''){
-      toEmit.push(this.another2Input.nativeElement.value);
+      toEmit.push(this.another2Input.nativeElement.value.trim());
     }
     this.nextStep.emit(toEmit);
   }

@@ -8,6 +8,11 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
+.title{
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
+}
 
 .shadeDiv{
         border-radius: 4px;

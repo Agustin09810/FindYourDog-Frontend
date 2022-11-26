@@ -6,6 +6,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    z-index: 9999;
+    background-color: white;
+}
+
+.title{
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
 }
 
 .shadeDiv{
@@ -61,5 +69,8 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
-

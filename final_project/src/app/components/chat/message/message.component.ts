@@ -40,11 +40,20 @@ export class MessageComponent implements OnInit, AfterViewInit {
       
       
       if(diff > 1000*60*60*24){
-        return `Hace ${Math.trunc(diff/1000/60/60/24)} días`;
+        if(Math.trunc(diff/1000/60/60/24) === 1){
+          return `Hace ${Math.trunc(diff/1000/60/60/24)} día`;
+        }
+        return `${Math.trunc(diff/1000/60/60/24)} días`;
       }else if(diff > 1000*60*60){
-        return `Hace ${Math.trunc(diff/1000/60/60)} horas`;
+        if(Math.trunc(diff/1000/60/60) === 1){
+          return `${Math.trunc(diff/1000/60/60)} hora`;
+        }
+        return `${Math.trunc(diff/1000/60/60)} horas`;
       }else if(diff > 1000*60){
-        return `Hace ${Math.trunc(diff/1000/60)} minutos`;
+        if(Math.trunc(diff/1000/60) === 1){
+          return `${Math.trunc(diff/1000/60)} minuto`;
+        }
+        return `${Math.trunc(diff/1000/60)} minutos`;
       }else{
         return `Reciente`;
       }

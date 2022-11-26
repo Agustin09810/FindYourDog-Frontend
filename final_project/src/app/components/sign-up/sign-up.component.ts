@@ -105,11 +105,28 @@ export class SignUpComponent implements OnInit {
         console.log(x)
 
         this.userCreated = true;
+        this.closeTabWarning();
       });
     }
+
+    
     //add username or email taken error
 
     
   }
 
+  closeTabWarning(){
+    if(this.userCreated == false){
+      window.addEventListener('beforeunload', function (e) {
+          e.preventDefault();
+          e.returnValue = '';
+      });
+    }
+    else{
+      window.removeEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+      });
+    }
+  } 
 }

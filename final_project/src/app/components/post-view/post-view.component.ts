@@ -81,6 +81,13 @@ export class PostViewComponent implements OnInit {
       }
   }
 
+  cleanDate(date: Date): string {
+    let dateInString: string = date.toString().split('T')[0];
+    let dateToFormat = `${dateInString.substring(8,10)}/${dateInString.substring(5,7)}/${dateInString.substring(0,4)}`;
+    return dateToFormat;
+  }
+
+
   getPostImages() {
     this.postImages = [];
     this.post?.photos.forEach(imgId => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy, HostListener} from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {lastValueFrom} from 'rxjs';
 
@@ -24,9 +24,9 @@ import {UserService} from '../../services/user.service';
   templateUrl: './add-edit-post.component.html',
   styleUrls: ['./add-edit-post.component.css']
 })
-export class AddEditPostComponent implements OnInit {
+export class AddEditPostComponent implements OnInit, OnDestroy {
 
-  step: string = "name";
+  step: string = "date";
   textNavbar: string = "Nombre";
 
   @ViewChild('dogPhotosComponent') dogPhotosComponent!: ImageUploadComponent;
@@ -62,6 +62,7 @@ export class AddEditPostComponent implements OnInit {
   ) { }
   
   ngOnInit(): void {
+    this.closeTabWarning();
     const postId = this.route.snapshot.paramMap.get('postId')
     if(postId != undefined){
       this.postService.getPostsById(postId).subscribe(post => {
@@ -88,6 +89,23 @@ export class AddEditPostComponent implements OnInit {
       }); 
     }
   }
+
+  ngOnDestroy(){
+    this.removeTabWarning();
+  }
+
+  closeTabWarning(){
+    window.onbeforeunload = function(e) {
+      e.preventDefault();
+      e.returnValue = '';
+    }, true
+  }
+
+  removeTabWarning(){
+    window.onbeforeunload = function(e) {
+    }, false
+  }
+
 
   navigateAux(data: string[]){
     this.step=data[0];
@@ -239,6 +257,8 @@ export class AddEditPostComponent implements OnInit {
                         dogDescription: this.dogDescription, photos: this.photos};
       return post;
     }
-      
-      
+
+
+
+  
 }

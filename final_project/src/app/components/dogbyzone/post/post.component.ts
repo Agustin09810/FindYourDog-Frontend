@@ -23,15 +23,29 @@ export class PostComponent implements OnInit {
     this.imgService.getImagesById(this.post.photos[0]).subscribe(x => this.firstPhoto = x);
   }
 
-  getDayDiff(startDate: Date): number {
-    const msInDay = 24 * 60 * 60 * 1000;
+  getDayDiff(startDate: Date): string {
     const dateLost = new Date(startDate);
 
-    var time = new Date().getTime() - dateLost.getTime();
+    var diff: number = new Date().getTime() - dateLost.getTime();
     
-    const days = Math.floor(time / msInDay);
-
-    return days;
+    if(diff > 1000*60*60*24){
+      if(Math.trunc(diff/1000/60/60/24) === 1){
+        return `Hace ${Math.trunc(diff/1000/60/60/24)} día`;
+      }
+      return `${Math.trunc(diff/1000/60/60/24)} días`;
+    }else if(diff > 1000*60*60){
+      if(Math.trunc(diff/1000/60/60) === 1){
+        return `${Math.trunc(diff/1000/60/60)} hora`;
+      }
+      return `${Math.trunc(diff/1000/60/60)} horas`;
+    }else if(diff > 1000*60){
+      if(Math.trunc(diff/1000/60) === 1){
+        return `${Math.trunc(diff/1000/60)} minuto`;
+      }
+      return `${Math.trunc(diff/1000/60)} minutos`;
+    }else{
+      return `Reciente`;
+    }
   }
 
 }

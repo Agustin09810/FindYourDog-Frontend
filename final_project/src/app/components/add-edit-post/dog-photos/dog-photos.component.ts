@@ -62,7 +62,7 @@ export class DogPhotosComponent implements OnInit {
   async editPostFunction(textArea: string) {
     let images: Image[] =  this.imageUploadComponent.checkAndSendImagesToEdit();
     let photosIDs: string[] = [];
-    photosIDs.push(textArea);
+    photosIDs.push(textArea.trim());
     for(let image of images){
       if(!this.dogPhotos!.includes(image.id)){
       const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
@@ -75,7 +75,7 @@ export class DogPhotosComponent implements OnInit {
   async nextStepFunction(textArea: string) {
     let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
     let photosIDs: string[] = [];
-    photosIDs.push(textArea);
+    photosIDs.push(textArea.trim());
     for(let image of images){
       const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
       photosIDs.push(result.id);
