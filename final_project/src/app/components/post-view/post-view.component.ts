@@ -189,6 +189,10 @@ export class PostViewComponent implements OnInit {
             return
           }
           this.zoneService.getZone(zoneId).subscribe(zone => {
+            if(zone.status == 404){
+              console.log(`Error 404: ZONE ${zoneId} NOT FOUND`);
+              return;
+            }
             let currentZone = zone;
             let index = currentZone.postsIds.indexOf(postId);
             currentZone.postsIds.splice(index, 1);

@@ -213,10 +213,18 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     this.postService.updatePost(this.post!).subscribe(() => {
       if(this.zoneEditAux != undefined){
         this.zoneService.getZone(this.zoneEditAux).subscribe(zone => {
+          if(zone.status == 404){
+            console.log(`Error 404: ZONE ${this.zoneEditAux} NOT FOUND`);
+            return;
+          }
           zone.postsIds.splice(zone.postsIds.indexOf(this.post!.id), 1);
 
           this.zoneService.updateZone(zone).subscribe(() => {
             this.zoneService.getZone(this.lostZone!).subscribe(zone => {
+              if(zone.status == 404){
+                console.log(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
+                return;
+              }
               zone.postsIds.push(this.post!.id);
               this.zoneService.updateZone(zone).subscribe(() => {
                 this.router.navigate(['/zone/' + this.lostZone!]);
@@ -249,6 +257,10 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
             return
           }
           this.zoneService.getZone(this.lostZone!).subscribe(zone => {
+            if(zone.status == 404){
+              console.log(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
+              return;
+            }
             zone.postsIds.push(id);
             this.zone = zone;
             this.zoneService.updateZone(this.zone!).subscribe( () => {

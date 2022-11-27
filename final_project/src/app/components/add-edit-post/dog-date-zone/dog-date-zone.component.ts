@@ -44,7 +44,13 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   }
 
   getZones(): void{
-    this.zonesService.getZones().subscribe(zones => this.zones = zones);
+    this.zonesService.getZones().subscribe(zones => {
+      if(zones.status == 404 || zones.status == 500){
+        this.zones = [];
+        console.error('NO ZONES FOUND')
+      }
+      this.zones = zones;
+    });
   }
 
   verifyDate(date: string, hour:string, selectedIndex:number): boolean{

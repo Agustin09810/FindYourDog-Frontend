@@ -30,6 +30,10 @@ export class GridComponent implements OnInit {
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
         department.zonesIds.forEach(zoneId => {
           this.zoneService.getZone(zoneId).subscribe(zone => {
+            if(zone.status == 404){
+              console.log(`Error 404: ZONE ${zoneId} NOT FOUND`);
+              return;
+            }
             if(!this.zones){
               this.zones = [];
             }
