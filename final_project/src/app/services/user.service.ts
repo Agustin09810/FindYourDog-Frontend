@@ -60,7 +60,8 @@ export class UserService {
   }
 
   createUser(user:User){
-    return this.http.post<User>(`http://localhost:3000/api/v1/signup/${user.username}` , user, this.httpOptions);
+    return this.http.post<User>(`http://localhost:3000/api/v1/signup/${user.username}` , user, this.httpOptions).pipe
+    (catchError(err => { return of(err) }));
   }
 
   confirmUser(code: string){

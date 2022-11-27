@@ -26,6 +26,7 @@ export class SignUpComponent implements OnInit {
   errorPass?: string;
   errorDepartment: boolean = false;
   userCreated: boolean = false;
+  userTaken = false;
 
   constructor(
     private departmentService: DepartmentService,
@@ -101,11 +102,18 @@ export class SignUpComponent implements OnInit {
       const userToCreate: User = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
                         postsIds: [], chatsIds: [], contactsUsernames: [], messages: [], status: 'Pending'};
       this.userService.createUser(userToCreate).subscribe(x => {
+        if(x.status==409){
+          console.log("Error: ese usuario o ese email ya existen.")
+          this.validEmail = 'invalid';
+          this.validUsername = 'invalid';
+          this.userTaken = true;
+        }else{
+          this.userCreated = true;
+        }
 
-        console.log(x)
+        this.cd.detectChanges();
 
-        this.userCreated = true;
-        this.closeTabWarning();
+        
       });
     }
 
@@ -115,18 +123,4 @@ export class SignUpComponent implements OnInit {
     
   }
 
-  closeTabWarning(){
-    if(this.userCreated == false){
-      window.addEventListener('beforeunload', function (e) {
-          e.preventDefault();
-          e.returnValue = '';
-      });
-    }
-    else{
-      window.removeEventListener('beforeunload', function (e) {
-        e.preventDefault();
-        e.returnValue = '';
-      });
-    }
-  } 
 }

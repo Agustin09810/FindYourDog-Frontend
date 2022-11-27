@@ -42,6 +42,9 @@
         <div class="alert alert-success" *ngIf="userCreated" role="alert">
             Usuario creado exitosamente. Por favor, verifica tu correo electrónico para confirmar tu cuenta.
         </div>
+        <div class="alert alert-danger" *ngIf="userTaken" role="alert">
+            Error: El usuario o email introducidos ya existen.
+        </div>
         <div class="signUpButton">
             <button class="btn btn-outline-dark" (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">Registrarse</button>
         </div>
