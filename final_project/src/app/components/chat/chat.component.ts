@@ -43,19 +43,22 @@ export class ChatComponent implements OnInit {
         this.originUsername = originUser?.username;
         this.userService.getUserByUsername(targetUsername).subscribe(targetUser => {
           if(targetUser.status==404){
-            console.log('Error 404, USER NOT FOUND');
+            console.error('Error 404, USER NOT FOUND');
             return;
           }
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
             if(chat.status==404){
-              console.log('Error 404, CHAT NOT FOUND');
+              console.error('Error 404, CHAT NOT FOUND');
               return;
             }
             this.chat = chat;
             chat?.messagesIds.forEach((id: string) => this.messageService.getMessageById(id).subscribe(msg => {
+              if(msg.status==404){
+                console.error(`Error 404, MESSAGE ${id} NOT FOUND`);
+                return;
+              }
               this.messages?.push(msg); 
-              console.log(chat.messagesIds.length + ' ' + this.messages?.length);
               
             if(this.messages?.length == chat?.messagesIds.length){
               this.messages?.sort( (objA, objB) => new Date(objA.date).getTime() - new Date(objB.date).getTime());

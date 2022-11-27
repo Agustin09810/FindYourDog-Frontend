@@ -50,7 +50,13 @@ export class UserPreviewComponent implements OnInit {
         return;
       }
       this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
-      message => this.lastMessage = message.text.substring(0, 20) + '...'
+      message => {
+        if(message.status==404){
+          console.log(`Error 404, MESSAGE ${chat?.messagesIds.at(-1)!} NOT FOUND`);
+          return;
+        }
+        this.lastMessage = message.text.substring(0, 20) + '...'
+      }
     )});
   }
 
