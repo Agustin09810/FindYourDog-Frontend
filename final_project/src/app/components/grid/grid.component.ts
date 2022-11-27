@@ -28,12 +28,12 @@ export class GridComponent implements OnInit {
   loadZones(){
     if(this.departmentId){
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
-        department.zonesIds.forEach(zoneId => {
+        if(department.status){
+          console.log(`Error ${department.status}: DEPARTMENT ${this.departmentId} NOT FOUND`);
+          return;
+        }
+        department.zonesIds.forEach((zoneId: string) => {
           this.zoneService.getZone(zoneId).subscribe(zone => {
-            if(zone.status == 404){
-              console.log(`Error 404: ZONE ${zoneId} NOT FOUND`);
-              return;
-            }
             if(!this.zones){
               this.zones = [];
             }

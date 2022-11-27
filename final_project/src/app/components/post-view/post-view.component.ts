@@ -77,6 +77,10 @@ export class PostViewComponent implements OnInit {
           console.log(post);
           this.post?.photos.forEach(imgId => {
             this.imageService.getImagesById(imgId).subscribe(x =>  {
+              if(x.status==404){
+                console.log("Error 404: IMAGE NOT FOUND");
+                return;
+              }
               this.postImages?.push(x!);
             });
           })
@@ -96,6 +100,10 @@ export class PostViewComponent implements OnInit {
     this.postImages = [];
     this.post?.photos.forEach(imgId => {
       this.imageService.getImagesById(imgId).subscribe(x =>  {
+        if(x.status==404){
+          console.log("Error 404: IMAGE NOT FOUND");
+          return;
+        }
         this.postImages?.push(x!);
       });
     })
@@ -175,9 +183,7 @@ export class PostViewComponent implements OnInit {
         photosIds.forEach( async photoId => {
           await lastValueFrom(this.imageService.deleteImage(photoId));
         })
-
-
-
+        
         this.userService.getUserByUsername(username).subscribe(user => {
           if(user.status==404){
             console.log('Error 404, USER NOT FOUND');

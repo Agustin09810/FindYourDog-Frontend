@@ -17,7 +17,7 @@ export class ZonesService {
 
   getZones() {
     return this.http.get<Zone[]>(this.zonesUrl).pipe(catchError(err => {
-      console.log(err);
+      console.error(err);
       return of(err);
     }));
   }
@@ -26,7 +26,7 @@ export class ZonesService {
     const url = `${this.zonesUrl}/${id}`;
     return this.http.get<Zone>(url).pipe(catchError(err => {
       if(err.status == 404){
-        console.log('Error 404: Zone not found');
+        console.error('Error 404: Zone not found');
         
       }
       return of(err);

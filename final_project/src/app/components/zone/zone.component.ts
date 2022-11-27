@@ -19,7 +19,12 @@ export class ZoneComponent implements OnInit {
   constructor(private imgService:ImageByIdService) { }
 
   ngOnInit(): void {
-    this.imgService.getImagesById(this.zone.imgId).subscribe(x => this.img = x);
+    this.imgService.getImagesById(this.zone.imgId).subscribe(x => {
+      if(x.status==404){
+        console.log("Error 404: IMAGE NOT FOUND");
+        return;
+      }
+      this.img = x});
   }
 
   

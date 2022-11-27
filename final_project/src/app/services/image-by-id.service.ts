@@ -24,26 +24,19 @@ export class ImageByIdService {
 
 
   getImagesById(id:string) {
-    return this.http.get<Image>(`${this.imagesUrl}/${id}`);
-  }
-
-  uploadImage(image: Image): Observable<Image> {
-    return this.http.post<Image>(this.imagesUrl, image, this.httpOptions).pipe(
-      tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
-    catchError(this.handleError<Image>('uploadImage'))
+    return this.http.get<Image>(`${this.imagesUrl}/${id}`).pipe(
+      catchError( err => { return of(err)})
     );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); 
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  };
+  uploadImage(image: Image): Observable<Image> {
+    return this.http.post<Image>(this.imagesUrl, image, this.httpOptions);
+  }
 
   deleteImage(id: string) {
-    return this.http.delete<Image>(`${this.imagesUrl}/${id}`, this.httpOptions);
+    return this.http.delete<Image>(`${this.imagesUrl}/${id}`, this.httpOptions).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
 }

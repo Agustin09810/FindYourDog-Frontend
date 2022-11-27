@@ -33,15 +33,23 @@ export class SettingsComponent implements OnInit {
   getCurrentUser(){
     this.userService.getUser().subscribe(x => {
       this.currentUser = x;
-      this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(img => this.profileImgUrl = img.url);
+      this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(img => {
+        if(img.status==404){
+          console.error("Error 404: IMAGE NOT FOUND");
+          return;
+        }
+        this.profileImgUrl = img.url});
     });
   }
 
   getDepartments(){
     this.departmentService.getDepartments().subscribe(departments =>{
+      if(departments.status==404){
+        console.error("Error 404: DEPARTMENTS NOT FOUND");
+        return;
+      }
        this.departments = departments
-       console.log(this.currentUser)
-       this.currentDepartmentId = departments.find(x => x.id == this.currentUser?.departmentId)?.id; });
+       this.currentDepartmentId = departments.find((x: { id: string | undefined; }) => x.id == this.currentUser?.departmentId)?.id; });
   }
 
   updateDepartment(department: string){

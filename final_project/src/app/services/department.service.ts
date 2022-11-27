@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { Department } from '../interfaces/Department';
 
 @Injectable({
@@ -13,20 +13,18 @@ export class DepartmentService {
 
   constructor(
     private http:HttpClient,
-    ) { 
-    }
-
+    ) {}
   
   getDepartments(){
-    return this.http.get<Department[]>(this.departmentsUrl);
+    return this.http.get<Department[]>(this.departmentsUrl).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
   getDepartmentById(id:string){
     let url:string = this.departmentsUrl + `/${id}`;
-    return this.http.get<Department>(url);
-  }
-
-  getDepartmentsNoAuth(): Observable<Department[]>{
-    return this.http.get<Department[]>(this.departmentsUrl, { headers: { 'skip': 'true' } });
+    return this.http.get<Department>(url).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 }
