@@ -57,7 +57,12 @@ export class UploadButtonComponent implements OnInit {
   deleteFile(): void{
     if(this.id!){
         if(this.post!.photos.length > 1){
-        this.imageService.deleteImage(this.id!).subscribe();
+        this.imageService.deleteImage(this.id!).subscribe( x => {
+          if(x.status==404){
+            console.log("Error 404: IMAGE NOT FOUND");
+            return;
+          }
+        });
         const index = this.post!.photos.indexOf(this.id!);
         const lastElement = this.post!.photos.length-1;
         const auxElement = this.post!.photos[index];
@@ -87,7 +92,11 @@ export class UploadButtonComponent implements OnInit {
 
   getImageToDisplay(){
     this.imageService.getImagesById(this.id!).subscribe(
-      (image: Image) => {
+      (image: Image|any) => {
+        if(image.status == 404){
+          console.log('Error 404: IMAGE NOT FOUND');
+          return;
+        }
         this.selectedFile = {src: image.url};
       }
     );

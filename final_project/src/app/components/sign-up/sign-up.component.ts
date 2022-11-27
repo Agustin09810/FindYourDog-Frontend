@@ -46,7 +46,12 @@ export class SignUpComponent implements OnInit {
   }
 
   getDepartments(): void{
-    this.departmentService.getDepartmentsNoAuth().subscribe(departments => this.departments = departments);
+    this.departmentService.getDepartments().subscribe(departments => {
+      if(departments.status==404){
+        console.log("Error 404: DEPARTMENTS NOT FOUND");
+        return
+      }
+      this.departments = departments});
   }
 
   register(user: string, mail: string, password: string, department: string): void{

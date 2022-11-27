@@ -20,7 +20,12 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.imgService.getImagesById(this.post.photos[0]).subscribe(x => this.firstPhoto = x);
+    this.imgService.getImagesById(this.post.photos[0]).subscribe(x => {
+      if(x.status==404){
+        console.error("Error 404: IMAGE NOT FOUND");
+        return;
+      }
+      this.firstPhoto = x});
   }
 
   getDayDiff(startDate: Date): string {

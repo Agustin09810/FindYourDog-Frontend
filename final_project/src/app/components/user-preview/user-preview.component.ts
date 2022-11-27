@@ -26,7 +26,12 @@ export class UserPreviewComponent implements OnInit {
   ngOnInit(): void {
     this.getChatId(this.originUser!, this.user!);
     this.getChat(this.chatId);
-    this.imageService.getImagesById(this.user.profileImg).subscribe(x => this.profileImgUrl = x);
+    this.imageService.getImagesById(this.user.profileImg).subscribe(x => {
+      if(x.status==404){
+        console.log("Error 404: IMAGE NOT FOUND");
+        return;
+      }
+      this.profileImgUrl = x});
 
 
   }
