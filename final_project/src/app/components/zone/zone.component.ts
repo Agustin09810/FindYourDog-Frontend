@@ -21,7 +21,7 @@ export class ZoneComponent implements OnInit {
   ngOnInit(): void {
     this.imgService.getImagesById(this.zone.imgId).subscribe(x => {
       if(x.status==404){
-        console.log("Error 404: IMAGE NOT FOUND");
+        console.error("Error 404: IMAGE NOT FOUND");
         return;
       }
       this.img = x});

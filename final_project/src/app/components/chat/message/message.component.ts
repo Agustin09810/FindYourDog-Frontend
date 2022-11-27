@@ -30,8 +30,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
 
   calculateTime(date: Date): string{
     if(date){
-      let diff = new Date().getTime() - new Date(date).getTime();
-  
+      let diff = new Date().getTime() - new Date(date).getTime();  
       if(diff > 1000*60*60*24){
         if(Math.trunc(diff/1000/60/60/24) === 1){
           return `Hace ${Math.trunc(diff/1000/60/60/24)} día`;

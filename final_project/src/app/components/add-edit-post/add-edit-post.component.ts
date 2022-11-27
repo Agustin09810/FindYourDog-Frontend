@@ -224,7 +224,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
       if(this.zoneEditAux != undefined){
         this.zoneService.getZone(this.zoneEditAux).subscribe(zone => {
           if(zone.status == 404){
-            console.log(`Error 404: ZONE ${this.zoneEditAux} NOT FOUND`);
+            console.error(`Error 404: ZONE ${this.zoneEditAux} NOT FOUND`);
             return;
           }
           zone.postsIds.splice(zone.postsIds.indexOf(this.post!.id), 1);
@@ -232,7 +232,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
           this.zoneService.updateZone(zone).subscribe(() => {
             this.zoneService.getZone(this.lostZone!).subscribe(zone => {
               if(zone.status == 404){
-                console.log(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
+                console.error(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
                 return;
               }
               zone.postsIds.push(this.post!.id);

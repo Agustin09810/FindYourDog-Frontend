@@ -59,7 +59,7 @@ export class UploadButtonComponent implements OnInit {
         if(this.post!.photos.length > 1){
         this.imageService.deleteImage(this.id!).subscribe( x => {
           if(x.status==404){
-            console.log("Error 404: IMAGE NOT FOUND");
+            console.error("Error 404: IMAGE NOT FOUND");
             return;
           }
         });
@@ -71,7 +71,7 @@ export class UploadButtonComponent implements OnInit {
         this.post!.photos.pop();
         this.postService.updatePost(this.post!).subscribe( post => {
             if(post.status==404){
-              console.log('Error 404: POST NOT FOUND');
+              console.error('Error 404: POST NOT FOUND');
               return;
             }
           }
@@ -94,7 +94,7 @@ export class UploadButtonComponent implements OnInit {
     this.imageService.getImagesById(this.id!).subscribe(
       (image: Image|any) => {
         if(image.status == 404){
-          console.log('Error 404: IMAGE NOT FOUND');
+          console.error('Error 404: IMAGE NOT FOUND');
           return;
         }
         this.selectedFile = {src: image.url};

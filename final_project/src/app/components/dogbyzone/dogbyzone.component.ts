@@ -31,7 +31,7 @@ export class DogbyzoneComponent implements OnInit {
       {
         this.zoneService.getZone(id).subscribe(zone => {
           if(zone.status == 404){
-            console.log(`Error 404: ZONE ${id} NOT FOUND`);
+            console.error(`Error 404: ZONE ${id} NOT FOUND`);
             return;
           }
           this.zone = zone;

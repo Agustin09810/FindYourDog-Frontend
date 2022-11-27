@@ -57,7 +57,7 @@ export class LoginButtonComponent implements OnInit {
           this.errorDisplay = "nonAuthorized";
         }
         else {
-          console.log(x);
+          console.error(x);
           this.router.navigate(['/home']);
         }
       });

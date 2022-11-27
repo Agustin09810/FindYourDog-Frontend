@@ -17,7 +17,6 @@ export class PostCarouselComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('url');
     this.currentImage = this.postImages?.at(0);
   }
 

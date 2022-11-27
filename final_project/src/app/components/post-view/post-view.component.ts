@@ -70,15 +70,14 @@ export class PostViewComponent implements OnInit {
       {
         this.postService.getPostsById(id).subscribe(post => {
           if(post.status==404){
-            console.log('Error 404: POST NOT FOUND');
+            console.error('Error 404: POST NOT FOUND');
             return;
           }
           this.post = post;
-          console.log(post);
           this.post?.photos.forEach(imgId => {
             this.imageService.getImagesById(imgId).subscribe(x =>  {
               if(x.status==404){
-                console.log("Error 404: IMAGE NOT FOUND");
+                console.error("Error 404: IMAGE NOT FOUND");
                 return;
               }
               this.postImages?.push(x!);
@@ -101,7 +100,7 @@ export class PostViewComponent implements OnInit {
     this.post?.photos.forEach(imgId => {
       this.imageService.getImagesById(imgId).subscribe(x =>  {
         if(x.status==404){
-          console.log("Error 404: IMAGE NOT FOUND");
+          console.error("Error 404: IMAGE NOT FOUND");
           return;
         }
         this.postImages?.push(x!);
@@ -125,7 +124,7 @@ export class PostViewComponent implements OnInit {
 
       this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
         if(user2.status==404){
-          console.log('Error 404, USER NOT FOUND');
+          console.error('Error 404, USER NOT FOUND');
           return;
         }
         if(user2.contactsUsernames.find((x: string | undefined) => x == this.currentUser?.username)){
@@ -137,12 +136,9 @@ export class PostViewComponent implements OnInit {
               }
             });
           });
-          console.log('no podes neisdasdasdasd');
           return;
         }
-        console.log('algogopaodj');
         this.userService.createChat(chat).subscribe(chatReceived => {
-          console.log(chatReceived.id + ' elchat');
           user2.chatsIds.push(chatReceived.id);
           user2.contactsUsernames.push(this.currentUser!.username);
 
@@ -151,13 +147,13 @@ export class PostViewComponent implements OnInit {
 
           this.userService.updateUser(user2).subscribe( x => {
             if(x.status==404){
-              console.log('Error 404, USER NOT FOUND');
+              console.error('Error 404, USER NOT FOUND');
               return;
             }
             this.userService.updateUser(this.currentUser!).subscribe( 
               y => {
                 if(y.status==404){
-                  console.log("Error 404: USER NOT FOUND");
+                  console.error("Error 404: USER NOT FOUND");
                   return
                 }
                 this.router.navigate(['/chats/' + user2.username + '/' + chatReceived.id])
@@ -186,7 +182,7 @@ export class PostViewComponent implements OnInit {
         
         this.userService.getUserByUsername(username).subscribe(user => {
           if(user.status==404){
-            console.log('Error 404, USER NOT FOUND');
+            console.error('Error 404, USER NOT FOUND');
             return;
           }
         let currentUser = user;
@@ -195,12 +191,12 @@ export class PostViewComponent implements OnInit {
 
         this.userService.updateUser(currentUser).subscribe( x => {
           if(x.status==404){
-            console.log("Error 404: USER NOT FOUND");
+            console.error("Error 404: USER NOT FOUND");
             return
           }
           this.zoneService.getZone(zoneId).subscribe(zone => {
             if(zone.status == 404){
-              console.log(`Error 404: ZONE ${zoneId} NOT FOUND`);
+              console.error(`Error 404: ZONE ${zoneId} NOT FOUND`);
               return;
             }
             let currentZone = zone;

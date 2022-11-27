@@ -58,7 +58,7 @@ export class SettingsComponent implements OnInit {
       this.userService.updateUser(this.currentUser).subscribe(
         x => {
           if(x.status==404){
-            console.log("Error 404: USER NOT FOUND");
+            console.error("Error 404: USER NOT FOUND");
             return
           }
           this.currentDepartmentId = x.departmentId;
@@ -70,8 +70,6 @@ export class SettingsComponent implements OnInit {
   }
 
   checkDepartment(department: string){
-    console.log(department);
-    console.log(this.currentUser); 
     if(this.currentUser){
       if(this.currentUser.departmentId == department){
         this.dissableButton = 'disabled';

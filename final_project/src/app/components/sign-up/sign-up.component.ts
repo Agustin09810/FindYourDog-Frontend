@@ -48,7 +48,7 @@ export class SignUpComponent implements OnInit {
   getDepartments(): void{
     this.departmentService.getDepartments().subscribe(departments => {
       if(departments.status==404){
-        console.log("Error 404: DEPARTMENTS NOT FOUND");
+        console.error("Error 404: DEPARTMENTS NOT FOUND");
         return
       }
       this.departments = departments});
@@ -100,16 +100,13 @@ export class SignUpComponent implements OnInit {
     }
 
     if(this.errorUsername != undefined || this.errorEmail != undefined || this.errorPass != undefined || this.errorDepartment == true){
-      console.log('error en signup');
       this.cd.detectChanges();
     }
     else{
-      console.log(user +'mail: '+ mail +'pass: '+ password +'department: '+ department);
       const userToCreate: UserLogin = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
                         postsIds: [], chatsIds: [], contactsUsernames: [], messages: [], status: 'Pending'};
       this.userService.createUser(userToCreate).subscribe(x => {
         if(x.status==409){
-          console.log("Error: ese usuario o ese email ya existen.")
           this.validEmail = 'invalid';
           this.validUsername = 'invalid';
           this.userTaken = true;

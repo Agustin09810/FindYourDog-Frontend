@@ -24,9 +24,6 @@ export class ConfirmedComponent implements OnInit {
     if(token){
     this.userService.confirmUser(token).subscribe();
     }
-    else{
-      console.log('No token');
-    }
   }
 
   

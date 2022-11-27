@@ -41,11 +41,10 @@ export class MyPostsComponent implements OnInit {
       user?.postsIds.forEach(postId => {
         this.postsService.getPostsById(postId).subscribe(post => {
           if(post.status==404){
-            console.log('Error 404: POST NOT FOUND');
+            console.error('Error 404: POST NOT FOUND');
             return;
           }
           this.posts.push(post!); 
-          console.log(this.posts); 
           if(count === 0){this.post = post};
           count++;
         });
@@ -59,7 +58,6 @@ export class MyPostsComponent implements OnInit {
       this.postsViews++;
       this.post = this.posts.at(this.postsViews);
     }else{
-      console.log('no se puede avanzar mas');
     }
     
   }
@@ -69,7 +67,6 @@ export class MyPostsComponent implements OnInit {
       this.postsViews--;
       this.post = this.posts.at(this.postsViews);
     }else{
-      console.log('no se puede retroceder mas');
     }
   }
 

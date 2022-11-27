@@ -35,7 +35,6 @@ export class ChatPreviewComponent implements OnInit {
               this.contacts = [];
             }
             this.contacts.push(y!);
-            console.log(this.contacts + 'contactos')
           })
         });
       });

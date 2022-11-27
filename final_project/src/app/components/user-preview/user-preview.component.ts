@@ -28,7 +28,7 @@ export class UserPreviewComponent implements OnInit {
     this.getChat(this.chatId);
     this.imageService.getImagesById(this.user.profileImg).subscribe(x => {
       if(x.status==404){
-        console.log("Error 404: IMAGE NOT FOUND");
+        console.error("Error 404: IMAGE NOT FOUND");
         return;
       }
       this.profileImgUrl = x});
@@ -51,17 +51,11 @@ export class UserPreviewComponent implements OnInit {
   getChat(chatId:string){
     this.userService.getChatById(chatId).subscribe(chat => {
       if(chat.status==404){
-        console.log('Error 404, CHAT NOT FOUND');
+        console.error('Error 404, CHAT NOT FOUND');
         return;
       }
       this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
-      message => {
-        if(message.status==404){
-          console.log(`Error 404, MESSAGE ${chat?.messagesIds.at(-1)!} NOT FOUND`);
-          return;
-        }
-        this.lastMessage = message.text.substring(0, 20) + '...'
-      }
+      message => this.lastMessage = message.text.substring(0, 20) + '...'
     )});
   }
 

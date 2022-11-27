@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Image } from '../interfaces/Image';
-import { map, filter, ignoreElements } from 'rxjs/operators';
 import { Observable, pipe, tap, catchError, of } from 'rxjs';
 
 @Injectable({
