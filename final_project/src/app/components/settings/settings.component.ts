@@ -49,6 +49,10 @@ export class SettingsComponent implements OnInit {
       this.currentUser.departmentId = department
       this.userService.updateUser(this.currentUser).subscribe(
         x => {
+          if(x.status==404){
+            console.log("Error 404: USER NOT FOUND");
+            return
+          }
           this.currentDepartmentId = x.departmentId;
           window.location.reload();
 

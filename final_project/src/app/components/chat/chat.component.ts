@@ -42,6 +42,10 @@ export class ChatComponent implements OnInit {
         this.messages = [];
         this.originUsername = originUser?.username;
         this.userService.getUserByUsername(targetUsername).subscribe(targetUser => {
+          if(targetUser.status==404){
+            console.log('Error 404, USER NOT FOUND');
+            return;
+          }
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
             this.chat = chat;

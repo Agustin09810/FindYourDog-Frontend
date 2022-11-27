@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
+import { Router } from '@angular/router';
 
-import { map, filter, ignoreElements, switchMap, catchError } from 'rxjs/operators';
-import { combineLatest, forkJoin, Observable, pipe, of, tap } from 'rxjs';
-import { Message } from '../interfaces/Message';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, of, tap } from 'rxjs';
 import { Chat } from '../interfaces/Chat';
-import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +18,23 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http:HttpClient, private messageService: MessageService) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router ) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
-  }
-
-  login(username: string, password: string): Observable<any|undefined> {
-    return this.http.post<any>(this.usersUrl, { username, password }, this.httpOptions);
-  }
-
-  getUserByUsername(username:string) {
-    return this.http.get<User>(`${this.usersUrl}/${username}`);
+  getUserByUsername(username:string): Observable<User|any> {
+    return this.http.get<User>(`${this.usersUrl}/${username}`).pipe(
+      catchError(err => { return of(err)})
+    );
  }
 
   getUser(): Observable<User|undefined> {
-    return this.http.get<User>(this.usersUrl).pipe(tap(user => console.log(user)));
+    return this.http.get<User>(this.usersUrl).pipe(tap(user => console.log(user)),
+    catchError(err => { 
+      if(err.status == 404){
+        this.router.navigate(['/error404']);
+      }
+      return of(err)}));
   }
 
 
@@ -47,7 +47,7 @@ export class UserService {
   }
 
 
-  getContactsUsernames(username:string){
+  getContactsUsernames(username:string): Observable<string[]>{
     return this.getUserByUsername(username).pipe(map(user => user?.contactsUsernames));
   }
 
@@ -56,7 +56,9 @@ export class UserService {
   }
 
   updateUser(user:User){
-    return this.http.put<User>(this.usersUrl + '/' + user.username, user, this.httpOptions);
+    return this.http.put<User>(this.usersUrl + '/' + user.username, user, this.httpOptions).pipe(
+      catchError(err => { return of(err)})
+    );
   }
 
   createUser(user:User){

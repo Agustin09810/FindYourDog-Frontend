@@ -243,7 +243,11 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
       this.user!.postsIds.push(postX.id)
       id = postX.id;
       this.userService.updateUser(this.user!).subscribe(
-        () => {
+        (user) => {
+          if(user.status==404){
+            console.log("Error 404: USER NOT FOUND");
+            return
+          }
           this.zoneService.getZone(this.lostZone!).subscribe(zone => {
             zone.postsIds.push(id);
             this.zone = zone;
