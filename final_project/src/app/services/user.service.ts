@@ -29,7 +29,7 @@ export class UserService {
  }
 
   getUser(): Observable<User|undefined> {
-    return this.http.get<User>(this.usersUrl).pipe(tap(user => console.log(user)),
+    return this.http.get<User>(this.usersUrl).pipe(
     catchError(err => { 
       if(err.status == 404){
         this.router.navigate(['/error404']);
