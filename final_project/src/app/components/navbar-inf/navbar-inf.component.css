@@ -4,6 +4,7 @@ footer{
     width: 100%;
     right: 0;
     background-color: white;
+    z-index: 9999;
 }
 footer a{
     align-content: center;

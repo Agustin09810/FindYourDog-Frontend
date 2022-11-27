@@ -157,7 +157,7 @@ export class PostViewComponent implements OnInit {
             let currentZone = zone;
             let index = currentZone.postsIds.indexOf(postId);
             currentZone.postsIds.splice(index, 1);
-            this.zoneService.updateZone(currentZone).subscribe();
+            this.zoneService.updateZone(currentZone).subscribe( () =>  window.location.reload());
           });
         });
       });

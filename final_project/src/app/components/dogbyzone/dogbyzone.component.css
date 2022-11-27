@@ -2,6 +2,12 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    margin-bottom: 10px;
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    max-width: 1200px;
+    z-index: 9999;
 }
 
 .upButton{
@@ -33,6 +39,10 @@
 
 .upButton:hover .bi{
     color:white;
+}
+
+.navBarInf{
+    z-index: 9999;
 }
 
 @media(max-width: 768px){

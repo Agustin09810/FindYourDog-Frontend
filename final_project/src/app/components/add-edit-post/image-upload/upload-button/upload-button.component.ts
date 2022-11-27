@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ImageByIdService } from '../../../../services/image-by-id.service';
 import { Image } from '../../../../interfaces/Image';
@@ -30,8 +30,8 @@ export class UploadButtonComponent implements OnInit {
   @Input() post?: Post;
 
 
-  //BORRAR
-  idNumber: string = 'random';
+  
+  idNumber: string = '';
   
   constructor(
     private imageService: ImageByIdService,

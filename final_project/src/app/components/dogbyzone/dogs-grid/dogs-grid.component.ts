@@ -16,6 +16,13 @@ export class DogsGridComponent implements OnInit {
 
   posts?: Post[];
   zone: Zone | undefined;
+
+  page: number = 1;
+  count: number = 0;
+  actualPost?: Post
+  currentIndex: number = -1;
+
+
   constructor(
     private postsService: PostsService,
     private zoneService: ZonesService,
@@ -25,6 +32,8 @@ export class DogsGridComponent implements OnInit {
   ngOnInit(): void {
     this.getZonePosts();
   }
+
+
   
   getZonePosts(): void {
     const id = this.route.snapshot.paramMap.get('zoneId');
@@ -41,16 +50,18 @@ export class DogsGridComponent implements OnInit {
   getZonePostsAux():void{
     if(this.zone !== undefined)
       {
-        if(this.zone.postsIds.length > 0){
-          this.zone.postsIds.forEach(postId => {
-            this.postsService.getPostsById(postId).subscribe(post => {
-              if(!this.posts){
-                this.posts = [];
-              }
-             this.posts.push(post)});
-          }); 
-        }       
+        this.postsService.getPostsByZone(this.zone.id, this.page - 1).subscribe(response => {
+          const { posts, totalItems } = response;
+          this.posts = posts;
+          this.count = totalItems;
+          console.log(response);
+        });
       }
+  }
+
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getZonePostsAux();
   }
   
 }

@@ -41,9 +41,10 @@ import { Page404Component } from './components/page404/page404.component';
 import { Page500Component } from './components/page500/page500.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.component';
 
 import { AuthInterceptor } from './interceptors/auth-interceptor';
-import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -82,13 +83,15 @@ import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.com
     Page500Component,
     SpinnerComponent,
     SignUpComponent,
-    ConfirmedComponent
+    ConfirmedComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
