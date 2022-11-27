@@ -20,8 +20,6 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
 
   @Output() nextStep = new EventEmitter<string[]>();
 
-  @Input() validDate?: string;
-  validHour?: string;
   validZone?: string;
   
   zones: Zone[] = [];
@@ -119,6 +117,7 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
 
   nextStepFunction(date:string, hour: string, zone: string, ubiDetails: string): void {
     let toEmit: string[] = [];
+    
     toEmit.push("photos");
     toEmit.push(date)
     toEmit.push(hour)
@@ -133,15 +132,6 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
     let toEmit: string[] = [];
     toEmit.push("breed");
     this.nextStep.emit(toEmit);
-  }
-
-  checkHour(hour: string){
-    if(hour != ""){
-      this.validHour = "valid";
-    }
-    else{
-      this.validHour = "invalid";
-    }
   }
 
   checkZone(zone: string){

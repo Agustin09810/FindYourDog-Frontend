@@ -43,7 +43,6 @@ export class DogNameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if(this.dogName){
-      console.log(this.dogName);
       this.disableButton = 'active';
     }
     if(this.otherNames){

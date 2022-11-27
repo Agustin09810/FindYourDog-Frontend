@@ -28,6 +28,10 @@ export class PostsService {
     return this.http.get<Post>(`${this.postsUrl}/${id}`);
   }
 
+  getPostsByZone(zoneId: string, pageNumber: number): Observable<any> {
+    return this.http.get<Post[]>(`${this.postsUrl}?zoneId=${zoneId}&page=${pageNumber}`);
+  }
+
   addPost(post: Post): Observable<Post>{
     return this.http.post<Post>(this.postsUrl, post, this.httpOptions).pipe(
       tap((newPost: Post) => console.log(`added post with id=${newPost.id}`)),

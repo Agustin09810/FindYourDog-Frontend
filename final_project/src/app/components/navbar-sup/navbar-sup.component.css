@@ -48,22 +48,9 @@ a{
     vertical-align: center;
 }
 
-.arrow{
-    left:5%;
-    position:absolute;
-    cursor:pointer;
-}
-
-@media(max-width: 992px){
-    .navbar-brand{
-        position: relative;
-
-    }
-}
-@media(min-width: 992px){
-    .navbar-brand{
-        position: relative;
-        left: 10%
+@media(min-width:992px){
+    .arrow{
+        padding-right: 30px;
     }
 }
 

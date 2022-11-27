@@ -26,7 +26,7 @@ import {UserService} from '../../services/user.service';
 })
 export class AddEditPostComponent implements OnInit, OnDestroy {
 
-  step: string = "date";
+  step: string = "name";
   textNavbar: string = "Nombre";
 
   @ViewChild('dogPhotosComponent') dogPhotosComponent!: ImageUploadComponent;
@@ -59,11 +59,12 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     private zoneService: ZonesService,
     private route: ActivatedRoute,
     private userService: UserService
-  ) { }
+  ) { } 
   
   ngOnInit(): void {
     this.closeTabWarning();
     const postId = this.route.snapshot.paramMap.get('postId')
+    //Si existe la ID, significa que estoy editando un post.
     if(postId != undefined){
       this.postService.getPostsById(postId).subscribe(post => {
         this.post = post;
@@ -134,7 +135,9 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
         break;
       case "date":
         this.textNavbar = "Fecha";
+        if(data[1]){
         this.dogBreed = data[1];
+        }
         break;
       case "photos":
         this.textNavbar = "Fotos";
@@ -236,6 +239,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     let id: string = '0';
 
     this.postService.addPost(post).subscribe(postX => {
+      console.log(postX);
       this.user!.postsIds.push(postX.id)
       id = postX.id;
       this.userService.updateUser(this.user!).subscribe(
@@ -244,7 +248,8 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
             zone.postsIds.push(id);
             this.zone = zone;
             this.zoneService.updateZone(this.zone!).subscribe( () => {
-              this.router.navigate(['/zone/' + zone.id])});
+              this.router.navigate(['/zone/' + zone.id])
+            });
           });
         })
     });
