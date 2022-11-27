@@ -40,6 +40,10 @@ export class MyPostsComponent implements OnInit {
       let count:number = 0;
       user?.postsIds.forEach(postId => {
         this.postsService.getPostsById(postId).subscribe(post => {
+          if(post.status==404){
+            console.log('Error 404: POST NOT FOUND');
+            return;
+          }
           this.posts.push(post!); 
           console.log(this.posts); 
           if(count === 0){this.post = post};

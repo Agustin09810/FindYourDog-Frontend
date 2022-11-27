@@ -64,7 +64,13 @@ export class UploadButtonComponent implements OnInit {
         this.post!.photos[index] = this.post!.photos[lastElement];
         this.post!.photos[lastElement] = auxElement;
         this.post!.photos.pop();
-        this.postService.updatePost(this.post!).subscribe();
+        this.postService.updatePost(this.post!).subscribe( post => {
+            if(post.status==404){
+              console.log('Error 404: POST NOT FOUND');
+              return;
+            }
+          }
+        );
         this.selectedFile = undefined;
         this.imageToUpload = undefined;
       }

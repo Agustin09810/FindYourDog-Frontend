@@ -39,7 +39,9 @@ export class UserService {
 
 
   updateChat(chat:Chat) {
-    return this.http.put<Chat>(this.chatsUrl+`/${chat.id}`, chat, this.httpOptions);
+    return this.http.put<Chat>(this.chatsUrl+`/${chat.id}`, chat, this.httpOptions).pipe(
+      catchError(err => { return of(err)})
+    );
   }
 
   createChat(chat:Chat){
@@ -52,7 +54,9 @@ export class UserService {
   }
 
   getChatById(chatId:string){
-    return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`);
+    return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`).pipe(
+      catchError(err => { return of(err)})
+    );
   }
 
   updateUser(user:User){

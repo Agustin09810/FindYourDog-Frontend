@@ -20,44 +20,31 @@ export class PostsService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  getPosts(): Observable<Post[]>{
-    return this.http.get<Post[]>(this.postsUrl);
-  }
-
   getPostsById(id: string){
-    return this.http.get<Post>(`${this.postsUrl}/${id}`);
+    return this.http.get<Post>(`${this.postsUrl}/${id}`).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
   getPostsByZone(zoneId: string, pageNumber: number): Observable<any> {
-    return this.http.get<Post[]>(`${this.postsUrl}?zoneId=${zoneId}&page=${pageNumber}`);
+    return this.http.get<Post[]>(`${this.postsUrl}?zoneId=${zoneId}&page=${pageNumber}`).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
   addPost(post: Post): Observable<Post>{
-    return this.http.post<Post>(this.postsUrl, post, this.httpOptions).pipe(
-      tap((newPost: Post) => console.log(`added post with id=${newPost.id}`)),
-    catchError(this.handleError<Post>('addPost'))
-    );
+    return this.http.post<Post>(this.postsUrl, post, this.httpOptions);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-
-  updatePost(post: Post): Observable<Post>{
+  updatePost(post: Post): Observable<Post|any>{
     return this.http.put<Post>(`${this.postsUrl}/${post.id}`, post, this.httpOptions).pipe(
-      tap((newPost: Post) => console.log(`updated post with id=${newPost.id}`)),
-    catchError(this.handleError<Post>('updatePost'))
+      catchError( err => { return of(err)})
     );
   }
 
-  deletePost(post: Post): Observable<Post>{
+  deletePost(post: Post): Observable<Post|any>{
       return this.http.delete<Post>(`${this.postsUrl}/${post.id}`, this.httpOptions).pipe(
-      tap((newPost: Post) => console.log(`deleted post with id=${newPost.id}`)),
-      catchError(this.handleError<Post>('deletePost'))
+      catchError( err => { return of(err)})
       );
   } 
 }
