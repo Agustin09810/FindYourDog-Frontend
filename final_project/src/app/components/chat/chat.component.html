@@ -10,7 +10,7 @@
         </div>
         <div class="inputMsgDiv">
             
-            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded">
+            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded" (keyup.enter)="sendMessage(inputMessage.value); inputMessage.value=''">
             <button class="btn btn-styles mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
     
         </div>

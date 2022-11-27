@@ -68,19 +68,10 @@ export class ChatComponent implements OnInit {
   
 
 
-  /*getMessages(chatId:string){
-    this.userService.getChatById(chatId).subscribe(chat => {
-      //this.chat = chat;
-      chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => {
-        let msgFound = this.chat?.messagesIds!.find(messageId => msg.id === messageId);
-        if(msgFound == undefined){
-          this.messages?.push(msg); 
-        }
-      })); 
-    })
-  }*/
-
   sendMessage(message:string) {
+    if(message.trim().length == 0){
+      return;
+    }
     function generateRandomInt(max:number) {
       return Math.floor(Math.random() * max) + 1;
     }
