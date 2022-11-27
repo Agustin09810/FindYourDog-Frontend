@@ -1,11 +1,11 @@
-import { Department } from "./Department";
 import { Message } from "./Message";
 
-export interface User{
+export interface UserLogin{
     contactsUsernames:string[],
     chatsIds:string[],
     username:string,
     email:string,
+    password:string,
     profileImg: string,
     postsIds:string[];
     messages: Message[],

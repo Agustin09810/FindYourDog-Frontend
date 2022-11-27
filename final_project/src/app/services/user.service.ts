@@ -34,7 +34,7 @@ export class UserService {
  }
 
   getUser(): Observable<User|undefined> {
-    return this.http.get<User>(this.usersUrl);
+    return this.http.get<User>(this.usersUrl).pipe(tap(user => console.log(user)));
   }
 
 
