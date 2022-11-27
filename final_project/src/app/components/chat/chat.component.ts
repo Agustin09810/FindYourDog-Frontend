@@ -48,8 +48,12 @@ export class ChatComponent implements OnInit {
           }
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
+            if(chat.status==404){
+              console.log('Error 404, CHAT NOT FOUND');
+              return;
+            }
             this.chat = chat;
-            chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => {
+            chat?.messagesIds.forEach((id: string) => this.messageService.getMessageById(id).subscribe(msg => {
               this.messages?.push(msg); 
               console.log(chat.messagesIds.length + ' ' + this.messages?.length);
               
@@ -92,7 +96,11 @@ export class ChatComponent implements OnInit {
       let chat:Chat = {id:this.chatId, messagesIds:messagesIdsCopy}
       this.messageService.sendMessage(msg).subscribe(() => {
         this.messages?.push(msg);
-        this.userService.updateChat(chat).subscribe(() => {
+        this.userService.updateChat(chat).subscribe((chat) => {
+          if(chat.status==404){
+            console.log('Error 404, CHAT NOT FOUND');
+            return;
+          }
           this.chat?.messagesIds.push(msg.id);
         });
       });

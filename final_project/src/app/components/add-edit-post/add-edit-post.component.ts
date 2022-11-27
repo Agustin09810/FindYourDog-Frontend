@@ -67,26 +67,32 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     //Si existe la ID, significa que estoy editando un post.
     if(postId != undefined){
       this.postService.getPostsById(postId).subscribe(post => {
+        if(post.status==404){
+          console.log("Error 404: POST NOT FOUND");
+          return
+        }
         this.post = post;
-        this.dogName = this.post.dogName;
-        if(this.post.dogNicknames != undefined){
-          this.otherNames = this.post.dogNicknames;
-        }
-        this.dogGender = this.post.dogGender;
-        this.dogBreed = this.post.dogBreed;
-        this.lastSeenDate = this.post.lostOn.toString().split('T')[0];
-        this.lastSeenHour = this.post.lostOn.toString().split('T')[1].substring(0,5);
-        this.lostZone = this.post.lostZone;
-        if(this.post.lostDescription != undefined){
+        if(this.post){
+          this.dogName = this.post.dogName;
+          if(this.post.dogNicknames != undefined){
+            this.otherNames = this.post.dogNicknames;
+          }
+          this.dogGender = this.post.dogGender;
+          this.dogBreed = this.post.dogBreed;
+          this.lastSeenDate = this.post.lostOn.toString().split('T')[0];
+          this.lastSeenHour = this.post.lostOn.toString().split('T')[1].substring(0,5);
+          this.lostZone = this.post.lostZone;
+          if(this.post.lostDescription != undefined){
+            this.ubiDetails = this.post.lostDescription;
+          }
           this.ubiDetails = this.post.lostDescription;
-        }
-        this.ubiDetails = this.post.lostDescription;
-        if(this.post.dogDescription != undefined){
+          if(this.post.dogDescription != undefined){
+            this.dogDescription = this.post.dogDescription;
+          }
           this.dogDescription = this.post.dogDescription;
+          this.photos = this.post.photos;
+          this.editBool = true;
         }
-        this.dogDescription = this.post.dogDescription;
-        this.photos = this.post.photos;
-        this.editBool = true;
       }); 
     }
   }
@@ -210,7 +216,11 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
       }
     }
     this.post!.photos = imagesAux;
-    this.postService.updatePost(this.post!).subscribe(() => {
+    this.postService.updatePost(this.post!).subscribe((response) => {
+      if(response.status==404){
+        console.log("Error 404: POST NOT FOUND");
+        return
+      }
       if(this.zoneEditAux != undefined){
         this.zoneService.getZone(this.zoneEditAux).subscribe(zone => {
           if(zone.status == 404){

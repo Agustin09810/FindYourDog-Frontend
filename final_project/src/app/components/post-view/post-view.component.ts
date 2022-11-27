@@ -69,6 +69,10 @@ export class PostViewComponent implements OnInit {
     if(id)
       {
         this.postService.getPostsById(id).subscribe(post => {
+          if(post.status==404){
+            console.log('Error 404: POST NOT FOUND');
+            return;
+          }
           this.post = post;
           console.log(post);
           this.post?.photos.forEach(imgId => {

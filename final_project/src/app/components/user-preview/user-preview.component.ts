@@ -44,9 +44,14 @@ export class UserPreviewComponent implements OnInit {
 
   //Se obtiene el chat y posteriormente su último mensaje.
   getChat(chatId:string){
-    this.userService.getChatById(chatId).subscribe(chat => this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
+    this.userService.getChatById(chatId).subscribe(chat => {
+      if(chat.status==404){
+        console.log('Error 404, CHAT NOT FOUND');
+        return;
+      }
+      this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
       message => this.lastMessage = message.text.substring(0, 20) + '...'
-    ));
+    )});
   }
 
   

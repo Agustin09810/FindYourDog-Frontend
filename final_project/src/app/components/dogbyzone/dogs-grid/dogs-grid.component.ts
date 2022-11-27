@@ -55,6 +55,10 @@ export class DogsGridComponent implements OnInit {
     if(this.zone !== undefined)
       {
         this.postsService.getPostsByZone(this.zone.id, this.page - 1).subscribe(response => {
+          if(response.status==404){
+            console.log('Error 404: POSTS NOT FOUND');
+            return;
+          }
           const { posts, totalItems } = response;
           this.posts = posts;
           this.count = totalItems;
