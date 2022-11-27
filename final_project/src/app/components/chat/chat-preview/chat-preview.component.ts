@@ -28,7 +28,7 @@ export class ChatPreviewComponent implements OnInit {
         x!.forEach(element => {
           this.userService.getUserByUsername(element).subscribe(y => {
             if(y.status==404){
-              console.log('Error 404, USER NOT FOUND');
+              console.error('Error 404, USER NOT FOUND');
               return;
             }
             if(!this.contacts){

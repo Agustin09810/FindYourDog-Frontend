@@ -22,10 +22,8 @@ export class MessageComponent implements OnInit, AfterViewInit {
   //Despues de que se inicia completamente la vista del componente.
   ngAfterViewInit() { 
     if(this.localUsername === this.message?.originUsername) {
-      console.log('1');
       this.msgDiv?.nativeElement.classList.add('messageSent');
     }else{
-      console.log('2');
       this.msgDiv?.nativeElement.classList.add('messageRecived');
     }
   }
@@ -33,12 +31,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
   calculateTime(date: Date): string{
     if(date){
       let diff = new Date().getTime() - new Date(date).getTime();
-      console.log(diff)
-
-      
-
-      
-      
+  
       if(diff > 1000*60*60*24){
         if(Math.trunc(diff/1000/60/60/24) === 1){
           return `Hace ${Math.trunc(diff/1000/60/60/24)} día`;

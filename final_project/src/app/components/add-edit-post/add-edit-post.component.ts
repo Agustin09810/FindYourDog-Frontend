@@ -68,7 +68,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     if(postId != undefined){
       this.postService.getPostsById(postId).subscribe(post => {
         if(post.status==404){
-          console.log("Error 404: POST NOT FOUND");
+          console.error("Error 404: POST NOT FOUND");
           return
         }
         this.post = post;
@@ -218,7 +218,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     this.post!.photos = imagesAux;
     this.postService.updatePost(this.post!).subscribe((response) => {
       if(response.status==404){
-        console.log("Error 404: POST NOT FOUND");
+        console.error("Error 404: POST NOT FOUND");
         return
       }
       if(this.zoneEditAux != undefined){
@@ -257,18 +257,17 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     let id: string = '0';
 
     this.postService.addPost(post).subscribe(postX => {
-      console.log(postX);
       this.user!.postsIds.push(postX.id)
       id = postX.id;
       this.userService.updateUser(this.user!).subscribe(
         (user) => {
           if(user.status==404){
-            console.log("Error 404: USER NOT FOUND");
+            console.error("Error 404: USER NOT FOUND");
             return
           }
           this.zoneService.getZone(this.lostZone!).subscribe(zone => {
             if(zone.status == 404){
-              console.log(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
+              console.error(`Error 404: ZONE ${this.lostZone} NOT FOUND`);
               return;
             }
             zone.postsIds.push(id);
