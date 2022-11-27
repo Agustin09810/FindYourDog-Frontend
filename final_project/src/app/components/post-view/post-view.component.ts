@@ -111,26 +111,32 @@ export class PostViewComponent implements OnInit {
     if(this.currentUser){
       let chat:Chat = {id:'xd',  messagesIds:[]};
 
+      this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
+        if(user2.contactsUsernames.find(x => x == this.currentUser?.username)){
+          user2.chatsIds.forEach(chatUser2 => {
+            this.currentUser!.chatsIds.forEach(chatUser1 => {
+              if(chatUser2 == chatUser1){
+                this.router.navigate(['/chats/' + user2.username + '/' + chatUser2]);
+                return;
+              }
+            });
+          });
+          console.log('no podes neisdasdasdasd');
+          return;
+        }
+        console.log('algogopaodj');
         this.userService.createChat(chat).subscribe(chatRecived => {
+          console.log(chatRecived.id + ' elchat');
+          user2.chatsIds.push(chatRecived.id);
+          user2.contactsUsernames.push(this.currentUser!.username);
 
-          this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
+          this.currentUser!.chatsIds.push(chatRecived.id);
+          this.currentUser!.contactsUsernames.push(user2.username);
 
-            if(user2.contactsUsernames.find(x => x == this.currentUser?.username)){
-              console.log('no podes nei');
-              return;
-            }
+          this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(this.currentUser!).subscribe( y => this.router.navigate(['/chats/' + user2.username + '/' + chatRecived.id])));
+        })
 
-            console.log(chatRecived.id + ' elchat');
-            user2.chatsIds.push(chatRecived.id);
-            user2.contactsUsernames.push(this.currentUser!.username);
-
-            this.currentUser!.chatsIds.push(chatRecived.id);
-            this.currentUser!.contactsUsernames.push(user2.username);
-
-
-            this.userService.updateUser(user2).subscribe( x => this.userService.updateUser(this.currentUser!).subscribe( y => this.router.navigate(['/chats/' + user2.username + '/' + chatRecived.id])));
-          })
-        });
+      });
     }   
   };
     
