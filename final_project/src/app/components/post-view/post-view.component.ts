@@ -43,12 +43,11 @@ export class PostViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //Permite que cargue desde otros componentes pasando data a traves de inputs.
     if (this.inputPost) {
       this.post = this.inputPost;
       this.displayButton = false;
       this.getCurrentUser();
-    }else{//default
+    }else{
       this.getPostById('post-view-Id');
       this.displayButton = true;
       this.getCurrentUser();
@@ -112,16 +111,10 @@ export class PostViewComponent implements OnInit {
   getCurrentUser(){
     return this.userService.getUser().subscribe(user => this.currentUser = user);
   }
-  //crer chat con el usuario que creo el post
-  //agregar el chatId en ambos usuarios
 
-  //get from route username
   contactUser(): void {
-
-
     if(this.currentUser){
-      let chat:Chat = {id:'xd',  messagesIds:[]};
-
+      let chat:Chat = {id:'random',  messagesIds:[]};
       this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
         if(user2.status==404){
           console.error('Error 404, USER NOT FOUND');

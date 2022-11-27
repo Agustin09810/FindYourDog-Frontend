@@ -113,17 +113,8 @@ export class SignUpComponent implements OnInit {
         }else{
           this.userCreated = true;
         }
-
         this.cd.detectChanges();
-
-        
       });
     }
-
-    
-    //add username or email taken error
-
-    
   }
-
 }

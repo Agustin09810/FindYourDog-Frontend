@@ -7,8 +7,7 @@ import { Message } from 'src/app/interfaces/Message';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit, AfterViewInit {
-  //chequear q el origin del mesagge sea diferente a mi asi pongo x estilo en el mesagge.
-  @Input() message?:Message;//si hay problemas con el undefined se puede crear un msg que diga cargando mensaje etc.
+  @Input() message?:Message;
   @Input() localUsername?: string;
   @ViewChild('msg') msgDiv?: ElementRef;
   messageDate?: string;
@@ -19,7 +18,6 @@ export class MessageComponent implements OnInit, AfterViewInit {
     this.messageDate = this.calculateTime(this.message!.date);
   }
 
-  //Despues de que se inicia completamente la vista del componente.
   ngAfterViewInit() { 
     if(this.localUsername === this.message?.originUsername) {
       this.msgDiv?.nativeElement.classList.add('messageSent');

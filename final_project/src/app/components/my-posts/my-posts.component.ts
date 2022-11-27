@@ -23,7 +23,7 @@ export class MyPostsComponent implements OnInit {
     this.getMyPosts();
   }
 
-  getRotueId(routeId: string): string | undefined{
+  getRouteId(routeId: string): string | undefined{
     const id = this.route.snapshot.paramMap.get(routeId);
     if(id){
       return id;
@@ -31,9 +31,6 @@ export class MyPostsComponent implements OnInit {
       return undefined;
     }
   }
-
-  //get my posts / array de posts
-  //cuando clickeo next agarro el n+1 elemento del array y lo seteo en una variable post, que se le pasa x input a post-view
 
   getMyPosts(){
     this.userService.getUser().subscribe(user => {

@@ -58,12 +58,4 @@ export class UserPreviewComponent implements OnInit {
       message => this.lastMessage = message.text.substring(0, 20) + '...'
     )});
   }
-
-  
-
-
-  
-
-  //limitar el tamaño del username mostrado y ddel last msg mostrado.
-
 }

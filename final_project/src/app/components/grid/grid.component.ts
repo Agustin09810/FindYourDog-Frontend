@@ -22,18 +22,21 @@ export class GridComponent implements OnInit {
   constructor(private zoneService:ZonesService, private departmentService:DepartmentService) { }
   ngOnInit(): void {
     this.loadZones();
-    console.error(this.departmentId);
   }
 
   loadZones(){
     if(this.departmentId){
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
-        if(department.status){
+        if(department.status==404){
           console.error(`Error ${department.status}: DEPARTMENT ${this.departmentId} NOT FOUND`);
           return;
         }
         department.zonesIds.forEach((zoneId: string) => {
           this.zoneService.getZone(zoneId).subscribe(zone => {
+            if(zone.status==404){
+              console.error(`Error ${zone.status}: ZONE ${zoneId} NOT FOUND`);
+              return;
+            }
             if(!this.zones){
               this.zones = [];
             }

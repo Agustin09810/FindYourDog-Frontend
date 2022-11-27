@@ -5,7 +5,6 @@ import { Image } from 'src/app/interfaces/Image';
 @Component({
   selector: 'app-post-carousel',
   templateUrl: './post-carousel.component.html',
-  //encapsulation: ViewEncapsulation.None,
   styleUrls: ['./post-carousel.component.css']
 })
 export class PostCarouselComponent implements OnInit {
