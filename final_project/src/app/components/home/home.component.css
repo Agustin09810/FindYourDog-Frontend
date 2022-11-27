@@ -9,3 +9,19 @@
     max-width: 1200px;
     z-index: 9999;
 }
+
+.containerDiv{
+    position: relative;
+    width: 100%;
+
+    max-width: 1200px;
+}
+
+.outerDiv{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: space-around;
+}

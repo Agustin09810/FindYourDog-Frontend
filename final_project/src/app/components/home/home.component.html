@@ -1,5 +1,9 @@
-<div class="navbarStyles">
-    <app-navbar-sup [text]="'Home'"></app-navbar-sup>
+<div class="outerDiv">
+    <div class="containerDiv">
+        <div class="navbarStyles">
+            <app-navbar-sup [text]="'Home'"></app-navbar-sup>
+        </div>
+        <app-grid [departmentId]="departmentId" *ngIf="departmentId" [username]="currentUsername"></app-grid>
+        <app-navbar-inf></app-navbar-inf>
+    </div>
 </div>
-<app-grid [departmentId]="departmentId" *ngIf="departmentId" [username]="currentUsername"></app-grid>
-<app-navbar-inf></app-navbar-inf>

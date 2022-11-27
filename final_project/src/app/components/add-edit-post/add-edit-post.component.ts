@@ -248,7 +248,7 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
             zone.postsIds.push(id);
             this.zone = zone;
             this.zoneService.updateZone(this.zone!).subscribe( () => {
-              //this.router.navigate(['/zone/' + zone.id])
+              this.router.navigate(['/zone/' + zone.id])
             });
           });
         })
