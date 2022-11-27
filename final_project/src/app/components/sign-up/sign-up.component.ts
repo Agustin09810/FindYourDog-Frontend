@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/User';
 
 import {ChangeDetectorRef} from '@angular/core';
+import { UserLogin } from 'src/app/interfaces/UserLogin';
 
 @Component({
   selector: 'app-sign-up',
@@ -98,8 +99,8 @@ export class SignUpComponent implements OnInit {
       this.cd.detectChanges();
     }
     else{
-      console.log('todo bien');
-      const userToCreate: User = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
+      console.log(user +'mail: '+ mail +'pass: '+ password +'department: '+ department);
+      const userToCreate: UserLogin = { username: user, email: mail, password: password, departmentId: department, profileImg: '',
                         postsIds: [], chatsIds: [], contactsUsernames: [], messages: [], status: 'Pending'};
       this.userService.createUser(userToCreate).subscribe(x => {
         if(x.status==409){
