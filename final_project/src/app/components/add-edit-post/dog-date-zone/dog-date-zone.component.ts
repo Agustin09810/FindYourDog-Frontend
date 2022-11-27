@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, Output, ChangeDetectorRef, EventEmitter } from '@angular/core';
 
+import { UserService } from 'src/app/services/user.service';
+import { DepartmentService } from 'src/app/services/department.service';
+
 import {Zone} from '../../../interfaces/Zone';
 import {ZonesService} from '../../../services/zones.service';
 
@@ -27,6 +30,8 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
 
   constructor(
     private zonesService: ZonesService,
+    private userService: UserService,
+    private departmentService: DepartmentService,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -44,12 +49,13 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   }
 
   getZones(): void{
-    this.zonesService.getZones().subscribe(zones => {
-      if(zones.status == 404 || zones.status == 500){
-        this.zones = [];
-        console.error('NO ZONES FOUND')
-      }
-      this.zones = zones;
+    this.userService.getUser().subscribe(user => {
+      this.departmentService.getDepartmentById(user!.departmentId).subscribe(department => {
+        department.zonesIds.forEach((zone: string) => {
+          this.zonesService.getZone(zone).subscribe(zone => {
+            this.zones.push(zone)})
+          })
+      })
     });
   }
 
