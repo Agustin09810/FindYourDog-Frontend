@@ -114,6 +114,12 @@ export class PostViewComponent implements OnInit {
         this.userService.createChat(chat).subscribe(chatRecived => {
 
           this.userService.getUserByUsername(this.post?.user!).subscribe(user2 => {
+
+            if(user2.contactsUsernames.find(x => x == this.currentUser?.username)){
+              console.log('no podes nei');
+              return;
+            }
+
             console.log(chatRecived.id + ' elchat');
             user2.chatsIds.push(chatRecived.id);
             user2.contactsUsernames.push(this.currentUser!.username);
