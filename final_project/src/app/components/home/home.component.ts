@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
       this.userService.getUser().subscribe(user => {
         this.currentUsername = user?.username;
         this.departmentId = user?.departmentId;
-        console.error(this.departmentId);
-        console.error(user);
       });
   }
 
