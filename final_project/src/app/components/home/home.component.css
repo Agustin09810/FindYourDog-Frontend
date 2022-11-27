@@ -26,3 +26,9 @@
     display: flex;
     justify-content: space-around;
 }
+
+@media(min-width:992px){
+    .navBarInf{
+        display: none;
+    }
+}

@@ -122,6 +122,11 @@
     }
 
 }
+@media(min-width:992px){
+    .navBarInf{
+        display: none;
+    }
+}
 @media (min-width:2300px){
     .containerDiv{
         max-width: 1500px;

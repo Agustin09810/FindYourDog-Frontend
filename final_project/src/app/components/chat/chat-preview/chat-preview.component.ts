@@ -13,7 +13,7 @@ export class ChatPreviewComponent implements OnInit {
 
   
   user?:User;
-  contacts?:User[]
+  contacts?:User[];
   constructor(private userService:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {

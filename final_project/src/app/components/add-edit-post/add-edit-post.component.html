@@ -13,4 +13,4 @@
         <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" [dogPhotos]="photos" [editBool]="editBool" [dogDescription]="dogDescription"  [post]="post" (nextStep)="navigateAux($event)" (editPost)="edit($event)" ></app-dog-photos>
     </div>
 </div>
-<app-navbar-inf style="position:fixed"></app-navbar-inf>
+<app-navbar-inf class="navBarInf" style="position:fixed"></app-navbar-inf>
