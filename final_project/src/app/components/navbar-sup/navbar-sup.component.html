@@ -3,7 +3,7 @@
     <button *ngIf="!backArrow" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div *ngIf="backArrow" class="arrow" (click)="goBack()"><i class="bi bi-arrow-left"></i></div>
+    <div *ngIf="backArrow" class="navbar arrow" (click)="goBack()"><i class="bi bi-arrow-left"></i></div>
     <a class="navbar-brand">{{text}}</a>
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav">
