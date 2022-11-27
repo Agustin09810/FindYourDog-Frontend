@@ -10,7 +10,7 @@ import { catchError, shareReplay} from 'rxjs/operators';
 })
 export class AuthService {
 
-  URL: string ='http://localhost:3000/api/v1/login';
+  URL: string ='https://fyd.azurewebsites.net/api/v1/login';
 
   constructor(private http: HttpClient) {
   }

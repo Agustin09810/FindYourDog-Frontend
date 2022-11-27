@@ -12,8 +12,8 @@ import { Chat } from '../interfaces/Chat';
 })
 export class UserService {
 
-  private usersUrl = 'http://localhost:3000/api/v1/users';
-  private chatsUrl = 'http://localhost:3000/api/v1/chats';
+  private usersUrl = 'https://fyd.azurewebsites.net/api/v1/users';
+  private chatsUrl = 'https://fyd.azurewebsites.net/api/v1/chats';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -66,12 +66,12 @@ export class UserService {
   }
 
   createUser(user:User){
-    return this.http.post<User>(`http://localhost:3000/api/v1/signup/${user.username}` , user, this.httpOptions).pipe
+    return this.http.post<User>(`https://fyd.azurewebsites.net/api/v1/signup/${user.username}` , user, this.httpOptions).pipe
     (catchError(err => { return of(err) }));
   }
 
   confirmUser(code: string){
-    return this.http.get<User>(`http://localhost:3000/api/v1/confirm/${code}`);
+    return this.http.get<User>(`https://fyd.azurewebsites.net/api/v1/confirm/${code}`);
   }
 
 }

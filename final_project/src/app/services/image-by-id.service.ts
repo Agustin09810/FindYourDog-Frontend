@@ -8,7 +8,7 @@ import { Observable, pipe, tap, catchError, of } from 'rxjs';
 })
 export class ImageByIdService {
 
-  private imagesUrl = 'http://localhost:3000/api/v1/images'
+  private imagesUrl = 'https://fyd.azurewebsites.net/api/v1/images'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

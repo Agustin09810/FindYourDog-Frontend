@@ -10,7 +10,7 @@ import { Observable, map, of, catchError } from 'rxjs';
 })
 
 export class BreedService {
-  private breedsUrl = 'http://localhost:3000/api/v1/breeds';
+  private breedsUrl = 'https://fyd.azurewebsites.net/api/v1/breeds';
 
   constructor(private http: HttpClient) { }
 

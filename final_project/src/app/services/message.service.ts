@@ -10,7 +10,7 @@ import { Message } from '../interfaces/Message';
 
 export class MessageService {
   
-  private messagesUrl = 'http://localhost:3000/api/v1/messages';
+  private messagesUrl = 'https://fyd.azurewebsites.net/api/v1/messages';
 
   constructor(private http:HttpClient) { }
 
