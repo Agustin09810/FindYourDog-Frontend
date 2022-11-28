@@ -1,7 +1,16 @@
-<div *ngIf="posts" class="outerDiv">
+<div *ngIf="posts.length > 0" class="outerDiv">
     <div class="containerDiv">
         <i class="bi bi-chevron-right nextButton" (click)="nextPost()"></i>
         <i class="bi bi-chevron-left previousButton" (click)="previousPost()"></i>
         <app-post-view *ngIf="post" [inputPost]="post" class="post-view"></app-post-view>
     </div>   
+</div>
+<div *ngIf="display == false" class="outerDivNoPost">
+    <div class="innerDivNoPost">
+        <h2>¡Que suerte! No tienes publicaciones</h2>
+        <button class="btn btn-outline-dark" routerLink="/home">Inicio</button>
+        <div class="imgContainer">
+            <img src="https://res.cloudinary.com/dm6civzi7/image/upload/v1668897469/test/happy-dog_uwpjhq.jpg" alt="">
+        </div>
+    </div>
 </div>

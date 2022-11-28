@@ -1,8 +1,8 @@
 <div class="outer">
-    <app-image-upload class="imageContainer" #imageUploadComponent (sendImagesToCheck)="checkIfButtonShouldBeDisabled()" [dogName]="dogName"></app-image-upload>
+    <app-image-upload class="imageContainer" #imageUploadComponent (sendImagesToCheck)="checkIfButtonShouldBeDisabled()" [dogName]="dogName" [dogPhotosIds]="dogPhotos!" [post]="post"></app-image-upload>
     <div class="container form mt-3">
         <label for="dogDetails">Detalles adicionales:</label>
-        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails"></textarea>
+        <textarea #dogDetails class="form-control" rows="4" maxlength="120" placeholder="" (keyup)="countCharacters(dogDetails.value)" id="dogDetails">{{dogDescription}}</textarea>
         <small class="form-text text-muted">{{counterOfChars}}/120</small>
     </div>
 </div>
@@ -12,7 +12,8 @@
             <button type="button" class="back btn btn-outline-primary" (click)="lastStepFunction()">Volver</button>
         </div>
         <div class="col">
-            <button type="button" class="continue btn btn-primary {{disableButton}} " (click)="nextStepFunction()">Publicar</button>
+            <button type="button" *ngIf="!editBool" class="continue btn btn-primary {{disableButton}} " (click)="nextStepFunction(dogDetails.value)">Publicar</button>
+            <button type="button" *ngIf="editBool" class="continue btn btn-primary {{disableButton}} " (click)="editPostFunction(dogDetails.value)">Editar</button>
         </div>
     </div>
 </div>

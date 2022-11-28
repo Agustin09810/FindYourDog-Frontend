@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, Output, ChangeDetectorRef, EventEmitter } from '@angular/core';
 
+import { UserService } from 'src/app/services/user.service';
+import { DepartmentService } from 'src/app/services/department.service';
+
 import {Zone} from '../../../interfaces/Zone';
 import {ZonesService} from '../../../services/zones.service';
 
@@ -14,17 +17,21 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   @Input() lastSeenDate?: string;
   @Input() lastSeenHour?: string;
   @Input() lostZone?: string;
-  @Input() ubiDetails: string = "";
+  @Input() ubiDetails?: string
 
   @Input() counterOfChars: number = 0;
 
   @Output() nextStep = new EventEmitter<string[]>();
+
+  validZone?: string;
   
   zones: Zone[] = [];
   disableButton: string = "disabled";
 
   constructor(
     private zonesService: ZonesService,
+    private userService: UserService,
+    private departmentService: DepartmentService,
     private cd: ChangeDetectorRef
   ) { }
 
@@ -42,7 +49,14 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
   }
 
   getZones(): void{
-    this.zonesService.getZones().subscribe(zones => this.zones = zones);
+    this.userService.getUser().subscribe(user => {
+      this.departmentService.getDepartmentById(user!.departmentId).subscribe(department => {
+        department.zonesIds.forEach((zone: string) => {
+          this.zonesService.getZone(zone).subscribe(zone => {
+            this.zones.push(zone)})
+          })
+      })
+    });
   }
 
   verifyDate(date: string, hour:string, selectedIndex:number): boolean{
@@ -105,6 +119,7 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
       }
     }
     this.disableButton = "active";
+    this.cd.detectChanges();
     return true;
   }
 
@@ -114,12 +129,13 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
 
   nextStepFunction(date:string, hour: string, zone: string, ubiDetails: string): void {
     let toEmit: string[] = [];
+    
     toEmit.push("photos");
     toEmit.push(date)
     toEmit.push(hour)
     toEmit.push(zone)
-    if(ubiDetails != ''){
-      toEmit.push(ubiDetails)
+    if(ubiDetails.trim().length != 0){
+      toEmit.push(ubiDetails.trim())
     }
     this.nextStep.emit(toEmit);
   }
@@ -128,6 +144,15 @@ export class DogDateZoneComponent implements OnInit, AfterViewInit {
     let toEmit: string[] = [];
     toEmit.push("breed");
     this.nextStep.emit(toEmit);
+  }
+
+  checkZone(zone: string){
+    if(zone != "0"){
+      this.validZone = "valid";
+    }
+    else{
+      this.validZone = "invalid";
+    }
   }
 
 }

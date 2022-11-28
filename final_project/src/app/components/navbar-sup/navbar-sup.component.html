@@ -1,17 +1,19 @@
 <nav class="navbar navbar-expand-lg" id="navBar" *ngIf="text">
   <div class="container">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <button *ngIf="!backArrow" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <div *ngIf="backArrow" class="navbar arrow" (click)="goBack()"><i class="bi bi-arrow-left"></i></div>
     <a class="navbar-brand">{{text}}</a>
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav">
         <!-- NAVIGATION NEEDS TO BE FIXED (id navigation) -->
-        <li class="nav-item"><a class="nav-link active" routerLink="/addpost"><i class="bi bi-plus-circle-fill"></i><strong>Publicar</strong></a></li>
-        <li class="nav-item"><a class="nav-link active" routerLink="/random"><i class="bi bi-stickies"></i> Mis publicaciones</a></li>
-        <li class="nav-item"><a class="nav-link active" href="/chat"><i class="bi bi-chat"></i> Mensajes</a></li>
-        <li class="nav-item"><a class="nav-link active" href=""><i class="bi bi-gear"></i> Configuración</a></li>
-        <li class="nav-item"><a class="nav-link active" href=""><i class="bi bi-door-closed"></i> Cerrar sesión</a></li>
+        <li class="nav-item"><a class="nav-link active" routerLink="/home"><img class="homeI"src="assets/images/Home_Icon_Dark.png"><strong> Inicio</strong></a></li>
+        <li class="nav-item"><a class="nav-link active" routerLink="/addpost"><i class="bi bi-plus-circle-fill"></i><strong> Publicar</strong></a></li>
+        <li class="nav-item"><a class="nav-link active" routerLink="/myposts"><i class="bi bi-stickies"></i> Posts</a></li>
+        <li class="nav-item"><a class="nav-link active" routerLink="/chats"><i class="bi bi-chat"></i> Mensajes</a></li>
+        <li class="nav-item"><a class="nav-link active" routerLink="/settings"><i class="bi bi-gear"></i> Opciones</a></li>
+        <li class="nav-item"><a class="nav-link active" href="" (click)="logout()"><i class="bi bi-door-closed"></i> Salir</a></li>
       </ul>
     </div>
   </div>

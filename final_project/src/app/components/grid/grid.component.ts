@@ -16,19 +16,31 @@ import { DepartmentService } from 'src/app/services/department.service';
 export class GridComponent implements OnInit {
 
   @Input() departmentId?:string;
-  zones:Zone[] = [];
+  @Input() username?:string;
+  
+  zones?:Zone[];
   constructor(private zoneService:ZonesService, private departmentService:DepartmentService) { }
   ngOnInit(): void {
     this.loadZones();
-    console.log(this.departmentId);
   }
 
   loadZones(){
     if(this.departmentId){
-      console.log('xd');
       this.departmentService.getDepartmentById(this.departmentId).subscribe(department => {
-        department.zonesId.forEach(zoneId => {
-          this.zoneService.getZone(zoneId).subscribe(zone => this.zones.push(zone));
+        if(department.status==404){
+          console.error(`Error ${department.status}: DEPARTMENT ${this.departmentId} NOT FOUND`);
+          return;
+        }
+        department.zonesIds.forEach((zoneId: string) => {
+          this.zoneService.getZone(zoneId).subscribe(zone => {
+            if(zone.status==404){
+              console.error(`Error ${zone.status}: ZONE ${zoneId} NOT FOUND`);
+              return;
+            }
+            if(!this.zones){
+              this.zones = [];
+            }
+            this.zones.push(zone)});
         });
       })
     }

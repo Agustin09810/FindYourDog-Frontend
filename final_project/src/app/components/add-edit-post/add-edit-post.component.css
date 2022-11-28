@@ -3,6 +3,7 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    background-color: white;
 }
 
 .container{
@@ -20,7 +21,7 @@
     }
 
     .navbarStyles{
-        z-index: 999999;
+        z-index: 999;
         position: fixed;
         width: 100%;
         max-width: 1200px;
@@ -43,14 +44,19 @@
         max-width: 1200px;
         max-height: 700px;
         height: calc(100% - (87px + 86px));
-        width:100%;
+        width:50%;
         box-shadow: 10px 5px 5px rgb(97, 97, 97);
     }
 
     .component{
         position: relative;
         width:100%;
-        overflow-y:scroll;
+    }
+}
+
+@media(min-width:992px){
+    .navBarInf{
+        display: none;
     }
 }
 

@@ -10,25 +10,35 @@ import { MyPostsComponent } from './components/my-posts/my-posts.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AddEditPostComponent } from './components/add-edit-post/add-edit-post.component';
+import { Page404Component } from './components/page404/page404.component';
+import { Page500Component } from './components/page500/page500.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.component';
 
 const routes: Routes = [
-  { path: ':userId/home', component: HomeComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'signup', component: SignUpComponent },
+  { path: 'confirm/:code', component: ConfirmedComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'zone/:zoneId', component: DogbyzoneComponent },
-  { path: 'chat', component: ChatPreviewComponent },
+  { path: 'chats', component: ChatPreviewComponent },
   { path: 'login', component: LoginComponent },
   { path: 'zone/:zoneId/:post-view-Id', component: PostViewComponent },
-  { path: 'random/:userId', component: MyPostsComponent },
-  { path: 'chats/:userId/:targetUserId/:chatId', component: ChatComponent },
-  { path: 'settings/:userId', component: SettingsComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'addpost', component: AddEditPostComponent }
+  { path: 'myposts', component: MyPostsComponent },
+  { path: 'chats/:targetUsername/:chatId', component: ChatComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'addpost', component: AddEditPostComponent },
+  { path: 'editpost/:postId', component: AddEditPostComponent },
+  { path: 'error404', component: Page404Component },
+  { path: 'error500', component: Page500Component },
+  { path: '**', component: Page404Component }
 
  
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

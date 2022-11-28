@@ -1,7 +1,4 @@
 .containerDiv{
-    /*margin-left: 20vw;
-    margin-right: 20vw;
-    margin-top: 35vh;*/
     width: 100%;
     height: 100%;
     max-width: 500px;
@@ -9,6 +6,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    z-index: 9999;
+    background-color: white;
+}
+
+.title{
+    font-size: 2em;
+    font-weight: 700;
+    text-align: center;
 }
 
 .shadeDiv{
@@ -17,13 +22,45 @@
           rgba(0, 0, 0, 0.024) 0px 0px 0px 1px,
           rgba(0, 0, 0, 0.05) 0px 1px 0px 0px,
           rgba(0, 0, 0, 0.1) 0px 0px 8px 0px,
-          rgba(0, 0, 0, 0.4) 0px 20px 30px 0px;
-            
+          rgba(0, 0, 0, 0.4) 0px 20px 30px 0px;       
 }
 
 .loginButton{
     display: flex;
     justify-content: center;
+}
+.signUpButton{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    width:120px
+}
+
+.separator{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.separator1{
+    position:relative;
+    width:30%;
+    top: -.45rem;
+    left: -.45rem;
+}
+
+.o{
+    position: relative;
+}
+
+.separator2{
+    position: relative;
+    width:30%;
+    top: -.45rem;
+    right: -.45rem; 
 }
 
 .outerDiv{
@@ -32,5 +69,8 @@
     align-items: center;
     height: 100vh;
     width: 100vw;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
-

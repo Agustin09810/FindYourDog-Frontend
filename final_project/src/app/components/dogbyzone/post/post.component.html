@@ -1,12 +1,12 @@
 <div class="card" >
     <a routerLink="./{{post.id}}">
-    <img class="card-img-top" src="{{firstPhoto?.imageUrl}}" alt="Card image cap">
+    <img class="card-img-top" src="{{firstPhoto?.url}}" alt="Card image cap">
     </a>
     <div class="card-body">
         <h5 class="card-title">{{post.dogName}}</h5>
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><strong>Raza:</strong> {{post.dogBreed}}</li>
-        <li class="list-group-item"><strong>Perdido hace:</strong> {{getDayDiff(post.lostOn)}} días</li>
+        <li class="list-group-item"><strong>Perdido hace:</strong> {{getDayDiff(post.lostOn)}}</li>
     </ul> 
 </div>

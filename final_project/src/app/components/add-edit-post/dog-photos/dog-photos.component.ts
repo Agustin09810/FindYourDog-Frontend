@@ -4,6 +4,8 @@ import { Image} from '../../../interfaces/Image';
 import { ImageByIdService } from '../../../services/image-by-id.service';
 import { lastValueFrom } from 'rxjs';
 
+import {Post} from '../../../interfaces/Post';
+
 @Component({
   selector: 'app-dog-photos',
   templateUrl: './dog-photos.component.html',
@@ -17,16 +19,24 @@ export class DogPhotosComponent implements OnInit {
   ) { }
 
   @Input() dogName?: string;
-  dogPhotos?: string[];
+  @Input() dogPhotos?: string[];
+  @Input() dogDescription?: string;
   
   @Output() nextStep = new EventEmitter<string[]>();
+  @Output() editPost = new EventEmitter<string[]>();
 
   @ViewChild('imageUploadComponent') imageUploadComponent!: ImageUploadComponent;
 
   @Input() counterOfChars: number = 0;
-  @Input() disableButton: string = 'disabled';
+  disableButton: string = 'disabled';
+
+  @Input() editBool: boolean = false;
+  @Input() post?: Post;
 
   ngOnInit(): void {
+    if(this.editBool){
+      this.disableButton = 'active';
+    }
   }
 
   countCharacters(event: any){
@@ -38,10 +48,9 @@ export class DogPhotosComponent implements OnInit {
   }
 
   checkIfButtonShouldBeDisabled(): void {
-    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
     this.cd.detectChanges();
-    console.log(photos)
-    if(photos.length > 0){
+    if(images.length > 0){
       this.disableButton = 'active';
     }
     else{
@@ -50,11 +59,27 @@ export class DogPhotosComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  nextStepFunction() {
-    let photos: Image[] =  this.imageUploadComponent.checkAndSendImages();
+  async editPostFunction(textArea: string) {
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImagesToEdit();
     let photosIDs: string[] = [];
-    photos.forEach(photo => photosIDs.push(photo.id))
-    photos.forEach(async photo => await lastValueFrom(this.imageService.uploadImage(photo)));
+    photosIDs.push(textArea.trim());
+    for(let image of images){
+      if(!this.dogPhotos!.includes(image.id)){
+      const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
+      photosIDs.push(result.id);
+      }
+    }
+    this.editPost.emit(photosIDs)
+  }
+
+  async nextStepFunction(textArea: string) {
+    let images: Image[] =  this.imageUploadComponent.checkAndSendImages();
+    let photosIDs: string[] = [];
+    photosIDs.push(textArea.trim());
+    for(let image of images){
+      const result: Image = await lastValueFrom(this.imageService.uploadImage(image));
+      photosIDs.push(result.id);
+    }
     this.nextStep.emit(photosIDs)
   }
 }

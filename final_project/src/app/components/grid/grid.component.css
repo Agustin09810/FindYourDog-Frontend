@@ -1,10 +1,14 @@
 
-
 .gridContainer {
     margin-left: 0px;
-    margin-right: 0px;    
+    margin-right: 0px;  
+    margin-top: 67px;  
 }
 
 .container {
     margin-bottom: 80px;
+}
+
+.loading{
+    margin-top:15%;
 }

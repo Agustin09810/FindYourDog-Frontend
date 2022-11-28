@@ -1,5 +1,4 @@
-import { BinaryOperatorExpr } from '@angular/compiler';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-login-input',
@@ -8,16 +7,18 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class LoginInputComponent implements OnInit {
 
+
   @ViewChild('usernameInput') user!: ElementRef;
   @ViewChild('passwordInput') pass!: ElementRef;
-  constructor() { }
+
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
 
   getUsername(): string {
     return this.user.nativeElement.value;
-
   }
 
   getPassword(): string {

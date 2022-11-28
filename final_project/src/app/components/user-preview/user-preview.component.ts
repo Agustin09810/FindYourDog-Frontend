@@ -26,7 +26,12 @@ export class UserPreviewComponent implements OnInit {
   ngOnInit(): void {
     this.getChatId(this.originUser!, this.user!);
     this.getChat(this.chatId);
-    this.imageService.getImagesById(this.user.profileImg).subscribe(x => this.profileImgUrl = x);
+    this.imageService.getImagesById(this.user.profileImg).subscribe(x => {
+      if(x.status==404){
+        console.error("Error 404: IMAGE NOT FOUND");
+        return;
+      }
+      this.profileImgUrl = x});
 
 
   }
@@ -36,6 +41,7 @@ export class UserPreviewComponent implements OnInit {
     user1.chatsIds.forEach(element => {
       if(user2.chatsIds.includes(element)){
         this.chatId = element;
+        return;
       }
     });
 
@@ -43,16 +49,13 @@ export class UserPreviewComponent implements OnInit {
 
   //Se obtiene el chat y posteriormente su último mensaje.
   getChat(chatId:string){
-    this.userService.getChatById(chatId).subscribe(chat => this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
+    this.userService.getChatById(chatId).subscribe(chat => {
+      if(chat.status==404){
+        console.error('Error 404, CHAT NOT FOUND');
+        return;
+      }
+      this.messageService.getMessageById(chat?.messagesIds.at(-1)!).subscribe(
       message => this.lastMessage = message.text.substring(0, 20) + '...'
-    ));
+    )});
   }
-
-  
-
-
-  
-
-  //limitar el tamaño del username mostrado y ddel last msg mostrado.
-
 }

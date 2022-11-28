@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Image } from '../interfaces/Image';
-import { map, filter, ignoreElements } from 'rxjs/operators';
 import { Observable, pipe, tap, catchError, of } from 'rxjs';
 
 @Injectable({
@@ -9,40 +8,34 @@ import { Observable, pipe, tap, catchError, of } from 'rxjs';
 })
 export class ImageByIdService {
 
-  private imagesUrl = 'api/images'
+  private imagesUrl = 'https://fyd.azurewebsites.net/api/v1/images'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  httpOptionsFile = {
+    headers: new HttpHeaders({ 'Content-Type': 'multipart/form-data'})
+  }
+
   constructor(private http: HttpClient) { }
 
-  getImages() {
-    return this.http.get<Image[]>(this.imagesUrl)
-  }
+
 
   getImagesById(id:string) {
-    console.log(id);
-    return this.getImages().pipe(map(imgs => imgs.find(img => img.id === id)));
-  }
-
-  uploadImage(image: Image): Observable<Image> {
-    return this.http.post<Image>(this.imagesUrl, image, this.httpOptions).pipe(
-      tap((newImage: Image) => console.log(`added image with id=${newImage.id}`)),
-    catchError(this.handleError<Image>('uploadImage'))
+    return this.http.get<Image>(`${this.imagesUrl}/${id}`).pipe(
+      catchError( err => { return of(err)})
     );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); 
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  };
+  uploadImage(image: Image): Observable<Image> {
+    return this.http.post<Image>(this.imagesUrl, image, this.httpOptions);
+  }
 
   deleteImage(id: string) {
-    return this.http.delete<Image>(`${this.imagesUrl}/${id}`, this.httpOptions);
+    return this.http.delete<Image>(`${this.imagesUrl}/${id}`, this.httpOptions).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
 }

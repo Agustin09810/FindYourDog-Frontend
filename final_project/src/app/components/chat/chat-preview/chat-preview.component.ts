@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interfaces/User';
 import { UserService } from 'src/app/services/user.service';
 import { UserPreviewComponent } from '../../user-preview/user-preview.component';
@@ -10,31 +11,37 @@ import { UserPreviewComponent } from '../../user-preview/user-preview.component'
 })
 export class ChatPreviewComponent implements OnInit {
 
-  username:string = 'admin';
+  
   user?:User;
-  contacts:User[] = [];
-  constructor(private userService:UserService) { }
+  contacts?:User[];
+  constructor(private userService:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getUser(this.username);
+    this.getUser();
   }
 
 
-  getUser(username:string) {
-    this.userService.getUserByUsername(username).subscribe(x => {
+  getUser() {
+    this.userService.getUser().subscribe(x => {
       this.user = x;
-      console.log(x + 'xd user');
-      this.userService.getContactsIds(this.user!.username).subscribe(x => {
+      this.userService.getContactsUsernames(this.user!.username).subscribe(x => {
         x!.forEach(element => {
-          this.userService.getUserById(element).subscribe(y => {
-            console.log(y?.id + 'y');
-            this.contacts?.push(y!);
-            console.log(this.contacts + 'contactos')
+          this.userService.getUserByUsername(element).subscribe(y => {
+            if(y.status==404){
+              console.error('Error 404, USER NOT FOUND');
+              return;
+            }
+            if(!this.contacts){
+              this.contacts = [];
+            }
+            this.contacts.push(y!);
           })
         });
       });
     });
   }
+
+    
 
 
   

@@ -8,6 +8,7 @@
             <form>
                 <div class="input-group">
                     <input
+                        readonly
                         class="form-control"
                         placeholder="yyyy-mm-dd"
                         #datePicker
@@ -25,13 +26,13 @@
         </div>
         <div class="mb-3">
             <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker" #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
+            <input type="time" id="timePicker"  #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
             <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
         </div>
     </div>
     <div class="container comboBox mb-3">
         <label for="location" class="form-label">Ubicación:</label>
-        <select #locationComboBox class="form-select" id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
+        <select #locationComboBox class="form-select is-{{validZone}}" (change)="checkZone(locationComboBox.value)"  id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
             <option value="0">Seleccione una opción</option>
             <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
         </select>
@@ -39,7 +40,7 @@
     </div>
     <div class="container form">
         <label for="details">Detalles adicionales sobre la ubicación:</label>
-        <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details"></textarea>
+        <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details">{{ubiDetails}}</textarea>
         <small class="form-text text-muted">{{counterOfChars}}/100</small>
     </div>
 </div>

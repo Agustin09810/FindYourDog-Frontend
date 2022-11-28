@@ -28,7 +28,7 @@ textarea{
     }
     .outer{
         position:relative;
-        overflow-y:scroll;
+        overflow-y:auto;
         height: 90%;
     }
     .imageContainer{

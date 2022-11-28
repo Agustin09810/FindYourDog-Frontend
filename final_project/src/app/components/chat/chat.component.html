@@ -1,7 +1,7 @@
 <div class="outerDiv">
-    <div class="containerDiv" *ngIf="this.messagesBool">
+    <div class="containerDiv">
         <div class="navBar">
-            <app-navbar-sup [text]="this.targetUsername" class=""></app-navbar-sup>
+            <app-navbar-sup [backArrow]="true" [text]="this.targetUsername" class=""></app-navbar-sup>
         </div>
     
         <div class="divMsg">
@@ -10,7 +10,7 @@
         </div>
         <div class="inputMsgDiv">
             
-            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded">
+            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded" (keyup.enter)="sendMessage(inputMessage.value); inputMessage.value=''">
             <button class="btn btn-styles mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
     
         </div>

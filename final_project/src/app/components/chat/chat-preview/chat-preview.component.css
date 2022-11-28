@@ -1,6 +1,5 @@
 .bg-chat{
     position: relative;
-    background-color: whitesmoke;
     height: 100vh;
     width: 100vw;
 
@@ -12,19 +11,21 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    background-color: white;
     position: fixed;
     width: 100%;
     max-width: 1200px;
-    background-color: whitesmoke;
     z-index: 9999;
+}
 
+.loading{
+    margin-top:15%;
 }
 
 .containerUserPreview{
     position: relative;
     padding-top: 87px;
     padding-bottom: 56.5px;
-    background-color: whitesmoke;
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -35,6 +36,10 @@
     width: 100%;
 
     max-width: 1200px;
-    background-color: whitesmoke;
 }
 
+@media(min-width:992px){
+    .navBarInf{
+        display: none;
+    }
+}

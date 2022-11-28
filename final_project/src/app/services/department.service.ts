@@ -1,22 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { Department } from '../interfaces/Department';
 
-const departmentUrl = 'api/departments';
 @Injectable({
-  providedIn: 'root'
+providedIn: 'root'
 })
 export class DepartmentService {
 
-  constructor(private http:HttpClient) { }
+  private departmentsUrl = 'https://fyd.azurewebsites.net/api/v1/departments';
 
+
+  constructor(
+    private http:HttpClient,
+    ) {}
   
   getDepartments(){
-    return this.http.get<Department[]>(departmentUrl);
+    return this.http.get<Department[]>(this.departmentsUrl).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 
   getDepartmentById(id:string){
-    let url:string = departmentUrl + `/${id}`;
-    return this.http.get<Department>(url);
+    let url:string = this.departmentsUrl + `/${id}`;
+    return this.http.get<Department>(url).pipe(
+      catchError( err => { return of(err)})
+    );
   }
 }

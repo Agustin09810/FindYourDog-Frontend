@@ -9,6 +9,7 @@
     align-items: center;
     text-align: center;
     margin-right: 42.3% ;
+    
 }
 
 .nav-item{
@@ -43,9 +44,21 @@
     vertical-align: -1.75px;
 }
 
+img{
+    width: 15px;
+    height: 16px;
+}
+
 
 a{
     vertical-align: center;
 }
+
+@media(min-width:992px){
+    .arrow{
+        padding-right: 30px;
+    }
+}
+
 
 

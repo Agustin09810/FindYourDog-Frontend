@@ -1,10 +1,32 @@
-<div class="w-100 pt-4 px-2 container">
+<div class="loading" *ngIf="!posts">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="posts" class="w-100 pt-4 px-2 container">
     <div class="row gx-2 gy-2 w-100 gridContainer ">
         <app-post
-        *ngFor="let postX of posts" 
+        *ngFor="let postX of posts | paginate 
+        : { itemsPerPage: 10, currentPage: page, totalItems: count };
+        let i = index"
         class="col-md-4"
         [post]="postX">
         </app-post>
     </div>
 </div>
+
+<div class="container pagination">
+    <div class="row">
+        <div class="col">
+            <ngb-pagination
+            [collectionSize]="count"
+            [page]="page"
+            [maxSize]="3"
+            [rotate]="true"
+            [ellipses]="false"
+            [boundaryLinks]="true"
+            [pageSize]="10"
+            (pageChange)="handlePageChange($event)">
+            ></ngb-pagination>
+        </div>
+    </div>
 

@@ -1,88 +1,77 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../interfaces/User';
+import { Router } from '@angular/router';
 
-import { map, filter, ignoreElements, switchMap } from 'rxjs/operators';
-import { combineLatest, forkJoin, Observable, pipe } from 'rxjs';
-import { Message } from '../interfaces/Message';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, of, tap } from 'rxjs';
 import { Chat } from '../interfaces/Chat';
-import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  usersUrl = 'api/users';
-  chatsUrl = 'api/chats';
+  private usersUrl = 'https://fyd.azurewebsites.net/api/v1/users';
+  private chatsUrl = 'https://fyd.azurewebsites.net/api/v1/chats';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http:HttpClient, private messageService: MessageService) { }
+  constructor(
+    private http: HttpClient, 
+    private router: Router ) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
-  }
-
-  login(username:string, password:string): Observable<User|undefined> {
-    console.log(username + ' ' + password + 'entre login service');
-    return this.getUsers().pipe(map(users => users.find(user => 
-                                          ((user.username === username) && (user.password === password)))), map(user => {
-                                            if(user === undefined) {
-                                              console.log('user undefined');
-                                              return undefined;
-                                            } else{
-                                              console.log("user found");
-                                              return user;
-                                            }
-                                          }));
-  }
-
-  getUserByUsername(username:string) {
-    return this.getUsers().pipe(map(users => users.find(user => user.username === username)), map(user => {
-                                                                                      if(user === undefined) {
-                                                                                        console.log('user undefined');
-                                                                                        return undefined;
-                                                                                      } else{
-                                                                                        console.log("user found");
-                                                                                        return user;
-                                                                                      }
-                                                                                      }));
+  getUserByUsername(username:string): Observable<User|any> {
+    return this.http.get<User>(`${this.usersUrl}/${username}`).pipe(
+      catchError(err => { return of(err)})
+    );
  }
 
- getUserById(id:string){
-  return this.getUsers().pipe(map(users => users.find(user => user.id === id)));
- }
-
-  getMessages(username1:string, username2:string){
-    return this.getUserByUsername(username1).pipe(map(user => user?.messages));
+  getUser(): Observable<User|undefined> {
+    return this.http.get<User>(this.usersUrl).pipe(
+    catchError(err => { 
+      if(err.status == 404){
+        this.router.navigate(['/error404']);
+      }
+      return of(err)}));
   }
 
-  sendMessage(chat:Chat) {
-    return this.http.put<Chat>(this.chatsUrl, chat, this.httpOptions);
+
+  updateChat(chat:Chat) {
+    return this.http.put<Chat>(this.chatsUrl+`/${chat.id}`, chat, this.httpOptions).pipe(
+      catchError(err => { return of(err)})
+    );
   }
 
-  getContactsIds(username:string){
-    return this.getUserByUsername(username).pipe(map(user => user?.contactsIds));
+  createChat(chat:Chat){
+    return this.http.post<Chat>(this.chatsUrl, chat, this.httpOptions);
   }
 
-  getContacts(username:string){
 
-
-    return this.getContactsIds(username).pipe(map(ids => ids?.map(id => this.getUserById(id))));
-
+  getContactsUsernames(username:string): Observable<string[]>{
+    return this.getUserByUsername(username).pipe(map(user => user?.contactsUsernames));
   }
 
-  getChats(){
-    return this.http.get<Chat[]>(this.chatsUrl);
-  }
   getChatById(chatId:string){
-    return this.getChats().pipe(map(chats => chats.find(chat => chat.id == chatId)));
+    return this.http.get<Chat>(`${this.chatsUrl}/${chatId}`).pipe(
+      catchError(err => { return of(err)})
+    );
   }
 
-  updateDepartment(user:User){
-    return this.http.put<User>(this.usersUrl, user, this.httpOptions);
+  updateUser(user:User){
+    return this.http.put<User>(this.usersUrl + '/' + user.username, user, this.httpOptions).pipe(
+      catchError(err => { return of(err)})
+    );
+  }
+
+  createUser(user:User){
+    return this.http.post<User>(`https://fyd.azurewebsites.net/api/v1/signup/${user.username}` , user, this.httpOptions).pipe
+    (catchError(err => { return of(err) }));
+  }
+
+  confirmUser(code: string){
+    return this.http.get<User>(`https://fyd.azurewebsites.net/api/v1/confirm/${code}`);
   }
 
 }

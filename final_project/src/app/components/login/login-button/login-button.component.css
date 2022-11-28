@@ -1,3 +1,11 @@
 .formContainer {
     margin-bottom: 5px;
 }
+.btn{
+    width:100%
+}
+.divContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}

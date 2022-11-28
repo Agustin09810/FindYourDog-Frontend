@@ -32,24 +32,41 @@ export class ChatComponent implements OnInit {
 
 
   loadChat(){
-    const userId = this.route.snapshot.paramMap.get('userId');
-    const targetUserId = this.route.snapshot.paramMap.get('targetUserId');
+    const targetUsername = this.route.snapshot.paramMap.get('targetUsername');
     const chatId = this.route.snapshot.paramMap.get('chatId');
   
-    if(userId && targetUserId && chatId){
+    if(targetUsername && chatId){
       this.chatId = chatId;
-      this.userService.getUserById(userId).subscribe(originUser => {
-        this.user = originUser;
+
+      this.userService.getUser().subscribe(originUser => {
+        this.messages = [];
         this.originUsername = originUser?.username;
-        this.userService.getUserById(targetUserId).subscribe(targetUser => {
+        this.userService.getUserByUsername(targetUsername).subscribe(targetUser => {
+          if(targetUser.status==404){
+            console.error('Error 404, USER NOT FOUND');
+            return;
+          }
           this.targetUsername = targetUser?.username;
           this.userService.getChatById(chatId).subscribe(chat => {
+            if(chat.status==404){
+              console.error('Error 404, CHAT NOT FOUND');
+              return;
+            }
             this.chat = chat;
-            chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => this.messages?.push(msg))); 
-            this.messagesBool = true;
+            chat?.messagesIds.forEach((id: string) => this.messageService.getMessageById(id).subscribe(msg => {
+              this.messages?.push(msg); 
+              
+            if(this.messages?.length == chat?.messagesIds.length){
+              this.messages?.sort( (objA, objB) => new Date(objA.date).getTime() - new Date(objB.date).getTime());
+              this.messagesBool = true;
+
+              }
+            })); 
+            
           });
         })
       })
+      
     }
   }
 
@@ -57,27 +74,18 @@ export class ChatComponent implements OnInit {
   
 
 
-  /*getMessages(chatId:string){
-    this.userService.getChatById(chatId).subscribe(chat => {
-      //this.chat = chat;
-      chat?.messagesIds.forEach(id => this.messageService.getMessageById(id).subscribe(msg => {
-        let msgFound = this.chat?.messagesIds!.find(messageId => msg.id === messageId);
-        if(msgFound == undefined){
-          this.messages?.push(msg); 
-        }
-      })); 
-    })
-  }*/
-
   sendMessage(message:string) {
+    if(message.trim().length == 0){
+      return;
+    }
     function generateRandomInt(max:number) {
       return Math.floor(Math.random() * max) + 1;
     }
 
     let idMsg:number = generateRandomInt(100000000000);
 
-    if(this.originUsername && this.targetUsername && this.chatId && this.messagesBool == true){
-      let msg: Message = { id: `${idMsg}`, originUsername: this.originUsername, targetUsername: this.targetUsername, text: message};
+    if(this.originUsername && this.targetUsername && this.chatId){
+      let msg: Message = { id: `${idMsg}`, originUsername: this.originUsername, targetUsername: this.targetUsername, text: message, date: new Date() };
       let user:User = this.user!;
 
       let messagesIdsCopy:string[] = [...this.chat?.messagesIds!];
@@ -86,7 +94,11 @@ export class ChatComponent implements OnInit {
       let chat:Chat = {id:this.chatId, messagesIds:messagesIdsCopy}
       this.messageService.sendMessage(msg).subscribe(() => {
         this.messages?.push(msg);
-        this.userService.sendMessage(chat).subscribe(() => {
+        this.userService.updateChat(chat).subscribe((chat) => {
+          if(chat.status==404){
+            console.error('Error 404, CHAT NOT FOUND');
+            return;
+          }
           this.chat?.messagesIds.push(msg.id);
         });
       });

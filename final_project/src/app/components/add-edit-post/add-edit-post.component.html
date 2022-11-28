@@ -5,12 +5,12 @@
 </div>
 <div class="outerDiv">
     <div class="containerDiv">
-        <app-dog-name class="component" *ngIf="step == 'name'" [dogName]="dogName" [otherNames]="otherNames" (nextStep)="navigateAux($event)"></app-dog-name>
+        <app-dog-name class="component" *ngIf="step == 'name'" [dogName]="dogName" [otherNames]="otherNames" [editBool]="editBool"  (nextStep)="navigateAux($event)"></app-dog-name>
         <app-dog-gender class="component" *ngIf="step == 'gender'" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
         <app-dog-breed class="component" *ngIf="step == 'breed'" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
         <app-dog-date-zone class="component" *ngIf="step == 'date'" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
                 [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
-        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" (nextStep)="navigateAux($event)" ></app-dog-photos>
+        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" [dogPhotos]="photos" [editBool]="editBool" [dogDescription]="dogDescription"  [post]="post" (nextStep)="navigateAux($event)" (editPost)="edit($event)" ></app-dog-photos>
     </div>
 </div>
-<app-navbar-inf style="position:fixed"></app-navbar-inf>
+<app-navbar-inf class="navBarInf" style="position:fixed"></app-navbar-inf>

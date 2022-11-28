@@ -9,9 +9,20 @@ import {  } from 'src/app/interfaces/Post';
 export class DogNameComponent implements OnInit, AfterViewInit {
 
   @Input() dogName?: string;
-  @Input() otherNames: string[] = [];
+  @Input() otherNames?: string[];
   @Output() nextStep = new EventEmitter<string[]>();
-
+  editBoolean: boolean = false;
+  @Input() 
+  get editBool(): boolean {return this.editBoolean}
+  set editBool(value: boolean) {
+    this.editBoolean = value;
+    if(value){
+      this.disableButton = "active";
+    }
+    else{
+      this.disableButton = "disabled";
+    }
+  }
 
   @ViewChild('dogNameInput') dogNameInput!: ElementRef<HTMLInputElement>;
   @ViewChild('nickName1') another1Input?: ElementRef;
@@ -20,6 +31,7 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   @ViewChild('checkYes') another1Button!: ElementRef<HTMLButtonElement>;
   
   @Input() checked: boolean = false;
+  validName?: string;
 
   disableButton: string = "disabled";
 
@@ -33,15 +45,26 @@ export class DogNameComponent implements OnInit, AfterViewInit {
     if(this.dogName){
       this.disableButton = 'active';
     }
-    if(this.otherNames[0] != undefined){
-      this.checked = true;
-      this.checkYes.nativeElement.checked = true;
+    if(this.otherNames){
+      if(this.otherNames[0] != undefined){
+        this.checked = true;
+        this.checkYes.nativeElement.checked = true;
+      }
     }
     this.cd.detectChanges();
   }
+
+  checkValidName(): void {
+    if(this.dogNameInput.nativeElement.value.trim().length == 0){
+      this.validName = "invalid";
+    }
+    else{
+      this.validName = "valid";
+    }
+  }
   
   changeButtonState(): void {
-    if(this.dogNameInput.nativeElement.value != '') {
+    if(this.dogNameInput.nativeElement.value.trim().length != 0) {
       this.disableButton = "active";
     }
     else{
@@ -52,12 +75,12 @@ export class DogNameComponent implements OnInit, AfterViewInit {
   nextStepFunction(): void {
     let toEmit: string[] = [];
     toEmit.push("gender");
-    toEmit.push(this.dogNameInput.nativeElement.value);
+    toEmit.push(this.dogNameInput.nativeElement.value.trim());
     if(this.another1Input && this.another1Input.nativeElement.value != ''){
-      toEmit.push(this.another1Input.nativeElement.value);
+      toEmit.push(this.another1Input.nativeElement.value.trim());
     }
     if(this.another2Input && this.another2Input.nativeElement.value != ''){
-      toEmit.push(this.another2Input.nativeElement.value);
+      toEmit.push(this.another2Input.nativeElement.value.trim());
     }
     this.nextStep.emit(toEmit);
   }

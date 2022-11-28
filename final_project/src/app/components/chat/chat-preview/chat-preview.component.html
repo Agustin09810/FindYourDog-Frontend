@@ -3,7 +3,6 @@
         <div class="navbarStyles">
             <app-navbar-sup [text]="'Chats'"></app-navbar-sup>
         </div>
-
         <div *ngIf="user" class="containerUserPreview">
             <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">       
             </app-user-preview>
@@ -14,4 +13,4 @@
     </div>
     
 </div>
-<app-navbar-inf></app-navbar-inf>
+<app-navbar-inf class="navBarInf"></app-navbar-inf>

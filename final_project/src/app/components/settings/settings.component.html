@@ -1,24 +1,40 @@
-<div class="settings-container" *ngIf="currentUser">
+<div class="settings-container">
     <app-navbar-sup [text]="'Opciones'" class="navbarStyles"></app-navbar-sup>
     <div class="mid-div">
         <div class="info-user-container">
                 <img src="{{profileImgUrl}}" alt="profile image" class="profile-image">
-            <h2>{{currentUser.username}}</h2>
+            <h2>{{currentUser!.username}}</h2>
         </div>
-    
-        <div class="deparment-selection-container dropdown">
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Departamento
-            </button>
-            <ul class="dropdown-menu">
-                <li *ngFor="let department of departments"><a class="dropdown-item" (click)="updateDepartment(department)">
-                    {{department.name}}
-                </a></li>              
-                
-            </ul>
+        
+        
+        <div class="deparment-selection-container">
+            <label for="department" class="form-label">Departamento:</label>
+            <select #departmentComboBox class="form-select" (change)="checkDepartment(departmentComboBox.value)" id="department">
+                <option *ngFor="let departmentX of departments; index as i" value="{{departmentX.id}}" [selected]="departmentX.id == currentDepartmentId">{{departmentX.name}}</option>
+            </select>
+        </div>  
+        <div class="button mt-5">
+            <button class="btn btn-outline-dark {{dissableButton}}" data-bs-toggle="modal" data-bs-target="#saveChangesModal" >Guardar</button>
         </div>
     </div>
   
 </div>
-<app-navbar-inf class="navbarStyles"></app-navbar-inf>
+<app-navbar-inf class="navbarStyles navBarInf"></app-navbar-inf>
 
+<div class="modal fade" tabindex="-1" id="saveChangesModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">¿Guardar cambios?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Desea guardar los cambios?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="updateDepartment(departmentComboBox.value)">Si</button>
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+</div>

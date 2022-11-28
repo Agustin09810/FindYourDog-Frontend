@@ -26,6 +26,8 @@ img {
     position: relative;
     width: 100%; /* borrarlos y ponerlos 100% cuando tengagmos grilla*/
     height: 150px;
+    cursor:pointer;
+    
 
 }
 
@@ -34,6 +36,7 @@ img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    
     background: linear-gradient(179.47deg, #000000 0.45%, rgba(196, 196, 196, 0) 99.55%);
 }
 

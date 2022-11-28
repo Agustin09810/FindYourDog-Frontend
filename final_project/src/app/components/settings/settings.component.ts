@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/interfaces/Department';
 import { User } from 'src/app/interfaces/User';
 import { DepartmentService } from 'src/app/services/department.service';
@@ -13,11 +12,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private userService:UserService, private route:ActivatedRoute, private imageService:ImageByIdService, private departmentService:DepartmentService) { }
+  constructor(
+    private userService:UserService,
+    private imageService:ImageByIdService,
+    private departmentService:DepartmentService,
+    private cd: ChangeDetectorRef
+    ) { }
 
   currentUser?:User;
   profileImgUrl?:string;
   departments?:Department[];
+  currentDepartmentId?:string;
+  dissableButton: string = 'disabled';
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -25,25 +31,53 @@ export class SettingsComponent implements OnInit {
   }
 
   getCurrentUser(){
-    const id = this.route.snapshot.paramMap.get('userId');
-    if(id){
-      this.userService.getUserById(id).subscribe(user => {
-        this.currentUser = user;
-        this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(imageUrl => this.profileImgUrl = imageUrl?.imageUrl);
-      });
-    }
+    this.userService.getUser().subscribe(x => {
+      this.currentUser = x;
+      this.imageService.getImagesById(this.currentUser!.profileImg).subscribe(img => {
+        if(img.status==404){
+          console.error("Error 404: IMAGE NOT FOUND");
+          return;
+        }
+        this.profileImgUrl = img.url});
+    });
   }
 
   getDepartments(){
-    this.departmentService.getDepartments().subscribe(departments => this.departments = departments);
+    this.departmentService.getDepartments().subscribe(departments =>{
+      if(departments.status==404){
+        console.error("Error 404: DEPARTMENTS NOT FOUND");
+        return;
+      }
+       this.departments = departments
+       this.currentDepartmentId = departments.find((x: { id: string | undefined; }) => x.id == this.currentUser?.departmentId)?.id; });
   }
 
-  updateDepartment(department:Department){
+  updateDepartment(department: string){
     if(this.currentUser){
-      this.currentUser.departmentId = department.id;
-      this.userService.updateDepartment(this.currentUser).subscribe();
-      //this.userService.getUserById(this.currentUser.id).subscribe(user => console.log(user?.departmentId + ' obtenido'));
+      this.currentUser.departmentId = department
+      this.userService.updateUser(this.currentUser).subscribe(
+        x => {
+          if(x.status==404){
+            console.error("Error 404: USER NOT FOUND");
+            return
+          }
+          this.currentDepartmentId = x.departmentId;
+          window.location.reload();
+
+        }
+      );
     }
   }
 
+  checkDepartment(department: string){
+    if(this.currentUser){
+      if(this.currentUser.departmentId == department){
+        this.dissableButton = 'disabled';
+        return true;
+      }
+      this.dissableButton = '';
+      return false;
+    }
+    return false
+  }
 }

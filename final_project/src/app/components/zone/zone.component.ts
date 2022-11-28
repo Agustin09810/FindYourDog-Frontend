@@ -13,16 +13,21 @@ import { ImageByIdService } from 'src/app/services/image-by-id.service';
 export class ZoneComponent implements OnInit {
 
   @Input() zone!: Zone;
+  @Input() username?:string;
   img?: Image;
 
   constructor(private imgService:ImageByIdService) { }
 
   ngOnInit(): void {
-    this.imgService.getImagesById(this.zone.imgId).subscribe(x => this.img = x);
+    this.imgService.getImagesById(this.zone.imgId).subscribe(x => {
+      if(x.status==404){
+        console.error("Error 404: IMAGE NOT FOUND");
+        return;
+      }
+      this.img = x});
   }
 
-  nombre: string = 'Centro';
-  id:string = '1';
+  
 
 
 

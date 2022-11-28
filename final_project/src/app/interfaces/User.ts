@@ -2,14 +2,14 @@ import { Department } from "./Department";
 import { Message } from "./Message";
 
 export interface User{
-    id:string,
-    contactsIds:string[],
+    contactsUsernames:string[],
     chatsIds:string[],
     username:string,
-    password:string,
+    email:string,
     profileImg: string,
     postsIds:string[];
     messages: Message[],
-    departmentId: string
+    departmentId: string,
+    status: string,
     
 }

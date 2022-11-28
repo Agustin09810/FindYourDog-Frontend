@@ -7,9 +7,9 @@ import { AppComponent } from './app.component';
 import { ZoneComponent } from './components/zone/zone.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+
 import { GridComponent } from './components/grid/grid.component';
 import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
 import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
@@ -37,6 +37,15 @@ import { DogGenderComponent } from './components/add-edit-post/dog-gender/dog-ge
 import { DogBreedComponent } from './components/add-edit-post/dog-breed/dog-breed.component';
 import { DogDateZoneComponent } from './components/add-edit-post/dog-date-zone/dog-date-zone.component';
 import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-photos.component';
+import { Page404Component } from './components/page404/page404.component';
+import { Page500Component } from './components/page500/page500.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ConfirmedComponent } from './components/sign-up/confirmed/confirmed.component';
+
+import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
@@ -69,18 +78,24 @@ import { DogPhotosComponent } from './components/add-edit-post/dog-photos/dog-ph
     DogGenderComponent,
     DogBreedComponent,
     DogDateZoneComponent,
-    DogPhotosComponent
+    DogPhotosComponent,
+    Page404Component,
+    Page500Component,
+    SpinnerComponent,
+    SignUpComponent,
+    ConfirmedComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

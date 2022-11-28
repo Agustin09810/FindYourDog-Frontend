@@ -24,11 +24,22 @@ export class DogBreedComponent implements OnInit {
   }
 
   getBreeds() : void{
-    this.breedService.getBreeds().subscribe(breeds => this.breeds = breeds);
+    this.breedService.getBreeds().subscribe(breeds => {
+      if(breeds!.status == 404){
+        console.error(`Error 404, BREEDS NOT FOUND`);
+        this.breeds = [];
+        return;
+      }
+      this.breeds = breeds
+    });
   }
 
   getBreedById(id: string): void{
     this.breedService.getBreedById(id).subscribe(breed => {
+      if(breed!.status == 404){
+        console.error(`Error 404, BREED ${id} NOT FOUND`);
+        return;
+      }
       if(breed){
         this.dogBreed = breed.name;
       }

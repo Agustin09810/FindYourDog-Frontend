@@ -2,7 +2,7 @@
     <div class="container name">
         <p>Por favor, indique el <strong>nombre</strong> de su perro</p>
         <div class="form-floating mb-3">
-            <input type="text" #dogNameInput (keyup)="changeButtonState()" class="form-control" id="dogName" placeholder="Capitán" value="{{dogName}}" >
+            <input type="text" #dogNameInput (keyup)="changeButtonState()" (focusout)="checkValidName()" class="form-control is-{{validName}}" id="dogName" placeholder="Capitán" value="{{dogName}}" >
             <label for="dogName">Nombre</label>
             <small class="form-text text-muted">Este campo es obligatorio</small>
         </div>

@@ -5,6 +5,9 @@
 
     
 }
+.modal.fade{
+    z-index: 9999999;
+}
 
 .carousel-container{
     position: relative;
@@ -22,10 +25,8 @@
     border-top-color: rgb(228, 228, 228);
     border-top-width: 2px;
     border-top-style: solid;
-
     position: relative;
     height: 60%;
-
     overflow-y: auto;
 }
 
@@ -33,6 +34,10 @@
     display: flex;
     justify-content: space-around;
     z-index: 9999999;
+}
+
+.btn{
+    width: 35%;
 }
 
 .dog-name{
@@ -53,8 +58,6 @@
     position: relative;
     height: 100vh;
     width: 100vw;
-
-
     display: flex;
     justify-content: space-around;
 }
@@ -63,21 +66,15 @@
     border-bottom-color: rgb(228, 228, 228);
     border-bottom-width: 1px;
     border-bottom-style: solid;
-
-
-
-    z-index: 9999;
-
+    background-color: white;
+    z-index: 999;
     position: fixed;
     width: 100%;
     max-width: 1200px;
 }
 
 .navbarStylesInf {
-
-
-    z-index: 9999;
-
+    z-index: 999;
     position: fixed;
     width: 100%;
 }
@@ -114,7 +111,6 @@
         width: 50%;
         height: 100%;
         font-size: x-large;
-
         border-top-color: rgb(228, 228, 228);
         border-top-width: 2px;
         border-top-style: solid;
@@ -125,6 +121,11 @@
         height: 100%;
     }
 
+}
+@media(min-width:992px){
+    .navBarInf{
+        display: none;
+    }
 }
 @media (min-width:2300px){
     .containerDiv{

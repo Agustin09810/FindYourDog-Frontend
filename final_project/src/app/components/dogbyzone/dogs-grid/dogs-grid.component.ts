@@ -14,8 +14,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DogsGridComponent implements OnInit {
 
-  posts: any[] = [];
+  posts?: Post[];
   zone: Zone | undefined;
+
+  page: number = 1;
+  count: number = 0;
+  actualPost?: Post
+  currentIndex: number = -1;
+
+
   constructor(
     private postsService: PostsService,
     private zoneService: ZonesService,
@@ -25,12 +32,18 @@ export class DogsGridComponent implements OnInit {
   ngOnInit(): void {
     this.getZonePosts();
   }
+
+
   
   getZonePosts(): void {
     const id = this.route.snapshot.paramMap.get('zoneId');
     if(id)
       {
         this.zoneService.getZone(id).subscribe(zone =>{
+          if(zone.status == 404){
+            console.error(`Error 404: ZONE ${id} NOT FOUND`);
+            return;
+          }
           this.zone = zone;
           this.getZonePostsAux();
         } );
@@ -41,12 +54,21 @@ export class DogsGridComponent implements OnInit {
   getZonePostsAux():void{
     if(this.zone !== undefined)
       {
-        if(this.zone.posts.length > 0){
-          this.zone.posts.forEach(postId => {
-            this.postsService.getPostsById(postId).subscribe(post => this.posts.push(post));
-          }); 
-        }       
+        this.postsService.getPostsByZone(this.zone.id, this.page - 1).subscribe(response => {
+          if(response.status==404){
+            console.error('Error 404: POSTS NOT FOUND');
+            return;
+          }
+          const { posts, totalItems } = response;
+          this.posts = posts;
+          this.count = totalItems;
+        });
       }
+  }
+
+  handlePageChange(event: number): void {
+    this.page = event;
+    this.getZonePostsAux();
   }
   
 }

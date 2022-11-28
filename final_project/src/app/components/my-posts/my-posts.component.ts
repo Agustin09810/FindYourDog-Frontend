@@ -15,14 +15,15 @@ export class MyPostsComponent implements OnInit {
   posts:Post[] = [];
   post?:Post;
   postsViews:number = 0;
+  display?: boolean;
 
   constructor(private route: ActivatedRoute, private userService:UserService, private postsService:PostsService) { }
 
   ngOnInit(): void {
-    this.getMyPosts('userId');
+    this.getMyPosts();
   }
 
-  getRotueId(routeId: string): string | undefined{
+  getRouteId(routeId: string): string | undefined{
     const id = this.route.snapshot.paramMap.get(routeId);
     if(id){
       return id;
@@ -31,24 +32,22 @@ export class MyPostsComponent implements OnInit {
     }
   }
 
-  //get my posts / array de posts
-  //cuando clickeo next agarro el n+1 elemento del array y lo seteo en una variable post, que se le pasa x input a post-view
-
-  getMyPosts(routeId:string){
-    const id = this.getRotueId(routeId);
-    if(id){
-      this.userService.getUserById(id).subscribe(user => {
-        let count:number = 0;
-        user?.postsIds.forEach(postId => {
-          this.postsService.getPostsById(postId).subscribe(post => {
-            this.posts.push(post!); 
-            console.log(this.posts); 
-            if(count === 0){this.post = post};
-            count++;
-          });
+  getMyPosts(){
+    this.userService.getUser().subscribe(user => {
+      let count:number = 0;
+      user?.postsIds.forEach(postId => {
+        this.postsService.getPostsById(postId).subscribe(post => {
+          if(post.status==404){
+            console.error('Error 404: POST NOT FOUND');
+            return;
+          }
+          this.posts.push(post!); 
+          if(count === 0){this.post = post};
+          count++;
         });
-      })
-    }
+      });
+      if(user!.postsIds.length > 0){this.display = true;}else{this.display = false;}
+    })
   }
 
   nextPost(){
@@ -56,7 +55,6 @@ export class MyPostsComponent implements OnInit {
       this.postsViews++;
       this.post = this.posts.at(this.postsViews);
     }else{
-      console.log('no se puede avanzar mas');
     }
     
   }
@@ -66,9 +64,7 @@ export class MyPostsComponent implements OnInit {
       this.postsViews--;
       this.post = this.posts.at(this.postsViews);
     }else{
-      console.log('no se puede retroceder mas');
     }
   }
-
 
 }

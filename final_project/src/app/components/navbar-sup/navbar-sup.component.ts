@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar-sup',
@@ -8,10 +10,21 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarSupComponent implements OnInit {
 
   @Input() text?: string;
+  @Input() backArrow: boolean = false;
 
-  constructor() { }
+  constructor(
+    private location: Location, private authService:AuthService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }
