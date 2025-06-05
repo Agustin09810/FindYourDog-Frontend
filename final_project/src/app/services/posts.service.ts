@@ -6,13 +6,14 @@ import { Post } from '../interfaces/Post';
 
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostsService {
 
-  private postsUrl = 'http://localhost:3000/api/v1/posts';
+  private postsUrl = BACKEND_PROD + '/api/v1/posts';
 
   constructor(private http:HttpClient) { }
 

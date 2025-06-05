@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Department } from '../interfaces/Department';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
 providedIn: 'root'
 })
 export class DepartmentService {
 
-  private departmentsUrl = 'http://localhost:3000/api/v1/departments';
+  private departmentsUrl = BACKEND_PROD + '/api/v1/departments';
 
 
   constructor(

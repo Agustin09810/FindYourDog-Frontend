@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Message } from '../interfaces/Message';
+import { BACKEND_PROD } from './constants';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Message } from '../interfaces/Message';
 
 export class MessageService {
   
-  private messagesUrl = 'http://localhost:3000/api/v1/messages';
+  private messagesUrl = BACKEND_PROD + '/api/v1/messages';
 
   constructor(private http:HttpClient) { }
 

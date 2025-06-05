@@ -6,14 +6,15 @@ import { Router } from '@angular/router';
 import { map, catchError } from 'rxjs/operators';
 import { Observable, of, tap } from 'rxjs';
 import { Chat } from '../interfaces/Chat';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private usersUrl = 'http://localhost:3000/api/v1/users';
-  private chatsUrl = 'http://localhost:3000/api/v1/chats';
+  private usersUrl = BACKEND_PROD + '/api/v1/users';
+  private chatsUrl = BACKEND_PROD + '/api/v1/chats';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -66,13 +67,13 @@ export class UserService {
   }
 
   createUser(user:User): Observable<User|any>{
-    return this.http.post<User>(`http://localhost:3000/api/v1/signup/${user.username}` , user, this.httpOptions).pipe(
+    return this.http.post<User>(`${BACKEND_PROD}/api/v1/signup/${user.username}` , user, this.httpOptions).pipe(
       catchError( err => { return of(err)})
     );
   }
 
   confirmUser(code: string){
-    return this.http.get<User>(`http://localhost:3000/api/v1/confirm/${code}`);
+    return this.http.get<User>(`${BACKEND_PROD}/api/v1/confirm/${code}`);
   }
 
 }

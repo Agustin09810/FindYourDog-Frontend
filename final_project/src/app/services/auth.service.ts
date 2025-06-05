@@ -4,13 +4,14 @@ import { Observable, tap, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/User';
 import { catchError, shareReplay} from 'rxjs/operators';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  URL: string ='http://localhost:3000/api/v1/login';
+  URL: string = BACKEND_PROD + '/api/v1/login';
 
   constructor(private http: HttpClient) {
   }

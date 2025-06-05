@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Image } from '../interfaces/Image';
 import { Observable, pipe, tap, catchError, of } from 'rxjs';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageByIdService {
 
-  private imagesUrl = 'http://localhost:3000/api/v1/images'
+  private imagesUrl = BACKEND_PROD + '/api/v1/images'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

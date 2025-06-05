@@ -4,13 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Breed } from '../interfaces/Breed';
 import { Observable, map, of, catchError } from 'rxjs';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class BreedService {
-  private breedsUrl = 'http://localhost:3000/api/v1/breeds';
+  private breedsUrl = BACKEND_PROD + '/api/v1/breeds';
 
   constructor(private http: HttpClient) { }
 

@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Zone } from '../interfaces/Zone';
 import { catchError, Observable, of } from 'rxjs';
+import { BACKEND_PROD } from './constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZonesService {
 
-  private zonesUrl = 'http://localhost:3000/api/v1/zones'
+  private zonesUrl = BACKEND_PROD + '/api/v1/zones'
   constructor(private http:HttpClient) { }
 
   httpOptions = {
