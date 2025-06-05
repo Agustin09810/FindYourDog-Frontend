@@ -1,4 +1,3 @@
-
 import { Component, Input, NgModule, OnInit } from '@angular/core';
 import { ZonesService } from 'src/app/services/zones.service';
 import { Zone } from 'src/app/interfaces/Zone';
@@ -46,8 +45,8 @@ export class GridComponent implements OnInit {
     }
   }
 
-  
-
-
-
+  // TrackBy function for better performance
+  trackByZoneId(index: number, zone: Zone): string {
+    return zone.id;
+  }
 }

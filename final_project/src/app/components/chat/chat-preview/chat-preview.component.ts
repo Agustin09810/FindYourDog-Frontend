@@ -11,41 +11,75 @@ import { UserPreviewComponent } from '../../user-preview/user-preview.component'
 })
 export class ChatPreviewComponent implements OnInit {
 
-  
-  user?:User;
-  contacts?:User[];
-  constructor(private userService:UserService, private route:ActivatedRoute) { }
+  user?: User;
+  contacts?: User[];
+  isLoading: boolean = true;
+
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getUser();
   }
 
-
   getUser() {
-    this.userService.getUser().subscribe(x => {
-      this.user = x;
-      this.userService.getContactsUsernames(this.user!.username).subscribe(x => {
-        x!.forEach(element => {
-          this.userService.getUserByUsername(element).subscribe(y => {
-            if(y.status==404){
-              console.error('Error 404, USER NOT FOUND');
-              return;
-            }
-            if(!this.contacts){
-              this.contacts = [];
-            }
-            this.contacts.push(y!);
-          })
-        });
-      });
+    this.isLoading = true;
+    this.userService.getUser().subscribe({
+      next: (x) => {
+        this.user = x;
+        this.loadContacts();
+      },
+      error: (error) => {
+        console.error('Error loading user:', error);
+        this.isLoading = false;
+      }
     });
   }
 
-    
+  loadContacts() {
+    if (!this.user || !this.user.username) {
+      this.isLoading = false;
+      return;
+    }
 
+    this.userService.getContactsUsernames(this.user.username).subscribe({
+      next: (contactUsernames) => {
+        if (!contactUsernames || contactUsernames.length === 0) {
+          this.contacts = [];
+          this.isLoading = false;
+          return;
+        }
 
-  
-  
-
-
+        this.contacts = [];
+        let loadedCount = 0;
+        
+        contactUsernames.forEach(contactUsername => {
+          this.userService.getUserByUsername(contactUsername).subscribe({
+            next: (contactUser) => {
+              if (contactUser.status === 404) {
+                console.error('Error 404, USER NOT FOUND:', contactUsername);
+              } else {
+                this.contacts!.push(contactUser);
+              }
+              
+              loadedCount++;
+              if (loadedCount === contactUsernames.length) {
+                this.isLoading = false;
+              }
+            },
+            error: (error) => {
+              console.error('Error loading contact:', contactUsername, error);
+              loadedCount++;
+              if (loadedCount === contactUsernames.length) {
+                this.isLoading = false;
+              }
+            }
+          });
+        });
+      },
+      error: (error) => {
+        console.error('Error loading contacts:', error);
+        this.isLoading = false;
+      }
+    });
+  }
 }

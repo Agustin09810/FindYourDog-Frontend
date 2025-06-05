@@ -1,39 +1,300 @@
-.container{
-    font-family: 'SF Pro Regular';
+/* Dog Photos Step Styling */
+.container {
+    font-family: var(--font-family);
     max-width: inherit;
 }
 
-.container.continue{
-    position: fixed;
-    bottom: 60px;
-}
-
-.continue.btn.btn-primary{
+/* Main Container */
+.outer {
+    position: relative;
     width: 100%;
+    min-height: 500px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
 }
 
-.back.btn.btn-outline-primary{
+/* Image Upload Container */
+.imageContainer {
+    position: relative;
     width: 100%;
+    flex: 1;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
-textarea{
+/* Form Section */
+.container.form {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    border: 1px solid var(--gray-200);
+    margin-top: 0 !important;
+}
+
+.container.form label {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+    display: block;
+}
+
+/* Textarea Styling */
+textarea {
     resize: none;
+    padding: var(--space-lg) var(--space-md);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+    outline: none;
+    min-height: 120px;
+    width: 100%;
+    font-family: var(--font-family);
+    line-height: 1.5;
 }
 
-/* DESKTOP */
-@media (min-width:578px){
-    .container.continue{
-        position:absolute;
-        bottom:1%
+textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.form-text {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-top: var(--space-xs);
+    font-style: italic;
+    text-align: right;
+}
+
+/* Navigation Buttons */
+.container.continue {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    padding: 0 var(--space-md);
+    z-index: 100;
+}
+
+.container.continue .row {
+    gap: var(--space-md);
+    margin: 0;
+}
+
+.container.continue .col {
+    padding: 0;
+}
+
+.btn {
+    width: 100%;
+    padding: var(--space-lg) var(--space-md);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    border: none;
+}
+
+.btn-outline-primary {
+    background: var(--gray-500);
+    color: var(--white);
+    border: 2px solid var(--gray-500);
+}
+
+.btn-outline-primary:hover {
+    background: var(--gray-600);
+    border-color: var(--gray-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background: var(--gray-400);
+    color: var(--gray-600);
+    border-color: var(--gray-400);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Special styling for publish/edit button */
+.btn-primary.continue {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary.continue:hover {
+    background: var(--success-dark, #43a047);
+    border-color: var(--success-dark, #43a047);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary.continue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary.continue:hover::before {
+    left: 100%;
+}
+
+/* Desktop Responsive */
+@media (min-width: 768px) {
+    .outer {
+        position: relative;
+        overflow-y: auto;
+        min-height: 600px;
+        padding: var(--space-xl);
+        max-width: 800px;
+        margin: 0 auto;
+        gap: var(--space-2xl);
     }
-    .outer{
-        position:relative;
-        overflow-y:auto;
-        height: 90%;
-    }
-    .imageContainer{
+    
+    .imageContainer {
         position: relative;
         width: 100%;
-        height: 100%;
+        min-height: 400px;
+        flex: 1;
+    }
+    
+    .container.form {
+        margin-bottom: var(--space-2xl);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .container.continue {
+        position: relative;
+        bottom: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-2xl);
+        padding: 0;
+        max-width: 500px;
+        margin: var(--space-2xl) auto 0;
+    }
+    
+    .btn {
+        min-width: 150px;
+        max-width: 200px;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .outer {
+        padding: var(--space-md);
+        gap: var(--space-lg);
+        min-height: 400px;
+    }
+    
+    .imageContainer {
+        min-height: 250px;
+    }
+    
+    .container.form {
+        padding: var(--space-lg);
+        margin-bottom: var(--space-xl);
+    }
+    
+    .container.form label {
+        font-size: 0.9rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    textarea {
+        min-height: 100px;
+        padding: var(--space-md);
+        font-size: 0.9rem;
+    }
+    
+    .container.continue {
+        bottom: 100px; /* Account for mobile navbar */
+        padding: 0 var(--space-sm);
+    }
+    
+    .container.continue .row {
+        gap: var(--space-sm);
+    }
+    
+    .btn {
+        padding: var(--space-md);
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet responsive */
+@media (min-width: 577px) and (max-width: 767px) {
+    .outer {
+        padding: var(--space-lg);
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 500px;
+    }
+    
+    .imageContainer {
+        min-height: 300px;
+    }
+    
+    .container.form {
+        padding: var(--space-lg);
+        max-width: 500px;
+        margin: 0 auto var(--space-xl);
+    }
+}
+
+/* Enhanced focus states for accessibility */
+.imageContainer:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Animation for form appearance */
+.container.form {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

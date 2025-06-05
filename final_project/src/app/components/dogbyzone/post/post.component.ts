@@ -53,4 +53,8 @@ export class PostComponent implements OnInit {
     }
   }
 
+  onImageError(event: any): void {
+    event.target.src = 'assets/images/default-dog-placeholder.svg';
+  }
+
 }

@@ -1,32 +1,38 @@
-<div class="loading" *ngIf="!posts">
-    <app-spinner></app-spinner>
+<!-- Loading State -->
+<div *ngIf="!posts" class="loading-section">
+    <div class="loading-content">
+        <app-spinner></app-spinner>
+        <p class="loading-text">Cargando publicaciones...</p>
+    </div>
 </div>
 
-<div *ngIf="posts" class="w-100 pt-4 px-2 container">
-    <div class="row gx-2 gy-2 w-100 gridContainer ">
+<!-- Posts Grid -->
+<div *ngIf="posts" class="posts-container">
+    <div class="posts-grid">
         <app-post
-        *ngFor="let postX of posts | paginate 
-        : { itemsPerPage: 10, currentPage: page, totalItems: count };
-        let i = index"
-        class="col-md-4"
-        [post]="postX">
+            *ngFor="let postX of posts | paginate 
+            : { itemsPerPage: 10, currentPage: page, totalItems: count };
+            let i = index"
+            class="post-item"
+            [post]="postX">
         </app-post>
     </div>
-</div>
 
-<div class="container pagination">
-    <div class="row">
-        <div class="col">
+    <!-- Pagination -->
+    <div class="pagination-section">
+        <div class="pagination-wrapper">
             <ngb-pagination
-            [collectionSize]="count"
-            [page]="page"
-            [maxSize]="3"
-            [rotate]="true"
-            [ellipses]="false"
-            [boundaryLinks]="true"
-            [pageSize]="10"
-            (pageChange)="handlePageChange($event)">
-            ></ngb-pagination>
+                [collectionSize]="count"
+                [page]="page"
+                [maxSize]="3"
+                [rotate]="true"
+                [ellipses]="false"
+                [boundaryLinks]="true"
+                [pageSize]="10"
+                (pageChange)="handlePageChange($event)"
+                class="modern-pagination">
+            </ngb-pagination>
         </div>
     </div>
+</div>
 

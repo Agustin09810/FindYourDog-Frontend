@@ -1,14 +1,51 @@
-<div class="loading" *ngIf="!zones">
+<div class="grid-container">
+  <!-- Loading State -->
+  <div class="loading-section" *ngIf="!zones">
     <app-spinner></app-spinner>
-</div>
-<div *ngIf="zones" class="w-100 pt-4 px-2 container">
-    <div  class="row gx-2 gy-2 w-100 gridContainer">
-        <app-zone
-        *ngFor="let zoneX of zones" 
-        class="col-6 col-md-4 col-lg-3" 
-        [zone]="zoneX"
-        [username]="username">
-        </app-zone>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="zones" class="grid-content fade-in">
+    <!-- Header Section -->
+    <div class="grid-header">
+      <div class="header-content">
+        <div class="welcome-section">
+          <h2 class="heading-2">¡Hola {{username}}! 🐾</h2>
+          <p class="body-large">Selecciona una zona para buscar mascotas perdidas</p>
+        </div>
+        <div class="stats-section">
+          <div class="stat-card">
+            <div class="stat-number">{{zones.length}}</div>
+            <div class="stat-label">Zonas disponibles</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Zones Grid -->
+    <div class="zones-section">
+      <div class="zones-grid">
+        <app-zone
+          *ngFor="let zoneX of zones; trackBy: trackByZoneId" 
+          class="zone-item" 
+          [zone]="zoneX"
+          [username]="username">
+        </app-zone>
+      </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="help-section">
+      <div class="help-card card-modern">
+        <div class="help-icon">❤️</div>
+        <h3 class="heading-3">¿Perdiste a tu mascota?</h3>
+        <p class="body-medium">No te preocupes, estamos aquí para ayudarte. Publica información sobre tu mascota perdida y la comunidad te ayudará a encontrarla.</p>
+        <a routerLink="/addpost" class="btn-modern btn-primary">
+          <i class="bi bi-plus-circle-fill"></i>
+          Publicar ahora
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 

@@ -1,46 +1,522 @@
-.container{
-    font-family: 'SF Pro Regular';
+/* Dog Date Zone Step Styling */
+.container {
+    font-family: var(--font-family);
     max-width: inherit;
 }
 
-.container.continue{
+/* Header Text */
+.container.text {
+    position: relative;
+    width: 100%;
+    margin-bottom: var(--space-xl);
+    text-align: center;
+}
+
+.container.text p {
+    font-size: 1.1rem;
+    color: var(--gray-700);
+    margin-bottom: var(--space-lg);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* Form Sections */
+.container.dates {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    border: 1px solid var(--gray-200);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+.container.comboBox {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    border: 1px solid var(--gray-200);
+}
+
+.container.form {
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+    border: 1px solid var(--gray-200);
+}
+
+/* Date and Time Sections */
+.date-section,
+.time-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.date-input-wrapper,
+.time-input-wrapper,
+.select-wrapper,
+.textarea-wrapper {
+    position: relative;
+}
+
+/* Form Labels with Icons */
+.form-label {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: var(--space-md);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* Enhanced Input Styling */
+.form-control {
+    padding: var(--space-lg) var(--space-md);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+    outline: none;
+    height: auto;
+    min-height: 56px;
+    font-family: var(--font-family);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-control.is-valid {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+}
+
+.form-control.is-invalid {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.1);
+}
+
+/* Modern Date Input Styling */
+.date-input {
+    position: relative;
+    cursor: pointer;
+    color: var(--gray-700);
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    padding: var(--space-md);
+}
+
+.date-input::-webkit-calendar-picker-indicator:hover {
+    background: rgba(255, 107, 53, 0.1);
+    border-radius: var(--radius-md);
+}
+
+/* Custom Date Input Icon */
+.date-input-wrapper::after {
+    content: '📅';
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: var(--gray-500);
+}
+
+.date-input:focus + ::after {
+    color: var(--primary-color);
+}
+
+/* Time Input Styling */
+.time-input {
+    cursor: pointer;
+    color: var(--gray-700);
+}
+
+.time-input::-webkit-calendar-picker-indicator {
+    background: transparent;
+    cursor: pointer;
+    filter: invert(0.5);
+}
+
+.time-input:focus::-webkit-calendar-picker-indicator {
+    filter: invert(0.3) sepia(1) saturate(3) hue-rotate(15deg);
+}
+
+/* Custom Time Input Icon */
+.time-input-wrapper::after {
+    content: '🕒';
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: var(--gray-500);
+}
+
+/* Select Styling - Aggressive fix for tick pattern bug */
+.form-select {
+    padding: var(--space-lg) var(--space-md);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--white) !important;
+    background-color: var(--white) !important;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: initial !important;
+    background-size: initial !important;
+    outline: none;
+    min-height: 56px;
+    cursor: pointer;
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    transform: translateY(-1px);
+    background: var(--white) !important;
+    background-color: var(--white) !important;
+    background-image: none !important;
+}
+
+.form-select.is-valid {
+    border-color: var(--success-color);
+    background: var(--white) !important;
+    background-image: none !important;
+}
+
+.form-select.is-invalid {
+    border-color: var(--error-color);
+    background: var(--white) !important;
+    background-image: none !important;
+}
+
+/* Force clean background for any validation states */
+.form-select.is-valid,
+.form-select.is-invalid,
+.form-select[class*="is-"] {
+    background: var(--white) !important;
+    background-color: var(--white) !important;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: initial !important;
+    background-size: initial !important;
+}
+
+/* Remove any pseudo-elements that might cause issues */
+.form-select::before,
+.form-select::after {
+    display: none !important;
+    content: none !important;
+}
+
+.select-wrapper::before,
+.select-wrapper::after {
+    display: none !important;
+    content: none !important;
+}
+
+option {
+    font-family: var(--font-family);
+    padding: var(--space-md);
+    color: var(--gray-700);
+}
+
+/* Enhanced Textarea Styling */
+textarea {
+    resize: vertical;
+    padding: var(--space-lg) var(--space-md);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+    outline: none;
+    min-height: 120px;
+    width: 100%;
+    font-family: var(--font-family);
+    line-height: 1.5;
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Character Counter */
+.char-counter {
+    position: absolute;
+    bottom: var(--space-sm);
+    right: var(--space-md);
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    background: var(--white);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--gray-200);
+    font-weight: 500;
+}
+
+/* Form Text */
+.form-text {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-top: var(--space-xs);
+    font-style: italic;
+}
+
+/* Navigation Buttons */
+.container.continue {
     position: fixed;
-    bottom: 60px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    padding: 0 var(--space-md);
+    z-index: 100;
 }
 
-.continue.btn.btn-primary{
+.container.continue .row {
+    gap: var(--space-md);
+    margin: 0;
+}
+
+.container.continue .col {
+    padding: 0;
+}
+
+.btn {
     width: 100%;
+    padding: var(--space-lg) var(--space-md);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    border: none;
 }
 
-option{
-    font-family: 'SF Pro Regular';
+.btn-outline-primary {
+    background: var(--gray-500);
+    color: var(--white);
+    border: 2px solid var(--gray-500);
 }
 
-.container.form{
-    margin-bottom:100px;
+.btn-outline-primary:hover {
+    background: var(--gray-600);
+    border-color: var(--gray-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
 }
 
-.back.btn.btn-outline-primary{
-    width: 100%;
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
 }
 
-textarea{
-    resize: none;
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
 }
 
-@media(min-width:578px){
-    .outer{
-        position:relative;
-        overflow-y:auto;
-        height: 90%;
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background: var(--gray-400);
+    color: var(--gray-600);
+    border-color: var(--gray-400);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Desktop Responsive */
+@media (min-width: 768px) {
+    .outer {
+        position: relative;
+        overflow-y: auto;
+        min-height: 500px;
+        padding: var(--space-lg);
+        max-width: 700px;
+        margin: 0 auto;
     }
-    .container.form{
-        margin-bottom:0;
+    
+    .container.dates {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xl);
     }
+    
+    .container.form {
+        margin-bottom: var(--space-2xl);
+    }
+    
+    .container.continue {
+        position: relative;
+        bottom: auto;
+        display: flex;
+        justify-content: center;
+        margin-top: var(--space-2xl);
+        padding: 0;
+        max-width: 500px;
+        margin: var(--space-2xl) auto 0;
+    }
+    
+    .btn {
+        min-width: 150px;
+        max-width: 200px;
+    }
+    
+    .container.dates,
+    .container.comboBox,
+    .container.form {
+        margin-bottom: var(--space-lg);
+    }
+}
 
-    .container.continue{
-        position:absolute;
-        bottom:1%;
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .container.text p {
+        font-size: 1rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .container.dates,
+    .container.comboBox,
+    .container.form {
+        padding: var(--space-lg);
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-control,
+    .form-select {
+        padding: var(--space-md);
+        min-height: 50px;
+    }
+    
+    textarea {
+        min-height: 100px;
+        padding: var(--space-md);
+    }
+    
+    .container.continue {
+        bottom: 100px; /* Account for mobile navbar */
+        padding: 0 var(--space-sm);
+    }
+    
+    .container.continue .row {
+        gap: var(--space-sm);
+    }
+    
+    .form-label {
+        font-size: 0.9rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .date-input-wrapper::after,
+    .time-input-wrapper::after {
+        font-size: 1rem;
+        right: var(--space-sm);
+    }
+    
+    .char-counter {
+        font-size: 0.7rem;
+        bottom: var(--space-xs);
+        right: var(--space-sm);
+    }
+}
+
+/* Tablet responsive */
+@media (min-width: 577px) and (max-width: 767px) {
+    .outer {
+        padding: var(--space-md);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .container.dates,
+    .container.comboBox,
+    .container.form {
+        padding: var(--space-lg);
+    }
+}
+
+/* Enhanced focus and hover states */
+.date-input:hover,
+.time-input:hover,
+.form-select:hover {
+    border-color: var(--gray-400);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading and success states */
+.form-control.loading {
+    background: linear-gradient(90deg, var(--white) 25%, var(--gray-50) 50%, var(--white) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .form-control,
+    .form-select,
+    textarea,
+    .btn {
+        transition: none;
+    }
+    
+    .char-counter {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .form-control,
+    .form-select,
+    textarea {
+        border-width: 3px;
+    }
+    
+    .container.dates,
+    .container.comboBox,
+    .container.form {
+        border-width: 2px;
     }
 }
 

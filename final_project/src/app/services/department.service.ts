@@ -8,7 +8,7 @@ providedIn: 'root'
 })
 export class DepartmentService {
 
-  private departmentsUrl = 'https://fyd.azurewebsites.net/api/v1/departments';
+  private departmentsUrl = 'http://localhost:3000/api/v1/departments';
 
 
   constructor(

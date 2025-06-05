@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,20 +12,28 @@ export class NavbarSupComponent implements OnInit {
 
   @Input() text?: string;
   @Input() backArrow: boolean = false;
+  @Input() customBackRoute?: string;
 
   constructor(
-    private location: Location, private authService:AuthService
+    private location: Location, 
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
   goBack(): void {
-    this.location.back();
+    if (this.customBackRoute) {
+      this.router.navigate([this.customBackRoute]);
+    } else {
+      this.location.back();
+    }
   }
 
-  logout(){
+  logout(): void {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

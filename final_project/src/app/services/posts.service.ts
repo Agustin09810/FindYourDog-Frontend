@@ -12,7 +12,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 })
 export class PostsService {
 
-  private postsUrl = 'https://fyd.azurewebsites.net/api/v1/posts';
+  private postsUrl = 'http://localhost:3000/api/v1/posts';
 
   constructor(private http:HttpClient) { }
 

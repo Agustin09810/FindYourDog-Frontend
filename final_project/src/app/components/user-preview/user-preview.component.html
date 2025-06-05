@@ -1,13 +1,32 @@
-<a routerLink="/chats/{{user.username}}/{{chatId}}" routerLinkActive="active">
-    <div class="userPreview">
-    
-    <div class="imgUser">
-        <img class="profile-img" src="{{profileImgUrl?.url}}" alt="">
-    </div>
-    <div class="userTextContainer">
-        <p class="username">{{user.username}}</p>
-        <p class="lastMsg">{{lastMessage}}</p>
-    </div>
-    
+<a routerLink="/chats/{{user.username}}/{{chatId}}" routerLinkActive="active" class="user-preview-link">
+    <div class="user-preview-modern">
+        <div class="user-avatar">
+            <img 
+                *ngIf="profileImgUrl && profileImgUrl.url && !imageError; else defaultAvatar"
+                [src]="profileImgUrl.url" 
+                [alt]="'Foto de perfil de ' + user.username"
+                class="avatar-image"
+                (error)="onImageError()"
+                loading="lazy"
+            />
+            <ng-template #defaultAvatar>
+                <img 
+                    src="assets/images/default-user-avatar.svg" 
+                    [alt]="'Avatar por defecto de ' + user.username"
+                    class="avatar-image default-avatar"
+                />
+            </ng-template>
+            <div class="online-indicator"></div>
+        </div>
+        
+        <div class="user-info">
+            <div class="username">{{user.username}}</div>
+            <div class="last-message" *ngIf="lastMessage">{{lastMessage}}</div>
+            <div class="no-message" *ngIf="!lastMessage">¡Inicia una conversación!</div>
+        </div>
+        
+        <div class="chat-arrow">
+            <i class="bi bi-chevron-right"></i>
+        </div>
     </div>
 </a>

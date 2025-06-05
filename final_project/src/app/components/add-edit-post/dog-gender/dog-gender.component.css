@@ -1,48 +1,173 @@
-.container{
-    font-family: 'SF Pro Regular';
+/* Dog Gender Step Styling */
+.container {
+    font-family: var(--font-family);
     max-width: inherit;
 }
 
-.btn-group-vertical{
+.container.genders {
+    position: relative;
     width: 100%;
-    height: 7em
+    margin-bottom: var(--space-xl);
+    text-align: center;
 }
 
-.container.continue{
+.container.genders p {
+    font-size: 1.1rem;
+    color: var(--gray-700);
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Gender Selection Buttons */
+.btn-group-vertical {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.btn-group-vertical .btn {
+    padding: var(--space-xl) var(--space-lg);
+    border: 2px solid var(--gray-300);
+    background: var(--white);
+    color: var(--gray-700);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    position: relative;
+    cursor: pointer;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-group-vertical .btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-group-vertical .btn:active {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(0);
+}
+
+.btn-group-vertical .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+}
+
+/* Selected state */
+.btn-group-vertical .btn.selected {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+/* Back Button */
+.container.continue {
     position: fixed;
-    bottom: 60px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    padding: 0 var(--space-md);
+    z-index: 100;
 }
 
-.continue.btn.btn-primary{
+.continue.btn {
+    background: var(--gray-500);
+    border: none;
+    color: var(--white);
+    padding: var(--space-lg) var(--space-2xl);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
     width: 100%;
 }
 
-.back.btn.btn-outline-primary{
-    width: 100%;
+.continue.btn:hover {
+    background: var(--gray-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
 }
-@media(min-width:578px){
-    .outer{
-        position:relative;
-        overflow-y:auto;
-        height: 90%;
+
+/* Desktop Responsive */
+@media (min-width: 768px) {
+    .outer {
+        position: relative;
+        overflow-y: auto;
+        min-height: 400px;
     }
-    .container.genders{
-        display:flex;
+    
+    .container.genders {
+        display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
+        padding: var(--space-2xl);
     }
-    .btn-group-vertical{
+    
+    .btn-group-vertical {
         width: 60%;
-        height: 7em
+        max-width: 500px;
     }
-    .container.continue.d-grid{
-        position:absolute;;
-        bottom:1%;
-        display:flex;
+    
+    .container.continue.d-grid {
+        position: relative;
+        bottom: auto;
+        display: flex;
         justify-content: center;
+        margin-top: var(--space-2xl);
+        padding: 0;
     }
-    .continue.btn{
-        width: 15vw;
+    
+    .continue.btn {
+        width: auto;
+        min-width: 200px;
+        max-width: 300px;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+    .container.genders p {
+        font-size: 1rem;
+        margin-bottom: var(--space-xl);
+    }
+    
+    .btn-group-vertical {
+        gap: var(--space-sm);
+    }
+    
+    .btn-group-vertical .btn {
+        padding: var(--space-lg);
+        font-size: 1rem;
+        min-height: 56px;
+    }
+    
+    .container.continue {
+        bottom: 100px; /* Account for mobile navbar */
+    }
+}
+
+/* Tablet responsive */
+@media (min-width: 577px) and (max-width: 767px) {
+    .btn-group-vertical {
+        width: 80%;
+    }
+    
+    .container.genders {
+        padding: var(--space-xl);
     }
 }

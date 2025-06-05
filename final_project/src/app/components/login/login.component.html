@@ -1,24 +1,71 @@
-
-<div class="outerDiv">
-    <div class="containerDiv shadeDiv">
-        <div class="title"><h2>Find Your Dog</h2></div>
-        <app-login-input #inputLogin  ></app-login-input>
-        <app-login-button class="loginButton" (click)="getData()"></app-login-button>
-        <div class="separator">
-            <div class="separator1">
-                <hr>
-            </div> 
-            <div class="o">
-                <p> o </p>
-            </div>
-            <div class="separator2">
-                <hr>
-            </div> 
-        </div>
-        <div class="signUpButton">
-            <button class="btn btn-outline-dark" routerLink="/signup">Registrarse</button>
-        </div>
+<div class="login-container">
+  <div class="login-card" [class.loading]="isLoading">
+    <!-- Header con iconos temáticos -->
+    <div class="login-header">
+      <div class="logo-section">
+        <div class="paw-icon">🐾</div>
+        <h1 class="heading-1 text-primary">Find Your Dog</h1>
+        <p class="body-medium text-center">Ayudamos a reunir familias con sus mascotas perdidas</p>
+      </div>
     </div>
+
+    <!-- Formulario de login -->
+    <div class="login-form">
+      <app-login-input #inputLogin></app-login-input>
+      
+      <!-- Error Messages -->
+      <div class="error-message" *ngIf="errorDisplay">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>{{ getErrorMessage() }}</span>
+      </div>
+      
+      <div class="login-actions">
+        <button 
+          class="btn-modern btn-primary w-100 paw-print" 
+          (click)="getData()"
+          [disabled]="isLoading">
+          <span *ngIf="!isLoading">Iniciar Sesión</span>
+          <span *ngIf="isLoading" class="loading-content">
+            <div class="mini-spinner"></div>
+            Iniciando sesión...
+          </span>
+        </button>
+      </div>
+
+      <!-- Separador -->
+      <div class="separator">
+        <div class="separator-line"></div>
+        <span class="separator-text body-small">o</span>
+        <div class="separator-line"></div>
+      </div>
+
+      <!-- Botón de registro -->
+      <div class="signup-section">
+        <p class="body-small text-center">¿No tienes cuenta?</p>
+        <button class="btn-modern btn-secondary w-100" routerLink="/signup">
+          <i class="bi bi-person-plus"></i>
+          Crear Cuenta
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer con mensaje motivacional -->
+    <div class="login-footer">
+      <div class="motivation-message">
+        <div class="heart-icon"></div>
+        <p class="body-small text-center">Cada mascota merece volver a casa</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decoración de fondo -->
+  <div class="background-decoration">
+    <div class="floating-paw paw-1">🐾</div>
+    <div class="floating-paw paw-2">🐾</div>
+    <div class="floating-paw paw-3">🐾</div>
+    <div class="floating-heart heart-1">❤️</div>
+    <div class="floating-heart heart-2">❤️</div>
+  </div>
 </div>
 
 

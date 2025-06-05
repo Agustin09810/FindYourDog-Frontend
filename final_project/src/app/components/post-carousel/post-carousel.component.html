@@ -1,11 +1,69 @@
-<div class="outerDiv">
-  <div class="carousel" *ngIf="postImages">
-    <div class="innerCarousel">
-      <i class="bi bi-caret-left previousButton" (click)="previous()"></i>
-      <i class="bi bi-caret-right nextButton" (click)="next()"></i>
-          <img [src]="currentImage?.url" alt="image.id" class="img-dog">
+<div class="carousel-container">
+    <div class="carousel-wrapper" *ngIf="postImages && postImages.length > 0">
+        <!-- Main Image -->
+        <div class="image-container">
+            <img 
+                [src]="currentImage?.url" 
+                [alt]="'Imagen ' + (currentIndex + 1) + ' de ' + postImages.length"
+                class="carousel-image"
+                (error)="onImageError($event)">
+            
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" *ngIf="isLoading">
+                <div class="loading-spinner">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+            </div>
+            
+            <!-- Image Counter -->
+            <div class="image-counter" *ngIf="postImages.length > 1">
+                <span>{{currentIndex + 1}} / {{postImages.length}}</span>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="carousel-controls" *ngIf="postImages.length > 1">
+            <!-- Previous Button -->
+            <button 
+                class="nav-button nav-previous"
+                (click)="previous()"
+                [disabled]="currentIndex === 0"
+                title="Imagen anterior">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <!-- Next Button -->
+            <button 
+                class="nav-button nav-next"
+                (click)="next()"
+                [disabled]="currentIndex === postImages.length - 1"
+                title="Siguiente imagen">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Thumbnail Navigation -->
+        <div class="thumbnail-nav" *ngIf="postImages.length > 1">
+            <div class="thumbnail-container">
+                <button
+                    *ngFor="let image of postImages; let i = index"
+                    class="thumbnail-button"
+                    [class.active]="i === currentIndex"
+                    (click)="goToImage(i)"
+                    [title]="'Ver imagen ' + (i + 1)">
+                    <img [src]="image.url" [alt]="'Thumbnail ' + (i + 1)" class="thumbnail-image">
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <!-- No Images State -->
+    <div class="no-images" *ngIf="!postImages || postImages.length === 0">
+        <div class="no-images-content">
+            <i class="bi bi-image"></i>
+            <p>No hay imágenes disponibles</p>
+        </div>
+    </div>
 </div>
 
 

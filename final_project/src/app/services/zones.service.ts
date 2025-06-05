@@ -8,7 +8,7 @@ import { catchError, Observable, of } from 'rxjs';
 })
 export class ZonesService {
 
-  private zonesUrl = 'https://fyd.azurewebsites.net/api/v1/zones'
+  private zonesUrl = 'http://localhost:3000/api/v1/zones'
   constructor(private http:HttpClient) { }
 
   httpOptions = {

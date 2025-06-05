@@ -1,12 +1,52 @@
-<div class="card" >
-    <a routerLink="./{{post.id}}">
-    <img class="card-img-top" src="{{firstPhoto?.url}}" alt="Card image cap">
+<div class="post-card">
+    <a routerLink="./{{post.id}}" class="post-link">
+        <!-- Image Container -->
+        <div class="post-image-container">
+            <img 
+                class="post-image" 
+                [src]="firstPhoto?.url" 
+                [alt]="'Foto de ' + post.dogName"
+                (error)="onImageError($event)">
+            <div class="post-overlay">
+                <i class="bi bi-eye post-view-icon"></i>
+            </div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="post-content">
+            <!-- Header -->
+            <div class="post-header">
+                <h3 class="post-title">{{post.dogName}}</h3>
+                <div class="post-status">
+                    <span class="status-badge status-lost">
+                        <i class="bi bi-exclamation-circle"></i>
+                        Perdido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div class="post-details">
+                <div class="detail-item">
+                    <i class="bi bi-tag detail-icon"></i>
+                    <span class="detail-label">Raza:</span>
+                    <span class="detail-value">{{post.dogBreed}}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <i class="bi bi-calendar detail-icon"></i>
+                    <span class="detail-label">Perdido hace:</span>
+                    <span class="detail-value">{{getDayDiff(post.lostOn)}}</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="post-footer">
+                <span class="view-more">
+                    Ver detalles
+                    <i class="bi bi-arrow-right"></i>
+                </span>
+            </div>
+        </div>
     </a>
-    <div class="card-body">
-        <h5 class="card-title">{{post.dogName}}</h5>
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><strong>Raza:</strong> {{post.dogBreed}}</li>
-        <li class="list-group-item"><strong>Perdido hace:</strong> {{getDayDiff(post.lostOn)}}</li>
-    </ul> 
 </div>

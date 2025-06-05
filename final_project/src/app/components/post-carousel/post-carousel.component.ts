@@ -9,30 +9,43 @@ import { Image } from 'src/app/interfaces/Image';
 })
 export class PostCarouselComponent implements OnInit {
 
-  @Input() postImages?:Image[];
-  currentImage?:Image;
-  count:number = 0;
+  @Input() postImages?: Image[];
+  currentImage?: Image;
+  currentIndex: number = 0;
+  isLoading: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.currentImage = this.postImages?.at(0);
-  }
-
-  next(){
-    if(this.count < this.postImages!.length-1){
-      this.count++;
-      this.currentImage = this.postImages!.at(this.count);
+    if (this.postImages && this.postImages.length > 0) {
+      this.currentImage = this.postImages[0];
+      this.currentIndex = 0;
     }
   }
 
-  previous(){
-    {
-      if(this.count > 0){
-        this.count--;
-        this.currentImage = this.postImages!.at(this.count);
-      }
+  next(): void {
+    if (this.postImages && this.currentIndex < this.postImages.length - 1) {
+      this.currentIndex++;
+      this.currentImage = this.postImages[this.currentIndex];
     }
+  }
+
+  previous(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.currentImage = this.postImages![this.currentIndex];
+    }
+  }
+
+  goToImage(index: number): void {
+    if (this.postImages && index >= 0 && index < this.postImages.length) {
+      this.currentIndex = index;
+      this.currentImage = this.postImages[index];
+    }
+  }
+
+  onImageError(event: any): void {
+    event.target.src = 'assets/images/default-dog-placeholder.svg';
   }
 
 }

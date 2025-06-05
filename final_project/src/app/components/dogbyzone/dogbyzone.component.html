@@ -1,10 +1,20 @@
-<div class="outerDiv">
-    <div class="containerDiv">
-        <div class="navbarStyles">
-            <app-navbar-sup [text]="zone?.name"></app-navbar-sup>
-        </div>
-        <app-dogs-grid></app-dogs-grid>
-        <button *ngIf="showButton" class="upButton" (click)="onScrollTop()"><i class="bi bi-arrow-up"></i></button>
-        <app-navbar-inf class="navBarInf" ></app-navbar-inf>
+<div class="page-container">
+    <!-- Header Section -->
+    <div class="page-header">
+        <app-navbar-sup [text]="zone?.name"></app-navbar-sup>
     </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <app-dogs-grid></app-dogs-grid>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button 
+        *ngIf="showButton" 
+        class="scroll-top-btn" 
+        (click)="onScrollTop()"
+        title="Volver arriba">
+        <i class="bi bi-arrow-up"></i>
+    </button>
 </div>

@@ -2,46 +2,74 @@
     <div class="container text">
         <p>Por favor, bríndenos datos sobre la <strong>fecha y ubicación</strong> de la última vez que vio a {{dogName}}</p>
     </div>
+    
     <div class="container dates">
-        <div class="mb-3">
-            <label for="datePicker" class="me-3">Visto por última vez:</label>
-            <form>
-                <div class="input-group">
-                    <input
-                        readonly
-                        class="form-control"
-                        placeholder="yyyy-mm-dd"
-                        #datePicker
-                        ngbDatepicker
-                        #calendarButton="ngbDatepicker"
-                        [placement]="'bottom'"
-                        (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
-                        (dateSelect)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
-                        value="{{lastSeenDate}}"
-                    />
-                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="calendarButton.toggle()" type="button"></button>
-                </div>
-                <small class="form-text text-muted">Este campo es obligatorio</small>
-            </form>
+        <div class="date-section">
+            <label for="datePicker" class="form-label">📅 Visto por última vez:</label>
+            <div class="date-input-wrapper">
+                <input 
+                    type="date" 
+                    id="datePicker" 
+                    #datePicker 
+                    class="form-control date-input"
+                    [value]="lastSeenDate"
+                    (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"
+                    required
+                />
+            </div>
+            <small class="form-text text-muted">Este campo es obligatorio</small>
         </div>
-        <div class="mb-3">
-            <label for="timePicker" class="me-3">Hora aproximada:</label>
-            <input type="time" id="timePicker"  #timePicker (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" name="timePicker" value="{{lastSeenHour}}" required>
-            <div><small class="form-text text-muted">Este campo es obligatorio</small></div>
+        
+        <div class="time-section">
+            <label for="timePicker" class="form-label">🕒 Hora aproximada:</label>
+            <div class="time-input-wrapper">
+                <input 
+                    type="time" 
+                    id="timePicker" 
+                    #timePicker 
+                    class="form-control time-input"
+                    [value]="lastSeenHour"
+                    (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)" 
+                    name="timePicker" 
+                    required
+                />
+            </div>
+            <small class="form-text text-muted">Este campo es obligatorio</small>
         </div>
     </div>
-    <div class="container comboBox mb-3">
-        <label for="location" class="form-label">Ubicación:</label>
-        <select #locationComboBox class="form-select is-{{validZone}}" (change)="checkZone(locationComboBox.value)"  id="location" required (change)="verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  >
-            <option value="0">Seleccione una opción</option>
-            <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
-        </select>
+    
+    <div class="container comboBox">
+        <label for="location" class="form-label">📍 Ubicación:</label>
+        <div class="select-wrapper">
+            <select 
+                #locationComboBox 
+                class="form-select"
+                (change)="checkZone(locationComboBox.value); verifyDate(datePicker.value, timePicker.value, locationComboBox.selectedIndex)"  
+                id="location" 
+                required
+            >
+                <option value="0">Seleccione una opción</option>
+                <option *ngFor="let zoneX of zones; index as i" value="{{zoneX.id}}" [selected]="zoneX.id == lostZone">{{zoneX.name}}</option>
+            </select>
+        </div>
         <small class="form-text text-muted">Este campo es obligatorio</small>
     </div>
+    
     <div class="container form">
-        <label for="details">Detalles adicionales sobre la ubicación:</label>
-        <textarea #ubiDetailsText [value]="ubiDetails" class="form-control" maxlength="100" placeholder="" (keyup)="countCharacters(ubiDetailsText.value)" id="details">{{ubiDetails}}</textarea>
-        <small class="form-text text-muted">{{counterOfChars}}/100</small>
+        <label for="details" class="form-label">📝 Detalles adicionales sobre la ubicación:</label>
+        <div class="textarea-wrapper">
+            <textarea 
+                #ubiDetailsText 
+                [value]="ubiDetails" 
+                class="form-control" 
+                maxlength="100" 
+                placeholder="Descripción del lugar, puntos de referencia, etc..." 
+                (keyup)="countCharacters(ubiDetailsText.value)" 
+                id="details"
+                rows="4"
+            >{{ubiDetails}}</textarea>
+            <div class="char-counter">{{counterOfChars}}/100</div>
+        </div>
     </div>
 </div>
 

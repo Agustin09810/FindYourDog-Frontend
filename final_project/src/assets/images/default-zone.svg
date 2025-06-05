@@ -1,0 +1,11 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#F5F5F5"/>
+  <circle cx="200" cy="120" r="40" fill="#FF6B35" opacity="0.3"/>
+  <path d="M160 160 L180 140 L200 160 L220 140 L240 160" stroke="#FF6B35" stroke-width="3" fill="none" opacity="0.5"/>
+  <text x="200" y="200" text-anchor="middle" fill="#9E9E9E" font-family="Arial, sans-serif" font-size="16" font-weight="500">
+    Zona
+  </text>
+  <text x="200" y="220" text-anchor="middle" fill="#BDBDBD" font-family="Arial, sans-serif" font-size="12">
+    🐾 Buscar mascotas aquí
+  </text>
+</svg> 

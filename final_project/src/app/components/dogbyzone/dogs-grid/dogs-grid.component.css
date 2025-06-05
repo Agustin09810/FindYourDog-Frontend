@@ -1,19 +1,228 @@
-.gridContainer {
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 67px;
-}
-
-.container {
-    padding-bottom: 50px;
-    margin-bottom: 5px ;
-}
-
-.loading{
-    margin-top:15%;
-}
-
-.container.pagination{
-    align-content: center;
+/* Loading Section */
+.loading-section {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    padding: var(--space-2xl);
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    text-align: center;
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Posts Container */
+.posts-container {
+    padding: var(--space-xl) var(--space-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Posts Grid - More horizontal posts */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md) 0;
+}
+
+.post-item {
+    display: block;
+    transition: var(--transition);
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.post-item:hover {
+    transform: translateY(-4px);
+}
+
+/* Pagination Section */
+.pagination-section {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--gray-200);
+    margin-top: var(--space-xl);
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Modern Pagination Styling - Enhanced */
+.modern-pagination {
+    --bs-pagination-padding-x: var(--space-md);
+    --bs-pagination-padding-y: var(--space-sm);
+    --bs-pagination-font-size: 0.95rem;
+    --bs-pagination-color: var(--gray-700);
+    --bs-pagination-bg: var(--white);
+    --bs-pagination-border-width: 1px;
+    --bs-pagination-border-color: var(--gray-300);
+    --bs-pagination-border-radius: var(--radius-lg);
+    --bs-pagination-hover-color: var(--white);
+    --bs-pagination-hover-bg: var(--primary-color);
+    --bs-pagination-hover-border-color: var(--primary-color);
+    --bs-pagination-focus-color: var(--white);
+    --bs-pagination-focus-bg: var(--primary-color);
+    --bs-pagination-focus-box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.25);
+    --bs-pagination-active-color: var(--white);
+    --bs-pagination-active-bg: var(--primary-color);
+    --bs-pagination-active-border-color: var(--primary-color);
+    --bs-pagination-disabled-color: var(--gray-400);
+    --bs-pagination-disabled-bg: var(--gray-100);
+    --bs-pagination-disabled-border-color: var(--gray-300);
+}
+
+/* Enhanced pagination item styling */
+:global(.pagination .page-item .page-link) {
+    transition: all 0.2s ease-in-out !important;
+    font-weight: 500 !important;
+    margin: 0 2px !important;
+    border-radius: var(--radius-md) !important;
+}
+
+:global(.pagination .page-item.active .page-link) {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark, #e55a2b) 100%) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px) !important;
+}
+
+:global(.pagination .page-item:not(.disabled) .page-link:hover) {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--space-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-container {
+        padding: var(--space-lg) var(--space-md);
+    }
+    
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: var(--space-md);
+        margin-bottom: var(--space-xl);
+    }
+    
+    .pagination-section {
+        padding: var(--space-lg) var(--space-md);
+        margin-top: var(--space-lg);
+    }
+    
+    .modern-pagination {
+        --bs-pagination-padding-x: var(--space-sm);
+        --bs-pagination-padding-y: var(--space-xs);
+        --bs-pagination-font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .posts-container {
+        padding: var(--space-md) var(--space-sm);
+    }
+    
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: var(--space-sm);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .pagination-section {
+        padding: var(--space-md);
+        margin-top: var(--space-md);
+    }
+    
+    .loading-section {
+        min-height: 300px;
+        padding: var(--space-xl) var(--space-md);
+    }
+}
+
+/* Large screens optimization - More columns */
+@media (min-width: 1400px) {
+    .posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-lg);
+    }
+    
+    .posts-container {
+        padding: var(--space-2xl);
+        max-width: 1600px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .post-item {
+        animation: none;
+        transition: none;
+    }
+    
+    .post-item:hover {
+        transform: none;
+    }
+    
+    :global(.pagination .page-item .page-link) {
+        transition: none !important;
+    }
+    
+    :global(.pagination .page-item.active .page-link),
+    :global(.pagination .page-item:not(.disabled) .page-link:hover) {
+        transform: none !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .pagination-section {
+        border-top-width: 2px;
+        border-color: var(--gray-400);
+    }
+    
+    .modern-pagination {
+        --bs-pagination-border-width: 2px;
+        --bs-pagination-active-border-color: var(--primary-dark, #e55a2b);
+    }
 }

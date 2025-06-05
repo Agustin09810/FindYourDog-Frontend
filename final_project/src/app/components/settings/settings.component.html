@@ -1,40 +1,170 @@
+<!-- Navbar Superior -->
+<div class="navbar-container">
+    <app-navbar-sup [text]="'Opciones'"></app-navbar-sup>
+</div>
+
+<!-- Main Settings Container -->
 <div class="settings-container">
-    <app-navbar-sup [text]="'Opciones'" class="navbarStyles"></app-navbar-sup>
-    <div class="mid-div">
-        <div class="info-user-container">
-                <img src="{{profileImgUrl}}" alt="profile image" class="profile-image">
-            <h2>{{currentUser!.username}}</h2>
-        </div>
-        
-        
-        <div class="deparment-selection-container">
-            <label for="department" class="form-label">Departamento:</label>
-            <select #departmentComboBox class="form-select" (change)="checkDepartment(departmentComboBox.value)" id="department">
-                <option *ngFor="let departmentX of departments; index as i" value="{{departmentX.id}}" [selected]="departmentX.id == currentDepartmentId">{{departmentX.name}}</option>
-            </select>
-        </div>  
-        <div class="button mt-5">
-            <button class="btn btn-outline-dark {{dissableButton}}" data-bs-toggle="modal" data-bs-target="#saveChangesModal" >Guardar</button>
+    
+    <!-- Settings Header -->
+    <div class="settings-header">
+        <div class="header-content">
+            <div class="header-title">
+                <i class="bi bi-gear-fill header-icon"></i>
+                <h1>Configuración</h1>
+            </div>
+            <div class="header-subtitle">
+                <p>Gestiona tu perfil y preferencias</p>
+            </div>
         </div>
     </div>
-  
-</div>
-<app-navbar-inf class="navbarStyles navBarInf"></app-navbar-inf>
 
+    <!-- Settings Content -->
+    <div class="settings-content">
+        
+        <!-- User Profile Card -->
+        <div class="profile-card card-modern">
+            <div class="profile-header">
+                <i class="bi bi-person-circle profile-icon"></i>
+                <h3>Perfil de Usuario</h3>
+            </div>
+            
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <img 
+                        src="{{profileImgUrl}}" 
+                        alt="Foto de perfil" 
+                        class="avatar-image" 
+                        (click)="triggerFileInput()"
+                        (error)="onImageError($event)"
+                    >
+                    <div class="avatar-badge">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="avatar-edit-overlay" (click)="triggerFileInput()">
+                        <i class="bi bi-camera-fill"></i>
+                        <span>Cambiar foto</span>
+                    </div>
+                    <input 
+                        #fileInput 
+                        type="file" 
+                        accept="image/*" 
+                        (change)="onFileSelected($event)" 
+                        style="display: none;"
+                    >
+                </div>
+                
+                <div class="profile-details">
+                    <h4 class="username">{{currentUser?.username}}</h4>
+                    <p class="user-role">Usuario activo</p>
+                    <div class="photo-status" *ngIf="isUploadingPhoto">
+                        <i class="bi bi-cloud-upload"></i>
+                        <span>Subiendo foto...</span>
+                    </div>
+                    <div class="photo-status success" *ngIf="photoUploadSuccess">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Foto actualizada</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Settings Card -->
+        <div class="department-card card-modern">
+            <div class="card-header">
+                <i class="bi bi-geo-alt-fill card-icon"></i>
+                <h3>Ubicación</h3>
+            </div>
+            
+            <div class="card-content">
+                <p class="card-description">
+                    Selecciona tu departamento para ver mascotas perdidas en tu zona
+                </p>
+                
+                <div class="form-group">
+                    <label for="department" class="form-label">
+                        <i class="bi bi-map"></i>
+                        Departamento actual:
+                    </label>
+                    <div class="select-wrapper">
+                        <select 
+                            #departmentComboBox 
+                            class="form-select modern-select" 
+                            (change)="checkDepartment(departmentComboBox.value)" 
+                            id="department"
+                        >
+                            <option *ngFor="let departmentX of departments; index as i" 
+                                    value="{{departmentX.id}}" 
+                                    [selected]="departmentX.id == currentDepartmentId">
+                                {{departmentX.name}}
+                            </option>
+                        </select>
+                        <i class="bi bi-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button 
+                        class="btn btn-primary modern-btn {{dissableButton}}" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#saveChangesModal"
+                        [disabled]="dissableButton === 'disabled'"
+                    >
+                        <i class="bi bi-check-circle"></i>
+                        Guardar cambios
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Card -->
+        <div class="help-card card-modern">
+            <div class="help-content">
+                <div class="help-icon">🐾</div>
+                <h3>¿Necesitas ayuda?</h3>
+                <p>Si tienes alguna pregunta o problema, no dudes en contactarnos. Estamos aquí para ayudarte a encontrar a tu mascota.</p>
+                <a href="mailto:support@findyourdog.com" class="btn btn-outline-secondary">
+                    <i class="bi bi-envelope"></i>
+                    Contactar soporte
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save Changes Modal -->
 <div class="modal fade" tabindex="-1" id="saveChangesModal">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">¿Guardar cambios?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content modern-modal">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <i class="bi bi-question-circle modal-icon"></i>
+                    <h5 class="modal-title">¿Guardar cambios?</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas guardar los cambios en tu departamento?</p>
+                <div class="modal-info">
+                    <i class="bi bi-info-circle"></i>
+                    <small>Esto afectará las mascotas perdidas que veas en tu zona</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    data-bs-dismiss="modal" 
+                    (click)="updateDepartment(departmentComboBox.value)"
+                >
+                    <i class="bi bi-check-circle"></i>
+                    Sí, guardar
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i>
+                    Cancelar
+                </button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>¿Desea guardar los cambios?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="updateDepartment(departmentComboBox.value)">Si</button>
-          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
-        </div>
-      </div>
     </div>
 </div>

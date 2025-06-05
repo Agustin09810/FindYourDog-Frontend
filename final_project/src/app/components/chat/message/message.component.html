@@ -1,8 +1,21 @@
-
-    <div #msg class="message">
-        <p class="messageTextFormat">{{message?.text}}</p>
-        <p class="hour">{{messageDate}}</p>
+<div #msg class="message-container">
+    <div class="message-bubble">
+        <div class="message-content">
+            <!-- Photo message -->
+            <div *ngIf="isPhotoMessage" class="photo-message">
+                <img [src]="getPhotoUrl()" [alt]="'Foto enviada'" class="message-photo" />
+            </div>
+            <!-- Text message -->
+            <p *ngIf="!isPhotoMessage" class="message-text">{{message?.text}}</p>
+        </div>
+        <div class="message-meta">
+            <span class="message-time">{{messageDate}}</span>
+            <div class="message-status" *ngIf="isOwnMessage">
+                <i class="bi bi-check-all" [class.read]="isRead"></i>
+            </div>
+        </div>
     </div>
+</div>
     
 
 

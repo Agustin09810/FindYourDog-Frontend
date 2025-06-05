@@ -1,16 +1,125 @@
-<div *ngIf="posts.length > 0" class="outerDiv">
-    <div class="containerDiv">
-        <i class="bi bi-chevron-right nextButton" (click)="nextPost()"></i>
-        <i class="bi bi-chevron-left previousButton" (click)="previousPost()"></i>
-        <app-post-view *ngIf="post" [inputPost]="post" class="post-view"></app-post-view>
-    </div>   
+<!-- Navbar Superior -->
+<div class="navbar-container">
+    <app-navbar-sup [text]="'Mis Posts'"></app-navbar-sup>
 </div>
-<div *ngIf="display == false" class="outerDivNoPost">
-    <div class="innerDivNoPost">
-        <h2>¡Que suerte! No tienes publicaciones</h2>
-        <button class="btn btn-outline-dark" routerLink="/home">Inicio</button>
-        <div class="imgContainer">
-            <img src="https://res.cloudinary.com/dm6civzi7/image/upload/v1668897469/test/happy-dog_uwpjhq.jpg" alt="">
+
+<!-- Main Container with Modern Header -->
+<div class="my-posts-container">
+    <!-- Modern Header Section -->
+    <div class="posts-header">
+        <div class="header-content">
+            <div class="header-title">
+                <i class="bi bi-collection-fill header-icon"></i>
+                <h1>Mis Publicaciones</h1>
+            </div>
+            <div class="posts-count" *ngIf="posts.length > 0">
+                <div class="current-post">{{postsViews + 1}}</div>
+                <div class="post-label">de {{posts.length}} publicaciones</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Posts with Content -->
+    <div *ngIf="posts.length > 0" class="posts-content">
+        <!-- Navigation Controls -->
+        <div class="navigation-controls">
+            <button 
+                class="nav-btn prev-btn" 
+                (click)="previousPost()" 
+                [disabled]="postsViews === 0"
+                [attr.aria-label]="'Ver publicación anterior'"
+            >
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button 
+                class="nav-btn next-btn" 
+                (click)="nextPost()" 
+                [disabled]="postsViews === posts.length - 1"
+                [attr.aria-label]="'Ver siguiente publicación'"
+            >
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Post View Container -->
+        <div class="post-container">
+            <!-- Only display post content without navbars -->
+            <div *ngIf="post" class="clean-post-view">
+                <div class="clean-post-container">
+                    <div class="carousel-container">
+                        <!-- Loading indicator while images load -->
+                        <div *ngIf="isLoadingImages" class="image-loading">
+                            <div class="loading-spinner">
+                                <i class="bi bi-image"></i>
+                                <p>Cargando imágenes...</p>
+                            </div>
+                        </div>
+                        <!-- Show carousel when images are loaded -->
+                        <app-post-carousel 
+                            *ngIf="!isLoadingImages && postImages.length > 0" 
+                            [postImages]="postImages" 
+                            class="post-carousel-clean">
+                        </app-post-carousel>
+                        <!-- Show placeholder when no images -->
+                        <div *ngIf="!isLoadingImages && postImages.length === 0" class="no-images">
+                            <i class="bi bi-image-fill"></i>
+                            <p>Sin imágenes disponibles</p>
+                        </div>
+                    </div>
+                    <div class="post-info">
+                        <div class="dog-name">
+                            <h2>{{post.dogName}}</h2>
+                        </div>
+                        <div class="other-info">
+                            <p *ngIf="post.dogNicknames.length > 0"><b>Apodos: </b>{{post.dogNicknames.join()}}</p>
+                            <p><b>Raza: </b>{{post.dogBreed}}</p>
+                            <p><b>Género: </b>{{post.dogGender}}</p>
+                            <p><b>Perdido el: </b>{{getCleanDate(post.lostOn)}}</p>
+                            <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="btn btn-outline-primary" [routerLink]="['/editpost', post.id]">
+                                <i class="bi bi-pencil"></i>
+                                Editar
+                            </button>
+                            <button class="btn btn-outline-danger" (click)="deletePost(post.id)">
+                                <i class="bi bi-trash3"></i>
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Posts State - Modern Empty State -->
+    <div *ngIf="posts.length === 0" class="empty-state">
+        <div class="empty-content">
+            <div class="empty-icon">
+                <i class="bi bi-journal-x"></i>
+            </div>
+            <h2>¡No tienes publicaciones aún!</h2>
+            <p>Cuando publiques sobre tu mascota perdida, aparecerán aquí para que puedas gestionarlas fácilmente.</p>
+            
+            <div class="empty-actions">
+                <button class="btn btn-primary" routerLink="/addpost">
+                    <i class="bi bi-plus-circle"></i>
+                    Crear mi primera publicación
+                </button>
+                <button class="btn btn-outline-secondary" routerLink="/home">
+                    <i class="bi bi-house"></i>
+                    Volver al inicio
+                </button>
+            </div>
+            
+            <div class="empty-illustration">
+                <img 
+                    src="https://res.cloudinary.com/dm6civzi7/image/upload/v1668897469/test/happy-dog_uwpjhq.jpg" 
+                    alt="Perro feliz ilustración"
+                    loading="lazy"
+                />
+            </div>
         </div>
     </div>
 </div>

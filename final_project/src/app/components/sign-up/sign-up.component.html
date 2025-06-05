@@ -1,52 +1,156 @@
-<div class="outerDiv">
-    <div class="containerDiv shadeDiv">
-        <div class="title"><h2>Find Your Dog</h2></div>
-        <form class="formContainer">
-            <div class="form-group">
-                <label for="usernameInput">Usuario</label>
-                <div class="inputContainer">
-                    <input type="text" class="form-control inputStyle is-{{validUsername}}" #usernameInput placeholder="Ingrese un nombre de usuario">
-                </div>
-                <small *ngIf="errorUsername==='empty'">Este campo es obligatorio</small>
-                <small *ngIf="errorUsername==='invalid'">Caracteres inválidos</small>
-                <small *ngIf="errorUsername==='short'">Nombre de usuario muy corto (mín. 4 car.)</small>
-                <small *ngIf="errorUsername==='taken'">¡Ese nombre de usuario ya existe!</small>
-            </div>
-            <div class="form-group emailForm">
-                <label for="emailInput">Correo electrónico</label>
-                <div class="inputContainer">
-                    <input type="email" class="form-control inputStyle is-{{validEmail}}" #emailInput placeholder="Ingrese un correo electrónico">
-                </div>
-                <small *ngIf="errorEmail==='empty'">Este campo es obligatorio</small>
-                <small *ngIf="errorEmail==='taken'">¡Ese correo electrónico ya existe!</small>
-            </div>
-            <div class="form-group passForm">
-                <label for="passwordInput">Contraseña</label>
-                <div class="inputContainer">
-                    <input type="text" class="form-control inputStyle  is-{{validPass}}" #passwordInput placeholder="Ingrese una contraseña">
-                </div>
-                <small *ngIf="errorPass==='empty'">Este campo es obligatorio</small>
-                <small *ngIf="errorPass==='short'">Contraseña muy corta (mín. 8 car.)</small>
-            </div>
-            <div class="form-group departmentForm">
-                <label for="departmentSelector">Seleccione su departmento</label>
-                <div class="selectorContainer">
-                    <select class="form-select is-{{validDepartment}}" #departmentSelector id="departmentSelector">
-                        <option value="0">Seleccione una opción</option>
-                        <option *ngFor="let department of departments; index as i" value="{{department.id}}">{{department.name}}</option>
-                    </select>
-                </div>
-                <small *ngIf="errorDepartment===true">Este campo es obligatorio</small>
-            </div>    
-        </form>
-        <div class="alert alert-success" *ngIf="userCreated" role="alert">
-            Usuario creado exitosamente. Por favor, verifica tu correo electrónico para confirmar tu cuenta.
-        </div>
-        <div class="alert alert-danger" *ngIf="userTaken" role="alert">
-            Error: El usuario o email introducidos ya existen.
-        </div>
-        <div class="signUpButton">
-            <button class="btn btn-outline-dark" (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">Registrarse</button>
-        </div>
+<div class="signup-container">
+  <!-- Background Decoration -->
+  <div class="background-decoration">
+    <div class="floating-paw paw-1">🐾</div>
+    <div class="floating-paw paw-2">🐾</div>
+    <div class="floating-paw paw-3">🐾</div>
+    <div class="floating-heart heart-1">❤️</div>
+    <div class="floating-heart heart-2">❤️</div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="signup-card" [class.loading]="isLoading">
+    <!-- Header Section -->
+    <div class="signup-header">
+      <div class="logo-section">
+        <div class="paw-icon">🐾</div>
+        <h1>Únete a Find Your Dog</h1>
+        <p>Ayúdanos a reunir familias peludas</p>
+      </div>
     </div>
+
+    <!-- Form Section -->
+    <form class="signup-form">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="usernameInput" class="form-label">Nombre de usuario</label>
+        <input 
+          type="text" 
+          class="form-control modern-input" 
+          [class.is-invalid]="validUsername === 'invalid'"
+          [class.is-valid]="validUsername === 'valid'"
+          #usernameInput 
+          placeholder="Ingresa tu nombre de usuario"
+          autocomplete="username">
+        <div class="error-message" *ngIf="errorUsername">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ usernameErrorMessage }}</span>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="emailInput" class="form-label">Correo electrónico</label>
+        <input 
+          type="email" 
+          class="form-control modern-input" 
+          [class.is-invalid]="validEmail === 'invalid'"
+          [class.is-valid]="validEmail === 'valid'"
+          #emailInput 
+          placeholder="Ingresa tu correo electrónico"
+          autocomplete="email">
+        <div class="error-message" *ngIf="errorEmail">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ emailErrorMessage }}</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="passwordInput" class="form-label">Contraseña</label>
+        <input 
+          type="password" 
+          class="form-control modern-input" 
+          [class.is-invalid]="validPass === 'invalid'"
+          [class.is-valid]="validPass === 'valid'"
+          #passwordInput 
+          placeholder="Crea una contraseña segura"
+          autocomplete="new-password">
+        <div class="error-message" *ngIf="errorPass">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ passwordErrorMessage }}</span>
+        </div>
+      </div>
+
+      <!-- Department Field -->
+      <div class="form-group">
+        <label for="departmentSelector" class="form-label">Departamento</label>
+        <div class="select-wrapper">
+          <select 
+            class="form-select modern-select" 
+            [class.is-invalid]="validDepartment === 'invalid'"
+            [class.is-valid]="validDepartment === 'valid'"
+            #departmentSelector 
+            id="departmentSelector"
+            [disabled]="isLoadingDepartments">
+            <option value="0">
+              {{ isLoadingDepartments ? 'Cargando departamentos...' : 'Selecciona tu departamento' }}
+            </option>
+            <option *ngFor="let department of departments; index as i" [value]="department.id">
+              {{ department.name }}
+            </option>
+          </select>
+          <i class="fas fa-chevron-down select-icon" *ngIf="!isLoadingDepartments"></i>
+          <div class="mini-spinner" *ngIf="isLoadingDepartments"></div>
+        </div>
+        <div class="error-message" *ngIf="errorDepartment">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ departmentErrorMessage }}</span>
+        </div>
+      </div>
+    </form>
+
+    <!-- Success Message -->
+    <div class="success-message" *ngIf="userCreated">
+      <i class="fas fa-check-circle"></i>
+      <span>¡Cuenta creada exitosamente! Revisa tu correo para confirmarla. Redirigiendo...</span>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="userTaken">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>El usuario o correo ya existen. Intenta con otros datos.</span>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="signup-actions">
+      <button 
+        type="button"
+        class="btn btn-modern btn-primary paw-print w-100" 
+        [disabled]="isLoading || isLoadingDepartments"
+        (click)="register(usernameInput.value, emailInput.value, passwordInput.value, departmentSelector.value)">
+        <div class="loading-content" *ngIf="isLoading">
+          <div class="mini-spinner"></div>
+          <span>Creando cuenta...</span>
+        </div>
+        <span *ngIf="!isLoading">Crear cuenta</span>
+      </button>
+    </div>
+
+    <!-- Separator -->
+    <div class="separator">
+      <div class="separator-line"></div>
+      <span class="separator-text">o</span>
+      <div class="separator-line"></div>
+    </div>
+
+    <!-- Login Section -->
+    <div class="login-section">
+      <p>¿Ya tienes una cuenta?</p>
+      <button 
+        type="button"
+        class="btn btn-modern btn-outline w-100" 
+        (click)="router.navigate(['/login'])">
+        Iniciar sesión
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="signup-footer">
+      <div class="motivation-message">
+        <div class="heart-icon">❤️</div>
+        <p>Cada registro nos acerca más a reunir mascotas perdidas con sus familias</p>
+      </div>
+    </div>
+  </div>
 </div>

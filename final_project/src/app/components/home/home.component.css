@@ -1,34 +1,89 @@
+/* Home Container */
+.outerDiv {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--gray-50);
+}
+
+.containerDiv {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Styles */
 .navbarStyles {
-    border-bottom-color: rgb(228, 228, 228);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    margin-bottom: 10px;
-    background-color: white;
-    position: fixed;
-    width: 100%;
-    max-width: 1200px;
-    z-index: 9999;
+  position: static;
+  width: 100%;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  margin-bottom: var(--space-lg);
 }
 
-.containerDiv{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1200px;
-
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  padding-top: 120px; /* More space for the centered navbar */
+  padding-bottom: 80px; /* Space for bottom navbar on mobile */
 }
 
-.outerDiv{
-    position: relative;
-    height: 100%;
-    width: 100%;
-
-    display: flex;
-    justify-content: space-around;
+/* Bottom Navigation */
+.navBarInf {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-lg);
 }
 
-@media(min-width:992px){
-    .navBarInf{
-        display: none;
-    }
+/* Desktop Responsive */
+@media (min-width: 992px) {
+  .navBarInf {
+    display: none;
+  }
+  
+  .main-content {
+    padding-bottom: var(--space-lg);
+    padding-top: 100px; /* Adjust for desktop navbar */
+  }
+  
+  .containerDiv {
+    padding: 0 var(--space-md);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 991px) {
+  .main-content {
+    padding-bottom: 100px; /* More space for mobile bottom nav */
+    padding-top: 120px; /* Account for mobile navbar */
+  }
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+/* Smooth Transitions */
+.containerDiv * {
+  transition: var(--transition);
+}
+
+/* Focus Management */
+.containerDiv:focus-within {
+  outline: none;
 }

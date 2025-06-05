@@ -1,49 +1,252 @@
-.userPreview {
-    position: relative;
+/* User Preview Link */
+.user-preview-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
+.user-preview-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Modern User Preview Card */
+.user-preview-modern {
     display: flex;
+    align-items: center;
+    padding: var(--space-lg);
+    background: var(--white);
+    transition: var(--transition);
+    position: relative;
+    gap: var(--space-md);
+    min-height: 80px;
+}
+
+.user-preview-modern:hover {
+    background: var(--gray-50);
+    transform: translateX(2px);
+}
+
+/* User Avatar Section */
+.user-avatar {
+    position: relative;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+}
+
+.avatar-image {
     width: 100%;
-    height: 80px;
-    border-bottom: 1px;
-    border-bottom-color: rgb(228, 228, 228);
-    border-bottom-style: solid;
-  
-    
-
-}
-
-.imgUser{
-    position: relative;
-    width: 100px;
-    height: 90%;
-    min-width: 100px;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.userTextContainer {
-    position: relative;
     height: 100%;
-    width: 100%;
-    color: black;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--white);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.avatar-image:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.default-avatar {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+}
+
+/* Online Indicator */
+.online-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--success-color, #4CAF50);
+    border: 3px solid var(--white);
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+}
+
+/* User Info Section */
+.user-info {
+    flex: 1;
+    min-width: 0; /* Allows text truncation */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
 }
 
 .username {
-    position: absolute;
-    top: 15px;
-    left: 5px;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.lastMsg{
-    position: absolute;
-    top: 40px;
-    left: 5px;
+.last-message {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin: 0;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
-.profile-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+.no-message {
+    font-size: 0.9rem;
+    color: var(--gray-400);
+    margin: 0;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* Chat Arrow */
+.chat-arrow {
+    flex-shrink: 0;
+    color: var(--gray-400);
+    font-size: 1.2rem;
+    transition: var(--transition);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+}
+
+.user-preview-modern:hover .chat-arrow {
+    color: var(--primary-color);
+    background: rgba(255, 107, 53, 0.1);
+    transform: translateX(2px);
+}
+
+/* Active State */
+.user-preview-link.active .user-preview-modern {
+    background: rgba(255, 107, 53, 0.1);
+    border-left: 4px solid var(--primary-color);
+}
+
+.user-preview-link.active .username {
+    color: var(--primary-color);
+}
+
+.user-preview-link.active .chat-arrow {
+    color: var(--primary-color);
+}
+
+/* Loading State */
+.user-preview-modern.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.user-preview-modern.loading .avatar-image {
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .user-preview-modern {
+        padding: var(--space-md);
+        gap: var(--space-sm);
+    }
+    
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .username {
+        font-size: 1rem;
+    }
+    
+    .last-message,
+    .no-message {
+        font-size: 0.85rem;
+    }
+    
+    .online-indicator {
+        width: 14px;
+        height: 14px;
+        border-width: 2px;
+    }
+}
+
+@media (max-width: 576px) {
+    .user-preview-modern {
+        padding: var(--space-sm) var(--space-md);
+    }
+    
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .username {
+        font-size: 0.95rem;
+    }
+    
+    .last-message,
+    .no-message {
+        font-size: 0.8rem;
+    }
+    
+    .chat-arrow {
+        font-size: 1rem;
+        padding: var(--space-xs);
+    }
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Focus States for Accessibility */
+.user-preview-link:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .user-preview-modern {
+        border: 1px solid var(--gray-400);
+    }
+    
+    .avatar-image {
+        border-width: 2px;
+        border-color: var(--gray-600);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .user-preview-modern,
+    .avatar-image,
+    .chat-arrow {
+        transition: none;
+    }
+    
+    .user-preview-modern:hover {
+        transform: none;
+    }
+    
+    .avatar-image:hover {
+        transform: none;
+    }
+    
+    .user-preview-modern.loading .avatar-image {
+        animation: none;
+    }
 }

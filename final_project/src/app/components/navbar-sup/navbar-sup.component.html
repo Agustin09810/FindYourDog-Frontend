@@ -1,20 +1,71 @@
-<nav class="navbar navbar-expand-lg" id="navBar" *ngIf="text">
-  <div class="container">
-    <button *ngIf="!backArrow" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div *ngIf="backArrow" class="navbar arrow" (click)="goBack()"><i class="bi bi-arrow-left"></i></div>
-    <a class="navbar-brand">{{text}}</a>
+<nav class="navbar-modern navbar navbar-expand-lg" id="navBar" *ngIf="text">
+  <div class="container-fluid px-0">
+    
+    <!-- Mobile menu button or back arrow -->
+    <div class="navbar-start">
+      <button 
+        *ngIf="!backArrow" 
+        class="navbar-toggler border-0" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarToggler" 
+        aria-controls="navbarToggler" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation">
+        <i class="bi bi-list text-primary" style="font-size: 1.5rem;"></i>
+      </button>
+      
+      <button 
+        *ngIf="backArrow" 
+        class="back-button btn-modern btn-secondary" 
+        (click)="goBack()">
+        <i class="bi bi-arrow-left"></i>
+        <span>Volver</span>
+      </button>
+    </div>
+
+    <!-- Logo/Brand - Always visible and links to home -->
+    <div class="navbar-brand-modern">
+      <a routerLink="/home" class="brand-link">
+        <span class="page-title">🐾 FindYourDog</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
     <div class="collapse navbar-collapse" id="navbarToggler">
-      <ul class="navbar-nav">
-        <!-- NAVIGATION NEEDS TO BE FIXED (id navigation) -->
-        <li class="nav-item"><a class="nav-link active" routerLink="/home"><img class="homeI"src="assets/images/Home_Icon_Dark.png"><strong> Inicio</strong></a></li>
-        <li class="nav-item"><a class="nav-link active" routerLink="/addpost"><i class="bi bi-plus-circle-fill"></i><strong> Publicar</strong></a></li>
-        <li class="nav-item"><a class="nav-link active" routerLink="/myposts"><i class="bi bi-stickies"></i> Posts</a></li>
-        <li class="nav-item"><a class="nav-link active" routerLink="/chats"><i class="bi bi-chat"></i> Mensajes</a></li>
-        <li class="nav-item"><a class="nav-link active" routerLink="/settings"><i class="bi bi-gear"></i> Opciones</a></li>
-        <li class="nav-item"><a class="nav-link active" href="" (click)="logout()"><i class="bi bi-door-closed"></i> Salir</a></li>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link-modern" routerLink="/addpost" routerLinkActive="active">
+            <i class="bi bi-plus-circle-fill text-primary"></i>
+            <span>Publicar</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link-modern" routerLink="/myposts" routerLinkActive="active">
+            <i class="bi bi-journal-text"></i>
+            <span>Mis Posts</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link-modern" routerLink="/chats" routerLinkActive="active">
+            <i class="bi bi-chat-dots"></i>
+            <span>Mensajes</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link-modern" routerLink="/settings" routerLinkActive="active">
+            <i class="bi bi-gear"></i>
+            <span>Opciones</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link-modern logout-btn" (click)="logout()">
+            <i class="bi bi-box-arrow-right text-error"></i>
+            <span>Salir</span>
+          </button>
+        </li>
       </ul>
     </div>
+
   </div>
 </nav> 

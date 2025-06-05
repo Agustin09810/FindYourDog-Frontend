@@ -1,16 +1,138 @@
-<div class="outerNav">
-    <div class="navbarStyles">
-        <app-navbar-sup [text]="textNavbar"></app-navbar-sup>
+<div class="post-creator-container">
+  <!-- Step Progress Indicator -->
+  <div class="step-progress">
+    <div class="step-item" [class.active]="step === 'name'" [class.completed]="getStepIndex() > 0">
+      <div class="step-circle">
+        <i class="bi bi-card-text" *ngIf="getStepIndex() <= 0"></i>
+        <i class="bi bi-check" *ngIf="getStepIndex() > 0"></i>
+      </div>
+      <span class="step-label">Nombre</span>
     </div>
-</div>
-<div class="outerDiv">
-    <div class="containerDiv">
-        <app-dog-name class="component" *ngIf="step == 'name'" [dogName]="dogName" [otherNames]="otherNames" [editBool]="editBool"  (nextStep)="navigateAux($event)"></app-dog-name>
-        <app-dog-gender class="component" *ngIf="step == 'gender'" [dogName]="dogName" [dogGender]="dogGender" (nextStep)="navigateAux($event)"></app-dog-gender>
-        <app-dog-breed class="component" *ngIf="step == 'breed'" [dogName]="dogName" [dogBreed]="dogBreed" (nextStep)="navigateAux($event)"></app-dog-breed>
-        <app-dog-date-zone class="component" *ngIf="step == 'date'" [dogName]="dogName" [lastSeenDate]="lastSeenDate" [lastSeenHour]="lastSeenHour"
-                [lostZone]="lostZone" [ubiDetails]="ubiDetails" (nextStep)="navigateAux($event)"></app-dog-date-zone>
-        <app-dog-photos class="component" *ngIf="step == 'photos'" #dogPhotosComponent [dogName]="dogName" [dogPhotos]="photos" [editBool]="editBool" [dogDescription]="dogDescription"  [post]="post" (nextStep)="navigateAux($event)" (editPost)="edit($event)" ></app-dog-photos>
+    
+    <div class="step-divider" [class.completed]="getStepIndex() > 0"></div>
+    
+    <div class="step-item" [class.active]="step === 'gender'" [class.completed]="getStepIndex() > 1">
+      <div class="step-circle">
+        <i class="bi bi-gender-ambiguous" *ngIf="getStepIndex() <= 1"></i>
+        <i class="bi bi-check" *ngIf="getStepIndex() > 1"></i>
+      </div>
+      <span class="step-label">Género</span>
     </div>
+    
+    <div class="step-divider" [class.completed]="getStepIndex() > 1"></div>
+    
+    <div class="step-item" [class.active]="step === 'breed'" [class.completed]="getStepIndex() > 2">
+      <div class="step-circle">
+        <i class="bi bi-award" *ngIf="getStepIndex() <= 2"></i>
+        <i class="bi bi-check" *ngIf="getStepIndex() > 2"></i>
+      </div>
+      <span class="step-label">Raza</span>
+    </div>
+    
+    <div class="step-divider" [class.completed]="getStepIndex() > 2"></div>
+    
+    <div class="step-item" [class.active]="step === 'date'" [class.completed]="getStepIndex() > 3">
+      <div class="step-circle">
+        <i class="bi bi-calendar3" *ngIf="getStepIndex() <= 3"></i>
+        <i class="bi bi-check" *ngIf="getStepIndex() > 3"></i>
+      </div>
+      <span class="step-label">Fecha y Lugar</span>
+    </div>
+    
+    <div class="step-divider" [class.completed]="getStepIndex() > 3"></div>
+    
+    <div class="step-item" [class.active]="step === 'photos'" [class.completed]="getStepIndex() > 4">
+      <div class="step-circle">
+        <i class="bi bi-camera" *ngIf="getStepIndex() <= 4"></i>
+        <i class="bi bi-check" *ngIf="getStepIndex() > 4"></i>
+      </div>
+      <span class="step-label">Fotos</span>
+    </div>
+  </div>
+
+  <!-- Step Content Card -->
+  <div class="step-content-card">
+    <!-- Step Header -->
+    <div class="step-header">
+      <div class="step-icon">
+        <i class="bi bi-card-text" *ngIf="step === 'name'"></i>
+        <i class="bi bi-gender-ambiguous" *ngIf="step === 'gender'"></i>
+        <i class="bi bi-award" *ngIf="step === 'breed'"></i>
+        <i class="bi bi-calendar3" *ngIf="step === 'date'"></i>
+        <i class="bi bi-camera" *ngIf="step === 'photos'"></i>
+      </div>
+      <div class="step-info">
+        <h2 class="step-title">{{ getStepTitle() }}</h2>
+        <p class="step-description">{{ getStepDescription() }}</p>
+      </div>
+      <div class="step-counter">
+        <span class="current-step">{{ getStepIndex() + 1 }}</span>
+        <span class="total-steps">/ 5</span>
+      </div>
+    </div>
+
+    <!-- Step Content -->
+    <div class="step-content">
+      <app-dog-name 
+        *ngIf="step === 'name'" 
+        [dogName]="dogName" 
+        [otherNames]="otherNames" 
+        [editBool]="editBool"  
+        (nextStep)="navigateAux($event)">
+      </app-dog-name>
+      
+      <app-dog-gender 
+        *ngIf="step === 'gender'" 
+        [dogName]="dogName" 
+        [dogGender]="dogGender" 
+        (nextStep)="navigateAux($event)">
+      </app-dog-gender>
+      
+      <app-dog-breed 
+        *ngIf="step === 'breed'" 
+        [dogName]="dogName" 
+        [dogBreed]="dogBreed" 
+        (nextStep)="navigateAux($event)">
+      </app-dog-breed>
+      
+      <app-dog-date-zone 
+        *ngIf="step === 'date'" 
+        [dogName]="dogName" 
+        [lastSeenDate]="lastSeenDate" 
+        [lastSeenHour]="lastSeenHour"
+        [lostZone]="lostZone" 
+        [ubiDetails]="ubiDetails" 
+        (nextStep)="navigateAux($event)">
+      </app-dog-date-zone>
+      
+      <app-dog-photos 
+        *ngIf="step === 'photos'" 
+        #dogPhotosComponent 
+        [dogName]="dogName" 
+        [dogPhotos]="photos" 
+        [editBool]="editBool" 
+        [dogDescription]="dogDescription"  
+        [post]="post" 
+        (nextStep)="navigateAux($event)" 
+        (editPost)="edit($event)">
+      </app-dog-photos>
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="help-section" *ngIf="!editBool">
+    <div class="help-card">
+      <div class="help-icon">💡</div>
+      <h3>Consejos para encontrar a tu mascota</h3>
+      <ul class="help-tips">
+        <li>Proporciona toda la información posible</li>
+        <li>Sube fotos claras y recientes</li>
+        <li>Incluye detalles distintivos</li>
+        <li>Comparte en redes sociales</li>
+      </ul>
+    </div>
+  </div>
 </div>
-<app-navbar-inf class="navBarInf" style="position:fixed"></app-navbar-inf>
+
+<!-- Navbar components for mobile -->
+<app-navbar-sup [text]="textNavbar" class="navbar-fixed"></app-navbar-sup>

@@ -1,12 +1,28 @@
-<div class="outsideDiv">
-    <a routerLink="/zone/{{zone.id}}" routerLinkActive="active">
-        <div class="imgZone">
-            <div class="gradient"></div>
-            <div class="textZone">
-                <p>{{zone.name}}</p>
-            </div>
-            <img src="{{img?.url}}" alt="">
+<div class="zone-card">
+  <a routerLink="/zone/{{zone.id}}" routerLinkActive="active" class="zone-link">
+    <div class="zone-image-container">
+      <img 
+        [src]="img?.url || 'assets/images/default-zone.svg'" 
+        [alt]="'Zona de ' + zone.name"
+        class="zone-image"
+        loading="lazy">
+      
+      <div class="zone-overlay">
+        <div class="zone-gradient"></div>
+        
+        <div class="zone-content">
+          <h3 class="zone-title">{{zone.name}}</h3>
+          <div class="zone-subtitle">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>Explorar zona</span>
+          </div>
         </div>
-    </a>
+        
+        <div class="zone-action">
+          <i class="bi bi-arrow-right-circle-fill"></i>
+        </div>
+      </div>
+    </div>
+  </a>
 </div>
 

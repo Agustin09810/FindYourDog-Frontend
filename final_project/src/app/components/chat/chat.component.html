@@ -1,18 +1,141 @@
-<div class="outerDiv">
-    <div class="containerDiv">
-        <div class="navBar">
-            <app-navbar-sup [backArrow]="true" [text]="this.targetUsername" class=""></app-navbar-sup>
+<!-- Chat Container -->
+<div class="chat-container">
+    <!-- Chat Header -->
+    <div class="chat-header">
+        <app-navbar-sup [backArrow]="true" [text]="'Chat'" [customBackRoute]="'/chat-preview'"></app-navbar-sup>
+        
+        <!-- User Info Header -->
+        <div class="user-info-header" *ngIf="targetUser">
+            <div class="user-avatar-center">
+                <img 
+                    [src]="targetUser.profileImg" 
+                    [alt]="targetUser.username + ' avatar'"
+                    (error)="onImageError($event)"
+                    class="avatar-img"
+                />
+            </div>
+            <h3 class="user-name-center">{{targetUser.username}}</h3>
         </div>
-    
-        <div class="divMsg">
-                <app-message *ngFor="let msg of messages" [message]="msg" [localUsername]="originUsername" class="row messageRow"></app-message>
-    
+    </div>
+
+    <!-- Messages Area -->
+    <div class="messages-area" #messagesContainer>
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-state">
+            <div class="loading-spinner">
+                <i class="bi bi-chat-dots"></i>
+                <p>Cargando mensajes...</p>
+            </div>
         </div>
-        <div class="inputMsgDiv">
-            
-            <input #inputMessage type="text" placeholder="Escribir mensaje" class="inputMsg rounded" (keyup.enter)="sendMessage(inputMessage.value); inputMessage.value=''">
-            <button class="btn btn-styles mx-1" (click)="sendMessage(inputMessage.value); inputMessage.value=''">Enviar</button>
+
+        <!-- Messages List -->
+        <div *ngIf="!isLoading && messages && messages.length > 0" class="messages-list">
+            <app-message 
+                *ngFor="let msg of messages; trackBy: trackByMessageId" 
+                [message]="msg" 
+                [localUsername]="originUsername"
+                class="message-wrapper">
+            </app-message>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && (!messages || messages.length === 0)" class="empty-chat">
+            <div class="empty-content">
+                <div class="empty-icon">
+                    <i class="bi bi-chat-heart"></i>
+                </div>
+                <h3>¡Inicia la conversación!</h3>
+                <p>Este es el comienzo de tu conversación con <strong>{{targetUsername}}</strong></p>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div *ngIf="isTyping" class="typing-indicator">
+            <div class="typing-bubble">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Input Area -->
+    <div class="message-input-area">
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input 
+                    #messageInput
+                    type="text" 
+                    placeholder="Escribe un mensaje..." 
+                    class="message-input"
+                    [(ngModel)]="currentMessage"
+                    (keyup.enter)="sendMessage()"
+                    (input)="onTyping()"
+                    [disabled]="isSending"
+                    autocomplete="off"
+                />
+                <button 
+                    class="photo-btn" 
+                    type="button"
+                    (click)="openPhotoOptions()"
+                    title="Enviar foto">
+                    <i class="bi bi-camera"></i>
+                </button>
+                <button 
+                    class="emoji-btn" 
+                    type="button"
+                    title="Emojis">
+                    <i class="bi bi-emoji-smile"></i>
+                </button>
+            </div>
+            <button 
+                class="send-btn" 
+                type="button"
+                (click)="sendMessage()"
+                [disabled]="!currentMessage.trim() || isSending"
+                title="Enviar mensaje">
+                <i class="bi bi-send-fill" *ngIf="!isSending"></i>
+                <div class="mini-spinner" *ngIf="isSending"></div>
+            </button>
+        </div>
+        
+        <!-- Hidden file input for photos -->
+        <input 
+            #fileInput 
+            type="file" 
+            accept="image/*" 
+            capture="environment"
+            (change)="onPhotoSelected($event)"
+            style="display: none;"
+        />
+        
+        <!-- Hidden file input for gallery -->
+        <input 
+            #galleryInput 
+            type="file" 
+            accept="image/*" 
+            (change)="onPhotoSelected($event)"
+            style="display: none;"
+        />
+    </div>
     
+    <!-- Photo Options Modal -->
+    <div *ngIf="showPhotoOptions" class="photo-options-modal" (click)="closePhotoOptions()">
+        <div class="photo-options-content" (click)="$event.stopPropagation()">
+            <h3>Enviar foto</h3>
+            <div class="photo-options-buttons">
+                <button class="photo-option-btn" (click)="takePicture()">
+                    <i class="bi bi-camera"></i>
+                    <span>Tomar foto</span>
+                </button>
+                <button class="photo-option-btn" (click)="selectFromGallery()">
+                    <i class="bi bi-image"></i>
+                    <span>Galería</span>
+                </button>
+            </div>
+            <button class="cancel-btn" (click)="closePhotoOptions()">Cancelar</button>
         </div>
     </div>
 </div>

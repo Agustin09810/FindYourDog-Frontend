@@ -1,55 +1,146 @@
-<div class="outerNav">
-    <div class="navbarStyles">
-        <app-navbar-sup [text]="'Perro'"></app-navbar-sup>
-    </div>
+<!-- Page Header -->
+<div class="page-header">
+    <app-navbar-sup [text]="'Detalles del Perro'"></app-navbar-sup>
 </div>
-<div class="outerDiv" *ngIf="post">
-    <div class="containerDiv">
-        <div *ngIf="postImages.length" class="carousel-container">
-            <app-post-carousel [postImages]="postImages" class="post-carousel"></app-post-carousel>
+
+<!-- Main Content -->
+<div class="page-container" *ngIf="post">
+    <div class="post-detail-card">
+        <!-- Image Section -->
+        <div class="image-section" *ngIf="postImages.length">
+            <app-post-carousel [postImages]="postImages" class="carousel-wrapper"></app-post-carousel>
         </div>
-        <div class="post-info">
-            <div class="dog-name">
-                <h2>{{post.dogName}}</h2>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <!-- Dog Header -->
+            <div class="dog-header">
+                <div class="dog-title">
+                    <h1 class="dog-name">{{post.dogName}}</h1>
+                    <div class="status-container">
+                        <span class="status-badge status-lost">
+                            <i class="bi bi-exclamation-circle"></i>
+                            Perdido
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="other-info">
-                <p *ngIf="post.dogNicknames.length > 0"><b>Apodos: </b>{{post.dogNicknames.join()}}</p>
-                <p><b>Raza: </b>{{post.dogBreed}}</p>
-                <p><b>Género: </b>{{post.dogGender}}</p>
-                <p><b>Perdido el: </b>{{cleanDate(post.lostOn)}}</p>
-                <p><b>Descripción: </b>{{post.lostDescription}}. <br> {{post.dogDescription}}</p>
+
+            <!-- Dog Information -->
+            <div class="dog-info">
+                <div class="info-grid">
+                    <!-- Nicknames -->
+                    <div class="info-item" *ngIf="post.dogNicknames.length > 0">
+                        <div class="info-icon">
+                            <i class="bi bi-tag"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Apodos</span>
+                            <span class="info-value">{{post.dogNicknames.join(', ')}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Breed -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="bi bi-heart"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Raza</span>
+                            <span class="info-value">{{post.dogBreed}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="bi bi-gender-ambiguous"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Género</span>
+                            <span class="info-value">{{post.dogGender}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Lost Date -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="bi bi-calendar-x"></i>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Perdido el</span>
+                            <span class="info-value">{{cleanDate(post.lostOn)}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="description-section">
+                    <div class="description-header">
+                        <i class="bi bi-chat-left-text"></i>
+                        <h3>Descripción</h3>
+                    </div>
+                    <div class="description-content">
+                        <p class="lost-description">{{post.lostDescription}}</p>
+                        <p class="dog-description">{{post.dogDescription}}</p>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="displayButton === true && currentUser?.username != post.user" class="contact-button">
-                <button class="btn btn-outline-dark" (click)="contactUser()">Contactar</button>
+
+            <!-- Action Buttons -->
+            <div class="action-section">
+                <!-- Contact Button (for other users) -->
+                <div *ngIf="displayButton === true && currentUser?.username != post.user" class="action-buttons">
+                    <button class="btn btn-primary contact-btn" (click)="contactUser()">
+                        <i class="bi bi-chat-dots"></i>
+                        Contactar
+                    </button>
+                </div>
+
+                <!-- Owner Actions -->
+                <div *ngIf="displayButton === false" class="action-buttons owner-actions">
+                    <button class="btn btn-secondary edit-btn" routerLink="/editpost/{{post.id}}">
+                        <i class="bi bi-pencil"></i>
+                        Editar
+                    </button>
+                    <button 
+                        class="btn btn-danger delete-btn" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deletePostModal">
+                        <i class="bi bi-trash3"></i>
+                        Eliminar
+                    </button>
+                </div>
             </div>
-            <div *ngIf="displayButton === false" class="contact-button">
-                <button class="btn btn-outline-dark" routerLink="/editpost/{{post.id}}" >Editar</button>
-            </div>
-            <div *ngIf="displayButton === false" class="contact-button mt-2">
-                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal" ><i class="bi bi-trash3"></i></button>
-            </div>
-        </div>   
-    </div>
-    <div class="navbarStylesInf">
-        <app-navbar-inf class="navBarInf"></app-navbar-inf>
+        </div>
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
 <div class="modal fade" tabindex="-1" id="deletePostModal">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">¿Eliminar Publicación?</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content modern-modal">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle text-warning"></i>
+                    Confirmar Eliminación
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-text">¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x"></i>
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deletePost()">
+                    <i class="bi bi-trash3"></i>
+                    Eliminar
+                </button>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>¿Desea eliminar la publicación?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="deletePost()">Si</button>
-          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">No</button>
-        </div>
-      </div>
     </div>
 </div>
 

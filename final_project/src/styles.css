@@ -1,3 +1,322 @@
-html{
-    scroll-behavior: smooth;
+/* Variables CSS para el tema de la aplicación */
+:root {
+  /* Colores principales */
+  --primary-color: #FF6B35;        /* Naranja cálido para acciones principales */
+  --primary-light: #FF8A65;        /* Naranja más claro */
+  --primary-dark: #E55100;         /* Naranja más oscuro */
+  
+  --secondary-color: #4CAF50;      /* Verde para estados positivos */
+  --secondary-light: #81C784;      /* Verde claro */
+  --secondary-dark: #388E3C;       /* Verde oscuro */
+  
+  /* Colores neutros */
+  --white: #FFFFFF;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #424242;
+  --gray-800: #212121;
+  --gray-900: #1A1A1A;
+  
+  /* Colores de estado */
+  --success-color: #4CAF50;
+  --warning-color: #FF9800;
+  --error-color: #F44336;
+  --info-color: #2196F3;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  
+  /* Espaciado */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Tipografía */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Monaco', monospace;
+  
+  /* Transitions */
+  --transition: all 0.2s ease-in-out;
+  --transition-slow: all 0.3s ease-in-out;
+}
+
+/* Reset y base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility classes */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.text-primary { color: var(--primary-color) !important; }
+.text-secondary { color: var(--secondary-color) !important; }
+.text-success { color: var(--success-color) !important; }
+.text-warning { color: var(--warning-color) !important; }
+.text-error { color: var(--error-color) !important; }
+
+.bg-primary { background-color: var(--primary-color) !important; }
+.bg-secondary { background-color: var(--secondary-color) !important; }
+.bg-white { background-color: var(--white) !important; }
+.bg-gray-50 { background-color: var(--gray-50) !important; }
+.bg-gray-100 { background-color: var(--gray-100) !important; }
+
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+  40%, 43% { transform: translateY(-10px); }
+  70% { transform: translateY(-5px); }
+  90% { transform: translateY(-2px); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Buttons modernos */
+.btn-modern {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  min-height: 44px;
+}
+
+.btn-modern:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-modern:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+.btn-secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+/* Cards modernas */
+.card-modern {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+  transition: var(--transition);
+  border: 1px solid var(--gray-200);
+}
+
+.card-modern:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Inputs modernos */
+.input-modern {
+  width: 100%;
+  padding: var(--space-md);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: 16px;
+  transition: var(--transition);
+  background: var(--white);
+}
+
+.input-modern:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* Typography */
+.heading-1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--gray-900);
+}
+
+.heading-2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--gray-900);
+}
+
+.heading-3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--gray-800);
+}
+
+.body-large {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.body-medium {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+
+.body-small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--gray-600);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 767px) {
+  .heading-1 { font-size: 2rem; }
+  .heading-2 { font-size: 1.5rem; }
+  .heading-3 { font-size: 1.25rem; }
+}
+
+/* Loading states */
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Navbar improvements */
+.navbar-modern {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--gray-200);
+  padding: var(--space-sm) 0;
+}
+
+/* Dog-themed decorations */
+.paw-print::before {
+  content: "🐾";
+  margin-right: var(--space-xs);
+}
+
+.heart-icon::before {
+  content: "❤️";
+  margin-right: var(--space-xs);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
 }

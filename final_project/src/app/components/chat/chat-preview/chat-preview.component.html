@@ -1,16 +1,72 @@
-<div #chatPreview class="bg-chat">
-    <div class="containerDiv">
-        <div class="navbarStyles">
-            <app-navbar-sup [text]="'Chats'"></app-navbar-sup>
-        </div>
-        <div *ngIf="user" class="containerUserPreview">
-            <app-user-preview [user]="userFriend" [originUser]="user" *ngFor="let userFriend of contacts">       
-            </app-user-preview>
-        </div>
-        <div>
+<!-- Navbar Superior -->
+<div class="navbar-container">
+    <app-navbar-sup [text]="'Mensajes'"></app-navbar-sup>
+</div>
 
+<!-- Main Chat Container -->
+<div class="chat-container">
+    <!-- Chat Header -->
+    <div class="chat-header">
+        <div class="header-content">
+            <div class="header-title">
+                <i class="bi bi-chat-dots-fill header-icon"></i>
+                <h1>Mis Conversaciones</h1>
+            </div>
+            <div class="chat-count" *ngIf="contacts && contacts.length > 0">
+                <div class="current-count">{{contacts.length}}</div>
+                <div class="count-label">{{contacts.length === 1 ? 'conversación' : 'conversaciones'}}</div>
+            </div>
         </div>
     </div>
-    
+
+    <!-- Chat Content -->
+    <div class="chat-content">
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-state">
+            <div class="loading-spinner">
+                <i class="bi bi-chat-dots"></i>
+                <p>Cargando conversaciones...</p>
+            </div>
+        </div>
+
+        <!-- Chat List -->
+        <div *ngIf="!isLoading && contacts && contacts.length > 0" class="chat-list">
+            <app-user-preview 
+                *ngFor="let userFriend of contacts" 
+                [user]="userFriend" 
+                [originUser]="user!" 
+                class="chat-item">
+            </app-user-preview>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && (!contacts || contacts.length === 0)" class="empty-state">
+            <div class="empty-content">
+                <div class="empty-icon">
+                    <i class="bi bi-chat-x"></i>
+                </div>
+                <h2>¡No tienes conversaciones aún!</h2>
+                <p>Cuando contactes con alguien sobre una mascota perdida, tus conversaciones aparecerán aquí.</p>
+                
+                <div class="empty-actions">
+                    <button class="btn btn-primary" routerLink="/home">
+                        <i class="bi bi-search"></i>
+                        Buscar mascotas perdidas
+                    </button>
+                    <button class="btn btn-outline-secondary" routerLink="/addpost">
+                        <i class="bi bi-plus-circle"></i>
+                        Publicar mascota perdida
+                    </button>
+                </div>
+                
+                <div class="empty-illustration">
+                    <img 
+                        src="https://res.cloudinary.com/dm6civzi7/image/upload/v1668897469/test/happy-dog_uwpjhq.jpg" 
+                        alt="Perro feliz ilustración"
+                        loading="lazy"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<app-navbar-inf class="navBarInf"></app-navbar-inf>

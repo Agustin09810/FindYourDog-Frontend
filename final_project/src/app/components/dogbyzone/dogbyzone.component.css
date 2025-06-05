@@ -1,77 +1,138 @@
-.navbarStyles {
-    border-bottom-color: rgb(228, 228, 228);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    margin-bottom: 10px;
-    background-color: white;
-    position: fixed;
-    width: 100%;
-    max-width: 1200px;
-    z-index: 9999;
-}
-
-.upButton{
-    bottom:70px;
-    right: 20px;
-    position: fixed;
-    z-index: 99;
-    padding:1rem;
-    font-size: 1.5rem;
-    border: 1px solid black;
-    background-color: white ;
-    cursor: pointer;
-    width:4rem;
-    height:4rem;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius: 50%;
-    transition: all 0.5s ease-in-out;
-}
-
-.upButton:hover{
-    background-color: black;
-    border: 1px solid grey;
-    font-size: 1.7rem;
-    width: 4.2rem;
-    height: 4.2rem;
-}
-
-.upButton:hover .bi{
-    color:white;
-}
-
-.navBarInf{
-    z-index: 9999;
-}
-
-.containerDiv{
-    position: relative;
-    width: 100%;
-
-    max-width: 1200px;
-}
-
-.outerDiv{
-    position: relative;
-    height: 100%;
-    width: 100%;
-
+/* Page Container */
+.page-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--gray-50);
+    position: relative;
 }
 
-@media(max-width: 768px){
-    .upButton{
-        bottom: 70px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
+/* Page Header */
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    z-index: 1000;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding-top: 100px; /* Space for fixed header */
+    padding-bottom: var(--space-xl);
+    background: linear-gradient(to bottom, var(--gray-50) 0%, var(--white) 100%);
+    min-height: calc(100vh - 100px);
+}
+
+/* Scroll to Top Button */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: var(--white);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+}
+
+.scroll-top-btn:hover {
+    background: var(--primary-dark, #e55a2b);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.scroll-top-btn:active {
+    transform: scale(0.95);
+}
+
+.scroll-top-btn i {
+    transition: var(--transition);
+}
+
+.scroll-top-btn:hover i {
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .page-header {
+        left: 0;
+        transform: none;
+        max-width: 100%;
     }
 }
-@media(min-width:992px){
-    .navBarInf{
-        display: none;
+
+@media (max-width: 768px) {
+    .main-content {
+        padding-top: 90px;
+        padding-bottom: var(--space-lg);
+    }
+    
+    .scroll-top-btn {
+        bottom: 70px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding-top: 80px;
+        padding-bottom: var(--space-md);
+    }
+    
+    .scroll-top-btn {
+        bottom: 60px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-top-btn {
+        transition: none;
+    }
+    
+    .scroll-top-btn:hover {
+        transform: none;
+    }
+    
+    .scroll-top-btn:hover i {
+        transform: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .page-header {
+        border-bottom-width: 2px;
+    }
+    
+    .scroll-top-btn {
+        border: 2px solid var(--primary-dark, #e55a2b);
     }
 }

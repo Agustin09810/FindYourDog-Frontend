@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,8 +12,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { GridComponent } from './components/grid/grid.component';
-import { NavbarInfComponent } from './components/navbar-inf/navbar-inf.component';
-import { UploadbuttonComponent } from './components/navbar-inf/uploadbutton/uploadbutton.component';
 import { NavbarSupComponent } from './components/navbar-sup/navbar-sup.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -53,8 +52,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppComponent,
     ZoneComponent,
     GridComponent,
-    NavbarInfComponent,
-    UploadbuttonComponent,
     NavbarSupComponent,
     HomeComponent,
     LoginComponent,
@@ -91,7 +88,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

@@ -113,6 +113,32 @@ export class AddEditPostComponent implements OnInit, OnDestroy {
     }, false
   }
 
+  getStepIndex(): number {
+    const steps = ['name', 'gender', 'breed', 'date', 'photos'];
+    return steps.indexOf(this.step);
+  }
+
+  getStepTitle(): string {
+    switch(this.step) {
+      case 'name': return 'Información del nombre';
+      case 'gender': return 'Género de tu mascota';
+      case 'breed': return 'Raza y características';
+      case 'date': return 'Fecha y lugar de pérdida';
+      case 'photos': return 'Fotos y descripción';
+      default: return '';
+    }
+  }
+
+  getStepDescription(): string {
+    switch(this.step) {
+      case 'name': return 'Ingresa el nombre principal y apodos de tu mascota';
+      case 'gender': return 'Selecciona el género para ayudar en la búsqueda';
+      case 'breed': return 'Especifica la raza para una identificación más precisa';
+      case 'date': return 'Proporciona detalles de cuándo y dónde se perdió';
+      case 'photos': return 'Añade fotos claras y una descripción detallada';
+      default: return '';
+    }
+  }
 
   navigateAux(data: string[]){
     this.step=data[0];
