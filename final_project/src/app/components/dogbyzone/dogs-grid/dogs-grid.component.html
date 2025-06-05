@@ -6,8 +6,21 @@
     </div>
 </div>
 
+<!-- Empty State -->
+<div *ngIf="posts && posts.length === 0" class="empty-state">
+    <div class="empty-content">
+        <i class="bi bi-heart-eyes empty-icon"></i>
+        <h3>¡Excelente noticia!</h3>
+        <p>No hay mascotas perdidas reportadas en esta zona actualmente. ¡Eso significa que todas están seguras en casa! 🏠</p>
+        <a routerLink="/home" class="btn-modern btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Volver a todas las zonas
+        </a>
+    </div>
+</div>
+
 <!-- Posts Grid -->
-<div *ngIf="posts" class="posts-container">
+<div *ngIf="posts && posts.length > 0" class="posts-container">
     <div class="posts-grid">
         <app-post
             *ngFor="let postX of posts | paginate 
